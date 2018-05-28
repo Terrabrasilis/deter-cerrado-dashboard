@@ -1,0 +1,36 @@
+body{
+    background-color: #396858 !important;
+    color: white !important;
+}
+text.pie-slice{
+	fill: black !important;
+}
+.dc-chart, .dc-chart g.row text, svg text{
+	fill: white !important;
+}
+.reset{
+	background-color: #1C5D8C !important;
+	border: rgb(122, 165, 185) solid 1px;
+}
+.glyphicon{
+	color: white !important;
+}
+.glyphicon-chevron-right{
+	color: black !important;
+}
+.table-hover tbody tr:hover td{
+	color: #4d4d4d !important;
+}
+#footer_page{
+	color: #e5e5e5 !important;
+}
+.info_p{
+	background-color: #2c3e38 !important;
+}
+.modal-content {
+ 	background-color: #150f0f;
+}
+.nav li.active #txt1{
+	color: white !important;
+	background-color: #396858 !important;
+}

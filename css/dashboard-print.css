@@ -1,0 +1,53 @@
+body{
+	background-color: #FFF;
+	width: 100%;
+	height: 95%;
+}
+.glyphicon, .keep-space, #footer_page, .btn, p{display:none !important;}
+.col-md-9 #chart-by-year{
+	width: 70%;
+	zoom: 80%;
+	float: left;
+}
+.col-md-3 #chart-by-state{
+	width: 20%;
+	zoom: 75%;
+	text-align: center;
+	float: right;
+}
+#chart-by-year-state, #chart-bar-by-year-state{
+	width: 95%;
+	zoom: 80%;
+}
+.col-md-6 #chart-by-year,.col-md-6 #chart-by-state,.col-md-6 #chart-by-mun,.col-md-6 #chart-by-uc{
+	width: 50%;
+	zoom: 85%;
+}
+.dc-chart path.line {
+	stroke-width: 3px;
+}
+.dc-chart .axis .grid-line, .dc-chart .axis .grid-line line, .dc-chart .grid-line, .dc-chart .grid-line line{
+	stroke: #909090;
+}
+.reset, .dc-chart, .dc-chart .pie-slice, .dc-chart g.row text{
+	fill: black;
+	font-size: 11px;
+}
+.panel-body {
+    padding: 0px;
+}
+.panel{
+	border: 0px;
+}
+.panel-heading{
+	display: none;
+}
+#footer_print{
+	display: block;
+	text-align: justify;
+	color: #635e5e;
+	font-size: 12px !important;
+	border-top: rgb(187, 224, 123) solid 1px;
+	position: fixed;
+	bottom: 0px;
+}
