@@ -53,8 +53,8 @@ var utils = {
 	 * - Enable or disable the panel swap button.
 	 */
 	applyConfigurations: function() {
-		document.getElementById("warning-msg").style.display=( (graph.displayInfo)?(''):('none') );
-		document.getElementById("panel_swap").style.display=( (graph.displaySwapPanelButton)?(''):('none') );
+		//document.getElementById("warning-msg").style.display=( (graph.displayInfo)?(''):('none') );
+		// document.getElementById("panel_swap").style.display=( (graph.displaySwapPanelButton)?(''):('none') );
 	},
 	changeCss: function(bt) {
 		utils.cssDefault=!utils.cssDefault;
@@ -102,7 +102,7 @@ var graph={
 	barRateByYear: null,
 	lineRateStatesByYear: null,
 	pieTotalizedByState: null,
-	barRateStatesByYear: null,
+	//barRateStatesByYear: null,
 	ratesDataTable: null,
 	relativeRatesDataTable: null,
 
@@ -202,11 +202,11 @@ var graph={
 			.width(fw14)
 			.height(fh)
 			.legend(dc.legend().x(0).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((fw14>=400)?(400):(200)).itemWidth(40));
-		this.barRateStatesByYear
-			.width(fw)
-			.height(fh)
-			.margins({top: 0, right: 10, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw - 380).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(380).autoItemWidth(true));
+		// this.barRateStatesByYear
+		// 	.width(fw)
+		// 	.height(fh)
+		// 	.margins({top: 0, right: 10, bottom: 50, left: 65})
+		// 	.legend(dc.legend().x(fw - 380).y(1).itemHeight(13).gap(7).horizontal(1).legendWidth(380).autoItemWidth(true));
 		
 		dc.renderAll();
 	},
@@ -215,26 +215,22 @@ var graph={
 		this.barRateByYear = dc.barChart("#chart-by-year");
 		this.lineRateStatesByYear = dc.seriesChart("#chart-by-year-state");
 		this.pieTotalizedByState = dc.pieChart("#chart-by-state");
-		this.barRateStatesByYear = dc.barChart("#chart-bar-by-year-state");
+		//this.barRateStatesByYear = dc.barChart("#chart-bar-by-year-state");
 		this.ratesDataTable = dataTable("rates-data-table");
 		this.relativeRatesDataTable = dataTable("relative-rates-data-table");
 	},
 	loadData: function() {
 		utils.loadingShow(true);
-		// download data in CSV format from PRODES WFS service.
-		// var url="http://terrabrasilis.info/fip-service/fip-project-prodes/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=fip-project-prodes:prodes_rates_d&outputFormat=csv";
-		// d3.csv(url, graph.processData);
-
 		// load data from CSV file
-		d3.csv("data/prodes_rates_d.csv", graph.processData);
+		//d3.csv("data/cerrado_rates_d.csv", graph.processData);
 		
-		// download data in JSON format from PRODES WFS service.
-		// var url="http://terrabrasilis.info/prodes-data/PRODES/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=PRODES:prodes_rates_d&outputFormat=application%2Fjson";
-		// d3.json(url, graph.processData);
+		// download data in JSON format from TerraBrasilis API service.
+		var url="http://terrabrasilis.info/data-api/api/v1/increase-cerrado/all";
+		d3.json(url, graph.processData);
 		
 		// load data from JSON file
-		// var url="data/prodes_rates.json";
-		// d3.json(url, graph.processData);
+		//var url="data/cerrado.json";
+		//d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
 		utils.loadingShow(false);
@@ -246,21 +242,36 @@ var graph={
 			return;
 		}else {
 			utils.displayGraphContainer();
-
-			var o=[],t=[];
-			for (var j = 0, n = data.length; j < n; ++j) {
-				var obj={
-					uf:data[j].state,
-					year:data[j].year,
-					rate:+data[j].rate,
-					ufYear:data[j].state + "/" + data[j].year
-				};
-				if(data[j].state=='CERRADO') {
-					t.push(obj);
-				}else{
+			// normalize all data
+			var o=[],t=[],len=data[0].totalElements,data=data[0].properties, cerrado=[];
+			for (var j = 0, n = len; j < n; ++j) {
+				if(data[j].e!='2000-01-01') {
+					var y=new Date(data[j].e+'T22:00:00.000Z');
+					var obj={
+						uf:data[j].d,
+						year:y.getFullYear(),
+						rate:+data[j].b,
+						ufYear:data[j].d + "/" + y.getFullYear()
+					};
 					o.push(obj);
+
+					if(cerrado[y.getFullYear()]===undefined){
+						cerrado[y.getFullYear()]=0;
+					}
+					cerrado[y.getFullYear()]+=data[j].b;
 				}
 			}
+			// to prepare the general sum for "cerrado" column
+			cerrado.forEach(function(v,k){
+				var obj={
+					uf:'CERRADO',
+					year:k,
+					rate:+v,
+					ufYear:"CERRADO/" + k
+				};
+				t.push(obj);
+			});
+			
 			data = o;
 			graph.data_all = t;
 			graph.registerDataOnCrossfilter(data);
@@ -311,25 +322,67 @@ var graph={
 		);
 	},
 	buildDataTable: function() {
-		var data2Table=[], yearFilter=[], total=[], ufList=[];
-		graph.ufYearDimension.bottom(Infinity).forEach(
+		var data2Table=[], yearFilter=[], yearForUf=[], total=[], ufList=[];
+		graph.stateYearRateGroup.all().forEach(
+			
 			function (y) {
-				if(!total[y.uf]) {
-					total[y.uf]=0;
-					ufList.push(y.uf);
+				if(total[y.key[0]]==undefined) {
+					total[y.key[0]]=0;
+					yearForUf[y.key[0]]=[];
+					ufList.push(y.key[0]);
 				}
-				total[y.uf]+=y.rate;
+				yearForUf[y.key[0]].push(y.key[1]);// year list for each UF
+				total[y.key[0]]+=y.value;
 				data2Table.push({
-					uf:y.uf,
-					year:y.year,
-					rate:localeBR.numberFormat(',1f')(y.rate),
-					originalRate:y.rate
+					uf:y.key[0],
+					year:y.key[1],
+					rate:localeBR.numberFormat(',1f')(Math.abs(+(y.value.toFixed(1)))),
+					originalRate:y.value
 				});
-				if(yearFilter.indexOf(y.year) < 0) {
-					yearFilter.push(y.year);
+				if(yearFilter.indexOf(y.key[1]) < 0) {
+					yearFilter.push(y.key[1]);
 				}
 			}
 		);
+		// to complete with all years for states when year series is incomplete
+		ufList.forEach(function(uf){
+
+			if(yearForUf[uf] && yearForUf[uf].length<yearFilter.length){
+				hasYears=[];
+				data2Table.forEach(function(d){
+					if(uf==d.uf){
+						hasYears.push(d.year);
+					}
+				});
+				yearFilter.forEach(function(y){
+					if(hasYears.indexOf(y)<0) {
+						data2Table.push({
+							uf:uf,
+							year:y,
+							rate:'0',
+							originalRate:0
+						});
+					}
+				});
+			}
+		});
+		var reA = /[^a-zA-Z]/g;
+		var reN = /[^0-9]/g;
+		function sortAlphaNum(a,b) {
+			a=a.uf+a.year,b=b.uf+b.year;
+
+			var aA = a.replace(reA, "");
+			var bA = b.replace(reA, "");
+			if(aA === bA) {
+				var aN = parseInt(a.replace(reN, ""), 10);
+				var bN = parseInt(b.replace(reN, ""), 10);
+				return aN === bN ? 0 : aN > bN ? 1 : -1;
+			} else {
+				return aA > bA ? 1 : -1;
+			}
+		}
+		data2Table.sort(sortAlphaNum);
+		// to include grouped data into table represented by "cerrado" column.
 		graph.data_all.forEach(function(da){
 			if(yearFilter.indexOf(da.year) >= 0) {
 				if(!total[da.uf]) {
@@ -340,11 +393,13 @@ var graph={
 				data2Table.push({
 					uf:da.uf,
 					year:da.year,
-					rate:localeBR.numberFormat(',1f')(da.rate),
+					rate:localeBR.numberFormat(',1f')(Math.abs(+(da.rate.toFixed(1)))),
 					originalRate:da.rate
 				});
 			}
 		});
+		
+
 		graph.data2csv=jQuery.extend(true, [], data2Table);
 		graph.buildVariationRatesDataTable(data2Table);
 		ufList.forEach(function(uf){
@@ -352,7 +407,7 @@ var graph={
 			data2Table.push({
 				uf:uf,
 				year:Translation[Lang.language].cumulate,
-				rate:localeBR.numberFormat(',1f')(total[uf])
+				rate:localeBR.numberFormat(',1f')(Math.abs(+(total[uf].toFixed(1))))
 			});
 		});
 		graph.ratesDataTable.init(data2Table);
@@ -363,7 +418,9 @@ var graph={
 		var data2Table=[], l=d.length;
 		for(var i=0;i<l;i++) {
 			if(d[i+1] && d[i].uf==d[i+1].uf) {
-				var rr=(d[i].originalRate>0)?( ( (100 - (d[i+1].originalRate*100/d[i].originalRate)) * (-1) ).toFixed(0) + '%'):('');
+				var rr=(d[i].originalRate>=0.1)?( ( (100 - (d[i+1].originalRate*100/d[i].originalRate)) * (-1) ).toFixed(0) ):(0);
+				if(rr=='-0') rr='0';
+				rr=rr+'%';
 				data2Table.push({
 					uf:d[i].uf,
 					year:d[i].year+'-'+d[i+1].year,
@@ -420,6 +477,7 @@ var graph={
 			return localeBR.numberFormat(',1f')(d);
 		});
 
+		/*
 		this.barRateByYear.addFilterHandler(function(filters, filter) {
 			filters.push(filter);
 			if(graph.barRateStatesByYear.hasFilter()) {
@@ -439,6 +497,7 @@ var graph={
 			return filters;
 		});
 
+
 		this.barRateByYear.removeFilterHandler(function(filters, filter) {
 			graph.barRateStatesByYear.filterAll();
 			var pos=filters.indexOf(filter);
@@ -451,6 +510,7 @@ var graph={
 			graph.barRateStatesByYear.redraw();
 			return filters;
 		});
+		*/
 
 		/**
 		 * Starting the lines chart by States for rates per years.
@@ -465,7 +525,7 @@ var graph={
 			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
 		this.lineRateStatesByYear
-			.chart(function(c) { return dc.lineChart(c).interpolate('default').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
+			.chart(function(c) { return dc.lineChart(c).interpolate('monotone').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
 			.x(xScale)
 			.brushOn(false)
 			.yAxisLabel(Translation[Lang.language].lineYAxis)
@@ -557,6 +617,7 @@ var graph={
 			ufList.push(d.key);
 		});
 		
+		/*
 		this.barRateStatesByYear
 			.x(d3.scale.ordinal())
 	        .xUnits(dc.units.ordinal)
@@ -640,7 +701,8 @@ var graph={
 				chart.selectAll('g.x text')
 					.attr('transform', 'translate(-15,7) rotate(315)');
 			});
-
+		*/
+		
 		this.updateChartsDimensions();
 		this.buildDataTable();
 		this.prepareTools();
@@ -658,7 +720,7 @@ var graph={
 	resetFilter: function(who) {
 		if(who=='year' || who=='stackbar-state'){
 			graph.barRateByYear.filterAll();
-			graph.barRateStatesByYear.filterAll();
+			//graph.barRateStatesByYear.filterAll();
 		}else if(who=='state'){
 			graph.pieTotalizedByState.filterAll();
 		}
@@ -701,7 +763,7 @@ var graph={
 				var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
 				var dt=new Date();
 				dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-				saveAs(blob, 'prodes_rates_filtered_'+dt+'.csv');
+				saveAs(blob, 'cerrado_rates_filtered_'+dt+'.csv');
 			}else{
 				downloadCSVWithoutFilter();
 			}
@@ -752,7 +814,7 @@ var graph={
 			var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
 			var dt=new Date();
 			dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-			saveAs(blob, 'prodes_rates_'+dt+'.csv');
+			saveAs(blob, 'cerrado_rates_'+dt+'.csv');
 		};
 		// build download data
 		d3.select('#downloadTableBtn')

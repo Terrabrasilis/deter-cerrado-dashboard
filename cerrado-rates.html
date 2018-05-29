@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Fip Cerrado Taxas Desmatamento</title>
+    <title>Cerrado brasileiro - incremento de Desmatamento</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-3.2.0.min.css" />
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
@@ -28,19 +28,18 @@
 			<div class="collapse navbar-collapse" id="navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a id="txt1">Taxas de desmatamento</a>
+						<a id="txt1">Incremento de desmatamento</a>
 					</li>	
-					<li>
+					<!--li>
 						<a href="prodes-increase.html" id="panel_swap" title="Ir para o painel de consulta aos incrementos anuais de desmatamento.">
-							<!--<img alt="btn image" src="./img/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;-->
 							<span id="txt2">Incrementos de desmatamento</span>
 						</a>					
-					</li>
+					</li -->
 					<li class="dropdown inverse-dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="tools">Ferramentas <span class="caret"></span></span></a>
 						<ul class="dropdown-menu">
 							<li>
-								<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de taxas de desmatamento.">
+								<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incremento de desmatamento.">
 									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
 								</a>
 							</li>
@@ -54,11 +53,11 @@
 									<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
 								</a>
 							</li>							
-							<li>
+							<!--li>
 								<a href="http://terrabrasilis.info/composer/PRODES" target="_blanck" id="goto_map" title="Ir para o perfil PRODES no TerraBrasilis.info para visualização do mapa.">
 									<span id="btn_style" class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;<span id="txt1a">Mapa</span>
 								</a>
-							</li>
+							</li -->
 						</ul>
 					</li>
 					<li class="dropdown inverse-dropdown">
@@ -99,9 +98,9 @@
 	<div class="container" id="panel_container" style="display:none;">
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
-				<span id="txt7">Taxas anuais de desmatamento na Amazônia Legal Brasileira (AMZ)</span>
+				<span id="txt7">Incrementos anuais de desmatamento no Cerrado brasileiro</span>
 				<a id="infoRatesBtn" href="#modal-container-info-rates" role="button" class="btn btn-chart-info" data-toggle="modal">
-					<span class="glyphicon glyphicon-info-sign" aria-hidden="true" id="display_warning" title="Clique para ver mais informações sobre as taxas."></span>
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true" id="display_warning" title="Clique para ver mais informações sobre os incrementos."></span>
 				</a>
 			</div>
 			<div class="col-md-9" id="chart1">
@@ -151,7 +150,7 @@
 		
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
-				<span id="txt15">Tabela de taxas anuais e variações relativas de desmatamento na Amazônia Legal Brasileira</span>
+				<span id="txt15">Tabela de incrementos anuais e variações relativas de desmatamento no Cerrado brasileiro</span>
 			</div>
 		</div>
 		
@@ -162,7 +161,7 @@
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
 								<i class="glyphicon glyphicon-chevron-right" style="color:black;display:unset;"></i>
-								<span id="txt16">Taxa anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
+								<span id="txt16">Incremento anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
 							</a>
 							<span style="clear: both;color: black;position: relative;float: right;">
 								<button id="downloadTableBtn" class="btn btn-success btn-sm btn-block" title="Baixar os dados da tabela, em formato CSV.">
@@ -182,7 +181,7 @@
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
 								<i class="glyphicon glyphicon-chevron-right" style="color:black;display:unset;"></i>
-								<span id="txt18">Variações relativas das taxas anuais de desmatamento (%)</span>
+								<span id="txt18">Variações relativas dos incrementos anuais de desmatamento (%)</span>
 							</a>
 						</h4>
 					</div>
@@ -216,15 +215,15 @@
 							<div class="modal-body">
 								<div class="alert alert-info">
 									<ul>
-										<li><span id="txt20">A taxa apresentada para o ano 1988 é a <strong>média entre 1977 e 1988.</strong></span></li>
-										<li><span id="txt21">As taxas apresentadas para os anos 1993 e 1994 representam a <strong>média entre estes anos.</strong></span></li>
+										<li><span id="txt20"></span></li>
+										<!--li><span id="txt21">Para consultar a área de interesse MATOPIBA, utilize o filtro no menu Ferramentas, no topo da página.</span></li-->
 										<!--<li><span id="txt22">2004 - início do</span> <a href="http://redd.mma.gov.br/pt/acompanhamento-e-a-analise-de-impacto-das-politicas-publicas/ppcdam">PPCDAm</a>.</li>-->
 									</ul>
 								</div>
-								<div id="warning-msg" class="alert alert-warning">
-									<strong><span>* </span></strong><span id="warning-txt">As taxas de 2017 são estimadas.</span>
-								</div>
-								<a target="_blank" href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes" id="txt23">Informações completas sobre o projeto PRODES</a>
+								<!--div id="warning-msg" class="alert alert-warning">
+									<strong><span>* </span></strong><span id="warning-txt"></span>
+								</div-->
+								<a target="_blank" href="http://www.dpi.inpe.br/fipcerrado/" id="txt23">Mais informações sobre o projeto FIP Cerrado</a>
 							</div>
 							<div class="modal-footer">
 								 
@@ -248,7 +247,7 @@
 								</h4>
 							</div>
 							<div class="modal-body">
-								<span id="txt26">Baixar a tabela com as taxas de desmatamento em formato CSV.</span>
+								<span id="txt26">Baixar a tabela com os incremento de desmatamento em formato CSV.</span>
 								<div class="dwn-tool">
 									<a href="#" id="download-csv-filtered">
 									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span>

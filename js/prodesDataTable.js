@@ -39,6 +39,7 @@ var dataTable = function(divId) {
 		build: function() {
 			var d=[];
 			this.data.forEach(function(o) {
+
 				var yearIndex=o.year.toString()+" ";
 				if(d.indexOf(yearIndex)<0){
 					d.push(yearIndex);
