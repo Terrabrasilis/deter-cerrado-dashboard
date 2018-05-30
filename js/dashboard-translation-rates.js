@@ -102,7 +102,7 @@ var Translation={
 		'txt20':'The years: 2001, 2003, 2005, 2007, 2009 e 2011 are the average between the present year and previous year because no have data from mapping to these years.',
 		/*'txt21':'1993 and 1994 deforestation increments correspond to the <strong>mean of the deforestation increments found between these years. </ Strong>',*/
 		/*'txt22':'2004 - start of',*/
-		'txt23':'For more information, see PRODES project',
+		'txt23':'For more information, see FIP Cerrado project',
 		'txt24':'Close',
 		'txt25':'Download information',
 		'txt26':'Download a deforestation increment table in CSV format.',
@@ -177,7 +177,7 @@ var Translation={
 		'txt20':'Los años: 2001, 2003, 2005, 2007, 2009 y 2011 son el promedio entre el año actual y el año anterior porque no se tienen datos del mapeo de estos años.',
 		/*'txt21':'Los incrementos presentadas para los años 1993 y 1994 representan la <strong> media entre estos años.</strong>',*/
 		/*'txt22':'2004 - start of',*/
-		'txt23':'Para más información acceda a la página del proyecto PRODES',
+		'txt23':'Para más información acceda a la página del proyecto FIP Cerrado',
 		'txt24':'Cerrar',
 		'txt25':'Cómo descargar tus datos',
 		'txt26':'Descargar la tabla con los incrementos de deforestación en formato CSV.',
