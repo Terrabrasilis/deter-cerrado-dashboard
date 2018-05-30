@@ -126,27 +126,45 @@
 		</div>
 
 		<div class="row">
-		  <div class="col-md-12">
-			  <div id="chart-by-year-state">
-			  	<div class="keep-space">
-			  	<!-- div class="btn-download"><span onclick="downloadAsImage('chart-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span></div -->
-			  	</div>
-			  </div>
-		  </div>
-		</div>
-
-		<div class="row" id="chart3">
-			<div class="col-md-12">
-				<div id="chart-bar-by-year-state">
-				<div class="reset" style="display:none;"><b><span id="txt99">Filtro:</span></b> <span class="filter"></span>
-					<a href="javascript:graph.resetFilter('stackbar-state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt98" title="Limpar este filtro."></span></a>
+			<div class="col-md-9">
+				<div id="chart-by-year-state">
+					<div class="keep-space">
+					<!-- div class="btn-download"><span onclick="downloadAsImage('chart-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span></div -->
+					</div>
 				</div>
-				<div class="keep-space">
-					<div class="btn-download"><span onclick="downloadAsImage('chart-bar-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span></div>
-				</div>
+			</div>
+			<div class="col-md-3">
+				<div id="chart-by-mun">
+					<span id="title-chart-by-mun" class="all-charts-title"></span>
+					<a href="#modal-container-filtered" role="button" data-toggle="modal" style="text-decoration: none;">
+						<span class="glyphicon glyphicon-search search-mun" aria-hidden="true" id="txt33" title="Procurar um município."></span>
+					</a>
+					<div class="keep-space">
+						<div class="reset" style="visibility: hidden;"><b><span id="txt34">Filtro:</span></b><span class="filter"></span>
+							<a href="javascript:graph.resetFilter('mun');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt35" title="Limpar este filtro."></span></a>
+						</div>
+						<div class="btn-download">
+							<span onclick="downloadAsImage('chart-by-mun');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt36" title="Baixar a imagem do gráfico em formato PNG."></span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- div class="row" id="chart3">
+			<div class="col-md-12">
+				<div id="chart-bar-by-year-state">
+					<div class="reset" style="display:none;"><b><span id="txt99">Filtro:</span></b> <span class="filter"></span>
+						<a href="javascript:graph.resetFilter('stackbar-state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt98" title="Limpar este filtro."></span></a>
+					</div>
+					<div class="keep-space">
+						<div class="btn-download">
+							<span onclick="downloadAsImage('chart-bar-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div -->
 		
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
@@ -311,6 +329,37 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal" id="about-close">Fechar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal window with counties filterd items -->
+				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="filtered">
+									<span id="txt1f">Pesquisa de municípios</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<span id="txt1g">Encontre um município (não utilizar <strong>acentuação gráfica</strong>).</span>
+								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
+									<input id="search-county" type="text" class="form-control" placeholder="Search">
+									<div class="input-group-btn">
+										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="glyphicon glyphicon-search" style="color:gray"></i></button>
+									</div>
+								</div>
+								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
+								<ul id="filtered-list"></ul>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt1i">Fechar</span>
+								</button> 
 							</div>
 						</div>
 					</div>

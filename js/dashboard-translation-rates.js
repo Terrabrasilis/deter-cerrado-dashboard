@@ -42,6 +42,10 @@ var Translation={
 		'txt31':'Imprimir',
 		/*"warning-txt":'',*/
 		'txt32':'<strong>Nota:</strong> Clique no texto para expandir/recolher os painéis.',
+		'txt33':'Procurar um município.',
+		'txt34':'Filtro:',
+		'txt35':'Limpar este filtro.',
+		'txt36':'Baixar a imagem do gráfico em formato PNG.',
 		/* titles for HTML entities */
 		'about-close':"Fechar",
 		/* 'panel_swap':'Ir para o painel de incrementos anuais de desmatamento.', */
@@ -59,6 +63,7 @@ var Translation={
 		'barXAxis':'Período de monitoramento no Cerrado Brasileiro: ',
 		'area':'Área: ',
 		'state':'Estado: ',
+		'county':'Município',
 		'year':'Ano: ',
 		'percent':'Porcentagem: ',
 		'lineYAxis':'Estimativa anual de desmatamento (km²/ano)',
@@ -67,6 +72,8 @@ var Translation={
 		'failure_load_data':'Falhou ao carregar os dados. ',
 		'refresh_data':'Repetir a carga dos dados.',
 		'no_data':'Sem dados para exibir. ',
+		'no_value':'Sem valor',
+		'not_found':'Não encontrou item para esta pesquisa.',
 		'tools': 'Ferramentas <span class="caret"></span>',
 		'help' : 'Ajuda <span class="caret"></span>',
 		'video': 'Video Introdutório',
@@ -117,6 +124,10 @@ var Translation={
 		'txt31':'Print',
 		/*"warning-txt":'2017 deforestation increment is still an estimation.',*/
 		'txt32':'<strong>Note:</strong> Click on the text to expand/collapse the panels.',
+		'txt33':'Procurar um município.',
+		'txt34':'Filtro:',
+		'txt35':'Limpar este filtro.',
+		'txt36':'Baixar a imagem do gráfico em formato PNG.',
 		/* titles for HTML entities */
 		'about-close':"Close",
 		/* 'panel_swap':'Go to the deforestation increment increment panel.',*/
@@ -142,6 +153,8 @@ var Translation={
 		'failure_load_data':'Failure to load data. ',
 		'refresh_data':'Try to load data.',
 		'no_data':'No data to show. ',
+		'no_value':'No value',
+		'not_found':'No search data to show',
 		'tools': 'Tools <span class="caret"></span>',
 		'help' : 'Help <span class="caret"></span>',
 		'video': 'Introductory Video',
@@ -192,6 +205,10 @@ var Translation={
 		'txt31':'Imprimir',
 		/*"warning-txt":'Incremento de deforestación en 2017 sigue siendo una estimación.',*/
 		'txt32':'<strong>Nota:</strong> Haga clic en el texto para expandir/contraer los paneles.',
+		'txt33':'Procurar um município.',
+		'txt34':'Filtro:',
+		'txt35':'Limpar este filtro.',
+		'txt36':'Baixar a imagem do gráfico em formato PNG.',
 		/* titles for HTML entities */
 		'about-close':"Cerrar",
 		/*'panel_swap':'Ir al panel de consulta a incrementos de deforestación.',*/
@@ -217,6 +234,8 @@ var Translation={
 		'failure_load_data':'Fallo al cargar los datos. ',
 		'refresh_data':'Intenta cargar datos.',
 		'no_data':'No hay datos para mostrar. ',
+		'no_value':'Sin valor',
+		'not_found':'No encontró ningún resultado.',
 		'tools': 'Herramientas <span class="caret"></span>',
 		'help': 'Ayuda <span class="caret"></span>',
 		'video': 'Video Introductorio',
