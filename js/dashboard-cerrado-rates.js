@@ -180,7 +180,7 @@ var utils = {
 	},
 	changeCss: function(bt) {
 		utils.cssDefault=!utils.cssDefault;
-		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/dashboard-prodes-rates-dark.css'));
+		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/dashboard-cerrado-rates-dark.css'));
 		bt.style.display='none';
 		setTimeout(function(){bt.style.display='';},200);
 	},
