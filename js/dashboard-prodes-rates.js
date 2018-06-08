@@ -842,11 +842,28 @@ var graph={
 				Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.aream.toFixed(2)))) + " km²\n" +
 				Translation[Lang.language].filter + ": " + Translation[Lang.language].without_filter
 			)
-			.colors([(utils.cssDefault)?(graph.histogramColor[0]):(graph.darkHistogramColor[0])]);
+			.colors([(utils.cssDefault)?(graph.histogramColor[0]):(graph.darkHistogramColor[0])])
+			.addFilterHandler(function(filters, filter) {
+				filters.push(filter);
+				if(!graph.barChart2.hasFilter() || graph.barChart2.filters().indexOf(filter)<0){
+					graph.barChart2.filter(filter);
+				}
+				return filters;
+			})
+			.removeFilterHandler(function(filters, filter) {
+				var pos=filters.indexOf(filter);
+				filters.splice(pos,1);
+				graph.barChart2.filter(null);
+				filters.forEach(f => {
+					graph.barChart2.filter(f);
+				});
+				return filters;
+			});
+
 
 		this.barChart2
 			.label(function(d) {
-				return utils.labelFormat(d.data.value.aream);
+				return utils.labelFormat(d.data.value.areat);
 			})
 			.clipPadding(0)
 	        .barPadding(0.3)
@@ -858,7 +875,23 @@ var graph={
 				Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.areat.toFixed(2)))) + " km²\n" +
 				Translation[Lang.language].filter + ": " + Translation[Lang.language].with_filter
 			)
-			.colors([(utils.cssDefault)?(graph.histogramColor[1]):(graph.darkHistogramColor[1])]);
+			.colors([(utils.cssDefault)?(graph.histogramColor[1]):(graph.darkHistogramColor[1])])
+			.addFilterHandler(function(filters, filter) {
+				filters.push(filter);
+				if(!graph.barChart1.hasFilter() || graph.barChart1.filters().indexOf(filter)<0){
+					graph.barChart1.filter(filter);
+				}
+				return filters;
+			})
+			.removeFilterHandler(function(filters, filter) {
+				var pos=filters.indexOf(filter);
+				filters.splice(pos,1);
+				graph.barChart1.filter(null);
+				filters.forEach(f => {
+					graph.barChart1.filter(f);
+				});
+				return filters;
+			});
 
 		this.compositeChart
 			.shareTitle(false)
@@ -881,6 +914,17 @@ var graph={
 			.compose([this.barChart1, this.barChart2])
 			.on("pretransition", chart => {
 				utils.scaleSubChartBarWidth(chart);
+				var bars = chart.selectAll("rect.bar");
+				if(graph.barChart1.hasFilter() || graph.barChart2.hasFilter()){
+					bars.classed(dc.constants.DESELECTED_CLASS, true);
+					bars[0].forEach( bar => {
+						if(graph.barChart1.filters().indexOf(bar.__data__.x)>=0 || graph.barChart2.filters().indexOf(bar.__data__.x)>=0){
+							bar.setAttribute('class', 'bar selected');
+						}
+					});
+				}else{
+					bars.classed(dc.constants.SELECTED_CLASS, true);
+				}
 			})
 			.on("preRedraw", chart => {
 				chart.rescale();
@@ -888,28 +932,14 @@ var graph={
 			.on("preRender", chart => {
 				chart.rescale();
 			});
-			// .addFilterHandler(function(filters, filter) {
-			// 	filters.push(filter);
-			// 	return filters;
-			// });
 		
 		this.compositeChart
 			.on("renderlet.a",function (chart) {
-				// apply mouseclick listener for all bars
-				// chart.selectAll("rect.bar")
-				// 	.on('click.composite', function(d, i) {
-				// 		// i = index of group bar
-				// 		// d = the bar clicked ( d.x = value on x axis, d.y = value on y axis ) and other properties about group bars
-				// 		console.log(d.x + ':' + d.y);
-				// 	});
-
-				var bars = chart.selectAll("rect.bar");
-				bars.classed(dc.constants.DESELECTED_CLASS, true);
-
 				// rotate x-axis labels
 				chart.selectAll('g.x text')
 					.attr('transform', 'translate(-15,7) rotate(315)');
 				// adjust top bar labels
+				var bars = chart.selectAll("rect.bar");
 				var widthBar=bars[0][0].getAttribute('width');
 
 				var texts = d3.selectAll(chart.select('g.sub._0').selectAll('text'));
@@ -951,6 +981,8 @@ var graph={
 			graph.rowTop10ByMun.filterAll();
 			graph.applyCountyFilter(null);
 		}else if(who=='compositebar') {
+			graph.barChart1.filterAll();
+			graph.barChart2.filterAll();
 			graph.compositeChart.filterAll();
 		}
 
