@@ -30,11 +30,6 @@
 					<li class="active">
 						<a id="txt1">Incremento de desmatamento</a>
 					</li>	
-					<!--li>
-						<a href="prodes-increase.html" id="panel_swap" title="Ir para o painel de consulta aos incrementos anuais de desmatamento.">
-							<span id="txt2">Incrementos de desmatamento</span>
-						</a>					
-					</li -->
 					<li class="dropdown inverse-dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="tools">Ferramentas <span class="caret"></span></span></a>
 						<ul class="dropdown-menu">
@@ -104,17 +99,21 @@
 				</a>
 			</div>
 			<div class="col-md-9" id="chart1">
-				<div id="chart-by-year">
+				<div id="chart-bar-by-year-625">
+					<div id="title-chart-bar-by-year-625" class="all-charts-title">Incrementos de desmatamento - totais anuais</div>
 					<div class="keep-space">
 						<div class="reset" style="display:none;"><b><span id="txt8">Filtro:</span></b> <span class="filter"></span>
-							<a href="javascript:graph.resetFilter('year');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt9" title="Limpar este filtro."></span></a>
+							<a href="javascript:graph.resetFilter('compositebar');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt9" title="Limpar este filtro."></span></a>
 						</div>
-						<div class="btn-download"><span onclick="downloadAsImage('chart-by-year');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt10" title="Baixar a imagem do gráfico em formato PNG."></span></div>
+						<div class="btn-download">
+							<span onclick="downloadAsImage('chart-bar-by-year-625');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt10" title="Baixar a imagem do gráfico em formato PNG."></span>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3" id="chart2">
 				<div id="chart-by-state">
+					<div id="title-chart-by-state" class="all-charts-title">Incrementos de desmatamento - totais por Estado</div>
 					<div class="keep-space">
 						<div class="reset" style="display:none;"><b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
 							<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
@@ -128,6 +127,7 @@
 		<div class="row">
 			<div class="col-md-9">
 				<div id="chart-by-year-state">
+					<div id="title-chart-states" class="all-charts-title">Incrementos de desmatamento - anuais por Estado</div>
 					<div class="keep-space">
 					<!-- div class="btn-download"><span onclick="downloadAsImage('chart-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span></div -->
 					</div>
@@ -135,7 +135,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="chart-by-mun">
-					<span id="title-chart-by-mun" class="all-charts-title"></span>
+					<div id="title-chart-by-mun" class="all-charts-title">Desmatamento por Município</div>
 					<a href="#modal-container-filtered" role="button" data-toggle="modal" style="text-decoration: none;">
 						<span class="glyphicon glyphicon-search search-mun" aria-hidden="true" id="txt33" title="Procurar um município."></span>
 					</a>
@@ -150,22 +150,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- div class="row" id="chart3">
-			<div class="col-md-12">
-				<div id="chart-bar-by-year-state">
-					<div class="reset" style="display:none;"><b><span id="txt99">Filtro:</span></b> <span class="filter"></span>
-						<a href="javascript:graph.resetFilter('stackbar-state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt98" title="Limpar este filtro."></span></a>
-					</div>
-					<div class="keep-space">
-						<div class="btn-download">
-							<span onclick="downloadAsImage('chart-bar-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div -->
-		
 		<div class="row">
 			<div class="col-md-12 info" style="margin-bottom: 3px;">
 				<span id="txt15">Tabela de incrementos anuais e variações relativas de desmatamento no Cerrado brasileiro</span>
@@ -238,9 +222,6 @@
 										<!--<li><span id="txt22">2004 - início do</span> <a href="http://redd.mma.gov.br/pt/acompanhamento-e-a-analise-de-impacto-das-politicas-publicas/ppcdam">PPCDAm</a>.</li>-->
 									</ul>
 								</div>
-								<!--div id="warning-msg" class="alert alert-warning">
-									<strong><span>* </span></strong><span id="warning-txt"></span>
-								</div-->
 								<a target="_blank" href="http://www.dpi.inpe.br/fipcerrado/" id="txt23">Mais informações sobre o projeto FIP Cerrado</a>
 							</div>
 							<div class="modal-footer">
@@ -346,15 +327,15 @@
 								</h4>
 							</div>
 							<div class="modal-body">
-								<span id="txt1g">Encontre um município (não utilizar <strong>acentuação gráfica</strong>).</span>
+								<span id="txt1g">Encontre um município.</span>
 								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
-									<input id="search-county" type="text" class="form-control" placeholder="Search">
+									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control" placeholder="Search">
 									<div class="input-group-btn">
 										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="glyphicon glyphicon-search" style="color:gray"></i></button>
 									</div>
 								</div>
 								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
-								<ul id="filtered-list"></ul>
+								<div class="counties-list"><ul id="filtered-list"></ul></div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">
