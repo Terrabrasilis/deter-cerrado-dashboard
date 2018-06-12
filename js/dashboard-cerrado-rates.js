@@ -27,9 +27,9 @@ var utils = {
             endAt = subScale(i + 1);
 
             startAt += utils.barPadding;
-            endAt -= utils.barPadding;
+			endAt -= utils.barPadding;
             d3.select(this)
-                .selectAll('rect')
+				.selectAll('rect')
 				.attr("clip-path", `polygon(${startAt}% 0, ${endAt}% 0, ${endAt}% 100%, ${startAt}% 100%)`);
         });
     },
@@ -913,7 +913,6 @@ var graph={
 			.yAxisPadding('10%')
 			.compose([this.barChart1, this.barChart2])
 			.on("pretransition", chart => {
-				utils.scaleSubChartBarWidth(chart);
 				var bars = chart.selectAll("rect.bar");
 				if(graph.barChart1.hasFilter() || graph.barChart2.hasFilter()){
 					bars.classed(dc.constants.DESELECTED_CLASS, true);
@@ -957,6 +956,8 @@ var graph={
 						var x=widthBar*0.22;
 						d3.select(text).attr('transform','translate('+x+',0)');
 					});
+				
+				utils.scaleSubChartBarWidth(chart);
 			});
 		
 		this.updateChartsDimensions();
