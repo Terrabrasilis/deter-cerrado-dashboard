@@ -992,12 +992,12 @@ var graph={
 	prepareTools: function() {
 		var downloadCSVWithFilter=function() {
 
-			if(graph.pieTotalizedByState.hasFilter() || graph.lineRateStatesByYear.hasFilter()) {
+			if(graph.pieTotalizedByState.hasFilter()) {
 
 				var ufs=[],years=[],rates=[];
 				
 				graph.data2csv.forEach(function(d) {
-					if(d.uf!='AMZ') {
+					if(d.uf!='CERRADO' && graph.pieTotalizedByState.filters().indexOf(d.uf)>=0) {
 						if(ufs.indexOf(d.uf)<0){
 							ufs.push(d.uf);
 							rates[d.uf]=[]
@@ -1023,7 +1023,7 @@ var graph={
 				});
 				for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
 
-				var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+				var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
 				var dt=new Date();
 				dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
 				saveAs(blob, 'cerrado_rates_filtered_'+dt+'.csv');
@@ -1074,7 +1074,7 @@ var graph={
 			
 			for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
 			
-			var blob = new Blob([d3.csv.format(csv)], {type: "text/csv;charset=utf-8"});
+			var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
 			var dt=new Date();
 			dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
 			saveAs(blob, 'cerrado_rates_'+dt+'.csv');
