@@ -28,7 +28,7 @@ var Translation={
 		'txt17':'Baixar CSV',
 		'txt18':'Variações relativas dos incrementos anuais de desmatamento (%)',
 		'txt19':'Informações complementares',
-		'txt20':'Os anos: 2001, 2003, 2005, 2007, 2009 e 2011 representam média com o ano subsequente, pois não houve mapeamentos nestes anos.',
+		'txt20':'Para os biênios 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010 e 2011-2012, foi feito um mapeamento, e atribuiu-se a cada um dos anos a metade do incremento do respectivo biênio.',
 		/*'txt21':'Para consultar a área de interesse MATOPIBA, utilize o filtro no menu Ferramentas, no topo da página',*/
 		/*'txt22':'2004 - início do',*/
 		'txt23':'Mais informações sobre o projeto FIP Cerrado',
@@ -119,7 +119,7 @@ var Translation={
 		'txt17':'Download CSV',
 		'txt18':'Relative variations of the annual deforestation increments (%)',
 		'txt19':'Additional information',
-		'txt20':'The years: 2001, 2003, 2005, 2007, 2009 e 2011 are the average between the present year and previous year because no have data from mapping to these years.',
+		'txt20':'For the biennia 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010 and 2011-2012, a mapping was done, and each half of the biennium increase was attributed to each year.',
 		/*'txt21':'1993 and 1994 deforestation increments correspond to the <strong>mean of the deforestation increments found between these years. </ Strong>',*/
 		/*'txt22':'2004 - start of',*/
 		'txt23':'For more information, see FIP Cerrado project',
@@ -209,7 +209,7 @@ var Translation={
 		'txt17':'Descargar CSV',
 		'txt18':'Variaciones relativas de los incrementos anuales de deforestación (%)',
 		'txt19':'Informaciones adicionales',
-		'txt20':'Los años: 2001, 2003, 2005, 2007, 2009 y 2011 son el promedio entre el año actual y el año anterior porque no se tienen datos del mapeo de estos años.',
+		'txt20':'Para los bienios 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010 y 2011-2012, se hizo un mapeo, y se atribuyó a cada uno de los años la mitad del incremento del respectivo bienio.',
 		/*'txt21':'Los incrementos presentadas para los años 1993 y 1994 representan la <strong> media entre estos años.</strong>',*/
 		/*'txt22':'2004 - start of',*/
 		'txt23':'Para más información acceda a la página del proyecto FIP Cerrado',
