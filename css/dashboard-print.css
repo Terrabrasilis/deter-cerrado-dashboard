@@ -4,7 +4,7 @@ body{
 	height: 95%;
 }
 .glyphicon, .keep-space, #footer_page, .btn, p{display:none !important;}
-.col-md-9 #chart-by-year{
+.col-md-9 #chart-by-year, #chart-bar-by-year-625{
 	width: 70%;
 	zoom: 80%;
 	float: left;
@@ -15,7 +15,7 @@ body{
 	text-align: center;
 	float: right;
 }
-#chart-by-year-state, #chart-bar-by-year-state{
+#chart-by-year-state{
 	width: 95%;
 	zoom: 80%;
 }
@@ -39,7 +39,7 @@ body{
 .panel{
 	border: 0px;
 }
-.panel-heading{
+.panel-heading, .info-table{
 	display: none;
 }
 #footer_print{
