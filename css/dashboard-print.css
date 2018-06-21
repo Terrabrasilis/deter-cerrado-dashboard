@@ -3,7 +3,7 @@ body{
 	width: 100%;
 	height: 95%;
 }
-.glyphicon, .keep-space, #footer_page, .btn, p{display:none !important;}
+.glyphicon, .keep-space, #footer_page, .btn, p, .panel-heading, .info-table{display:none !important;}
 .col-md-9 #chart-by-year, #chart-bar-by-year-625{
 	width: 70%;
 	zoom: 80%;
@@ -39,15 +39,12 @@ body{
 .panel{
 	border: 0px;
 }
-.panel-heading, .info-table{
-	display: none;
-}
 #footer_print{
 	display: block;
 	text-align: justify;
 	color: #635e5e;
 	font-size: 12px !important;
-	border-top: rgb(187, 224, 123) solid 1px;
+	/*border-top: rgb(187, 224, 123) solid 1px;*/
 	position: fixed;
-	bottom: 0px;
+	bottom: -3px;
 }
