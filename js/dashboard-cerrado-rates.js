@@ -220,6 +220,9 @@ var utils = {
 	},
 	displayGraphContainer:function() {
 		d3.select('#panel_container').style('display','block');
+	},
+	displayDisclaimer: function(){
+		$('#modal-container-general-info').modal('show');
 	}
 };
 
@@ -1165,5 +1168,6 @@ window.onload=function(){
 	window.init();
 	Lang.init();
 	graph.init();
-	Lang.apply();// apply from previous selection			
+	Lang.apply();// apply from previous selection
+	utils.displayDisclaimer();
 };
