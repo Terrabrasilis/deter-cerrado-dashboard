@@ -12,7 +12,15 @@ var Translation={
 		'txt1i':'Fechar',
 		'txt2':'',
 		'txt2a':'Informações gerais',
-		'txt2b':'Um texto aqui !!',
+		'txt2b':'<h3>Sobreposição PRODES Amazônia x Cerrado</h3>'+
+		'<br /><br />'+
+		'O Mapeamento do cerrado é realizado para toda extensão do Bioma, o que inclui uma zona de sobreposição com os limites da Amazônia Legal Brasileira. Ocorre que as áreas de florestas, dentro da zona de sobreposição entre os limites do Bioma Cerrado e os limites da Amazônia Legal, 7% da área total, já são mapeadas, desde 1988, pelo projeto PRODES Amazônia. Nesta área de sobreposição o INPE utilizou os dados  já mapeados pelo PRODES Amazônia, para evitar resultados discrepantes entre os dois produtos. Apesar dos dois mapeamentos possuírem a mesma legenda (i.e. desmatamento do tipo corte raso) existe uma peculiaridade em relação ao início de suas séries históricas e frequências de mapeamento.'+
+		'<br /><br />'+
+		'O PRODES Cerrado tem uma série histórica com início no ano 2000 e possui frequência de mapeamento bianual até 2012 e anual desde 2013 até 2017. O PRODES Amazônia tem sua série histórica com início em 1988 e possui frequência anual de mapeamento, entretanto durante esse período foi necessário fazer um ajuste geométrico na máscara de desmatamento para corrigir deslocamentos causados por diferentes processos de georreferenciamento das imagens adotados ao longo da vida do projeto. <a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes/pdfs/nt_deslocamentomascara.pdf" target="_blank">Acesse este link para mais detalhes.</a>'+
+		'<br /><br />'+
+		'Este ajuste na máscara de desmatamento do PRODES Amazônia resultou em uma agregação de todos os anos mapeados até 2008 em um único plano de informação, não sendo possível separar a geometria do desmatamento dos anos anteriores. Uma vez que os números computados pelo PRODES Cerrado são referentes ao desmatamento mapeado a partir da máscara agregada do ano 2000, início de sua série histórica, os mesmos não consideram a área de desmatamento acumulado até o ano 2000.'+
+		'<br /><br />'+
+		'Por essa razão, ainda que esta diferença ocorra apenas na área de sobreposição (7% da área total), os números do desmatamento anual publicados no dashboard do TerraBrasilis (www.dpi.inpe.br/fipcerrado/dashboard/) não são iguais aos dados geográficos disponibilizados para download no mesmo site, exclusivamente para os anos 2000 até 2008.',
 		'txt2c':'Fechar',
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir',
@@ -106,7 +114,15 @@ var Translation={
 		'txt1i':'Close',
 		'txt2':'Deforestation increments',
 		'txt2a':'General informations',
-		'txt2b':'One text here !!',
+		'txt2b':'<h3>Overlay PRODES Amazon x Closed</h3>'+
+		'<br /><br />'+
+		'Mapping of the cerrado is carried out for the whole extension of the Biome, which includes an overlap zone with the limits of the Brazilian Legal Amazon. It occurs that the forest areas, within the zone of overlap between the borders of the Cerrado Biome and the limits of the Legal Amazon, 7% of the total area, have been mapped since 1988 by PRODES Amazônia. In this area of ​​overlap, INPE used the data already mapped by PRODES Amazônia, to avoid discrepant results between the two products. Although the two mappings have the same legend (i.e. shallow-cut deforestation) there is a peculiarity in relation to the beginning of their historical series and mapping frequencies.'+
+		'<br /><br />'+
+		'PRODES Cerrado has a historical series beginning in the year 2000 and has bi-annual mapping frequency until 2012 and annual from 2013 to 2017. PRODES Amazônia has its historical series beginning in 1988 and has an annual mapping frequency, however during that period it was it is necessary to make a geometric adjustment in the deforestation mask to correct displacements caused by different processes of georeferencing of the images adopted throughout the life of the project.  <a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes/pdfs/nt_deslocamentomascara.pdf" target="_blank">Access this link for more details.</a>'+
+		'<br /><br />'+
+		'This adjustment in the deforestation mask of PRODES Amazônia resulted in an aggregation of all the years mapped until 2008 into a single information plan, and it is not possible to separate the geometry of deforestation from previous years. Since the numbers computed by PRODES Cerrado refer to the deforestation mapped from the aggregate mask of the year 2000, beginning of its historical series, they do not consider the deforestation area accumulated until the year 2000.'+
+		'<br /><br />'+
+		'For this reason, even though this difference occurs only in the overlapping area (7% of the total area), the annual deforestation figures published in the TerraBrasilis dashboard (www.dpi.inpe.br/fipcerrado/dashboard/) are not the same as the geographic data available for download at the same site, exclusively for the years 2000 to 2008.',
 		'txt2c':'Close',
 		'txt3':'Download',
 		'txt4':'Print',
@@ -199,7 +215,15 @@ var Translation={
 		'txt1i':'Cerrar',
 		'txt2':'',
 		'txt2a':'Informaciones generales',
-		'txt2b':'¡Un texto aquí!',
+		'txt2b':'<h3>Sobreposición PRODES Amazonia x Cerrado</h3>'+
+		'<br /><br />'+
+		'El Mapeamento del Cerrado es realizado para toda extensión del Bioma, lo que incluye una zona de superposición con los límites de la Amazonia Legal Brasileña. Se observa que las áreas de bosques, dentro de la zona de superposición entre los límites del Bioma Cerrado y los límites de la Amazonía Legal, el 7% del área total, ya son mapeadas desde 1988 por el proyecto PRODES Amazonia. En esta área de superposición el INPE utilizó los datos ya mapeados por el PRODES Amazonia, para evitar resultados discrepantes entre los dos productos. A pesar de que los dos mapeamientos poseen la misma leyenda (de deforestación del tipo corte raso) existe una peculiaridad en relación al inicio de sus series históricas y frecuencias de mapeo.'+
+		'<br /><br />'+
+		'El PRODES Cerrado tiene una serie histórica con inicio en el año 2000 y tiene frecuencia de mapeo bianual hasta 2012 y anual desde 2013 hasta 2017. El PRODES Amazonia tiene su serie histórica con inicio en 1988 y tiene una frecuencia anual de mapeo, entretanto durante ese período fue es necesario hacer un ajuste geométrico en la máscara de deforestación para corregir desplazamientos causados ​​por diferentes procesos de georreferenciación de las imágenes adoptadas a lo largo de la vida del proyecto. <a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes/pdfs/nt_deslocamentomascara.pdf" target="_blank">Acceda a este enlace para más detalles.</a>'+
+		'<br /><br />'+
+		'Este ajuste en la máscara de deforestación del PRODES Amazonia resultó en una agregación de todos los años asignados hasta 2008 en un único plan de información, no siendo posible separar la geometría de la deforestación de los años anteriores. Una vez que los números computados por el PRODES Cerrado son referentes a la deforestación mapeada a partir de la máscara agregada del año 2000, inicio de su serie histórica, los mismos no consideran el área de deforestación acumulada hasta el año 2000.'+
+		'<br /><br />'+
+		'Por esta razón, aunque esta diferencia sólo ocurre en el área de superposición (7% del área total), los números de la deforestación anual publicados en el tablero de TerraBrasilis (www.dpi.inpe.br/fipcerrado/dashboard/) no son iguales a los datos geográficos disponibles para su descarga en el mismo sitio, exclusivamente para los años 2000 hasta 2008.',
 		'txt2c':'Cerrar',
 		'txt3':'Descargar datos',
 		'txt4':'Imprimir',
