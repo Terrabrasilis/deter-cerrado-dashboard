@@ -351,10 +351,10 @@ var graph={
 				.x(fw34 - 380)
 				.y(5)
 				.itemHeight(13)
-				.gap(7)
+				//.gap(7)
 				.horizontal(1)
 				.legendWidth(380)
-				.itemWidth(90)
+				.itemWidth(120)
 				.legendText(function (d) {
 					return (d.color==graph.histogramColor[0] || d.color==graph.darkHistogramColor[0])?(Translation[Lang.language].without_filter):(Translation[Lang.language].with_filter)
 				})
@@ -682,7 +682,7 @@ var graph={
 			.x(xScale)
 			.brushOn(false)
 			.yAxisLabel(Translation[Lang.language].lineYAxis)
-			.xAxisLabel(Translation[Lang.language].lineXAxis + years[0].key + " - " + years[years.length-1].key)
+			//.xAxisLabel(Translation[Lang.language].lineXAxis + years[0].key + " - " + years[years.length-1].key)
 			.renderHorizontalGridLines(true)
 			.renderVerticalGridLines(true)
 			.title(function(d) {
@@ -899,7 +899,7 @@ var graph={
 		this.compositeChart
 			.shareTitle(false)
 			.yAxisLabel(Translation[Lang.language].barYAxis)
-			.xAxisLabel(Translation[Lang.language].barXAxis + years[0].key + " - " + years[years.length-1].key)
+			//.xAxisLabel(Translation[Lang.language].barXAxis + years[0].key + " - " + years[years.length-1].key)
 			.dimension(this.compositeDimension)
 			.group(utils.snapToZero(this.compositeGroup))
 			.title(function(d) {
