@@ -832,9 +832,9 @@ var graph={
 		 * Composite bar chart to display the sum area by year with and without filter by 6.25 ha
 		 */
 		this.barChart1
-			.label(function(d) {
-				return utils.labelFormat(d.data.value.aream);
-			})
+			// .label(function(d) {
+			// 	return utils.labelFormat(d.data.value.aream);
+			// })
 			.clipPadding(0)
 	        .barPadding(0.3)
 			.valueAccessor(
@@ -865,9 +865,9 @@ var graph={
 
 
 		this.barChart2
-			.label(function(d) {
-				return utils.labelFormat(d.data.value.areat);
-			})
+			// .label(function(d) {
+			// 	return utils.labelFormat(d.data.value.areat);
+			// })
 			.clipPadding(0)
 	        .barPadding(0.3)
 			.valueAccessor(
