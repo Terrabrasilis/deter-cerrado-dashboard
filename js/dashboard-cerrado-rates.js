@@ -228,7 +228,7 @@ var utils = {
 
 var graph={
 
-	lineRateStatesByYear: null,
+	lineRateByYear: null,
 	pieTotalizedByState: null,
 	rowTop10ByMun: null,
 	barChart1: null,
@@ -242,6 +242,7 @@ var graph={
 	munDimension: null,
 	ufYearDimension: null,
 	stateYearDimension: null,
+	countyYearDimension: null,
 	compositeDimension: null,
 	munAreaMunGroup: null,
 	munGroup: null,
@@ -249,7 +250,8 @@ var graph={
 
 	yearRateGroup: null,
 	ufRateGroup: null,
-	stateYearRateGroup: null, 
+	stateYearRateGroup: null,
+	countyYearRateGroup: null,
 
 	data:null,
 	data_all:null,
@@ -290,24 +292,6 @@ var graph={
 		});
 		
 	},
-	getStates: function() {
-		var ufs=graph.ufDimension.group().all(),
-		ufList=[];
-
-		ufs.forEach(function(d){
-			ufList.push(d.key);
-		});
-		return ufList
-	},
-	getOrdinalColorsToStates: function() {
-		var c=[];
-		var ufList=this.getStates();
-		var cor=(utils.cssDefault)?(graph.pallet):(graph.darkPallet);
-		for(var i=0;i<ufList.length;i++) {
-			c.push({key:ufList[i],color:cor[i]});
-		}
-		return c;
-	},
 	setDimensions: function(dim) {
 		this.winWidth=dim.w;
 		this.winHeight=dim.h;
@@ -328,11 +312,12 @@ var graph={
 			fw14 = fw;
 		}
 
-		this.lineRateStatesByYear
+		this.lineRateByYear
 			.width(fw34)
 			.height(fh)
 			.margins({top: 0, right: 10, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw34 - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
+			.legend(dc.legend().x(fw34-180));
+			//.legend(dc.legend().x(fw34 - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
 		this.pieTotalizedByState
 			.width(fw14)
 			.height(fh)
@@ -368,7 +353,6 @@ var graph={
 	},
 	setChartReferencies: function() {
 
-		this.lineRateStatesByYear = dc.seriesChart("#chart-by-year-state");
 		this.pieTotalizedByState = dc.pieChart("#chart-by-state");
 		this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
 		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625");
@@ -461,6 +445,9 @@ var graph={
 		this.stateYearDimension = ndx.dimension(function(d) {
 			return [d.uf, +d.year];
 		});
+		this.countyYearDimension = ndx.dimension(function(d) {
+			return [d.county, +d.year];
+		});
 		this.compositeDimension = ndx.dimension(function(d) {
 			return d.key;
         });
@@ -476,6 +463,9 @@ var graph={
 			return +d.rate;
 		});
 		this.stateYearRateGroup = this.stateYearDimension.group().reduceSum(function(d) {
+			return +d.rate;
+		});
+		this.countyYearRateGroup = this.countyYearDimension.group().reduceSum(function(d) {
 			return +d.rate;
 		});
 		this.munAreaMunGroup = this.munDimension.group().reduceSum(function(d) {
@@ -539,7 +529,7 @@ var graph={
 				filteredGroup.reverse();
 				return filteredGroup;
 			});
-			this.rowTop10ByMun.filterAll();
+			//this.rowTop10ByMun.filterAll();
 			this.rowTop10ByMun.filter(d[0].key);
 		}
 		dc.redrawAll();
@@ -653,21 +643,16 @@ var graph={
 		graph.relativeRatesDataTable.init(data2Table);
 		graph.relativeRatesDataTable.redraw();
 	},
-	build: function() {
-		var w=parseInt(this.winWidth - (this.winWidth * 0.05)),
-		h=parseInt(this.winHeight * 0.3),
-		barColors = this.getOrdinalColorsToStates();
+	/**
+	 * Starting the lines chart by States for rates per years or
+	 * the line chart for counties by year
+	 */
+	buildLineChart: function(dataDimension, dataGroup, chartType) {
+		
+		this.lineRateByYear = dc.seriesChart("#chart-line-rates-by-year");
+		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
+		d3.select('#title-chart-lines-p2').html( chartTitle );
 
-		utils.setDinamicTexts();
-
-		var fw=parseInt(w),
-		fh=parseInt((this.winHeight - h) * 0.6);
-
-		var years=graph.yearDimension.group().all();
-
-		/**
-		 * Starting the lines chart by States for rates per years.
-		 */
 		var auxYears=[],auxRates=[];
 		graph.yearGroup.all().forEach(function(y){
 			auxYears.push(+y.key);
@@ -677,7 +662,7 @@ var graph={
 			.domain([auxYears[0] -1,auxYears[auxYears.length-1]+1])
 			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
-		this.lineRateStatesByYear
+		this.lineRateByYear
 			.chart(function(c) { return dc.lineChart(c).interpolate('monotone').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
 			.x(xScale)
 			.brushOn(false)
@@ -686,14 +671,14 @@ var graph={
 			.renderHorizontalGridLines(true)
 			.renderVerticalGridLines(true)
 			.title(function(d) {
-				return Translation[Lang.language].state + d.key[0] + "\n" +
+				return chartTitle + ': ' + d.key[0] + "\n" +
 				Translation[Lang.language].year + d.key[1] + "\n" +
 				Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})
 			.elasticY(true)
 			.yAxisPadding('10%')
-			.dimension(this.stateYearDimension)
-			.group(utils.snapToZero(this.stateYearRateGroup))
+			.dimension(dataDimension)
+			.group(utils.snapToZero(dataGroup))
 			.mouseZoomable(false)
 			.seriesAccessor(function(d) {
 				return d.key[0];
@@ -706,21 +691,48 @@ var graph={
 			})
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
 
-		this.lineRateStatesByYear.xAxis().ticks(auxYears.length);
-		this.lineRateStatesByYear.xAxis().tickFormat(function(d) {
+		if(chartTitle=='Município') {
+			this.lineRateByYear
+			.data(function (group) {
+				var fakeGroup=[],k=[];
+				k.push(Translation[Lang.language].no_value);
+				k.push(0);
+				fakeGroup.push({key:k,value:0});
+				if(graph.rowTop10ByMun.hasFilter()){
+					graph.lineRateByYear.filter(graph.rowTop10ByMun.filters());
+					fakeGroup = graph.lineRateByYear.group().top(Infinity);
+				}
+				return fakeGroup;
+			});
+		}
+
+		this.lineRateByYear.xAxis().ticks(auxYears.length);
+		this.lineRateByYear.xAxis().tickFormat(function(d) {
 			return d+"";
 		});
-		this.lineRateStatesByYear.yAxis().tickFormat(function(d) {
+		this.lineRateByYear.yAxis().tickFormat(function(d) {
 			return localeBR.numberFormat(',1f')(d);
 		});
 		
-		this.lineRateStatesByYear
-			.on("renderlet.a",function (chart) {
-				// rotate x-axis labels
-				chart.selectAll('g.x text')
-					.attr('transform', 'translate(-15,7) rotate(315)');
-			});
+		this.lineRateByYear.on("renderlet.a",function (chart) {
+			// rotate x-axis labels
+			chart.selectAll('g.x text')
+				.attr('transform', 'translate(-15,7) rotate(315)');
+		});
 		
+		this.lineRateByYear.addFilterHandler(function(filters, filter) {
+			filters.push(filter);
+			dc.redrawAll();
+			return filters;
+		});
+
+		graph.updateChartsDimensions();
+	},
+
+	build: function() {
+
+		utils.setDinamicTexts();
+
 		/**
 		 * Starting the pie chart of the States by rates.
 		 */
@@ -732,7 +744,7 @@ var graph={
 			.title(function(d) {
 				var t=utils.totalRateCalculator();
 				t = Translation[Lang.language].percent + localeBR.numberFormat(',1f')((d.value * 100 / t).toFixed(1)) + " %";
-				t = Translation[Lang.language].state + d.key + "\n" + t + "\n";
+				t = Translation[Lang.language].state + ': ' + d.key + "\n" + t + "\n";
 				return t + Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})			
 			.label(function(d) {
@@ -785,7 +797,7 @@ var graph={
 			.dimension(this.munDimension)
 			.group(utils.snapToZero(this.munAreaMunGroup))
 			.title(function(d) {
-				return Translation[Lang.language].county + "/" + Translation[Lang.language].state + d.key + "\n" +
+				return Translation[Lang.language].county + "/" + Translation[Lang.language].state + ': ' + d.key + "\n" +
 				Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
 			})
 			.label(function(d) {
@@ -809,6 +821,7 @@ var graph={
 		}).ticks(5);
 
 		this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
+
 		this.rowTop10ByMun.removeFilterHandler(function(filters, filter) {
 			var pos=filters.indexOf(filter);
 			filters.splice(pos,1);
@@ -903,7 +916,7 @@ var graph={
 			.dimension(this.compositeDimension)
 			.group(utils.snapToZero(this.compositeGroup))
 			.title(function(d) {
-				return Translation[Lang.language].state + d.key[0] + "\n" +
+				return Translation[Lang.language].state + ': ' + d.key[0] + "\n" +
 				Translation[Lang.language].year + d.key[1] + "\n" +
 				Translation[Lang.language].area + localeBR.numberFormat(',1f')(Math.abs(+(d.value.toFixed(2)))) + " km²";
 			})
@@ -963,7 +976,10 @@ var graph={
 				utils.scaleSubChartBarWidth(chart);
 			});
 		
-		this.updateChartsDimensions();
+		
+		// Initialize line chart with States by default.
+		graph.buildLineChart(graph.stateYearDimension, graph.stateYearRateGroup, 'Estado');
+
 		this.buildDataTable();
 		this.prepareTools();
 	},
@@ -991,6 +1007,17 @@ var graph={
 		}
 
 		dc.redrawAll();
+	},
+	chartLineSwitcher: function(btn) {
+		var btnValue='';
+		if(btn.innerText=='Estados'){
+			btnValue='Municípios';
+			graph.buildLineChart(graph.countyYearDimension, graph.countyYearRateGroup, btnValue);
+		}else{
+			btnValue='Estados';
+			graph.buildLineChart(graph.stateYearDimension, graph.stateYearRateGroup, btnValue);
+		}
+		btn.innerText=btnValue;
 	},
 	prepareTools: function() {
 		var downloadCSVWithFilter=function() {
@@ -1099,13 +1126,18 @@ var graph={
 		
 		d3.select('#change_style')
 	    .on('click', function() {
-	    	utils.changeCss(this);
+			utils.changeCss(this);
 	    	graph.build();
 	    });
 		
 		d3.select('#panel_swap')
 	    .on('click', function() {
 	    	window.location='?type=default';
+		});
+
+		d3.select('#line-chart-toggle')
+		.on('click', function() {
+	    	graph.chartLineSwitcher(this);
 		});
 
 		this.jsLanguageChange();

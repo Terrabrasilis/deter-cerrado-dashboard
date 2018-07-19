@@ -206,3 +206,6 @@ h4 a:hover,h4 a:focus {
 #footer_print{
 	display: none;
 }
+.general-info{
+	width: 55%;
+}

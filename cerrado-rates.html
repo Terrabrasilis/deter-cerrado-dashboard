@@ -109,7 +109,7 @@
 			</div>
 			<div class="col-md-9" id="chart1">
 				<div id="chart-bar-by-year-625">
-					<div id="title-chart-bar-by-year-625" class="all-charts-title">Incrementos de desmatamento - totais anuais</div>
+					<div id="title-chart-bar-by-year-625" class="all-charts-title">Totais anuais</div>
 					<div class="keep-space">
 						<div class="reset" style="display:none;"><b><span id="txt8">Filtro:</span></b> <span class="filter"></span>
 							<a href="javascript:graph.resetFilter('compositebar');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt9" title="Limpar este filtro."></span></a>
@@ -122,7 +122,7 @@
 			</div>
 			<div class="col-md-3" id="chart2">
 				<div id="chart-by-state">
-					<div id="title-chart-by-state" class="all-charts-title">Incrementos de desmatamento - totais por Estado</div>
+					<div id="title-chart-by-state" class="all-charts-title">Totais por Estado</div>
 					<div class="keep-space">
 						<div class="reset" style="display:none;"><b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
 							<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
@@ -135,11 +135,11 @@
 
 		<div class="row">
 			<div class="col-md-9">
-				<div id="chart-by-year-state">
-					<div id="title-chart-states" class="all-charts-title">Incrementos de desmatamento - anuais por Estado</div>
-					<div class="keep-space">
-					<!-- div class="btn-download"><span onclick="downloadAsImage('chart-by-year-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt14" title="Baixar a imagem do gráfico em formato PNG."></span></div -->
-					</div>
+				<button id="line-chart-toggle" type="button" class="btn btn-default" data-dismiss="modal">
+					<span>Estados</span>
+				</button>
+				<div id="chart-line-rates-by-year">
+					<div class="all-charts-title"><span id="title-chart-lines">Totais anuais por</span> <span id="title-chart-lines-p2">Estado</span></div>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -356,7 +356,7 @@
 				</div>
 				<!-- modal window for General informations -->
 				<div class="modal fade" id="modal-container-general-info" role="dialog" aria-labelledby="general-info" aria-hidden="true">
-					<div class="modal-dialog">
+					<div class="modal-dialog general-info">
 						<div class="modal-content">
 							<div class="modal-header">
 								 
