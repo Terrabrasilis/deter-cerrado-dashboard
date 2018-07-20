@@ -529,7 +529,10 @@ var graph={
 				filteredGroup.reverse();
 				return filteredGroup;
 			});
+			// -----------------------------------------------------------------
+			// enable this line if you want to clean municipalities of the previous selections.
 			//this.rowTop10ByMun.filterAll();
+			// -----------------------------------------------------------------
 			this.rowTop10ByMun.filter(d[0].key);
 		}
 		dc.redrawAll();
