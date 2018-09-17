@@ -228,6 +228,9 @@ var utils = {
 
 var graph={
 
+	// defining group charts
+	compositeGroup: "doublebar",
+
 	lineRateByYear: null,
 	lineRateByYearState: null,
 	pieTotalizedByState: null,
@@ -364,9 +367,9 @@ var graph={
 
 		this.pieTotalizedByState = dc.pieChart("#chart-by-state");
 		this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
-		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625");
-		this.barChart1 = dc.barChart(this.compositeChart);
-		this.barChart2 = dc.barChart(this.compositeChart)
+		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625", this.compositeGroup);
+		this.barChart1 = dc.barChart(this.compositeChart, this.compositeGroup);
+		this.barChart2 = dc.barChart(this.compositeChart, this.compositeGroup)
 		this.ratesDataTable = dataTable("rates-data-table");
 		this.relativeRatesDataTable = dataTable("relative-rates-data-table");
 	},
@@ -860,6 +863,9 @@ var graph={
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
+		this.pieTotalizedByState.on("renderlet.a", function(chart){
+			dc.renderAll(graph.compositeGroup);
+		});
 
 		/**
 		 * Starting the bar chart of the States by years.
