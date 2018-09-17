@@ -318,18 +318,22 @@ var graph={
 		// 	fw34 = fw;
 		// 	fw14 = fw;
 		// }
-
-		this.lineRateByYear
+		if(this.lineRateByYear){
+			this.lineRateByYear
 			.width(fw34)
 			.height(fh)
 			.margins({top: 0, right: 10, bottom: 50, left: 65})
 			.legend(dc.legend().x(fw34-180));
 			//.legend(dc.legend().x(fw34 - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
-		// this.lineRateByYearState
-		// 	.width(fw34)
-		// 	.height(fh)
-		// 	.margins({top: 0, right: 10, bottom: 50, left: 65})
-		// 	.legend(dc.legend().x(fw34-180));
+		}
+		
+		if(this.lineRateByYearState){
+			this.lineRateByYearState
+			.width(fw34)
+			.height(fh)
+			.margins({top: 0, right: 10, bottom: 50, left: 65})
+			.legend(dc.legend().x(fw34-180));
+		}
 		this.pieTotalizedByState
 			.width(fw14)
 			.height(fh)
@@ -670,11 +674,11 @@ var graph={
 	buildLineChartMun: function(dataDimension, dataGroup) {
 
 		var chartType='Municípios';
+		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='none';
+		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='';
 
 		this.lineRateByYear = dc.seriesChart("#chart-line-rates-by-year-mun");
 		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
-		d3.select('#title-chart-lines-p2').html( chartTitle );
-
 		var auxYears=[],auxRates=[];
 		graph.yearGroup.all().forEach(function(y){
 			auxYears.push(+y.key);
@@ -771,10 +775,10 @@ var graph={
 			return filters;
 		});
 
-		//graph.updateChartsDimensions();
+		//this.lineRateByYear.render();
+		graph.updateChartsDimensions();
 	},
 
-	// chart-line-rates-by-year-state
 	/**
 	 * Starting the lines chart by States for rates per years or
 	 * the line chart for counties by year
@@ -782,10 +786,11 @@ var graph={
 	buildLineChartState: function(dataDimension, dataGroup) {
 		
 		var chartType='Estados';
+		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='none';
+		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='';
 
 		this.lineRateByYearState = dc.seriesChart("#chart-line-rates-by-year-state");
 		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
-		d3.select('#title-chart-lines-p2').html( chartTitle );
 
 		var auxYears=[],auxRates=[];
 		graph.yearGroup.all().forEach(function(y){
@@ -845,7 +850,8 @@ var graph={
 			return filters;
 		});
 
-		//graph.updateChartsDimensions();
+		//this.lineRateByYearState.render();
+		graph.updateChartsDimensions();
 	},
 
 	build: function() {
@@ -1148,10 +1154,10 @@ var graph={
 		var btnValue='';
 		if(btn.innerText=='Estados'){
 			btnValue='Municípios';
-			graph.buildLineChart(graph.countyYearDimension, graph.countyYearRateGroup, btnValue);
+			graph.buildLineChartState(graph.stateYearDimension, graph.stateYearRateGroup);
 		}else{
 			btnValue='Estados';
-			graph.buildLineChart(graph.stateYearDimension, graph.stateYearRateGroup, btnValue);
+			graph.buildLineChartMun(graph.countyYearDimension, graph.countyYearRateGroup);			
 		}
 		btn.innerText=btnValue;
 	},

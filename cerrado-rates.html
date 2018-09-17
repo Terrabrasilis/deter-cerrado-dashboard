@@ -235,7 +235,7 @@
 		<div class="row box">			 
 			<div class="col-md-9">
 				<div class="toggle_chart">
-					<button id="line-chart-toggle" type="button" class="btn btn-default" data-dismiss="modal">
+					<button id="line-chart-toggle" type="button" class="btn btn-default btn-sm" data-dismiss="modal">
 						<span>Estados</span>
 					</button>
 				</div>
@@ -253,13 +253,17 @@
 			<div class="col-md-3">
 				<div class="box-grafico text-center">
 					<div id="chart-by-mun">
-						<div id="title-chart-by-mun" class="all-charts-title">Desmatamento por Município</div>
-						<a href="#modal-container-filtered" role="button" data-toggle="modal" style="text-decoration: none;">
-							<span class="glyphicon glyphicon-search search-mun" aria-hidden="true" id="txt33" title="Procurar um município."></span>
-						</a>
+						<div style="position:relative;">
+							<div id="title-chart-by-mun" class="all-charts-title">Desmatamento por Município</div>
+							<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun">
+								<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">search</i></span>
+							</a>
+						</div>
 						<div class="keep-space">
 							<div class="reset" style="visibility: hidden;"><b><span id="txt34">Filtro:</span></b><span class="filter"></span>
-								<a href="javascript:graph.resetFilter('mun');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt35" title="Limpar este filtro."></span></a>
+								<a href="javascript:graph.resetFilter('mun');"><span aria-hidden="true" id="txt35" title="Limpar este filtro.">
+									<i class="material-icons md-icon-16">delete</i>
+								</span></a>
 							</div>
 							<div class="btn-download">
 								<span onclick="downloadAsImage('chart-by-mun');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt36" title="Baixar a imagem do gráfico em formato PNG."></span>
@@ -453,7 +457,7 @@
 								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
 									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control" placeholder="Search">
 									<div class="input-group-btn">
-										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="glyphicon glyphicon-search" style="color:gray"></i></button>
+										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
 									</div>
 								</div>
 								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>

@@ -142,24 +142,30 @@ div .dc-chart {
 	font-size: x-small;
 	text-align: initial;
 }
+.search-mun{
+	text-decoration: none;
+    position: absolute;
+    right: 1px;
+    top: 0px;
+    z-index: 99;
+}
+.counties-list{
+	width: 100%;
+	height: 500px;
+	overflow-y: scroll;
+}
+a span .md-icon-16{
+	color: #368fb3;
+	font-size: 16px;
+	vertical-align: bottom;
+}
+/*
 #display_warning, i .glyphicon, .glyphicon-trash{
 	display: unset !important;
 }
 .glyphicon{
 	color: #368fb3;
 	display: none;
-}
-.search-mun{
-	display: inline;
-	position: absolute;
-    top: 1px;
-    right: 1px;
-    z-index: 999;
-}
-.counties-list{
-	width: 100%;
-	height: 500px;
-	overflow-y: scroll;
 }
 .nav .glyphicon, button .glyphicon{
 	color: #ffffff;
@@ -182,6 +188,7 @@ h4 a:hover,h4 a:focus {
 	color: inherit !important;
 	margin: 0px;
 }
+*/
 .info{
 	text-align: center;
 	font-size: large;
