@@ -29,19 +29,22 @@ a, a:hover, a:focus {
 
 .box{
     padding:0px;
-	margin: 15px;}
+    margin-left: 8px;
+}
 
 
 .box-grafico{
     background:#FFF;
     border-radius:0;
-    padding:30px;
-	margin-top: 15px;
-	min-width: 500px;
-	
-	
+    padding:3px;
+	margin-top: 25px;
+	/*min-width: 500px;*/
 }
 
+.full-width{
+    margin-left: inherit !important;
+    width: auto;
+}
 
 .verde { color: #96c964;}
 .amarelo { color: #f9c069;}
@@ -523,3 +526,9 @@ footer{
 	
 }
 
+/* ---------------------------------------------------
+    Bootstrap adjust
+----------------------------------------------------- */
+.col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9{
+    padding-left: 0px;
+}

@@ -9,6 +9,15 @@ body{
 	margin-left: 10px;
 	width: 99%;
 }
+.container-fluid{
+	margin-left: 290px !important;
+	width: calc(100% - 290px);
+	padding-left: 0px;
+	margin-top: 64px;
+}
+.modal-dialog{
+	max-width: 55% !important;
+}
 .btn-download{
 	cursor: pointer;
     position: absolute;
@@ -57,6 +66,11 @@ div .dc-chart {
 	color: black;
 	background-color: white;
 	line-height: 22px;
+}
+.toggle_chart{
+	position: absolute;
+	right: 25px;
+	top: 35px;
 }
 #txt2{
 	line-height: 22px;
@@ -126,6 +140,7 @@ div .dc-chart {
 	border: rgb(187, 224, 123) solid 1px;
 	fill: black;
 	font-size: x-small;
+	text-align: initial;
 }
 #display_warning, i .glyphicon, .glyphicon-trash{
 	display: unset !important;

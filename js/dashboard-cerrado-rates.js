@@ -299,7 +299,9 @@ var graph={
 		this.winHeight=dim.h;
 	},
 	updateChartsDimensions: function() {
-		var w=parseInt(this.winWidth - (this.winWidth * 0.05)),
+		// no sense because when side bar has class active the return is false
+		var sbWidth=($('#sidebar').hasClass('active')===false?$('#sidebar').width():0);
+		var w=parseInt(this.winWidth - sbWidth - (this.winWidth * 0.05)),
 		h=parseInt(this.winHeight * 0.3),
 		fw=parseInt(w),
 		fh=parseInt((this.winHeight - h) * 0.6),
@@ -307,18 +309,18 @@ var graph={
 		fw14 = parseInt(fw/4);
 
 		// to single column in main container
-		var chartByState=document.getElementById('chart-by-state')
-		if((chartByState.clientWidth*4) > window.document.body.clientWidth) {
-			fw = chartByState.clientWidth;
-			fw34 = fw;
-			fw14 = fw;
-		}
+		// var chartByState=document.getElementById('chart-by-state')
+		// if((chartByState.clientWidth*4) > window.document.body.clientWidth) {
+		// 	fw = chartByState.clientWidth;
+		// 	fw34 = fw;
+		// 	fw14 = fw;
+		// }
 
-		this.lineRateByYear
-			.width(fw34)
-			.height(fh)
-			.margins({top: 0, right: 10, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw34-180));
+		// this.lineRateByYear
+		// 	.width(fw34)
+		// 	.height(fh)
+		// 	.margins({top: 0, right: 10, bottom: 50, left: 65})
+		// 	.legend(dc.legend().x(fw34-180));
 			//.legend(dc.legend().x(fw34 - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
 		this.lineRateByYearState
 			.width(fw34)
@@ -332,7 +334,7 @@ var graph={
 		this.rowTop10ByMun
 			.width(fw14)
 			.height(fh)
-			.margins({top: 0, right: 10, bottom: 50, left: 65});
+			.margins({top: 0, right: 10, bottom: 50, left: 10});
 		
 		this.compositeChart
 			.width(fw34)
@@ -944,9 +946,9 @@ var graph={
 		 * Composite bar chart to display the sum area by year with and without filter by 6.25 ha
 		 */
 		this.barChart1
-			// .label(function(d) {
-			// 	return utils.labelFormat(d.data.value.aream);
-			// })
+			.label(function(d) {
+				return utils.labelFormat(d.data.value.aream);
+			})
 			.clipPadding(0)
 	        .barPadding(0.3)
 			.valueAccessor(
@@ -977,9 +979,9 @@ var graph={
 
 
 		this.barChart2
-			// .label(function(d) {
-			// 	return utils.labelFormat(d.data.value.areat);
-			// })
+			.label(function(d) {
+				return utils.labelFormat(d.data.value.areat);
+			})
 			.clipPadding(0)
 	        .barPadding(0.3)
 			.valueAccessor(
@@ -1080,7 +1082,7 @@ var graph={
 		//graph.buildLineChart(graph.stateYearDimension, graph.stateYearRateGroup, 'Estado');
 
 		this.buildLineChartState(this.stateYearDimension, this.stateYearRateGroup);
-		this.buildLineChartMun(this.countyYearDimension, this.countyYearRateGroup);
+		//this.buildLineChartMun(this.countyYearDimension, this.countyYearRateGroup);
 
 		this.updateChartsDimensions();
 
@@ -1306,5 +1308,5 @@ window.onload=function(){
 	Lang.init();
 	graph.init();
 	Lang.apply();// apply from previous selection
-	utils.displayDisclaimer();
+	//utils.displayDisclaimer();
 };
