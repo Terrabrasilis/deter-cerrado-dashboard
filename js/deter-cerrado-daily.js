@@ -10,7 +10,7 @@ var graph={
 	totalizedAreaInfoBox:undefined,// totalized area info box
 	totalizedAlertsInfoBox:undefined,// totalized alerts info box
 	lineDistributionByMonth:undefined,
-	ringTotalizedByClass:undefined,
+	//ringTotalizedByClass:undefined,
     histTopByCounties:undefined,
     ringTotalizedByState:undefined,
     histTopByUCs:undefined,
@@ -89,7 +89,7 @@ var graph={
 	
 	resetFilters:function() {
 		graph.lineDistributionByMonth.filterAll();
-		graph.ringTotalizedByClass.filterAll();
+		//graph.ringTotalizedByClass.filterAll();
 		graph.histTopByCounties.filterAll();
 		graph.ringTotalizedByState.filterAll();
 		graph.histTopByUCs.filterAll();

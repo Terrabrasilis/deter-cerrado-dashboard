@@ -143,7 +143,7 @@
                     <div class="box-grafico text-center">
                         <div id="totalized-area">
                             <input id="radio-area" title="Ver gráficos com base no somatório de áreas em km²." class="input_radio"  style="display:none;margin-top:18px;margin-right:-20px;"
-                            name="set_dim" type="radio" onclick="dashBoard.setDataDimension('area');" checked="checked">
+                            name="set_dim" type="radio" onclick="graph.setDataDimension('area');" checked="checked">
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                     <div class="box-grafico text-center">
                         <div id="totalized-alerts">
                             <input id="radio-alerts" title="Ver gráficos com base na contagem do número de alertas." class="input_radio" style="display:none;margin-top:18px;margin-right:-20px;"
-                            name="set_dim" type="radio" onclick="dashBoard.setDataDimension('alert');">
+                            name="set_dim" type="radio" onclick="graph.setDataDimension('alert');">
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                         <div id="chart-line-by-month" class="all-charts timeline-charts">
                             <div id="title-chart-timeline" class="all-charts-title"></div>
                             <div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>
@@ -184,7 +184,7 @@
                         <div id="chart-ring-by-state" class="all-charts ring-charts">
                             <div id="title-chart-state" class="all-charts-title"></div>
                             <div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                         <div id="chart-hist-top-counties" class="all-charts bar-charts">
                             <div id="title-chart-counties" class="all-charts-title"></div>
                             <div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                         <div id="chart-hist-top-ucs" class="all-charts bar-charts">
                             <div id="title-chart-ucs" class="all-charts-title"></div>
                             <div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             </div>
                         </div>
                     </div>
