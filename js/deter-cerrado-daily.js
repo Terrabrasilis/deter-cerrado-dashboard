@@ -48,7 +48,7 @@ var graph={
 		if(enable===undefined) enable=true;
 		document.getElementById("charts-panel").style.display=((enable)?('none'):(''));
 		document.getElementById("loading_data_info").style.display=((!enable)?('none'):(''));
-		document.getElementById("download_data").style.display=((enable)?('none'):(''));
+		document.getElementById("panel_container").style.display=((enable)?('none'):(''));
 		document.getElementById("warning_data_info").style.display='none';
 		document.getElementById("radio-area").style.display=((enable)?('none'):(''));
 		document.getElementById("radio-alerts").style.display=((enable)?('none'):(''));

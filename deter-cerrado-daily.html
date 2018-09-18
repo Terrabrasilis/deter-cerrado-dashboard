@@ -127,7 +127,7 @@
 		</nav>
 	</div>
 
-	<div class="container-fluid" id="download_data" style="clear:both;display:none;">
+	<div class="container-fluid" id="panel_container" style="display:none;">
 
         <div class="row box">
             <div class="col-md-12">
@@ -156,7 +156,6 @@
                     </div>
                 </div>
             </div>
-            <br/>
             <div class="row box">
                 <div class="col-md-12">
                     <div class="box-grafico text-center">
@@ -169,13 +168,24 @@
                     </div>
                 </div>
             </div>
-            <br/>
             <div class="row box p_break p_zoom">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="box-grafico text-center">
-                        <div id="chart-line-rates-by-year-state">
-                            <div class="all-charts-title"><span id="title-chart-lines">Totais mensais por</span> <span id="title-chart-lines">Estado</span></div>
-                            <div class="keep-space">&nbsp;</div>
+						<div id="chart-hist-top-counties" class="all-charts bar-charts">
+                            <div id="title-chart-counties" class="all-charts-title"></div>
+                            <div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<div class="col-md-4">
+                    <div class="box-grafico text-center">
+						<div id="chart-hist-top-ucs" class="all-charts bar-charts">
+                            <div id="title-chart-ucs" class="all-charts-title"></div>
+                            <div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,34 +198,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <br/>
-            <div class="row box p_zoom">
-                <div class="col-md-6">
-                    <div class="box-grafico text-center">
-                        <div id="chart-hist-top-counties" class="all-charts bar-charts">
-                            <div id="title-chart-counties" class="all-charts-title"></div>
-                            <div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="box-grafico text-center">
-                        <div id="chart-hist-top-ucs" class="all-charts bar-charts">
-                            <div id="title-chart-ucs" class="all-charts-title"></div>
-                            <div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row box row_print">
-                <div class="col-md-12">
-                    <div id="footer_print"></div>
                 </div>
             </div>
         </div>

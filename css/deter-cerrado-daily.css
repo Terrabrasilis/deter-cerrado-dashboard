@@ -40,7 +40,8 @@ body{
 }
 .all-charts {
 	fill: black;
-	font-weight: bold;
+	font-weight: normal;
+	font-size: 13px;
 }
 .all-charts-title {
 	text-align: center;
@@ -56,18 +57,22 @@ body{
 }
 .dc-chart .pie-slice, .dc-chart g.row text{
 	fill: black;
-	font-size: smaller;
+	font-size: 11px;
 }
 div .dc-chart {
     float: none;
 }
 .filter, .reset {
 	color: black;
+	font-weight: normal;
 }
 .reset{
 	background-color: rgb(220, 241, 186);
 	border-radius: 8px;
 	border: rgb(187, 224, 123) solid 1px;
+	font-weight: bold;
+	font-size: 10px;
+    text-align: initial;
 }
 
 .input_radio{
