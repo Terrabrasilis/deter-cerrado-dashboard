@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-br, en, es">
+<head>
+    <title>Cerrado brasileiro - alertas de Desmatamento</title>
+    <meta charset="UTF-8">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="pt-br, en, es">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-77404603-3"></script>
+	<script>
+		
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-77404603-3');
+		
+	</script-->
+	<!-- Bootstrap CSS CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+	<!-- Font-awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<!-- Font Material design google -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
+	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+   	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
+	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily-print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
+</head>
+<body>
+
+	<div class="wrapper">
+		<!-- Sidebar Holder -->
+		<nav id="sidebar">            
+			
+			<div class="sidebar-header">
+				
+				
+				<div class="desctxt">
+						<h5><span class="amarelo">Cerrado</span><span class="verde">Brasileiro</span> </h5>
+						<div class="texto">Alertas de desmatamento</div>
+				</div>
+			</div>
+			
+			<ul class="list-unstyled components">
+									
+				<li class="active">
+					<a href="#ferramentas" data-toggle="collapse" aria-expanded="true">
+							<i class="material-icons">build</i>Ferramentas</a>
+					</li>
+				<li>
+					<a href="#download" data-toggle="collapse" aria-expanded="false">
+							<i class="material-icons">cloud_download</i>Baixar Dados</a>
+				</li>
+				
+				<li>
+					<a href="#imprimir" data-toggle="collapse" aria-expanded="false">
+							<i class="material-icons">print</i>Imprimir Graficos</a>
+				</li>
+				
+				<li>
+					<a href="#ajuda" data-toggle="collapse" aria-expanded="false">
+							<i class="material-icons">invert_colors</i>Claro / Escuro</a>
+				</li>
+				
+				<li>
+					<a href="#ajuda" data-toggle="collapse" aria-expanded="false">
+							<i class="material-icons">help</i>Ajuda</a>
+				</li>
+				
+				<li>
+					<a href="#sobre" data-toggle="collapse" aria-expanded="false">
+							<i class="material-icons">info</i>Sobre</a>
+				</li>
+				
+				<li>
+					<a href="#contato" data-toggle="collapse" aria-expanded="false">
+							<i class="material-icons">email</i>Contato</a>
+				</li>
+			</ul>
+
+			<ul class="list-unstyled CTAs">
+				<li><a href="#" class="btn btn-primary btn-success">Portal Fip Cerrado</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Menu superior -->
+	<div id="content">
+		<nav  class="navbar navbar-expand-lg materialnav navbar-header">
+			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="material-icons menuicon">menu</i>
+			</button>
+			<a class="navbar-brand" href="#"><span class="amarelo">Cerrado</span><span class="verde">Brasileiro</span></a>
+			<div class="collapse navbar-collapse justify-content-between">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" href="#">| Alertas de desmatamento</a>
+				</div>
+				<ul class="navbar-nav  navbar-right">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Sobre <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Contato</a>
+					</li>
+					<li class="nav-item">
+                        <a class="nav-link" href="#"> 
+                            <img id="flag-pt-br" alt="Bandeira Brasil" src="img/br.svg" onclick="Lang.change('pt-br');" class="img-circle" title="Alterar o idioma do painel para Português do Brasil.">
+                        </a>
+					</li>
+					<li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <img id="flag-en" alt="Flag USA" src="img/usa.svg" onclick="Lang.change('en');" class="img-circle" title="Change panel language to English.">
+                        </a>
+					</li>      
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container-fluid" id="download_data" style="clear:both;display:none;">
+
+        <div class="row box">
+            <div class="col-md-12">
+                <div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
+                <div id="warning_data_info" style="display:none;"><h1><span id="txt8">Não há dados.</span></h1></div>
+                <iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
+            </div>
+        </div>
+
+		<div id="charts-panel">
+            <div class="row box">
+                <div class="col-md-6">
+                    <div class="box-grafico text-center">
+                        <div id="totalized-area">
+                            <input id="radio-area" title="Ver gráficos com base no somatório de áreas em km²." class="input_radio"  style="display:none;margin-top:18px;margin-right:-20px;"
+                            name="set_dim" type="radio" onclick="dashBoard.setDataDimension('area');" checked="checked">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-grafico text-center">
+                        <div id="totalized-alerts">
+                            <input id="radio-alerts" title="Ver gráficos com base na contagem do número de alertas." class="input_radio" style="display:none;margin-top:18px;margin-right:-20px;"
+                            name="set_dim" type="radio" onclick="dashBoard.setDataDimension('alert');">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row box">
+                <div class="col-md-12">
+                    <div class="box-grafico text-center">
+                        <div id="chart-line-by-month" class="all-charts timeline-charts">
+                            <div id="title-chart-timeline" class="all-charts-title"></div>
+                            <div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row box p_break p_zoom">
+                <div class="col-md-8">
+                    <div class="box-grafico text-center">
+                        <div id="chart-line-rates-by-year-state">
+                            <div class="all-charts-title"><span id="title-chart-lines">Totais mensais por</span> <span id="title-chart-lines">Estado</span></div>
+                            <div class="keep-space">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box-grafico text-center">
+                        <div id="chart-ring-by-state" class="all-charts ring-charts">
+                            <div id="title-chart-state" class="all-charts-title"></div>
+                            <div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row box p_zoom">
+                <div class="col-md-6">
+                    <div class="box-grafico text-center">
+                        <div id="chart-hist-top-counties" class="all-charts bar-charts">
+                            <div id="title-chart-counties" class="all-charts-title"></div>
+                            <div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-grafico text-center">
+                        <div id="chart-hist-top-ucs" class="all-charts bar-charts">
+                            <div id="title-chart-ucs" class="all-charts-title"></div>
+                            <div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="dashBoard.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row box row_print">
+                <div class="col-md-12">
+                    <div id="footer_print"></div>
+                </div>
+            </div>
+        </div>
+        <div id="print_information" style="display:none;" onclick="this.style.display='none';">
+            <span class="info_p"><span id="txt14">
+                A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+                A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+                &nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+                &nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+                &nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br /></span>
+                <span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
+                <span id="txt15">Concluir</span>
+                </span>
+            </span>
+        </div>
+        <div id="display_error">
+            <span id="inner_display_error">
+            
+            </span>
+        </div>
+        <!--div id="footer_page"></div-->
+
+	</div><!-- Fim do painel de gráficos -->
+
+	<div class="container">
+		<div class="row box">
+			<div class="col-md-12">
+                <div id="footer_print"></div>
+                <!-- modal copied from original DETER-B panel -->
+                <div class="modal fade" id="modal-container-718053" role="dialog" aria-labelledby="areaXclass" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                                <h4 class="modal-title" id="areaXclass">
+                                    <span id="txt16">Informações para download (granularidade diária)</span>
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                            
+                                <span id="txt17">Baixar os dados incluindo a componente geográfica.</span>
+                                <div class="dwn-tool">
+                                    <span id="txt22">Selecione o formato do arquivo:</span>&nbsp;
+                                    <select id="download-option" class="form-control">
+                                    <option value="SHAPE-ZIP">Shapefile (ZIP)</option>
+                                    <option value="csv">CSV</option>
+                                    <option value="KML">KML</option>
+                                    </select>
+                                    <br/>
+                                    <a href="#" id="download-filter">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt18">Respeitando os filtros definidos neste painel de consulta.</span><strong>*</strong></a>
+                                    <br/>
+                                    <a href="#" id="download-all">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt19">Sem filtros, arquivo completo.</span></a>
+                                    <br/><br/>
+                                    <div class="alert alert-warning">
+                                        <strong>*</strong>&nbsp;<span id="txt20">Ao atribuir qualquer um dos filtros por Classe, Estado, Município ou Áreas de Proteção e <strong>não</strong> atribuir filtro temporal, <strong>toda a extensão temporal</strong> será considerada e não apenas a extensão exibida no painel.</span>
+                                    </div>
+                                </div>
+                                <br/>
+                                <span id="txt23">Baixar os dados sem a componente geográfica, apenas tabela de atributos, em formato CSV.</span>
+                                <div class="dwn-tool">
+                                    <a href="#" id="download-csv-daily">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt24">Com filtros.</span><strong>*</strong>
+                                    </a>
+                                    <br/>
+                                    <a href="#" id="download-csv-daily-all">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt25">Sem filtros.</span><strong>*</strong>
+                                    </a>
+                                    <br/><br/>
+                                    <div class="alert alert-warning">
+                                        <strong>*</strong>&nbsp;<span id="txt3">Apenas para o intervalo de tempo exibido no painel (365 dias).</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    <span id="txt21">Fechar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<!-- modal window with information about rates -->
+				<div class="modal fade" id="modal-container-info-rates" role="dialog" aria-labelledby="info-rates" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								 
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="info-rates">
+									<span id="txt19">Informações complementares</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-info">
+									<ul>
+										<li><span id="txt20"></span></li>
+										<!--li><span id="txt21">Para consultar a área de interesse MATOPIBA, utilize o filtro no menu Ferramentas, no topo da página.</span></li-->
+										<!--<li><span id="txt22">2004 - início do</span> <a href="http://redd.mma.gov.br/pt/acompanhamento-e-a-analise-de-impacto-das-politicas-publicas/ppcdam">PPCDAm</a>.</li>-->
+									</ul>
+								</div>
+								<a target="_blank" href="http://www.dpi.inpe.br/fipcerrado/" id="txt23">Mais informações sobre o projeto FIP Cerrado</a>
+							</div>
+							<div class="modal-footer">
+								 
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt24">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal window with information about download -->
+				<div class="modal fade" id="modal-container-download" role="dialog" aria-labelledby="download-rates" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">								
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="download-rates">
+									<span id="txt25">Informações para download</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<span id="txt26">Baixar a tabela com os incremento de desmatamento em formato CSV.</span>
+								<div class="dwn-tool">
+									<a href="#" id="download-csv-filtered">
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span>
+									</a>
+									<br/>
+									<a href="#" id="download-csv-all">
+									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span>
+									</a>
+								</div>
+							</div>
+							<div class="modal-footer">								
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt29">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal window with an introductory video of this panel -->
+				<div class="modal fade" id="modal-container-video" role="dialog" aria-labelledby="video-rates" aria-hidden="true">
+					<div class="modal-dialog" style="width:830px;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="video-rates">
+									<span id="txt1c">Informações de ajuda para uso do painel</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+								<div class="embed-video">
+                                    <video width="800" height="600" controls>
+                                        <source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
+                                        <track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+                                        <track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+                                        <track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
+                                        Seu navegador não suporta a tag de vídeo.
+                                    </video>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt1e">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- modal window with counties filterd items -->
+				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="filtered">
+									<span id="txt1f">Pesquisa de municípios</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<span id="txt1g">Encontre um município.</span>
+								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
+									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control" placeholder="Search">
+									<div class="input-group-btn">
+										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
+									</div>
+								</div>
+								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
+								<div class="counties-list"><ul id="filtered-list"></ul></div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt1i">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- modal window for General informations -->
+				<div class="modal fade" id="modal-container-general-info" role="dialog" aria-labelledby="general-info" aria-hidden="true">
+					<div class="modal-dialog general-info">
+						<div class="modal-content">
+							<div class="modal-header">
+								 
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="general-info">
+									<span id="txt2a">Informações gerais</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-info">
+									<span id="txt2b">Texto de aviso sobre os dados</span>
+								</div>
+							</div>
+							<div class="modal-footer">
+								 
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt2c">Fechar</span>
+								</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div> 					
+							<!-- / modal-header -->
+								<div class="modal-body ">						
+								<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
+									<ol class="carousel-indicators">
+										<li data-target="#carouselExampleIndicators" id="" data-slide-to="0" class="active"></li>
+										<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+										<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+									</ol>
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img class="d-block w-100" src="img/slider7.jpg" alt="Primeiro slide">
+											<h1 class="titulo">Sobre o <span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
+											<p class="descricaoslide"> O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos eus programas de monitoramento ambiental.  </p>
+										</div>
+										<div class="carousel-item">
+											<img class="d-block w-100" src="img/slide2.jpg" alt="Segundo slide">
+											<h1 class="titulo">Sobre o <span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
+											<p class="descricaoslide"> O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos eus programas de monitoramento ambiental.  </p>
+										</div>
+									</div>
+									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+								</div>
+							</div>
+
+							<!-- / modal-body -->
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<input class="modal-check" name="modal-check" type="checkbox"><span class="textoc">Não mostrar novamente.</span>
+									</label>
+								</div>
+							<!--/ checkbox -->
+							</div>
+						<!--/ modal-footer -->
+						</div>
+					<!-- / modal-content -->
+					</div>
+				<!--/ modal-dialog -->
+				</div>
+			</div>
+        </div>
+	</div>
+	<div id="display_error"><span id="inner_display_error"></span></div>
+	<div id="display_loading"><span id="inner_display_loading"></span></div>
+	<div id="print_information" style="display:none;" onclick="this.style.display='none';">
+		<span class="info_p">
+			<span id="txt30">
+				A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+				A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+				&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+				&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+				&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />
+			</span>
+			<span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
+				<span id="txt31">Concluir</span>
+			</span>
+		</span>
+	</div>
+	<!--Footer-->
+	<footer class="footer">
+		<p>© 2018<a href="#"> Cerrado Brasileiro</a></p>
+	</footer>
+	<!--/.Footer-->
+
+	<!-- already minified -->
+	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
+	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
+	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
+	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
+	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
+	<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
+
+	<!-- jQuery CDN -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- Popper.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<!-- Bootstrap Js CDN -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<!-- jQuery Custom Scroller CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- worked to minify / using to minify: https://www.minifier.org/ -->
+	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
+	<script type="text/javascript" src="./js/dataTable.js"></script>
+	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
+	<script type="text/javascript" src="./js/deter-cerrado-daily-translation.js"></script>
+    <script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
+    <script type="text/javascript" src="./js/deter-cerrado-daily.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid" id="download_data" style="clear: both; color: black; display:none;">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><span id="txt1">Painel DETER-B - diário</span></a>
+    </div>
+	<ul class="nav navbar-nav">
+	    <li>
+			<a href="#" id="aggregate_monthly" title="Alternar para o painel de consulta agregada mensal.">
+			<img alt="btn image" src="/theme/images/pie_chart_icon.png" style="vertical-align: text-bottom;">&nbsp;<span id="txt2">Painel Mensal</span>
+			</a>
+		</li>
+		<!-- li>
+			<a href="#" id="download-csv-daily" title="Baixar os dados brutos, granularidade diária, em formato CSV.">
+			<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar CSV</span>
+			<span id="animateIconCSVd" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
+			</a>
+		</li -->
+		<li>
+		    <a id="modal-718053" href="#modal-container-718053" data-toggle="modal" title="Baixar os dados com granularidade diária.">
+			<!-- <a href="#" id="download-shp-daily" title="Baixar os dados brutos, granularidade diária, em formato Shapefile-ZIP."> -->
+			<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt4">Baixar Dados</span>
+			<span id="animateIconSHPd" class="glyphicon glyphicon-ok glyphicon-green" style="display:none;" aria-hidden="true"></span>
+			</a>
+		</li>
+		<li>
+			<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
+			<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt5">Imprimir</span>
+			</a>
+		</li>
+		<li>
+			<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro." onclick="dashBoard.changeCss(this);">
+			<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt6">Escurecer/clarear</span>
+			</a>
+		</li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href="#">
+		<img id="flag-pt-br" alt="Bandeira Brasil" src="/theme/images/flag_br.gif" onclick="Lang.change('pt-br');" class="img-circle" title="Alterar o idioma do painel para Português do Brasil.">&nbsp;&nbsp;
+		<img id="flag-en" alt="Flag USA" src="/theme/images/flag_usa.gif" onclick="Lang.change('en');" class="img-circle" title="Change panel language to English.">&nbsp;&nbsp;
+		<img id="flag-es" alt="Bandera de España" src="/theme/images/flag_spain.gif" onclick="Lang.change('es');" class="img-circle" title="Cambiar el idioma del panel al español.">
+		</a></li>
+		<!-- li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txt7">Entrar</span></a></li -->
+	</ul>
+  </div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div id="loading_data_info" style="display:block;"><img src="{{basePath}}/theme/images/loading_map.gif" /></div>
+			<div id="warning_data_info" style="display:none;"><h1><span id="txt8">Não há dados.</span></h1></div>
+			<iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
+		</div>
+	</div>
+<div class="row">
+		<div class="col-md-12">
+			<div class="modal fade" id="modal-container-718053" role="dialog" aria-labelledby="areaXclass" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							 
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="areaXclass">
+								<span id="txt16">Informações para download (granularidade diária)</span>
+							</h4>
+						</div>
+						<div class="modal-body">
+						
+							<span id="txt17">Baixar os dados incluindo a componente geográfica.</span>
+							<div class="dwn-tool">
+								<span id="txt22">Selecione o formato do arquivo:</span>&nbsp;
+								<select id="download-option" class="form-control">
+								<option value="SHAPE-ZIP">Shapefile (ZIP)</option>
+								<option value="csv">CSV</option>
+								<option value="KML">KML</option>
+								</select>
+								<br/>
+								<a href="#" id="download-filter">
+								<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt18">Respeitando os filtros definidos neste painel de consulta.</span><strong>*</strong></a>
+								<br/>
+								<a href="#" id="download-all">
+								<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt19">Sem filtros, arquivo completo.</span></a>
+								<br/><br/>
+								<div class="alert alert-warning">
+									<strong>*</strong>&nbsp;<span id="txt20">Ao atribuir qualquer um dos filtros por Classe, Estado, Município ou Áreas de Proteção e <strong>não</strong> atribuir filtro temporal, <strong>toda a extensão temporal</strong> será considerada e não apenas a extensão exibida no painel.</span>
+								</div>
+							</div>
+							<br/>
+							<span id="txt23">Baixar os dados sem a componente geográfica, apenas tabela de atributos, em formato CSV.</span>
+							<div class="dwn-tool">
+								<a href="#" id="download-csv-daily">
+								<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt24">Com filtros.</span><strong>*</strong>
+								</a>
+								<br/>
+								<a href="#" id="download-csv-daily-all">
+								<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt25">Sem filtros.</span><strong>*</strong>
+								</a>
+								<br/><br/>
+								<div class="alert alert-warning">
+									<strong>*</strong>&nbsp;<span id="txt3">Apenas para o intervalo de tempo exibido no painel (365 dias).</span>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								<span id="txt21">Fechar</span>
+							</button> 
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div id="charts-panel">
+	<div class="row">
+		<div class="col-md-6">
+			<div id="totalized-area">
+				<input id="radio-area" title="Ver gráficos com base no somatório de áreas em km²." class="input_radio"  style="display:none;margin-top:18px;margin-right:-20px;"
+				name="set_dim" type="radio" onclick="dashBoard.setDimension('area');" checked="checked">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div id="totalized-alerts">
+				<input id="radio-alerts" title="Ver gráficos com base na contagem do número de alertas." class="input_radio" style="display:none;margin-top:18px;margin-right:-20px;"
+				name="set_dim" type="radio" onclick="dashBoard.setDimension('alert');">
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="chart-line-by-month" class="all-charts timeline-charts">
+				<div id="title-chart-timeline" class="all-charts-title"></div>
+				<div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
+					<button type="button" class="btn btn-default btn-xs" onclick="dashBoard.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row p_break p_zoom">
+		<div class="col-md-6">
+			<div id="chart-ring-by-class" class="all-charts ring-charts">
+				<div id="title-chart-class" class="all-charts-title"></div>
+				<div class="reset" style="display: none;"><span id="txt10">Filtro:</span>&nbsp;<span class="filter"></span>
+					<button type="button" class="btn btn-default btn-xs" onclick="dashBoard.ringTotalizedByClass.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div id="chart-hist-top-counties" class="all-charts bar-charts">
+				<div id="title-chart-counties" class="all-charts-title"></div>
+				<div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
+					<button type="button" class="btn btn-default btn-xs" onclick="dashBoard.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row p_zoom">
+		<div class="col-md-6">
+			<div id="chart-ring-by-state" class="all-charts ring-charts">
+				<div id="title-chart-state" class="all-charts-title"></div>
+				<div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
+					<button type="button" class="btn btn-default btn-xs" onclick="dashBoard.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div id="chart-hist-top-ucs" class="all-charts bar-charts">
+				<div id="title-chart-ucs" class="all-charts-title"></div>
+				<div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
+					<button type="button" class="btn btn-default btn-xs" onclick="dashBoard.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row row_print">
+		<div class="col-md-12">
+			<div id="footer_print"></div>
+		</div>
+	</div>
+</div>
+<div id="print_information" style="display:none;" onclick="this.style.display='none';">
+	<span class="info_p"><span id="txt14">
+		A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+		A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+		&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+		&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+		&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br /></span>
+		<span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
+		<span id="txt15">Concluir</span>
+		</span>
+	</span>
+</div>
+<div id="display_error">
+	<span id="inner_display_error">
+	
+	</span>
+</div>
+<div id="footer_page"></div>
+<link rel="stylesheet" type="text/css" href="{{basePath}}/theme/css/dashboard.css" id="stylesheet_dash" />
+<link rel="stylesheet" type="text/css" href="{{basePath}}/theme/css/dashboard-print.css" media="print" />
+<script type="text/javascript" src="{{basePath}}/theme/js/dashboard-translation-deter-b.js"></script>
+<script type="text/javascript" src="{{basePath}}/theme/js/dashboard-change-lang-deter-b.js"></script>
+<script type="text/javascript" src="{{basePath}}/theme/js/dashboard-deter-b.js"></script>
