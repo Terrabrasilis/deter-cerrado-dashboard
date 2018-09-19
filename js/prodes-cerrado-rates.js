@@ -228,8 +228,10 @@ var utils = {
 
 var graph={
 
-	// defining group charts
-	compositeGroup: "doublebar",
+	// defining a name for grouping composite charts
+	compositeChartName: "doublebar",
+	// to control the current line chart, 1=states or 2=municipalities
+	crtSwapLineChart: 1,
 
 	lineRateByYear: null,
 	lineRateByYearState: null,
@@ -322,8 +324,8 @@ var graph={
 			this.lineRateByYear
 			.width(fw34)
 			.height(fh)
-			.margins({top: 0, right: 10, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw34-180));
+			.margins({top: 0, right: 180, bottom: 50, left: 65})
+			.legend(dc.legend().x(fw34-170));
 			//.legend(dc.legend().x(fw34 - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
 		}
 		
@@ -331,13 +333,13 @@ var graph={
 			this.lineRateByYearState
 			.width(fw34)
 			.height(fh)
-			.margins({top: 0, right: 10, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw34-180));
+			.margins({top: 0, right: 180, bottom: 50, left: 65})
+			.legend(dc.legend().x(fw34-170));
 		}
 		this.pieTotalizedByState
 			.width(fw14)
 			.height(fh)
-			.legend(dc.legend().x(0).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((fw14>=400)?(400):(200)).itemWidth(40));
+			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((fw14>=400)?(400):(300)).itemWidth(40));
 		this.rowTop10ByMun
 			.width(fw14)
 			.height(fh)
@@ -366,14 +368,15 @@ var graph={
 			.margins({top: 0, right: 10, bottom: 50, left: 65});
 		
 		dc.renderAll();
+		dc.renderAll(graph.compositeChartName);
 	},
 	setChartReferencies: function() {
 
 		this.pieTotalizedByState = dc.pieChart("#chart-by-state");
 		this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
-		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625", this.compositeGroup);
-		this.barChart1 = dc.barChart(this.compositeChart, this.compositeGroup);
-		this.barChart2 = dc.barChart(this.compositeChart, this.compositeGroup)
+		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625", this.compositeChartName);
+		this.barChart1 = dc.barChart(this.compositeChart, this.compositeChartName);
+		this.barChart2 = dc.barChart(this.compositeChart, this.compositeChartName);
 		this.ratesDataTable = dataTable("rates-data-table");
 		this.relativeRatesDataTable = dataTable("relative-rates-data-table");
 	},
@@ -689,7 +692,17 @@ var graph={
 			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
 		this.lineRateByYear
-			.chart(function(c) { return dc.lineChart(c).interpolate('monotone').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
+			.chart(function(c) {
+				/* 
+				* see the complete list of interpolate:
+				* https://github.com/d3/d3-3.x-api-reference/blob/master/SVG-Shapes.md#line_interpolate
+				*/
+				return dc.lineChart(c)
+					.interpolate('cardinal')
+					//.interpolate('monotone')
+					.renderDataPoints({radius: 4})
+					.evadeDomainFilter(true);
+			})
 			.x(xScale)
 			.brushOn(false)
 			.yAxisLabel(Translation[Lang.language].lineYAxis)
@@ -737,23 +750,21 @@ var graph={
 						realGroup.push({key:[s.county,s.year],value:s.rate});
 					});
 				}
+				// filter by years from composite bar chart
+				if(graph.barChart2.hasFilter()){
+					var auxGroup=[],years=graph.barChart2.filters();
+					realGroup.forEach(function(rg){
+						years.find(function(i){
+							if(rg.key[1]==i){
+								auxGroup.push(rg);
+							}
+						});
+					});
+					realGroup=auxGroup;
+				}
 				
 				return realGroup;
 			});
-		// if(chartType=='Municípios') {
-		// 	this.lineRateByYear
-		// 	.data(function (group) {
-		// 		var fakeGroup=[],k=[];
-		// 		k.push(Translation[Lang.language].no_value);
-		// 		k.push(0);
-		// 		fakeGroup.push({key:k,value:0});
-		// 		if(graph.rowTop10ByMun.hasFilter()){
-		// 			graph.lineRateByYear.filter(graph.rowTop10ByMun.filters());
-		// 			fakeGroup = graph.lineRateByYear.group().top(Infinity);
-		// 		}
-		// 		return fakeGroup;
-		// 	});
-		// }
 
 		this.lineRateByYear.xAxis().ticks(auxYears.length);
 		this.lineRateByYear.xAxis().tickFormat(function(d) {
@@ -771,11 +782,9 @@ var graph={
 		
 		this.lineRateByYear.addFilterHandler(function(filters, filter) {
 			filters.push(filter);
-			//dc.redrawAll();
 			return filters;
 		});
 
-		//this.lineRateByYear.render();
 		graph.updateChartsDimensions();
 	},
 
@@ -802,7 +811,17 @@ var graph={
 			.range([auxRates[0],auxRates[auxRates.length-1]]);
 		
 		this.lineRateByYearState
-			.chart(function(c) { return dc.lineChart(c).interpolate('monotone').renderDataPoints({radius: 4}).evadeDomainFilter(true); })
+			.chart(function(c) {
+				/* 
+				* see the complete list of interpolate:
+				* https://github.com/d3/d3-3.x-api-reference/blob/master/SVG-Shapes.md#line_interpolate
+				*/
+				return dc.lineChart(c)
+					.interpolate('cardinal')
+					//.interpolate('monotone')
+					.renderDataPoints({radius: 4})
+					.evadeDomainFilter(true);
+			})
 			.x(xScale)
 			.brushOn(false)
 			.yAxisLabel(Translation[Lang.language].lineYAxis)
@@ -892,18 +911,18 @@ var graph={
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
-		this.pieTotalizedByState.on("renderlet.a", function(chart){
-			dc.renderAll(graph.compositeGroup);
+		this.pieTotalizedByState.on("filtered", function(chart,filter){
+			dc.renderAll(graph.compositeChartName);
 		});
 
 		/**
 		 * Starting the bar chart of the States by years.
 		 */
-		function sel_stack(i) {
-			return function(d) {
-				return +d.value[i];
-			};
-		}
+		// function sel_stack(i) {
+		// 	return function(d) {
+		// 		return +d.value[i];
+		// 	};
+		// }
 
 		var ufs=graph.ufDimension.group().all(),ufList=[];
 		ufs.forEach(function(d){
@@ -974,6 +993,10 @@ var graph={
 				var p=(rankMun["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
 				t.innerHTML=p+t.innerHTML;
 			});
+		});
+
+		this.rowTop10ByMun.on("filtered", function(chart,filter){
+			dc.renderAll(graph.compositeChartName);
 		});
 
 
@@ -1082,6 +1105,9 @@ var graph={
 			})
 			.on("preRender", chart => {
 				chart.rescale();
+			})
+			.on("postRedraw", chart => {
+				dc.redrawAll();
 			});
 		
 		this.compositeChart
@@ -1112,14 +1138,8 @@ var graph={
 				utils.scaleSubChartBarWidth(chart);
 			});
 		
-		
-		// Initialize line chart with States by default.
-		//graph.buildLineChart(graph.stateYearDimension, graph.stateYearRateGroup, 'Estado');
-
-		//this.buildLineChartState(this.stateYearDimension, this.stateYearRateGroup);
-		this.buildLineChartMun(this.countyYearDimension, this.countyYearRateGroup);
-
-		this.updateChartsDimensions();
+		this.buildLineChartState(this.stateYearDimension, this.stateYearRateGroup);
+		//this.buildLineChartMun(this.countyYearDimension, this.countyYearRateGroup);
 
 		this.buildDataTable();
 		this.prepareTools();
@@ -1140,7 +1160,6 @@ var graph={
 			graph.pieTotalizedByState.filterAll();
 		}else if(who=='mun'){
 			graph.rowTop10ByMun.filterAll();
-			graph.lineRateByYear.filterAll();
 			graph.applyCountyFilter(null);
 		}else if(who=='compositebar') {
 			graph.barChart1.filterAll();
@@ -1152,12 +1171,14 @@ var graph={
 	},
 	chartLineSwitcher: function(btn) {
 		var btnValue='';
-		if(btn.innerText=='Estados'){
-			btnValue='Municípios';
-			graph.buildLineChartState(graph.stateYearDimension, graph.stateYearRateGroup);
+		if(graph.crtSwapLineChart==1){
+			graph.crtSwapLineChart=2;
+			btnValue=Translation[Lang.language].state;
+			graph.buildLineChartMun(graph.countyYearDimension, graph.countyYearRateGroup);
 		}else{
-			btnValue='Estados';
-			graph.buildLineChartMun(graph.countyYearDimension, graph.countyYearRateGroup);			
+			graph.crtSwapLineChart=1;
+			btnValue=Translation[Lang.language].county;
+			graph.buildLineChartState(graph.stateYearDimension, graph.stateYearRateGroup);
 		}
 		btn.innerText=btnValue;
 	},

@@ -49,6 +49,9 @@ body{
 div .dc-chart {
     float: none;
 }
+.dc-legend{
+	font-size: 10px;
+}
 .dropdown-menu {
 	background-color: #222;
 	color:#fff;
