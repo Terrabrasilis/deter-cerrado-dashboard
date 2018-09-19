@@ -180,7 +180,7 @@ var utils = {
 	},
 	changeCss: function(bt) {
 		utils.cssDefault=!utils.cssDefault;
-		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/dashboard-cerrado-rates-dark.css'));
+		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/prodes-cerrado-rates-dark.css'));
 		bt.style.display='none';
 		setTimeout(function(){bt.style.display='';},200);
 	},
@@ -278,7 +278,7 @@ var graph={
 	 */
 	loadConfigurations: function(callback) {
 		
-		d3.json("config/config-rates.json", function(error, conf) {
+		d3.json("config/prodes-cerrado-rates.json", function(error, conf) {
 			if (error) {
 				console.log("Didn't load config file. Using default options.");
 			}else{
@@ -387,7 +387,7 @@ var graph={
 		d3.json(url, graph.processData);
 		
 		// load data from JSON file
-		//var url="data/cerrado.json";
+		//var url="data/prodes-cerrado-rates.json";
 		//d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {

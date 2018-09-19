@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br, en, es">
 <head>
-    <title>Cerrado brasileiro - incremento de Desmatamento</title>
-	<meta charset="UTF-8">
+    <title>Cerrado brasileiro - alertas de Desmatamento</title>
+    <meta charset="UTF-8">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="pt-br, en, es">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-77404603-3"></script>
 	<script>
@@ -23,10 +31,9 @@
 	<!-- Font Material design google -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-	<link rel="stylesheet" type="text/css" href="./css/glyphicon-change.css" />
-	<link rel="stylesheet" type="text/css" href="#" id="stylesheet_dark" />
-   	<link rel="stylesheet" type="text/css" href="./css/dashboard-cerrado-rates.css" />
-	<link rel="stylesheet" type="text/css" href="./css/dashboard-print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+   	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
+	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
 </head>
 <body>
@@ -40,7 +47,7 @@
 				
 				<div class="desctxt">
 						<h5><span class="amarelo">Cerrado</span><span class="verde">Brasileiro</span> </h5>
-						<div class="texto">Incrementos de desmatamento</div>
+						<div class="texto">Alertas de desmatamento</div>
 				</div>
 			</div>
 			
@@ -87,82 +94,6 @@
 		</nav>
 	</div>
 
-	<!--
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid" style="clear: both; color: black;">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand nav-brand-left" href="http://www.inpe.br/">
-					<img src="./img/logo_INPE.png" alt="INPE icon" class="img-rounded" height="35" width="45" />
-				</a>
-				<a class="navbar-brand nav-brand-left" href="http://www.obt.inpe.br/OBT/home">
-					<img src="./img/logo_OBT.png" alt="OBT icon" class="img-rounded" height="35" width="80" />
-				</a>
-			</div>
-			<div class="collapse navbar-collapse" id="navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a id="txt1">Incremento de desmatamento</a>
-					</li>	
-					<li class="dropdown inverse-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="tools">Ferramentas <span class="caret"></span></span></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incremento de desmatamento.">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
-								</a>
-							</li>
-							<li>
-								<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
-									<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
-								</a>
-							</li>
-							<li>
-								<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
-									<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
-								</a>
-							</li>							
-						</ul>
-					</li>
-					<li class="dropdown inverse-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="help">Ajuda <span class="caret"></span></span></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
-									<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="video">Video Introdutório</span>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="#modal-container-about" id="goto_about" data-toggle="modal" title="Ver informações sobre o projeto e a equipe.">
-									<span id="btn_style" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;<span id="about">Sobre</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br.">
-							<span class="glyphicon glyphicon-envelope"></span>&nbsp;<span id="contactus">Contacte-nos</span>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="#">
-							<img id="flag-pt-br" alt="Bandeira Brasil" src="./img/flag_br.gif" class="img-circle" title="Alterar o idioma do painel para Português do Brasil." />&nbsp;&nbsp;
-							<img id="flag-en" alt="Flag USA" src="./img/flag_usa.gif" class="img-circle" title="Change panel language to English." />&nbsp;&nbsp;
-							<img id="flag-es" alt="Bandera de España" src="./img/flag_spain.gif" class="img-circle" title="Cambiar el idioma del panel al español." />
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	
-	-->
-
 	<!-- Menu superior -->
 	<div id="content">
 		<nav  class="navbar navbar-expand-lg materialnav navbar-header">
@@ -172,7 +103,7 @@
 			<a class="navbar-brand" href="#"><span class="amarelo">Cerrado</span><span class="verde">Brasileiro</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#">| Incrementos de desmatamento</a>
+					<a class="nav-item nav-link" href="#">| Alertas de desmatamento</a>
 				</div>
 				<ul class="navbar-nav  navbar-right">
 					<li class="nav-item active">
@@ -182,10 +113,14 @@
 						<a class="nav-link" href="#">Contato</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><img src="img/br.svg" class="bandeira" alt="portugues"></a>
+                        <a class="nav-link" href="#"> 
+                            <img id="flag-pt-br" alt="Bandeira Brasil" src="img/br.svg" onclick="Lang.change('pt-br');" class="img-circle" title="Alterar o idioma do painel para Português do Brasil.">
+                        </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><img src="img/usa.svg" class="bandeira" alt="ingles"></a>
+                        <a class="nav-link" href="#">
+                            <img id="flag-en" alt="Flag USA" src="img/usa.svg" onclick="Lang.change('en');" class="img-circle" title="Change panel language to English.">
+                        </a>
 					</li>      
 				</ul>
 			</div>
@@ -194,147 +129,161 @@
 
 	<div class="container-fluid" id="panel_container" style="display:none;">
 
-		<!-- Linha Graficos 1 -->
-		<div class="row box">
-			<!--div class="col-md-12 info" style="margin-bottom: 3px;">
-				<a id="infoRatesBtn" href="#modal-container-info-rates" role="button" class="btn btn-chart-info" data-toggle="modal">
-					<span class="glyphicon glyphicon-info-sign" aria-hidden="true" id="display_warning" title="Clique para ver mais informações sobre os incrementos."></span>
-				</a>
-			</div-->
-			<div class="col-md-9" id="chart1">
-				<div class="box-grafico text-center">					 
-					<div id="chart-bar-by-year-625">
-						<div id="title-chart-bar-by-year-625" class="all-charts-title boxtitle">Totais anuais</div>
-						<div class="keep-space">
-							<div class="reset alert alert-success" role="alert" style="display:none;"><b><span id="txt8">Filtro:</span></b> <span class="filter"></span>
-								<a href="javascript:graph.resetFilter('compositebar');">
-									<span aria-hidden="true" id="txt9" title="Limpar este filtro.">
-									<i class="material-icons md-icon-16 icongreen">delete</i>
-								</span>
-									
-									</a>
-							</div>
-							<div class="btn-download">
-								<span onclick="downloadAsImage('chart-bar-by-year-625');" class="icondownload" aria-hidden="true" id="txt10" title="Baixar a imagem do gráfico em formato PNG."><i class="material-icons">save_alt</i></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3" id="chart2">
-				<div class="box-grafico text-center">
-					<div id="chart-by-state">
-						<div id="title-chart-by-state" class="all-charts-title boxtitle">Totais por Estado</div>
-						<div class="keep-space">
-							<div class="reset alert alert-success" role="alert" style="display:none;"><b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
-								<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."><i class="material-icons md-icon-16 icongreen">delete</i></span></a>
-							</div>
-							<div class="btn-download"><span onclick="downloadAsImage('chart-by-state');" class="icondownload" aria-hidden="true" id="txt13" title="Baixar a imagem do gráfico em formato PNG."><i class="material-icons">save_alt</i></span></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="row box">
+            <div class="col-md-12">
+                <div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
+                <div id="warning_data_info" style="display:none;"><h1><span id="txt8">Não há dados.</span></h1></div>
+                <iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
+            </div>
+        </div>
 
-		<!-- Linha Graficos 2 -->
-		<div class="row box">			 
-			<div class="col-md-9">
-				<div class="toggle_chart">
-					<button id="line-chart-toggle" type="button" class="btn btn-sm btnbox" data-dismiss="modal">
-						<span>Estados</span>
-					</button>
+		<div id="charts-panel">
+            <div class="row box">
+                <div class="col-md-6">
+                    <div class="box-grafico text-center">
+                        <div id="totalized-area">
+                            <input id="radio-area" title="Ver gráficos com base no somatório de áreas em km²." class="input_radio"  style="display:none;margin-top:18px;margin-right:-20px;"
+                            name="set_dim" type="radio" onclick="graph.setDataDimension('area');" checked="checked">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-grafico text-center">
+                        <div id="totalized-alerts">
+                            <input id="radio-alerts" title="Ver gráficos com base na contagem do número de alertas." class="input_radio" style="display:none;margin-top:18px;margin-right:-20px;"
+                            name="set_dim" type="radio" onclick="graph.setDataDimension('alert');">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row box">
+                <div class="col-md-12">
+                    <div class="box-grafico text-center">
+                        <div id="chart-line-by-month" class="all-charts timeline-charts">
+                            <div id="title-chart-timeline" class="all-charts-title"></div>
+                            <div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row box p_break p_zoom">
+                <div class="col-md-4">
+                    <div class="box-grafico text-center">
+						<div id="chart-hist-top-counties" class="all-charts bar-charts">
+                            <div id="title-chart-counties" class="all-charts-title"></div>
+                            <div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
 				</div>
-				<div class="box-grafico text-center">
-					<div id="chart-line-rates-by-year-mun">
-						<div class="all-charts-title boxtitle"><span id="title-chart-lines boxtitle">Totais anuais por</span> <span id="title-chart-lines-p2">Município</span></div>
-						<div class="keep-space">&nbsp;</div>
-					</div>
-					<div id="chart-line-rates-by-year-state" style="display:none;">
-						<div class="all-charts-title boxtitle"><span id="title-chart-lines3">Totais anuais por</span> <span id="title-chart-lines-p3">Estado</span></div>
-						<div class="keep-space">&nbsp;</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box-grafico text-center">
-					<div id="chart-by-mun">
-						<div style="position:relative;">
-							<div id="title-chart-by-mun" class="all-charts-title boxtitle">Desmatamento por Município</div>
-							<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
-								<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
-							</a>
-						</div>
-						<div class="keep-space">
-							<div class="reset alert alert-success" role="alert" style="visibility: hidden;"><b><span id="txt34">Filtro:</span></b><span class="filter"></span>
-								<a href="javascript:graph.resetFilter('mun');"><span aria-hidden="true" id="txt35" title="Limpar este filtro.">
-									<i class="material-icons md-icon-16 icongreen">delete</i>
-								</span></a>
-							</div>
-							<div class="btn-download">
-								<span onclick="downloadAsImage('chart-by-mun');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt36" title="Baixar a imagem do gráfico em formato PNG."></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row boxtitulo">
-			<div class="col-md-12">
-			  <span id="txt15">Tabela de incrementos anuais e variações relativas de desmatamento no Cerrado brasileiro</span>
-			</div>
-		</div>
-		
-		<div class="row box">
-			<div class="panel-group groupbox" id="accordion">
-				<div class="panel panel-default boxtables">
-					<div class="panel-heading">
-						<h4 class="panel-title boxtitletable">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                               <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                               <span id="txt16">Incremento anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
-							</a>
-							<span style="clear: both;color: black;position: relative;float: right;">
-								<button id="downloadTableBtn" class="btn btn-sm btn-block btndown" title="Baixar os dados da tabela, em formato CSV.">
-									<span id="txt17">Baixar CSV</span> <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-								</button>
-							</span>
-						</h4>
-					</div>
-					<div id="collapse1" class="panel-collapse collapse">
-						<div class="panel-body">
-							<div id="rates-data-table"></div>
-						</div>
-					</div>
-			
-				</div>
-				
-				<div class="panel panel-default boxtables">
-					<div class="panel-heading">
-						<h4 class="panel-title boxtitletable">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                               <i class="fa fa-plus-circle" aria-hidden="true"></i>                           
-								<span id="txt18">Variações relativas dos incrementos anuais de desmatamento (%)</span>
-							</a>
-						</h4>
-					</div>
-					<div id="collapse2" class="panel-collapse collapse">
-						<div class="panel-body">
-							<div id="relative-rates-data-table"></div>
-						</div>
-					</div>
-				</div>	
-
-			</div>
-		</div>
-		<p id="txt32"><strong>Nota:</strong> Clique no texto para expandir/recolher os painéis.</p>
+				<div class="col-md-4">
+                    <div class="box-grafico text-center">
+						<div id="chart-hist-top-ucs" class="all-charts bar-charts">
+                            <div id="title-chart-ucs" class="all-charts-title"></div>
+                            <div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box-grafico text-center">
+                        <div id="chart-ring-by-state" class="all-charts ring-charts">
+                            <div id="title-chart-state" class="all-charts-title"></div>
+                            <div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
+                                <button type="button" class="btn btn-default btn-xs" onclick="graph.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="print_information" style="display:none;" onclick="this.style.display='none';">
+            <span class="info_p"><span id="txt14">
+                A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+                A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+                &nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+                &nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+                &nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br /></span>
+                <span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
+                <span id="txt15">Concluir</span>
+                </span>
+            </span>
+        </div>
+        <div id="display_error">
+            <span id="inner_display_error">
+            
+            </span>
+        </div>
+        <!--div id="footer_page"></div-->
 
 	</div><!-- Fim do painel de gráficos -->
 
 	<div class="container">
 		<div class="row box">
 			<div class="col-md-12">
-				<div id="footer_print"></div>
+                <div id="footer_print"></div>
+                <!-- modal copied from original DETER-B panel -->
+                <div class="modal fade" id="modal-container-718053" role="dialog" aria-labelledby="areaXclass" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                                <h4 class="modal-title" id="areaXclass">
+                                    <span id="txt16">Informações para download (granularidade diária)</span>
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                            
+                                <span id="txt17">Baixar os dados incluindo a componente geográfica.</span>
+                                <div class="dwn-tool">
+                                    <span id="txt22">Selecione o formato do arquivo:</span>&nbsp;
+                                    <select id="download-option" class="form-control">
+                                    <option value="SHAPE-ZIP">Shapefile (ZIP)</option>
+                                    <option value="csv">CSV</option>
+                                    <option value="KML">KML</option>
+                                    </select>
+                                    <br/>
+                                    <a href="#" id="download-filter">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt18">Respeitando os filtros definidos neste painel de consulta.</span><strong>*</strong></a>
+                                    <br/>
+                                    <a href="#" id="download-all">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt19">Sem filtros, arquivo completo.</span></a>
+                                    <br/><br/>
+                                    <div class="alert alert-warning">
+                                        <strong>*</strong>&nbsp;<span id="txt20">Ao atribuir qualquer um dos filtros por Classe, Estado, Município ou Áreas de Proteção e <strong>não</strong> atribuir filtro temporal, <strong>toda a extensão temporal</strong> será considerada e não apenas a extensão exibida no painel.</span>
+                                    </div>
+                                </div>
+                                <br/>
+                                <span id="txt23">Baixar os dados sem a componente geográfica, apenas tabela de atributos, em formato CSV.</span>
+                                <div class="dwn-tool">
+                                    <a href="#" id="download-csv-daily">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt24">Com filtros.</span><strong>*</strong>
+                                    </a>
+                                    <br/>
+                                    <a href="#" id="download-csv-daily-all">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt25">Sem filtros.</span><strong>*</strong>
+                                    </a>
+                                    <br/><br/>
+                                    <div class="alert alert-warning">
+                                        <strong>*</strong>&nbsp;<span id="txt3">Apenas para o intervalo de tempo exibido no painel (365 dias).</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    <span id="txt21">Fechar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<!-- modal window with information about rates -->
 				<div class="modal fade" id="modal-container-info-rates" role="dialog" aria-labelledby="info-rates" aria-hidden="true">
 					<div class="modal-dialog">
@@ -414,13 +363,13 @@
 							<div class="modal-body">
 								<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
 								<div class="embed-video">
-										<video width="800" height="600" controls>
-											<source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
-											<track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
-											<track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
-											<track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
-											Seu navegador não suporta a tag de vídeo.
-										</video>
+                                    <video width="800" height="600" controls>
+                                        <source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
+                                        <track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+                                        <track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+                                        <track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
+                                        Seu navegador não suporta a tag de vídeo.
+                                    </video>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -432,22 +381,6 @@
 					</div>
 				</div>
 				
-				<!-- modal window about the project -->
-				<div class="modal fade" id="modal-container-about" role="dialog" aria-labelledby="about-rates" aria-hidden="true">
-					<div class="modal-dialog" style="width:830px;">
-						<div class="modal-content">
-							<div class="modal-header">
-							  	<h1 class="modal-title" id="about-rates">TerraBrasilis</h1>
-							</div>
-							<div class="modal-body">
-								<iframe id="iframe-about" src="dashboard-about.html" width="800" height="600" frameborder="0"></iframe>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal" id="about-close">Fechar</button>
-							</div>
-						</div>
-					</div>
-				</div>
 				<!-- modal window with counties filterd items -->
 				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
 					<div class="modal-dialog">
@@ -506,8 +439,6 @@
 						</div>
 					</div>
 				</div>
-
-
 				<div class="modal fade" id="myModal">
 					<div class="modal-dialog">
 						<div class="modal-content modalinf">
@@ -560,10 +491,8 @@
 					</div>
 				<!--/ modal-dialog -->
 				</div>
-
-
 			</div>
-		</div>
+        </div>
 	</div>
 	<div id="display_error"><span id="inner_display_error"></span></div>
 	<div id="display_loading"><span id="inner_display_loading"></span></div>
@@ -587,12 +516,9 @@
 	</footer>
 	<!--/.Footer-->
 
-	<!-- div id="footer_page"></div -->
 	<!-- already minified -->
 	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
 	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
-	<!--script type="text/javascript" src="./libs/jquery/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="./libs/bootstrap/bootstrap-3.2.0.min.js"></script-->
 	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
 	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
 	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
@@ -608,36 +534,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
 	<!-- worked to minify / using to minify: https://www.minifier.org/ -->
-	<!-- <script type="text/javascript" src="./js/svg-to-image.js"></script> -->
 	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
 	<script type="text/javascript" src="./js/dataTable.js"></script>
-	<!-- <script type="text/javascript" src="./js/dataTable.min.js"></script> -->	
-	<!-- <script type="text/javascript" src="./js/dashboard-cerrado-rates.min.js"></script> -->	
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
-	<script type="text/javascript" src="./js/dashboard-cerrado-rates.js"></script>
-	<script type="text/javascript" src="./js/dashboard-translation-rates.js"></script>
-	<script type="text/javascript" src="./js/dashboard-change-lang.js"></script>
-	
-	<script>
-	
-	$(document).ready(function () {
-            $('.collapse')
-                .on('shown.bs.collapse', function() {
-                    $(this)
-                        .parent()
-                        .find(".fa-plus-circle")
-                        .removeClass("fa-plus-circle")
-                        .addClass("fa-minus-circle");
-                })
-                .on('hidden.bs.collapse', function() {
-                    $(this)
-                        .parent()
-                        .find(".fa-minus-circle")
-                        .removeClass("fa-minus-circle")
-                        .addClass("fa-plus-circle");
-                });
-        });
-	</script>
+	<script type="text/javascript" src="./js/deter-cerrado-daily-translation.js"></script>
+    <script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
+    <script type="text/javascript" src="./js/deter-cerrado-daily.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,8 @@
+{
+	"legendOriginal":["CICATRIZ_DE_QUEIMADA","CORTE_SELETIVO","CS_DESORDENADO","CS_GEOMETRICO","DEGRADACAO","DESMATAMENTO_CR","DESMATAMENTO_VEG","MINERACAO"],
+	"legendOverlay":{
+		"pt-br":["Cicatriz de Incêndio Florestal","Corte Seletivo","Corte Seletivo Tipo 1 (Desordenado)","Corte Seletivo Tipo 2 (Geométrico)","Degradação","Desmatamento com Solo Exposto","Desmatamento com Vegetação","Mineração"],
+		"en":["Wildfire scar","Selective Cut","Selective Cut Type 1 (Disordered)","Selective Cut Type 2 (Geometric)","Degradation","Deforestation with Exposed Soil","Deforestation with Vegetation","Mining"],
+		"es":["Cicatriz de Incendio Forestal","Corte Selectivo","Corte Selectivo Tipo 1 (Desordenado)","Corte Selectivo Tipo 2 (Geométrico)","Degradación","Deforestación con Suelo Expuesto","Deforestación con Vegetación","Minería"]
+	}
+}
