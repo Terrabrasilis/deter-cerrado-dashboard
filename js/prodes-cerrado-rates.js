@@ -850,6 +850,17 @@ var graph={
 		this.lineRateByYearState
 			.data(function (group) {
 				var realGroup=group.all();
+				if(graph.pieTotalizedByState.hasFilter()) {
+					var auxGroup=[],states=graph.pieTotalizedByState.filters();
+					realGroup.forEach(function(rg){
+						states.find(function(s){
+							if(rg.key[0]==s){
+								auxGroup.push(rg);
+							}
+						});
+					});
+					realGroup=auxGroup;
+				}
 				// filter by years from composite bar chart
 				if(graph.barChart2.hasFilter()){
 					var auxGroup=[],years=graph.barChart2.filters();
@@ -1155,8 +1166,8 @@ var graph={
 				utils.scaleSubChartBarWidth(chart);
 			});
 		
+		// defining default line chart
 		this.buildLineChartState(this.stateYearDimension, this.stateYearRateGroup);
-		//this.buildLineChartMun(this.countyYearDimension, this.countyYearRateGroup);
 
 		this.buildDataTable();
 		this.prepareTools();
