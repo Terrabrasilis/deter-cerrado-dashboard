@@ -732,9 +732,7 @@ var graph={
 
 		this.lineRateByYear
 			.data(function (group) {
-				//var fakeGroup=[],
 				var realGroup=[],baseGroup;
-				//fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
 				if(!graph.rowTop10ByMun.hasFilter()) {
 					baseGroup=graph.munAreaMunGroup.top(10);
 					baseGroup.forEach(function(el){
@@ -848,6 +846,25 @@ var graph={
 				return +d.value;
 			})
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet));
+		
+		this.lineRateByYearState
+			.data(function (group) {
+				var realGroup=group.all();
+				// filter by years from composite bar chart
+				if(graph.barChart2.hasFilter()){
+					var auxGroup=[],years=graph.barChart2.filters();
+					realGroup.forEach(function(rg){
+						years.find(function(i){
+							if(rg.key[1]==i){
+								auxGroup.push(rg);
+							}
+						});
+					});
+					realGroup=auxGroup;
+				}
+				
+				return realGroup;
+			});
 
 		this.lineRateByYearState.xAxis().ticks(auxYears.length);
 		this.lineRateByYearState.xAxis().tickFormat(function(d) {
@@ -1166,8 +1183,8 @@ var graph={
 			graph.barChart2.filterAll();
 			graph.compositeChart.filterAll();
 		}
-
 		dc.redrawAll();
+		dc.redrawAll(graph.compositeChartName);
 	},
 	chartLineSwitcher: function(btn) {
 		var btnValue='';
