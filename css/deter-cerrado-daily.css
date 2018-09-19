@@ -74,7 +74,11 @@ div .dc-chart {
 	font-size: 10px;
     text-align: initial;
 }
-
+.keep-space{
+	position: relative;
+	height: 18px;
+    margin-bottom: 3px;
+}
 .input_radio{
 	position: absolute;
     right: 93%;

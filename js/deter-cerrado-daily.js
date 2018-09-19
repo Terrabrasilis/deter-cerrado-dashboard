@@ -493,7 +493,7 @@ var graph={
 	        .group(this.utils.removeLittlestValues(groups["uf"]))
 	        .ordinalColors(["#6A5ACD","#483D8B","#008B8B","#5F9EA0","#6495ED","#4169E1","#4682B4","#708090","#B0C4DE"])
 	        //.legend(dc.legend());
-	        .legend(dc.legend().x(0).y(this.config.defaultHeight-40).itemHeight(10).gap(2).horizontal(1).legendWidth(100).itemWidth(100));
+	        .legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
 
 		// this.ringTotalizedByState
 		// 	.on('postRender', function(chart) {
