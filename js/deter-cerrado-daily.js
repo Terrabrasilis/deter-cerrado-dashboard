@@ -157,7 +157,7 @@ var graph={
 		},
 
 		getDefaultHeight:function() {
-			return ((window.innerHeight*0.5).toFixed(0))*1;
+			return ((window.innerHeight*0.4).toFixed(0))*1;
 		},
 		/**
 		 * Mapping class names to or from originals.
@@ -339,7 +339,7 @@ var graph={
 					(graph.utils.wildcardExchange("%Unit%")));
 		
 		this.lineDistributionByMonth
-			.height(280)
+			.height(310)
 			.margins({top: 10, right: 15, bottom: 85, left: 45})
 			.yAxisLabel( yLabel )
 			.xAxisLabel( Translation[Lang.language].timeline_desc + " " + dateFormat(new Date(alertsMinDate[0].timestamp)) + " - " + dateFormat(new Date(alertsMaxDate[0].timestamp)) )
@@ -486,25 +486,34 @@ var graph={
 		graph.utils.setTitle('state',Translation[Lang.language].title_tot_state);
 		
 		this.ringTotalizedByState
-	        .height(this.config.defaultHeight)
+			.height(this.config.defaultHeight)
 	        .innerRadius(25)
 	        .externalRadiusPadding(40)
 	        .dimension(dimensions["uf"])
 	        .group(this.utils.removeLittlestValues(groups["uf"]))
-	        //.colors(d3.scale.category20())
 	        .ordinalColors(["#6A5ACD","#483D8B","#008B8B","#5F9EA0","#6495ED","#4169E1","#4682B4","#708090","#B0C4DE"])
 	        //.legend(dc.legend());
-	        .legend(dc.legend().x(0).y(0).itemHeight(10).gap(2).horizontal(1).legendWidth(window.innerWidth/2).itemWidth(80));
+	        .legend(dc.legend().x(0).y(this.config.defaultHeight-40).itemHeight(10).gap(2).horizontal(1).legendWidth(100).itemWidth(100));
 
-		this.ringTotalizedByState
-			.on('postRender', function(chart) {
-				var lh=chart.height();
-				var ph=(chart.selectAll('g.pie-slice-group')).node().getBBox().height;
+		// this.ringTotalizedByState
+		// 	.on('postRender', function(chart) {
+		// 		var lh=chart.height();
+		// 		var ph=(chart.selectAll('g.pie-slice-group')).node().getBBox().height;
 				
-				var cy=lh-ph/2;
-				chart.cy(cy);
-				chart.redraw();
-			});
+		// 		var cy=lh-ph/2;
+		// 		chart.cy(cy);
+		// 		chart.redraw();
+		// 	});
+
+		// this.ringTotalizedByState
+		// 	.on('postRender', function(chart) {
+		// 		var lw=chart.width();
+		// 		var pw=(chart.selectAll('g.pie-slice-group')).node().getBBox().width;
+				
+		// 		var cx=(lw-pw/2)-10;
+		// 		chart.cx(cx);
+		// 		chart.redraw();
+		// 	});
 		
 		this.ringTotalizedByState
 			.on('preRender', function(chart) {
