@@ -23,7 +23,7 @@
 	<!-- Font Material design google -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+	<link rel="stylesheet" type="text/css" href="#" id="stylesheet_dark" />
    	<link rel="stylesheet" type="text/css" href="./css/prodes-cerrado-rates.css" />
 	<link rel="stylesheet" type="text/css" href="./css/prodes-cerrado-rates-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
@@ -201,15 +201,20 @@
 				</a>
 			</div-->
 			<div class="col-md-9" id="chart1">
-				<div class="box-grafico text-center">
+				<div class="box-grafico text-center">					 
 					<div id="chart-bar-by-year-625">
-						<div id="title-chart-bar-by-year-625" class="all-charts-title">Totais anuais</div>
+						<div id="title-chart-bar-by-year-625" class="all-charts-title boxtitle">Totais anuais</div>
 						<div class="keep-space">
-							<div class="reset" style="display:none;"><b><span id="txt8">Filtro:</span></b> <span class="filter"></span>
-								<a href="javascript:graph.resetFilter('compositebar');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt9" title="Limpar este filtro."></span></a>
+							<div class="reset alert alert-success" role="alert" style="display:none;"><b><span id="txt8">Filtro:</span></b> <span class="filter"></span>
+								<a href="javascript:graph.resetFilter('compositebar');">
+									<span aria-hidden="true" id="txt9" title="Limpar este filtro.">
+									<i class="material-icons md-icon-16 icongreen">delete</i>
+								</span>
+									
+									</a>
 							</div>
 							<div class="btn-download">
-								<span onclick="downloadAsImage('chart-bar-by-year-625');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt10" title="Baixar a imagem do gráfico em formato PNG."></span>
+								<span onclick="downloadAsImage('chart-bar-by-year-625');" class="icondownload" aria-hidden="true" id="txt10" title="Baixar a imagem do gráfico em formato PNG."><i class="material-icons">save_alt</i></span>
 							</div>
 						</div>
 					</div>
@@ -218,12 +223,12 @@
 			<div class="col-md-3" id="chart2">
 				<div class="box-grafico text-center">
 					<div id="chart-by-state">
-						<div id="title-chart-by-state" class="all-charts-title">Totais por Estado</div>
+						<div id="title-chart-by-state" class="all-charts-title boxtitle">Totais por Estado</div>
 						<div class="keep-space">
-							<div class="reset" style="display:none;"><b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
-								<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."></span></a>
+							<div class="reset alert alert-success" role="alert" style="display:none;"><b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
+								<a href="javascript:graph.resetFilter('state');"><span class="glyphicon glyphicon-trash" aria-hidden="true" id="txt12" title="Limpar este filtro."><i class="material-icons md-icon-16 icongreen">delete</i></span></a>
 							</div>
-							<div class="btn-download"><span onclick="downloadAsImage('chart-by-state');" class="glyphicon glyphicon-download-alt" aria-hidden="true" id="txt13" title="Baixar a imagem do gráfico em formato PNG."></span></div>
+							<div class="btn-download"><span onclick="downloadAsImage('chart-by-state');" class="icondownload" aria-hidden="true" id="txt13" title="Baixar a imagem do gráfico em formato PNG."><i class="material-icons">save_alt</i></span></div>
 						</div>
 					</div>
 				</div>
@@ -234,17 +239,17 @@
 		<div class="row box">			 
 			<div class="col-md-9">
 				<div class="toggle_chart">
-					<button id="line-chart-toggle" type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+					<button id="line-chart-toggle" type="button" class="btn btn-sm btnbox" data-dismiss="modal">
 						<span>Municípios</span>
 					</button>
 				</div>
 				<div class="box-grafico text-center">
 					<div id="chart-line-rates-by-year-mun">
-						<div class="all-charts-title"><span id="title-chart-lines">Totais anuais por</span> <span id="title-chart-lines-p2">Município</span></div>
+						<div class="all-charts-title boxtitle"><span id="title-chart-lines boxtitle">Totais anuais por</span> <span id="title-chart-lines-p2">Município</span></div>
 						<div class="keep-space">&nbsp;</div>
 					</div>
 					<div id="chart-line-rates-by-year-state">
-						<div class="all-charts-title"><span id="title-chart-lines3">Totais anuais por</span> <span id="title-chart-lines-p3">Estado</span></div>
+						<div class="all-charts-title boxtitle"><span id="title-chart-lines3">Totais anuais por</span> <span id="title-chart-lines-p3">Estado</span></div>
 						<div class="keep-space">&nbsp;</div>
 					</div>
 				</div>
@@ -253,15 +258,15 @@
 				<div class="box-grafico text-center">
 					<div id="chart-by-mun">
 						<div style="position:relative;">
-							<div id="title-chart-by-mun" class="all-charts-title">Desmatamento por Município</div>
-							<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun">
-								<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">search</i></span>
+							<div id="title-chart-by-mun" class="all-charts-title boxtitle">Desmatamento por Município</div>
+							<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
+								<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
 							</a>
 						</div>
 						<div class="keep-space">
-							<div class="reset" style="visibility: hidden;"><b><span id="txt34">Filtro:</span></b><span class="filter"></span>
+							<div class="reset alert alert-success" role="alert" style="visibility: hidden;"><b><span id="txt34">Filtro:</span></b><span class="filter"></span>
 								<a href="javascript:graph.resetFilter('mun');"><span aria-hidden="true" id="txt35" title="Limpar este filtro.">
-									<i class="material-icons md-icon-16">delete</i>
+									<i class="material-icons md-icon-16 icongreen">delete</i>
 								</span></a>
 							</div>
 							<div class="btn-download">
@@ -273,23 +278,23 @@
 			</div>
 		</div>
 
-		<div class="row box">
-			<div class="col-md-12 info info-table" style="margin-bottom: 3px;">
-				<span id="txt15">Tabela de incrementos anuais e variações relativas de desmatamento no Cerrado brasileiro</span>
+		<div class="row boxtitulo">
+			<div class="col-md-12">
+			  <span id="txt15">Tabela de incrementos anuais e variações relativas de desmatamento no Cerrado brasileiro</span>
 			</div>
 		</div>
 		
 		<div class="row box">
-			<div class="panel-group" id="accordion">
-				<div class="panel panel-default">
+			<div class="panel-group groupbox" id="accordion">
+				<div class="panel panel-default boxtables">
 					<div class="panel-heading">
-						<h4 class="panel-title">
+						<h4 class="panel-title boxtitletable">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-								<i class="glyphicon glyphicon-chevron-right" style="color:black;display:unset;"></i>
-								<span id="txt16">Incremento anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
+                               <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                               <span id="txt16">Incremento anual de desmatamento entre <span id="year-range"></span> (km²/ano)</span>
 							</a>
 							<span style="clear: both;color: black;position: relative;float: right;">
-								<button id="downloadTableBtn" class="btn btn-success btn-sm btn-block" title="Baixar os dados da tabela, em formato CSV.">
+								<button id="downloadTableBtn" class="btn btn-sm btn-block btndown" title="Baixar os dados da tabela, em formato CSV.">
 									<span id="txt17">Baixar CSV</span> <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
 								</button>
 							</span>
@@ -300,12 +305,14 @@
 							<div id="rates-data-table"></div>
 						</div>
 					</div>
+			
 				</div>
-				<div class="panel panel-default">
+				
+				<div class="panel panel-default boxtables">
 					<div class="panel-heading">
-						<h4 class="panel-title">
+						<h4 class="panel-title boxtitletable">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-								<i class="glyphicon glyphicon-chevron-right" style="color:black;display:unset;"></i>
+                               <i class="fa fa-plus-circle" aria-hidden="true"></i>                           
 								<span id="txt18">Variações relativas dos incrementos anuais de desmatamento (%)</span>
 							</a>
 						</h4>
@@ -315,7 +322,8 @@
 							<div id="relative-rates-data-table"></div>
 						</div>
 					</div>
-				</div>				
+				</div>	
+
 			</div>
 		</div>
 		<p id="txt32"><strong>Nota:</strong> Clique no texto para expandir/recolher os painéis.</p>
@@ -603,6 +611,27 @@
 	<!-- <script type="text/javascript" src="./js/dataTable.min.js"></script> -->	
 	<!-- <script type="text/javascript" src="./js/dashboard-cerrado-rates.min.js"></script> -->	
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
+
+	<script>
+	
+	$(document).ready(function () {
+            $('.collapse')
+                .on('shown.bs.collapse', function() {
+                    $(this)
+                        .parent()
+                        .find(".fa-plus-circle")
+                        .removeClass("fa-plus-circle")
+                        .addClass("fa-minus-circle");
+                })
+                .on('hidden.bs.collapse', function() {
+                    $(this)
+                        .parent()
+                        .find(".fa-minus-circle")
+                        .removeClass("fa-minus-circle")
+                        .addClass("fa-plus-circle");
+                });
+        });
+	</script>
 	<script type="text/javascript" src="./js/prodes-cerrado-rates.js"></script>
 	<script type="text/javascript" src="./js/prodes-cerrado-rates-translation.js"></script>
 	<script type="text/javascript" src="./js/prodes-cerrado-rates-change-lang.js"></script>
