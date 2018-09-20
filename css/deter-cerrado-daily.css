@@ -8,11 +8,14 @@ body{
 	width: 99%;
 }
 .container-fluid{
-	margin-left: 290px !important;
+	margin-left: 290px;
 	width: calc(100% - 290px);
 	padding-left: 0px;
 	margin-top: 64px;
 	margin-bottom: 55px;
+}
+#info_container{
+	padding: 25%;
 }
 #totalized-area {
 	background: rgb(255, 212, 0);

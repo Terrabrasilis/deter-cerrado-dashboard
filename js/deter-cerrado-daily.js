@@ -25,6 +25,7 @@ var graph={
 		Lang.apply();
 		
 		graph.utils.dataConfig=config.dataConfig;
+
 		if(this.loadData(false, data)) {
 			
 			this.displayWaiting(false);
@@ -46,12 +47,13 @@ var graph={
 	
 	displayWaiting: function(enable) {
 		if(enable===undefined) enable=true;
-		document.getElementById("charts-panel").style.display=((enable)?('none'):(''));
-		document.getElementById("loading_data_info").style.display=((!enable)?('none'):(''));
-		document.getElementById("panel_container").style.display=((enable)?('none'):(''));
-		document.getElementById("warning_data_info").style.display='none';
-		document.getElementById("radio-area").style.display=((enable)?('none'):(''));
-		document.getElementById("radio-alerts").style.display=((enable)?('none'):(''));
+		d3.select('#charts-panel').style('display',((enable)?('none'):('')));
+		d3.select('#loading_data_info').style('display',((!enable)?('none'):('')));
+		d3.select('#info_container').style('display',((!enable)?('none'):('')));
+		d3.select('#panel_container').style('display',((enable)?('none'):('')));
+		d3.select('#warning_data_info').style('display','none');
+		d3.select('#radio-area').style('display',((enable)?('none'):('')));
+		d3.select('#radio-alerts').style('display',((enable)?('none'):('')));
 	},
 	
 	displayWarning:function(enable) {
@@ -153,39 +155,11 @@ var graph={
 
 		onResize:function(event) {
 			clearTimeout(graph.config.resizeTimeout);
-  			graph.config.resizeTimeout = setTimeout(graph.updateChartsDimensions, 100);
+  			graph.config.resizeTimeout = setTimeout(graph.doResize, 100);
 		},
 
 		getDefaultHeight:function() {
 			return ((window.innerHeight*0.4).toFixed(0))*1;
-		},
-		/**
-		 * Mapping class names to or from originals.
-		 * If toOriginals is undefined or false, uses cl parameter to compare with original class name, returning the translated class name.
-		 * Otherwise, if toOriginals is true, uses the translated class name to mapping the original class name.
-		 */
-		mappingClassNames: function(cl, toOriginals) {
-			if(toOriginals===undefined) {
-				toOriginals=false;
-			}
-			if(!graph.utils.dataConfig) {// if not config entry was finded, the input class name is returned. 
-				return cl;
-			}
-			var input_legends=graph.utils.dataConfig.legendOriginal,
-			output_legends=graph.utils.dataConfig.legendOverlay[Lang.language];
-			if(toOriginals) {
-				input_legends=graph.utils.dataConfig.legendOverlay[Lang.language];
-				output_legends=graph.utils.dataConfig.legendOriginal;
-			}
-			
-			var l = input_legends.length;
-			for (var i = 0; i < l; i++) {
-				if(input_legends[i]===cl) {
-					cl=output_legends[i];
-					break;
-				}
-			}
-			return cl;
 		},
 		downloadAll: function() {
 			//graph.utils.setStateAnimateIcon('animateIconSHPd', true);
@@ -204,19 +178,18 @@ var graph={
 			}, 200);
 		}
 	},
-
-	updateChartsDimensions:function() {
+	doResize:function() {
 		graph.config.defaultHeight = graph.utils.getDefaultHeight();
 		dc.renderAll();
 		//setTimeout(function(){graph.addGenerationDate();},300);
 	},
-	// gid as a, fake_point as b, classname as c, areatotalkm as d, areamunkm as e, areauckm as f, date as g, uf as h, county as i, uc as j 
+	// gid as a, fake_point as b, areatotalkm as d, areamunkm as e, areauckm as f, date as g, uf as h, county as i, uc as j 
 	normalizeData:function() {
 		var numberFormat = d3.format('.4f');
 	    var json=[];
         // normalize/parse data
         this.jsonData.forEach(function(d) {
-            var o={uf:d.properties.h,ocl:d.properties.c,className:graph.utils.mappingClassNames(d.properties.c),county:d.properties.i};
+            var o={uf:d.properties.h,ocl:d.properties.c,county:d.properties.i};
             o.uc = (d.properties.j)?(d.properties.j):('null');
             var auxDate = new Date(d.properties.g + 'T04:00:00.000Z');
             o.timestamp = auxDate.getTime();
@@ -229,12 +202,6 @@ var graph={
 		delete json;
 	},
 	
-	translateClassNames:function() {
-		this.jsonData.forEach(function(d) {
-			d.className=graph.utils.mappingClassNames(d.ocl);
-		});
-	},
-	
 	build:function() {
 		
 		var dimensions=[];
@@ -242,7 +209,7 @@ var graph={
 		var alerts = crossfilter(this.jsonData);
 		dimensions["area"] = alerts.dimension(function(d) {return d.areaKm;});
 		dimensions["county"] = alerts.dimension(function(d) {return d.county+"/"+d.uf;});
-		dimensions["class"] = alerts.dimension(function(d) {return d.className;});
+		//dimensions["class"] = alerts.dimension(function(d) {return d.className;});
 		dimensions["date"] = alerts.dimension(function(d) {return d.timestamp;});
 		dimensions["uf"] = alerts.dimension(function(d) {return d.uf;});
 		dimensions["uc"] = alerts.dimension(function(d) {return d.uc+"/"+d.uf;});
@@ -278,13 +245,13 @@ var graph={
 		
 		var groups=[];
 		if(graph.config.defaultDataDimension=="area") {
-			groups["class"] = dimensions["class"].group().reduceSum(function(d) {return +d.areaKm;});
+			//groups["class"] = dimensions["class"].group().reduceSum(function(d) {return +d.areaKm;});
 			groups["county"] = dimensions["county"].group().reduceSum(function(d) {return +d.areaKm;});
 			groups["uf"] = dimensions["uf"].group().reduceSum(function(d) {return +d.areaKm;});
 			groups["date"] = dimensions["date"].group().reduceSum(function(d) {return +d.areaKm;});
 			groups["uc"] = dimensions["uc"].group().reduceSum(function(d) {return (d.uc!='null')?(+d.areaUcKm):(0);});
 		}else{
-			groups["class"] = dimensions["class"].group().reduceCount(function(d) {return d.className;});
+			//groups["class"] = dimensions["class"].group().reduceCount(function(d) {return d.className;});
 			groups["county"] = dimensions["county"].group().reduceCount(function(d) {return d.county;});
 			groups["uf"] = dimensions["uf"].group().reduceCount(function(d) {return d.uf;});
 			groups["date"] = dimensions["date"].group().reduceCount(function(d) {return +d.timestamp;});
@@ -393,65 +360,6 @@ var graph={
 		});
 		// -----------------------------------------------------------------------
 		
-		// build graph areas or alerts by class
-		/*
-		graph.utils.setTitle('class', Translation[Lang.language].title_tot_class);
-
-		this.ringTotalizedByClass
-	        .height(this.config.defaultHeight)
-	        .innerRadius(25)
-	        .externalRadiusPadding(40)
-	        .dimension(dimensions["class"])
-	        .group(this.utils.removeLittlestValues(groups["class"]))
-	        .ordinalColors(["#FFD700","#FF4500","#FF8C00","#FFA500","#6B8E23","#8B4513","#D2691E","#FF0000"])
-	        //.legend(dc.legend());
-	        .legend(dc.legend().x(0).y(0).itemHeight(10).gap(2).horizontal(1).legendWidth(window.innerWidth/2).itemWidth(220));
-
-		this.ringTotalizedByClass
-			.on('postRender', function(chart) {
-				var lh=chart.height();
-				var ph=(chart.selectAll('g.pie-slice-group')).node().getBBox().height;
-				
-				var cy=lh-ph/2;
-				chart.cy(cy);
-				chart.redraw();
-			});
-		
-		this.ringTotalizedByClass
-			.on('preRender', function(chart) {
-				chart.height(graph.config.defaultHeight);
-				chart.legend().legendWidth(window.innerWidth/2);
-			});
-		
-		this.ringTotalizedByClass.title(function(d) {
-			return (d.key!='empty')?(d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%")):(Translation[Lang.language].without); 
-		});
-
-		// .externalLabels(30) and .drawPaths(true) to enable external labels
-		this.ringTotalizedByClass
-			.renderLabel(true)
-	        .minAngleForLabel(0.5);
-		
-		this.ringTotalizedByClass.label(function(d) {
-			var txtLabel=(d.key!='empty')?(graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%")):(Translation[Lang.language].without);
-			if(graph.ringTotalizedByClass.hasFilter()) {
-				var f=graph.ringTotalizedByClass.filters();
-				return (f.indexOf(d.key)>=0)?(txtLabel):('');
-			}else{
-				return txtLabel;
-			}
-		});
-
-		if(!graph.ctlFirstLoading) {
-			dc.override(this.ringTotalizedByClass, 'legendables', function() {
-				var legendables = (this._legendables!=undefined)?(this._legendables()):(this.legendables());
-				return legendables.filter(function(l) {
-					return l.data > 0;
-				});
-			});
-		}
-		*/
-
 		// build top areas or alerts by county
 		graph.utils.setTitle('counties', Translation[Lang.language].title_top_county);
 		
@@ -492,8 +400,8 @@ var graph={
 	        .dimension(dimensions["uf"])
 	        .group(this.utils.removeLittlestValues(groups["uf"]))
 	        .ordinalColors(["#6A5ACD","#483D8B","#008B8B","#5F9EA0","#6495ED","#4169E1","#4682B4","#708090","#B0C4DE"])
-	        //.legend(dc.legend());
-	        .legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
+			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
+			//.legend(dc.legend());
 
 		// this.ringTotalizedByState
 		// 	.on('postRender', function(chart) {
@@ -600,7 +508,6 @@ var graph={
 				    o.uc = ((d.uc!='null')?(d.uc):(''));
 				    o.uf = d.uf;
 				    o.municipio = d.county;
-				    o.className = d.className;
 				    data.push(o);
 				});
 		    	graph.utils.download(data);
@@ -627,7 +534,6 @@ var graph={
 				    o.uc = ((d.uc!='null')?(d.uc):(''));
 				    o.uf = d.uf;
 				    o.municipio = d.county;
-				    o.className = d.className;
 				    data.push(o);
 				});
 		    	graph.utils.download(data);
@@ -671,7 +577,7 @@ var graph={
 	    	graph.preparePrint();
 	    });
 		
-		graph.updateChartsDimensions();
+		graph.doResize();
 		window.onresize=this.utils.onResize;
 		this.ctlFirstLoading=true;// to config for exec only once
 	},
@@ -684,20 +590,20 @@ var graph={
 	    });
 	},
 	// Used to update the footer position and date.
-	addGenerationDate: function() {
-		var footer_page=document.getElementById("footer_page");
-		var footer_print=document.getElementById("footer_print");
-		if(!footer_page || !footer_print) {
-			return;
-		}
-		var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
-		footer_page.style.top=h+"px";
-		//footer_print.style.width=window.innerWidth+"px";
-		var now=new Date();
-		var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
-		footer_page.innerHTML=footer;
-		footer_print.innerHTML=footer;
-	},
+	// addGenerationDate: function() {
+	// 	var footer_page=document.getElementById("footer_page");
+	// 	var footer_print=document.getElementById("footer_print");
+	// 	if(!footer_page || !footer_print) {
+	// 		return;
+	// 	}
+	// 	var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
+	// 	footer_page.style.top=h+"px";
+	// 	//footer_print.style.width=window.innerWidth+"px";
+	// 	var now=new Date();
+	// 	var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
+	// 	footer_page.innerHTML=footer;
+	// 	footer_print.innerHTML=footer;
+	// },
 	configurePrintKeys:function() {
 		Mousetrap.bind(['command+p', 'ctrl+p'], function() {
 	        console.log('command p or control p is disabled');
@@ -731,6 +637,6 @@ window.onload=function(){
 			};
 			d3.json(dataUrl, afterLoadData);
 		};
-		d3.json("./config/deter-cerrado.json", afterLoadConfiguration);
+		d3.json("./config/deter-cerrado-daily.json", afterLoadConfiguration);
 	}
 };
