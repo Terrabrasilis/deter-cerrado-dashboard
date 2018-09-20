@@ -23,7 +23,7 @@
 	<!-- Font Material design google -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-	<link rel="stylesheet" type="text/css" href="#" id="stylesheet_dark" />
+	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
    	<link rel="stylesheet" type="text/css" href="./css/prodes-cerrado-rates.css" />
 	<link rel="stylesheet" type="text/css" href="./css/prodes-cerrado-rates-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
@@ -45,15 +45,15 @@
 			
 			<ul class="list-unstyled components">
 									
-				<li class="active">
+				<li class="active"><!-- manter active no primeiro -->
 					<a href="#ferramentas" data-toggle="collapse" aria-expanded="true">
 							<i class="material-icons">build</i>Ferramentas</a>
 					</li>
 				<li>
-					<a href="#download" data-toggle="collapse" aria-expanded="false">
-							<i class="material-icons">cloud_download</i>Baixar Dados</a>
+					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de incremento de desmatamento.">
+						<i class="material-icons">cloud_download</i><span id="txt3">Baixar Dados</span></a>
 				</li>
-				
+												
 				<li>
 					<a href="#imprimir" data-toggle="collapse" aria-expanded="false">
 							<i class="material-icons">print</i>Imprimir Graficos</a>
@@ -65,12 +65,12 @@
 				</li>
 				
 				<li>
-					<a href="#ajuda" data-toggle="collapse" aria-expanded="false">
-							<i class="material-icons">help</i>Ajuda</a>
+					<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
+						<i class="material-icons">help</i>Ajuda</a>
 				</li>
 				
-				<li>
-					<a href="#sobre" data-toggle="collapse" aria-expanded="false">
+				<li>					
+					<a href="#modal-container-about" id="goto_about" data-toggle="modal" title="Ver informações sobre o projeto e a equipe." >
 							<i class="material-icons">info</i>Sobre</a>
 				</li>
 				
@@ -326,7 +326,7 @@
 
 			</div>
 		</div>
-		<p id="txt32"><strong>Nota:</strong> Clique no texto para expandir/recolher os painéis.</p>
+		<div class="alert alert-success boxnote" id="txt32" role="alert"><strong>Nota:</strong> Clique no texto para expandir/recolher os painéis.</div>
 
 	</div><!-- Fim do painel de gráficos -->
 
@@ -366,73 +366,366 @@
 						</div>
 					</div>
 				</div>
-				<!-- modal window with information about download -->
-				<div class="modal fade" id="modal-container-download" role="dialog" aria-labelledby="download-rates" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">								
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="download-rates">
-									<span id="txt25">Informações para download</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-								<span id="txt26">Baixar a tabela com os incremento de desmatamento em formato CSV.</span>
-								<div class="dwn-tool">
-									<a href="#" id="download-csv-filtered">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span>
-									</a>
-									<br/>
-									<a href="#" id="download-csv-all">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span>
-									</a>
-								</div>
-							</div>
-							<div class="modal-footer">								
-								<button type="button" class="btn btn-default" data-dismiss="modal">
+				
+		<!-- Modal Download-->		
+				<div class="modal fade" id="modal-container-download">
+          <div class="modal-dialog">
+             <div class="modal-content modalinf">
+                <div class="modal-header fechar">
+					 <h5 class="modal-title boxtitletable"> <span id="txt26">Baixar a tabela com os incremento de desmatamento em formato CSV.</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                </div> 					
+                    <!-- / modal-header -->
+              <div class="modal-body ">			
+								<div class="dwn-tool">									
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+											   <i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-filtered">
+													<span id="txt27" class="alerttitle">Com filtros.</span>
+											    </a>
+											</p>
+										</div>
+            						</div> 
+									
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+											   <i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-all">
+													<span  id="txt28" class="alerttitle">Sem filtros.</span>
+											    </a>
+											</p>
+										</div>
+            						</div> 
+								</div>				
+                           </div>
+                   
+                    <!-- / modal-body -->
+                   <div class="modal-footer">
+                       <div class="checkbox pull-right">
+                            <label>
+                              <button type="button" class="btn btngreen" data-dismiss="modal">
 									<span id="txt29">Fechar</span>
 								</button> 
-							</div>
-						</div>
-					</div>
-				</div>
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                  </div>
+                  <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+          </div>
+          <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->
+				
+			
 				<!-- modal window with an introductory video of this panel -->
-				<div class="modal fade" id="modal-container-video" role="dialog" aria-labelledby="video-rates" aria-hidden="true">
-					<div class="modal-dialog" style="width:830px;">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="video-rates">
-									<span id="txt1c">Informações de ajuda para uso do painel</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-								<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+		<div class="modal fade" id="modal-container-video">
+          <div class="modal-dialog">
+             <div class="modal-content modalinf">
+                <div class="modal-header fechar">
+					 <h5 class="modal-title boxtitletable"> <span id="txt1c">Informações de ajuda para uso do painel</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                </div> 					
+                    <!-- / modal-header -->
+              <div class="modal-body ">	
+				  <div class="alert alert-success" role="alert">
+					  <span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+				  </div>
 								<div class="embed-video">
-										<video width="800" height="600" controls>
+										<video style="width: 100%" controls>
 											<source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
 											<track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
 											<track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
 											<track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
 											Seu navegador não suporta a tag de vídeo.
 										</video>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
+								</div>			
+                           </div>
+                   
+                    <!-- / modal-body -->
+                   <div class="modal-footer">
+                       <div class="checkbox pull-right">
+                            <label>
+                              <button type="button" class="btn btngreen" data-dismiss="modal">
 									<span id="txt1e">Fechar</span>
 								</button> 
-							</div>
-						</div>
-					</div>
-				</div>
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                  </div>
+                  <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+          </div>
+          <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->
+	
+	<!-- modal About -->
+		<div class="modal fade about" id="modal-container-about">
+          <div class="modal-dialog  logo-card">
+             <div class="modal-content modalinf">
+                <div class="modal-header fechar">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                </div> 					
+                    <!-- / modal-header -->
+            	  <!-- logo -->
+                		  
+				 <!-- Visao -->
+				<div id="visao" class="card aboutdialog">
+					   
+					<div class="padding80 bgcolor-voilet ">
+				  <div class="container ">	
+					    <img class="logo-img" src="img/logo.png" alt="logo" >	
+                   <h2 class="aboutcard-title"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></h2>
+                   <div class="row">
+					
+		 	<p class="tmargin10 txtvisao">O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos eus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet. </p>
+        <a href="http://terrabrasilis.info/" class="btn btn-primary">Leia mais informações sobre o TerraBrasilis</a>
+
+</div>
+</div>
+	</div>
+	
+<!-- Equipe -->
+<section id="equipe" class="pb-5">
+    <div class="container">
+        <h5 class="titleb h2">EQUIPE DE COORDENADORES</h5>
+        <div class="row">
+            <!-- karine -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/karine.png" alt="card image"></p>
+                                    <h4 class="card-title">Karine Reis Ferreira</h4>
+                                    <p class="card-text">Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE</p>
+                                </div>
+                            </div>
+                        </div>
+               
+                </div>
+            </div>
+            <!-- ./karine -->
+            <!-- lubia -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/lubia.png" alt="card image"></p>
+                                    <h4 class="card-title">Lubia Vinhas</h4>
+                                    <p class="card-text">Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE</p>
+                                  </div>
+                            </div>
+                        </div>
+               
+                </div>
+            </div>
+            <!-- ./lubia -->
+            <!-- maurano -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div >
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/maurano.png" alt="card image"></p>
+                                    <h4 class="card-title">Luis E. Maurano</h4>
+                                    <p class="card-text">Tecnologista Senior da Divisão de Processamento de Imagens (DIDPI) do INPE</p>
+                                </div>
+                            </div>
+                        </div>
+           
+                </div>
+            </div>
+            <!-- ./Maurano -->
+            
+  </div>
+	<!-- Equipe de TI -->	
+	<h5 class="titleb h2">EQUIPE DE T.I</h5>	
+		<div class="row">
+			
+			<!-- adeline -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/adeline.png" alt="card image"></p>
+                                    <h4 class="card-title">Adeline Maciel</h4>
+                                    <p class="card-text">Desenvolvimento de Software</p>
+                                </div>
+                            </div>
+                        </div>
+         
+                </div>
+            </div>
+            <!-- ./adeline -->
+			
+            <!-- andre -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/andre.png" alt="card image"></p>
+                                    <h4 class="card-title">André Carvalho</h4>
+                                    <p class="card-text">Desenvolvimento de Software</p>
+                                </div>
+                            </div>
+                        </div>
+          
+                </div>
+            </div>
+            <!-- ./andre -->
+			<!-- claudinei -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/claudinei.png" alt="card image"></p>
+                                    <h4 class="card-title">Claudinei de Camargo</h4>
+                                    <p class="card-text">Web Designer</p>
+                                </div>
+                            </div>
+                        </div>
+          
+                </div>
+            </div>
+            <!-- ./claudinei -->
+            <!-- fabio -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/fabio.png" alt="card image"></p>
+                                    <h4 class="card-title">Fábio da Conceição Pinheiro</h4>
+                                    <p class="card-text">Adminstrador de Banco de Dados</p>
+                                </div>
+                            </div>
+                        </div>
+       
+                </div>
+            </div>
+            <!-- ./fabio -->
+            <!-- jether -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/jether.png" alt="card image"></p>
+                                    <h4 class="card-title">Jether Rodrigues</h4>
+                                    <p class="card-text">Desenvolvimento de Software Sênior</p>
+                                </div>
+                            </div>
+                     </div>
+                </div>
+            </div>
+            <!-- ./jether -->
+            <!-- luiz -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div>
+                        <div class="cardfront">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/luiz.png" alt="card image"></p>
+                                    <h4 class="card-title">Luiz Fernando F. G. de Assis</h4>
+                                    <p class="card-text">Desenvolvedor de Software Pleno</p>
+                                </div>
+                            </div>
+                        </div>
+         
+                </div>
+            </div>
+            <!-- ./luiz -->
+            <!-- row -->
+       
+      </div>		
+    </div>
+</section>
+<!-- equipe -->
+	
+	
+<!-- Outros -->
+<section id="other" class="pb-0">	
+	<div class="padding80 bgcolor-voilet">
+<div class="container">
+	<div class="row">
+		<div class="row">
+            <!-- Ex-colaboradores -->
+            <div class="col-xs-12 col-sm-6 col-md-6">               
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ex-Colaboradores</h4>
+									<ul class="list-group">
+									  <li class="list-group-item">Claudio Bogossian</li>
+									  <li class="list-group-item">Gustavo Furtado</li>
+									  <li class="list-group-item">Paulo Luan</li>
+									  <li class="list-group-item">Marcos Alexandre</li>
+                                    </ul>
+                                </div>
+                   </div>
+            </div>
+            <!-- ./ex-colaboradores -->
+            
+            <!-- apoio -->
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Apoio</h4>
+                                    <ul class="list-group">
+									  <li class="list-group-item">Instituto Nacional de Pesquisas Espaciais (INPE)</li>
+									  <li class="list-group-item">Fundação de Ciência Aplicações e Tecnologia Espaciais (FUNCATE)</li>
+									  <li class="list-group-item">Fundação de Desenvolvimento da Pesquisa (FUNDEP)</li>
+									  <li class="list-group-item">Grupo Banco Mundial</li>
+									  <li class="list-group-item">Banco Nacional de Desenvolvimento (BNDES)</li>
+                                    </ul>
+                               
+                    </div>
+                </div>
+            </div>
+            <!-- ./apoio -->
+	    </div>
+ </div>
+</div>
+	</div>
+	
+</section>	
+                           </div>
+                   
+                    <!-- / modal-body -->
+                   <div class="modal-footer">
+                       <div class="checkbox pull-right">
+                            <label>
+                              <button type="button" class="btn btngreen" data-dismiss="modal">
+									<span>Fechar</span>
+								</button> 
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                  </div>
+                  <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+          </div>
+          <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->	
 				
 				<!-- modal window about the project -->
-				<div class="modal fade" id="modal-container-about" role="dialog" aria-labelledby="about-rates" aria-hidden="true">
+				<!--<div class="modal fade" id="modal-container-about" role="dialog" aria-labelledby="about-rates" aria-hidden="true">
 					<div class="modal-dialog" style="width:830px;">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -447,6 +740,8 @@
 						</div>
 					</div>
 				</div>
+				-->
+				
 				<!-- modal window with counties filterd items -->
 				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
 					<div class="modal-dialog">
@@ -612,26 +907,6 @@
 	<!-- <script type="text/javascript" src="./js/dashboard-cerrado-rates.min.js"></script> -->	
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
 
-	<script>
-	
-	$(document).ready(function () {
-            $('.collapse')
-                .on('shown.bs.collapse', function() {
-                    $(this)
-                        .parent()
-                        .find(".fa-plus-circle")
-                        .removeClass("fa-plus-circle")
-                        .addClass("fa-minus-circle");
-                })
-                .on('hidden.bs.collapse', function() {
-                    $(this)
-                        .parent()
-                        .find(".fa-minus-circle")
-                        .removeClass("fa-minus-circle")
-                        .addClass("fa-plus-circle");
-                });
-        });
-	</script>
 	<script type="text/javascript" src="./js/prodes-cerrado-rates.js"></script>
 	<script type="text/javascript" src="./js/prodes-cerrado-rates-translation.js"></script>
 	<script type="text/javascript" src="./js/prodes-cerrado-rates-change-lang.js"></script>
