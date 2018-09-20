@@ -585,7 +585,10 @@ footer{
     #sidebarCollapse span {
         display: none;
     }
-	
+	.container-fluid{
+        margin-left: 0px;
+        width: 100%;
+    }
 	
 }
 

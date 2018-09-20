@@ -10,7 +10,7 @@ body{
 	width: 99%;
 }
 .container-fluid{
-	margin-left: 290px !important;
+	margin-left: 290px;
 	width: calc(100% - 290px);
 	padding-left: 0px;
 	margin-top: 64px;
@@ -55,21 +55,10 @@ div .dc-chart {
 .dropdown-menu {
 	background-color: #222;
 	color:#fff;
-	/*font-family: "Droid Sans";
-	font-size: 16px;*/
-}
-.dropdown-toggle {
-	/*font-family: "Droid Sans";
-	font-size: 18px;*/
 }
 .y-axis-label, .x-axis-label{
 	font-size: small;
 }
-/*.nav li.active #txt1{
-	color: black;
-	background-color: white;
-	line-height: 22px;
-}*/
 .toggle_chart{
 	position: absolute;
 	right: 25px;

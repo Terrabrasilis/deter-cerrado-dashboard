@@ -38,12 +38,7 @@ var utils = {
 	},
 	onResize:function(event) {
 		clearTimeout(utils.config.resizeTimeout);
-		utils.config.resizeTimeout = setTimeout(utils.rebuildAll, 200);
-	},
-	updateDimensions: function() {
-		var d={ w: window.innerWidth,
-				h: window.innerHeight};
-		graph.setDimensions(d);
+		utils.config.resizeTimeout = setTimeout(graph.doResize, 200);
 	},
 	setDinamicTexts: function() {
 		var startYear=graph.yearDimension.bottom(1),
@@ -161,23 +156,19 @@ var utils = {
 		allTop.forEach(function(k,i){ar["\""+k.key+"\""]=(i+1);});
 		return ar;
 	},
-	rebuildAll: function() {
-		utils.updateDimensions();
-		graph.updateChartsDimensions();
-	},
-	addGenerationDate: function() {
-		var footer_page=document.getElementById("footer_page");
-		var footer_print=document.getElementById("footer_print");
-		if(!footer_page || !footer_print) {
-			return;
-		}
-		var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
-		footer_print.style.width=window.innerWidth+"px";
-		var now=new Date();
-		var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
-		footer_page.innerHTML=footer;
-		footer_print.innerHTML=footer;
-	},
+	// addGenerationDate: function() {
+	// 	var footer_page=document.getElementById("footer_page");
+	// 	var footer_print=document.getElementById("footer_print");
+	// 	if(!footer_page || !footer_print) {
+	// 		return;
+	// 	}
+	// 	var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
+	// 	footer_print.style.width=window.innerWidth+"px";
+	// 	var now=new Date();
+	// 	var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
+	// 	footer_page.innerHTML=footer;
+	// 	footer_print.innerHTML=footer;
+	// },
 	changeCss: function(bt) {
 		utils.cssDefault=!utils.cssDefault;
 		document.getElementById('stylesheet_dark').href=((utils.cssDefault)?(''):('./css/prodes-cerrado-rates-dark.css'));
@@ -263,17 +254,13 @@ var graph={
 	data:null,
 	data_all:null,
 
-	winWidth: window.innerWidth,
-	winHeight: window.innerHeight,
-
 	histogramColor: ["#0000FF","#57B4F0"],
 	darkHistogramColor: ["#ffd700","#fc9700"],
 	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
 	darkPallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
 	barTop10Color: "#b8b8b8",
 	darkBarTop10Color: "#232323",
-	displayInfo: false,
-	displaySwapPanelButton: false,
+	defaultHeight: 450,
 
 	/**
 	 * Load configuration file before loading data.
@@ -291,67 +278,43 @@ var graph={
 					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
 					graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
 					graph.darkBarTop10Color=conf.darkBarTop10Color?conf.darkBarTop10Color:graph.darkBarTop10Color;
-					graph.displayInfo=conf.displayInfo?conf.displayInfo:graph.displayInfo;
-					graph.displaySwapPanelButton=conf.displaySwapPanelButton?conf.displaySwapPanelButton:graph.displaySwapPanelButton;
+					graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.defaultHeight;
 				}
 			}
 			callback();
 		});
 		
 	},
-	setDimensions: function(dim) {
-		this.winWidth=dim.w;
-		this.winHeight=dim.h;
-	},
 	updateChartsDimensions: function() {
-		// no sense because when side bar has class active the return is false
-		var sbWidth=($('#sidebar').hasClass('active')===false?$('#sidebar').width():0);
-		var w=parseInt(this.winWidth - sbWidth - (this.winWidth * 0.05)),
-		h=parseInt(this.winHeight * 0.3),
-		fw=parseInt(w),
-		fh=parseInt((this.winHeight - h) * 0.6),
-		fw34 = parseInt( (fw/4) * 3),
-		fw14 = parseInt(fw/4);
 
-		// to single column in main container
-		// var chartByState=document.getElementById('chart-by-state')
-		// if((chartByState.clientWidth*4) > window.document.body.clientWidth) {
-		// 	fw = chartByState.clientWidth;
-		// 	fw34 = fw;
-		// 	fw14 = fw;
-		// }
 		if(this.lineRateByYear){
 			this.lineRateByYear
-			.width(fw34)
-			.height(fh)
+			.height(graph.defaultHeight)
 			.margins({top: 0, right: 180, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw34-170));
-			//.legend(dc.legend().x(fw34 - 380).y(5).itemHeight(13).gap(7).horizontal(1).legendWidth(380).itemWidth(40));
+			.legend(dc.legend().x(parseInt($('#chart-line-rates-by-year-mun').width())-170));
 		}
 		
 		if(this.lineRateByYearState){
 			this.lineRateByYearState
-			.width(fw34)
-			.height(fh)
-			.margins({top: 0, right: 180, bottom: 50, left: 65})
-			.legend(dc.legend().x(fw34-170));
+			.height(graph.defaultHeight)
+			.margins({top: 0, right: 80, bottom: 50, left: 65})
+			.legend(dc.legend().x(parseInt($('#chart-line-rates-by-year-state').width())-70));
 		}
+
 		this.pieTotalizedByState
-			.width(fw14)
-			.height(fh)
-			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((fw14>=400)?(400):(300)).itemWidth(40));
+			.height(graph.defaultHeight)
+			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((parseInt($('#chart-by-state').width())>=400)?(400):(300)).itemWidth(40));
+		
 		this.rowTop10ByMun
-			.width(fw14)
-			.height(fh)
+			.height(graph.defaultHeight)
 			.margins({top: 0, right: 10, bottom: 50, left: 10});
 		
 		this.compositeChart
-			.width(fw34)
-			.height(fh)
+			.height(graph.defaultHeight)
 			.margins({top: 0, right: 10, bottom: 50, left: 65})
 			.legend(
 				dc.legend()
-				.x(fw34 - 380)
+				.x(parseInt($('#chart-bar-by-year-625').width()) - 380)
 				.y(5)
 				.itemHeight(13)
 				//.gap(7)
@@ -366,13 +329,15 @@ var graph={
 			.margins({top: 0, right: 10, bottom: 50, left: 65});
 		this.barChart2
 			.margins({top: 0, right: 10, bottom: 50, left: 65});
-		
+	},
+	doResize: function() {
+		graph.updateChartsDimensions();
 		dc.renderAll();
 		dc.renderAll(graph.compositeChartName);
 	},
 	setChartReferencies: function() {
 
-		this.pieTotalizedByState = dc.pieChart("#chart-by-state");
+		this.pieTotalizedByState = dc.pieChart("#chart-by-state");		
 		this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
 		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625", this.compositeChartName);
 		this.barChart1 = dc.barChart(this.compositeChart, this.compositeChartName);
@@ -390,8 +355,8 @@ var graph={
 		d3.json(url, graph.processData);
 		
 		// load data from JSON file
-		//var url="data/prodes-cerrado-rates.json";
-		//d3.json(url, graph.processData);
+		// var url="data/prodes-cerrado-rates.json";
+		// d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
 		utils.loadingShow(false);
@@ -651,7 +616,7 @@ var graph={
 		});
 		graph.ratesDataTable.init(data2Table);
 		graph.ratesDataTable.redraw();
-		utils.addGenerationDate();
+		//utils.addGenerationDate();
 	},
 	buildVariationRatesDataTable: function(d) {
 		var data2Table=[], l=d.length;
@@ -679,6 +644,9 @@ var graph={
 		var chartType='Municípios';
 		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='none';
 		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='';
+
+		// destroy the State chart reference
+		this.lineRateByYearState=null;
 
 		this.lineRateByYear = dc.seriesChart("#chart-line-rates-by-year-mun");
 		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
@@ -783,7 +751,6 @@ var graph={
 			return filters;
 		});
 
-		graph.updateChartsDimensions();
 	},
 
 	/**
@@ -795,6 +762,9 @@ var graph={
 		var chartType='Estados';
 		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='none';
 		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='';
+
+		// destroy the Mun chart reference
+		this.lineRateByYear=null;
 
 		this.lineRateByYearState = dc.seriesChart("#chart-line-rates-by-year-state");
 		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
@@ -893,12 +863,9 @@ var graph={
 		
 		this.lineRateByYearState.addFilterHandler(function(filters, filter) {
 			filters.push(filter);
-			//dc.redrawAll();
 			return filters;
 		});
 
-		//this.lineRateByYearState.render();
-		graph.updateChartsDimensions();
 	},
 
 	build: function() {
@@ -1168,7 +1135,7 @@ var graph={
 		
 		// defining default line chart
 		this.buildLineChartState(this.stateYearDimension, this.stateYearRateGroup);
-
+		this.doResize();
 		this.buildDataTable();
 		this.prepareTools();
 	},
@@ -1209,6 +1176,7 @@ var graph={
 			graph.buildLineChartState(graph.stateYearDimension, graph.stateYearRateGroup);
 		}
 		btn.innerText=btnValue;
+		this.doResize();
 	},
 	prepareTools: function() {
 		var downloadCSVWithFilter=function() {
