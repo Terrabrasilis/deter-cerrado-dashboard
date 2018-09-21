@@ -639,13 +639,6 @@ footer{
 	
 	.box, .boxnote, .boxtitulo {   margin-left: -275px;}
 	.box-grafico {   margin-left: 0px;}
-
-	.container-fluid{
-        margin-left: 0px;
-        width: 100%;
-    }
-	
-
 }
 
 /* ---------------------------------------------------
