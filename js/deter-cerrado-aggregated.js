@@ -530,8 +530,8 @@ var graph={
 
 		this.loadConfigurations(function(){
 			Lang.apply();
-			//var dataUrl = "http://terrabrasilis.info/files/deter_cerrado/deter_month_d.json";
-			var dataUrl = "./data/deter-cerrado-month.json";
+			var dataUrl = "http://terrabrasilis.info/files/deter_cerrado/deter_month_d.json";
+			//var dataUrl = "./data/deter-cerrado-month.json";
 			graph.loadData(dataUrl);
 			utils.attachEventListeners();
 		});
