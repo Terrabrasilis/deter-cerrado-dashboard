@@ -20,7 +20,7 @@ $(document).ready(function () {
         }else{//if close
             $('#panel_container').removeClass('full-width');
         }
-        graph.updateChartsDimensions();
+        graph.doResize();
     });
 });
 

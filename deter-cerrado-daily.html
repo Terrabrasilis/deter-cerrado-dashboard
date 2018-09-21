@@ -127,15 +127,19 @@
 		</nav>
 	</div>
 
-	<div class="container-fluid" id="panel_container" style="display:none;">
-
-        <div class="row box">
+	<div class="container-fluid" id="info_container">
+		<div class="row box">
             <div class="col-md-12">
-                <div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
-                <div id="warning_data_info" style="display:none;"><h1><span id="txt8">Não há dados.</span></h1></div>
-                <iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
+				<div class="text-center">
+					<div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
+					<div id="warning_data_info" style="display:none;"><h1><span id="txt8">Não há dados.</span></h1></div>
+					<iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
+				</div>
             </div>
-        </div>
+		</div>
+	</div>
+
+	<div class="container-fluid" id="panel_container" style="display:none;">
 
 		<div id="charts-panel">
             <div class="row box">
@@ -160,10 +164,12 @@
                 <div class="col-md-12">
                     <div class="box-grafico text-center">
                         <div id="chart-line-by-month" class="all-charts timeline-charts">
-                            <div id="title-chart-timeline" class="all-charts-title"></div>
-                            <div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="graph.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </div>
+							<div id="title-chart-timeline" class="all-charts-title"></div>
+							<div class="keep-space">
+								<div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
+									<button type="button" class="btn btn-default btn-xs" onclick="graph.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
@@ -172,30 +178,36 @@
                 <div class="col-md-4">
                     <div class="box-grafico text-center">
 						<div id="chart-hist-top-counties" class="all-charts bar-charts">
-                            <div id="title-chart-counties" class="all-charts-title"></div>
-                            <div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </div>
+							<div id="title-chart-counties" class="all-charts-title"></div>
+							<div class="keep-space">
+								<div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
+									<button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								</div>
+							</div>
                         </div>
                     </div>
 				</div>
 				<div class="col-md-4">
                     <div class="box-grafico text-center">
 						<div id="chart-hist-top-ucs" class="all-charts bar-charts">
-                            <div id="title-chart-ucs" class="all-charts-title"></div>
-                            <div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </div>
+							<div id="title-chart-ucs" class="all-charts-title"></div>
+							<div class="keep-space">
+								<div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
+									<button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="box-grafico text-center">
                         <div id="chart-ring-by-state" class="all-charts ring-charts">
-                            <div id="title-chart-state" class="all-charts-title"></div>
-                            <div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
-                                <button type="button" class="btn btn-default btn-xs" onclick="graph.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            </div>
+							<div id="title-chart-state" class="all-charts-title"></div>
+							<div class="keep-space">
+								<div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
+									<button type="button" class="btn btn-default btn-xs" onclick="graph.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
@@ -535,7 +547,6 @@
 
 	<!-- worked to minify / using to minify: https://www.minifier.org/ -->
 	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
-	<script type="text/javascript" src="./js/dataTable.js"></script>
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-daily-translation.js"></script>
     <script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>

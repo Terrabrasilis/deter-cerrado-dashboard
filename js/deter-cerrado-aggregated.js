@@ -8,17 +8,20 @@ var utils = {
 	    	utils.preparePrint();
 	    });
 	},
-	btnChangePanel:function() {
-		d3.select('#aggregate_daily')
-	    .on('click', function() {
-	    	var layerName = (window.layer_config_global && window.layer_config_global!="")?("&internal_layer="+window.layer_config_global):("");
-	    	window.location='?type=default'+layerName;
-	    });
+	// btnChangePanel:function() {
+	// 	d3.select('#aggregate_daily')
+	//     .on('click', function() {
+	//     	var layerName = (window.layer_config_global && window.layer_config_global!="")?("&internal_layer="+window.layer_config_global):("");
+	//     	window.location='?type=default'+layerName;
+	//     });
+	// },
+	getDefaultHeight:function() {
+		return ((window.innerHeight*0.4).toFixed(0))*1;
 	},
 	btnDownload:function() {
 		d3.select('#download-csv-monthly')
 	    .on('click', function() {
-	        var blob = new Blob([d3.csv.format(dashBoard.data)], {type: "text/csv;charset=utf-8"});
+	        var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
 	        saveAs(blob, 'deter-b-agregado-mensal.csv');
 	    });
 	},
@@ -30,50 +33,41 @@ var utils = {
 	    	window.print();
 	    });
 	},
-	appendEventOnButtons:function() {
+	attachEventListeners:function() {
 		utils.btnPrintPage();
 		//utils.btnDownload();
-		utils.btnChangePanel();
+		//utils.btnChangePanel();
 	},
 	onResize:function(event) {
 		clearTimeout(utils.config.resizeTimeout);
-		utils.config.resizeTimeout = setTimeout(utils.rebuildAll, 200);
-	},
-	updateDimensions: function() {
-		var d={w: window.innerWidth,
-				h: window.innerHeight};
-		dashBoard.setDimensions(d);
-	},
-	rebuildAll: function() {
-		utils.updateDimensions();
-		dashBoard.build();
+		utils.config.resizeTimeout = setTimeout(graph.doResize, 200);
 	},
 	renderAll:function() {
 		dc.renderAll("agrega");
 		dc.renderAll("filtra");
 		d3.selectAll("circle")
-		.attr("r",function(){return 5;})
-		.on("mouseout.foo", function(){
-			d3.select(this)
-	        .attr("r", function(){return 5;});
-		});
-		utils.addGenerationDate();
+			.attr("r",function(){return 5;})
+			.on("mouseout.foo", function(){
+				d3.select(this)
+				.attr("r", function(){return 5;});
+			});
+		//utils.addGenerationDate();
 	},
 	// Used to update the footer position and date.
-	addGenerationDate: function() {
-		var footer_page=document.getElementById("footer_page");
-		var footer_print=document.getElementById("footer_print");
-		if(!footer_page || !footer_print) {
-			return;
-		}
-		var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
-		footer_page.style.top=h+"px";
-		footer_print.style.width=window.innerWidth+"px";
-		var now=new Date();
-		var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
-		footer_page.innerHTML=footer;
-		footer_print.innerHTML=footer;
-	},
+	// addGenerationDate: function() {
+	// 	var footer_page=document.getElementById("footer_page");
+	// 	var footer_print=document.getElementById("footer_print");
+	// 	if(!footer_page || !footer_print) {
+	// 		return;
+	// 	}
+	// 	var h=( (window.document.body.clientHeight>window.innerHeight)?(window.document.body.clientHeight):(window.innerHeight - 20) );
+	// 	footer_page.style.top=h+"px";
+	// 	footer_print.style.width=window.innerWidth+"px";
+	// 	var now=new Date();
+	// 	var footer=Translation[Lang.language].footer1+' '+now.toLocaleString()+' '+Translation[Lang.language].footer2;
+	// 	footer_page.innerHTML=footer;
+	// 	footer_print.innerHTML=footer;
+	// },
 	/*
 	 * Remove numeric values less than 1e-6
 	 */
@@ -99,22 +93,6 @@ var utils = {
         }
         return false;
     },
-    setLayerConfiguration: function(cfg) {
-		utils.config.layerConfig=cfg;
-	},
-	mappingClassNames: function(cl) {
-		if(utils.config.layerConfig===undefined) {
-			return cl;
-		}
-		var l = utils.config.layerConfig.legendOriginal.length;
-		for (var i = 0; i < l; i++) {
-			if(utils.config.layerConfig.legendOriginal[i]===cl) {
-				cl=utils.config.layerConfig.legendOverlay[Lang.language][i];
-				break;
-			}
-		}
-		return cl;
-	},
 	xaxis:function(d) {
 		var list=Translation[Lang.language].months_of_prodes_year;
 		return list[d-8];
@@ -123,11 +101,6 @@ var utils = {
 	fakeMonths: function(d) {
 		var list=[13,14,15,16,17,18,19,8,9,10,11,12];
 		return list[d-1];
-	},
-	
-	displayWarning: function(enable) {
-		if(enable===undefined) enable=true;
-		d3.select('#no-filter-warning').style('display',((enable)?(''):('none')));
 	},
 	displayError:function(info) {
 		d3.select('#panel_container').style('display','none');
@@ -146,6 +119,16 @@ var utils = {
 	displayGraphContainer:function() {
 		d3.select('#panel_container').style('display','block');
 	},
+	displayWaiting: function(enable) {
+		if(enable===undefined) enable=true;
+		d3.select('#charts-panel').style('display',((enable)?('none'):('')));
+		d3.select('#loading_data_info').style('display',((!enable)?('none'):('')));
+		d3.select('#info_container').style('display',((!enable)?('none'):('')));
+		d3.select('#panel_container').style('display',((enable)?('none'):('')));
+		d3.select('#warning_data_info').style('display','none');
+		d3.select('#radio-area').style('display',((enable)?('none'):('')));
+		d3.select('#radio-alerts').style('display',((enable)?('none'):('')));
+	},
 	changeCss: function(bt) {
 		utils.cssDefault=!utils.cssDefault;
 		document.getElementById('stylesheet_dash').href='../theme/css/dashboard-aggregated'+((utils.cssDefault)?(''):('-dark'))+'.css';
@@ -154,35 +137,59 @@ var utils = {
 	}
 };
 
-var dashBoard={
+var graph={
 	
 	focusChart: null,
 	overviewChart: null,
 	ringTotalizedByState: null,
-	rowTotalizedByClass: null,
 	barAreaByYear: null,
 	
 	monthDimension: null,
 	temporalDimension: null,
 	areaGroup: null,
 	yearDimension0: null,
-	classDimension0: null,
 	ufDimension0: null,
 	yearDimension: null,
 	yearGroup: null,
 	ufDimension: null,
 	ufGroup: null,
-	classDimension: null,
-	classGroup: null,
 	
 	data:null,
-	
-	winWidth: window.innerWidth,
-	winHeight: window.innerHeight,
-	
-	setDimensions: function(dim) {
-		this.winWidth=dim.w;
-		this.winHeight=dim.h;
+
+	pallet: null,
+	darkPallet: null,
+	histogramColor: null,
+	darkHistogramColor: null,
+	barTop10Color: null,
+	darkBarTop10Color: null,
+
+	defaultHeight: null,
+
+	/**
+	 * Load configuration file before loading data.
+	 */
+	loadConfigurations: function(callback) {
+		
+		d3.json("config/deter-cerrado-aggregated.json", function(error, conf) {
+			if (error) {
+				console.log("Didn't load config file. Using default options.");
+			}else{
+				if(conf) {
+					graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+					graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
+					graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+					graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
+					graph.darkBarTop10Color=conf.darkBarTop10Color?conf.darkBarTop10Color:graph.darkBarTop10Color;
+					graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.defaultHeight;
+				}
+			}
+			callback();
+		});
+	},
+	doResize: function() {
+		graph.defaultHeight = utils.getDefaultHeight();
+		utils.renderAll();
 	},
 	getYears: function() {
 		return this.yearDimension.group().all();
@@ -208,11 +215,10 @@ var dashBoard={
 		this.focusChart = dc.seriesChart("#agreg", "agrega");
 		this.overviewChart = dc.seriesChart("#agreg-overview", "agrega");
 		this.ringTotalizedByState = dc.pieChart("#chart-by-state", "filtra");
-		this.rowTotalizedByClass = dc.rowChart("#chart-by-class", "filtra");
 		this.barAreaByYear = dc.barChart("#chart-by-year", "filtra");
 	},
 	loadData: function(url) {
-		d3.json(url, dashBoard.processData);
+		d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
 		if (error) {
@@ -236,20 +242,15 @@ var dashBoard={
 			if(month >=8 && month<=12) {
 				year = "20"+year+"/20"+(year+1);
 			}
-			o.push({Year:year,Month:month,Area:+((fet.properties.ar).toFixed(1)),uf:fet.properties.uf,ocl:fet.properties.cl,cl:utils.mappingClassNames(fet.properties.cl)});
+			o.push({Year:year,Month:month,Area:+((fet.properties.ar).toFixed(1)),uf:fet.properties.uf});
 		}
 		data = o;
-		dashBoard.registerDataOnCrossfilter(data);
-		dashBoard.build();
-	},
-	translateClassNames:function() {
-		return;
-		/*this.data.forEach(function(d) {
-			d.cl=utils.mappingClassNames(d.ocl);
-		});*/
+		graph.registerDataOnCrossfilter(data);
+		utils.displayWaiting(false);
+		graph.build();
 	},
 	registerDataOnCrossfilter: function(data) {
-		dashBoard.data=data;
+		graph.data=data;
 		var ndx0 = crossfilter(data),
 		ndx1 = crossfilter(data);
 		
@@ -267,9 +268,6 @@ var dashBoard={
 		this.yearDimension0 = ndx0.dimension(function(d) {
 			return d.Year;
 		});
-		this.classDimension0 = ndx0.dimension(function(d) {
-			return d.ocl;
-		});
 		this.ufDimension0 = ndx0.dimension(function(d) {
 			return d.uf;
 		});
@@ -285,23 +283,14 @@ var dashBoard={
 		this.ufGroup = this.ufDimension.group().reduceSum(function(d) {
 			return d.Area;
 		});
-		this.classDimension = ndx1.dimension(function(d) {
-			return d.ocl;
-		});
-		this.classGroup = this.classDimension.group().reduceSum(function(d) {
-			return d.Area;
-		});
 	},
 	build: function() {
-		var w=parseInt(this.winWidth - (this.winWidth * 0.08)),
-		h=parseInt(this.winHeight * 0.3),
-		barColors = this.getOrdinalColorsToYears();
+		var	barColors = this.getOrdinalColorsToYears();
 		
 		this.setChartReferencies();
 		
 		this.focusChart
-			.width(w)
-			.height(h)
+			.height(this.defaultHeight-70)
 			.chart(function(c) { return dc.lineChart(c).interpolate('cardinal').renderDataPoints(true).evadeDomainFilter(true); })
 			.x(d3.scale.linear().domain([8,19]))
 			.renderHorizontalGridLines(true)
@@ -330,7 +319,8 @@ var dashBoard={
 			.valueAccessor(function(d) {
 				return Math.abs(+(d.value.toFixed(2)));
 			})
-			.legend(dc.legend().x(100).y(30).itemHeight(15).gap(5).horizontal(1).legendWidth(600).itemWidth(80));
+			.legend(dc.legend().x(100).y(30).itemHeight(15).gap(5).horizontal(1).legendWidth(600).itemWidth(80))
+			.margins({top: 20, right: 35, bottom: 70, left: 65});
 
 		this.focusChart.yAxis().tickFormat(function(d) {
 			//return d3.format(',d')(d);
@@ -340,13 +330,13 @@ var dashBoard={
 			return utils.xaxis(d);
 		});
 
-		this.focusChart.margins().right = 5; 
-		this.focusChart.margins().left += 30;
-		this.focusChart.margins().top += 30;
+		// this.focusChart.margins().right += 10;
+		// this.focusChart.margins().left += 30;
+		// this.focusChart.margins().top += 30;
 		
 		this.focusChart.on('filtered', function(chart) {
 			if(chart.filter()) {
-				dashBoard.monthDimension.filterRange([chart.filter()[0], (chart.filter()[1]+1) ]);
+				graph.monthDimension.filterRange([chart.filter()[0], (chart.filter()[1]+1) ]);
 				dc.redrawAll("filtra");
 			}
 		});
@@ -367,24 +357,23 @@ var dashBoard={
 		});
 		
 		this.overviewChart
-			.width(w)
-		    .height(70)
+		    .height(90)
 		    .chart(function(c,_,_,i) {
 			    var chart = dc.lineChart(c);
 			    if(i===0) {
 			    	chart.on('filtered', function (chart) {
 			            if (!chart.filter()) {
 			                dc.events.trigger(function () {
-			                    dashBoard.overviewChart.focusChart().x().domain(dashBoard.overviewChart.focusChart().xOriginalDomain());
-			                    dashBoard.overviewChart.focusChart().redraw();
-			                    dashBoard.focusChart.filterAll();
-			                    dashBoard.overviewChart.filterAll()
-			                    dashBoard.monthDimension.filterAll();
+			                    graph.overviewChart.focusChart().x().domain(graph.overviewChart.focusChart().xOriginalDomain());
+			                    graph.overviewChart.focusChart().redraw();
+			                    graph.focusChart.filterAll();
+			                    graph.overviewChart.filterAll()
+			                    graph.monthDimension.filterAll();
 			                    dc.redrawAll("filtra");
 			                });
-			            } else if (!utils.rangesEqual(chart.filter(), dashBoard.overviewChart.focusChart().filter())) {
+			            } else if (!utils.rangesEqual(chart.filter(), graph.overviewChart.focusChart().filter())) {
 			                dc.events.trigger(function () {
-			                	dashBoard.overviewChart.focusChart().focus(chart.filter());
+			                	graph.overviewChart.focusChart().focus(chart.filter());
 			                });
 			            }
 			        });
@@ -408,11 +397,12 @@ var dashBoard={
 			})
 			.valueAccessor(function(d) {
 				return Math.abs(+(d.value.toFixed(2)));
-			});
+			})
+			.margins({top: 0, right: 35, bottom: 50, left: 65});
 		
-		this.overviewChart.margins().right = 5; 
-		this.overviewChart.margins().left += 40;
-		this.overviewChart.margins().top = 0;
+		// this.overviewChart.margins().right = 5; 
+		// this.overviewChart.margins().left += 40;
+		// this.overviewChart.margins().top = 0;
 		
 		this.overviewChart.yAxis().ticks(0);
 		this.overviewChart.yAxis().tickFormat(function(d) {
@@ -427,19 +417,11 @@ var dashBoard={
 				return parseInt(v);
 	    	}
 		);
-		
-		var minWidth=250, maxWidth=600, fw=parseInt((w)/3),
-		fh=parseInt((this.winHeight - h) * 0.5);
-		// define min width to filter graphs
-		fw=((fw<minWidth)?(minWidth):(fw));
-		// define max width to filter graphs
-		fw=((fw>maxWidth)?(maxWidth):(fw));
 
 		this.ringTotalizedByState
-			.height(fh)
-			.width(fw)
-			.innerRadius(10)
-			.externalRadiusPadding(30)
+			.height(this.defaultHeight)
+			.innerRadius(25)
+			.externalRadiusPadding(40)
 			.dimension(this.ufDimension)
 			.group(this.ufGroup)
 			.title(function(d) {
@@ -453,60 +435,16 @@ var dashBoard={
 				return d.key + ":" + v + " "+Translation[Lang.language].unit;
 			})
 			.ordinalColors(["#FF0000","#FFFF00","#FF00FF","#F8B700","#78CC00","#00FFFF","#56B2EA","#0000FF","#00FF00"])
-			.legend(dc.legend());
-		
+			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
+			//.legend(dc.legend());
+
+	
 		this.ringTotalizedByState.valueAccessor(function(d) {
 			return Math.abs(+(d.value.toFixed(2)));
 		});
 
-		this.rowTotalizedByClass
-			.height(fh)
-			.width(fw)
-			.dimension(this.classDimension)
-			.group(utils.snapToZero(this.classGroup))
-			.title(function(d) {
-				var v=Math.abs(+(parseFloat(d.value).toFixed(2)));
-				v=localeBR.numberFormat(',1f')(v);
-				var t=Translation[Lang.language].area+": " + v + " " + Translation[Lang.language].unit;
-				if(d.key==="CORTE_SELETIVO") {
-					t=Translation[Lang.language].area+": " + v + " " + Translation[Lang.language].unit + " ("+Translation[Lang.language].warning_class+")";
-				}
-				return t;
-			})
-			.label(function(d) {
-				var v=Math.abs(+(parseFloat(d.value).toFixed(1)));
-				v=localeBR.numberFormat(',1f')(v);
-				var t=utils.mappingClassNames(d.key) + ": " + v + " " + Translation[Lang.language].unit;
-				if(d.key==="CORTE_SELETIVO") {
-					t=utils.mappingClassNames(d.key) + "*: " + v + " " + Translation[Lang.language].unit + " ("+Translation[Lang.language].warning_class+")";
-				}
-				return t;
-			})
-			.elasticX(true)
-			.ordinalColors(["#FF0000","#FFFF00","#FF00FF","#F8B700","#78CC00","#00FFFF","#56B2EA","#0000FF","#00FF00"])
-			.ordering(function(d) {
-				return -d.value;
-			})
-			.controlsUseVisibility(true);
-
-		this.rowTotalizedByClass.xAxis().tickFormat(function(d) {
-			var t=parseInt(d/1000);
-			t=(t<1?parseInt(d):t+"k");
-			return t;
-		}).ticks(5);
-		
-		this.rowTotalizedByClass
-		.filterPrinter(function(f) {
-			var l=[];
-			f.forEach(function(cl){
-				l.push(utils.mappingClassNames(cl));
-			});
-			return l.join(",");
-		});
-
 		this.barAreaByYear
-			.height(fh)
-			.width(fw)
+			.height(this.defaultHeight)
 			.yAxisLabel(Translation[Lang.language].area+" ("+Translation[Lang.language].unit+")")
 			.xAxisLabel(Translation[Lang.language].barArea_x_label)
 			.dimension(this.yearDimension)
@@ -536,9 +474,10 @@ var dashBoard={
 					}
 					i++;
 				}
-			});
+			})
+			.margins({top: 20, right: 35, bottom: 50, left: 55});
 
-		this.barAreaByYear.margins().left += 30;
+		//this.barAreaByYear.margins().left += 30;
 		
 		dc.chartRegistry.list("filtra").forEach(function(c,i){
 			c.on('filtered', function(chart, filter) {
@@ -546,26 +485,9 @@ var dashBoard={
 
 				if(chart.anchorName()=="chart-by-year"){
 					if(!filters.length) {
-						dashBoard.yearDimension0.filterAll();
+						graph.yearDimension0.filterAll();
 					}else {
-						dashBoard.yearDimension0.filterFunction(function (d) {
-							for (var i = 0; i < filters.length; i++) {
-								var f = filters[i];
-								if (f.isFiltered && f.isFiltered(d)) {
-									return true;
-								} else if (f <= d && f >= d) {
-									return true;
-								}
-							}
-							return false;
-						});
-					}
-				}
-				if(chart.anchorName()=="chart-by-class"){
-					if(!filters.length) {
-						dashBoard.classDimension0.filterAll();
-					}else {
-						dashBoard.classDimension0.filterFunction(function (d) {
+						graph.yearDimension0.filterFunction(function (d) {
 							for (var i = 0; i < filters.length; i++) {
 								var f = filters[i];
 								if (f.isFiltered && f.isFiltered(d)) {
@@ -580,9 +502,9 @@ var dashBoard={
 				}
 				if(chart.anchorName()=="chart-by-state"){
 					if(!filters.length) {
-						dashBoard.ufDimension0.filterAll();
+						graph.ufDimension0.filterAll();
 					}else {
-						dashBoard.ufDimension0.filterFunction(function (d) {
+						graph.ufDimension0.filterFunction(function (d) {
 							for (var i = 0; i < filters.length; i++) {
 								var f = filters[i];
 								if (f.isFiltered && f.isFiltered(d)) {
@@ -596,14 +518,23 @@ var dashBoard={
 					}
 				}
 				dc.redrawAll("agrega");
-				utils.addGenerationDate();
+				//utils.addGenerationDate();
 			});
 		});
 		utils.renderAll();
 	},
 	init: function() {
 		window.onresize=utils.onResize;
-		utils.appendEventOnButtons();
+		
+		utils.displayWaiting();
+
+		this.loadConfigurations(function(){
+			Lang.apply();
+			//var dataUrl = "http://terrabrasilis.info/files/deter_cerrado/deter_month_d.json";
+			var dataUrl = "./data/deter-cerrado-month.json";
+			graph.loadData(dataUrl);
+			utils.attachEventListeners();
+		});
 	},
 	/*
 	 * Called from the UI controls to clear one specific filter.
@@ -611,26 +542,23 @@ var dashBoard={
 	resetFilter: function(who,group) {
 		var g=(typeof group === 'undefined')?("filtra"):(group);
 		if(who=='state'){
-			dashBoard.ringTotalizedByState.filterAll();
-		}else if(who=='class'){
-			dashBoard.rowTotalizedByClass.filterAll();
+			graph.ringTotalizedByState.filterAll();
 		}else if(who=='year'){
-			dashBoard.barAreaByYear.filterAll();
+			graph.barAreaByYear.filterAll();
 		}else if(who=='agreg'){
-			dashBoard.overviewChart.filterAll();
-			dashBoard.focusChart.filterAll();
-			dashBoard.monthDimension.filterAll();
+			graph.overviewChart.filterAll();
+			graph.focusChart.filterAll();
+			graph.monthDimension.filterAll();
 			dc.redrawAll("filtra");
 		}
 		dc.redrawAll(g);
 	},
 	resetFilters: function() {
-		dashBoard.ringTotalizedByState.filterAll();
-		dashBoard.rowTotalizedByClass.filterAll();
-		dashBoard.barAreaByYear.filterAll();
-		dashBoard.overviewChart.filterAll();
-		dashBoard.focusChart.filterAll();
-		dashBoard.monthDimension.filterAll();
+		graph.ringTotalizedByState.filterAll();
+		graph.barAreaByYear.filterAll();
+		graph.overviewChart.filterAll();
+		graph.focusChart.filterAll();
+		graph.monthDimension.filterAll();
 	}
 };
 
@@ -641,25 +569,6 @@ window.onload=function(){
         // and stop event from bubbling
         return false;
     });
-	$(function() {
-		$('#col-chart-class').hover(function() {
-		    $('#modal-718053').fadeIn(); 
-		}, function() { 
-		    $('#modal-718053').fadeOut(); 
-		});
-	});
 	Lang.init();
-	var afterLoadConfiguration=function(cfg) {
-		Lang.apply();
-		utils.setLayerConfiguration(cfg);
-		if(window.parent.gxp) {
-			// show it when into TerraBrasilis DETER-B profile
-			utils.displayWarning();
-		}
-		var layerName=((layer_config_global && layer_config_global!="")?(layer_config_global+"_month"):("deter_month"));
-		var dataUrl = "http://terrabrasilis.info/files/deterb/"+layerName+"_d.json";
-		dashBoard.init();
-		dashBoard.loadData(dataUrl);
-	}
-	d3.json("/config/layerConfigDETER-B.json", afterLoadConfiguration);
+	graph.init();
 };
