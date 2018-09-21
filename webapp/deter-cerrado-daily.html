@@ -178,10 +178,16 @@
                 <div class="col-md-4">
                     <div class="box-grafico text-center">
 						<div id="chart-hist-top-counties" class="all-charts bar-charts">
-							<div id="title-chart-counties" class="all-charts-title"></div>
+							<div style="position:relative;">
+								<div id="title-chart-counties" class="all-charts-title"></div>
+								<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
+									<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
+								</a>
+							</div>
+
 							<div class="keep-space">
 								<div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
-									<button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+									<button type="button" class="btn btn-default btn-xs" onclick="SearchEngine.applyCountyFilter();graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 								</div>
 							</div>
                         </div>
@@ -394,36 +400,7 @@
 				</div>
 				
 				<!-- modal window with counties filterd items -->
-				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="filtered">
-									<span id="txt1f">Pesquisa de municípios</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-								<span id="txt1g">Encontre um município.</span>
-								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
-									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control" placeholder="Search">
-									<div class="input-group-btn">
-										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
-									</div>
-								</div>
-								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
-								<div class="counties-list"><ul id="filtered-list"></ul></div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt1i">Fechar</span>
-								</button> 
-							</div>
-						</div>
-					</div>
-				</div>
+				<div id="modal-search"></div>
 				<!-- modal window for General informations -->
 				<div class="modal fade" id="modal-container-general-info" role="dialog" aria-labelledby="general-info" aria-hidden="true">
 					<div class="modal-dialog general-info">
@@ -550,7 +527,8 @@
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-daily-translation.js"></script>
     <script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
-    <script type="text/javascript" src="./js/deter-cerrado-daily.js"></script>
+	<script type="text/javascript" src="./js/deter-cerrado-daily.js"></script>
+	<script type="text/javascript" src="./js/mun-search-engine.js"></script>
 
 </body>
 </html>

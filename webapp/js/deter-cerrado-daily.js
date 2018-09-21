@@ -42,6 +42,7 @@ var graph={
 			this.histTopByUCs = dc.rowChart("#chart-hist-top-ucs");
 			
 			graph.build();
+			SearchEngine.init(this.histTopByCounties, this.ringTotalizedByState ,'modal-search');
 		}
 	},
 	
@@ -95,6 +96,7 @@ var graph={
 		graph.histTopByCounties.filterAll();
 		graph.ringTotalizedByState.filterAll();
 		graph.histTopByUCs.filterAll();
+		SearchEngine.applyCountyFilter();
 	},
 
 	utils:{
