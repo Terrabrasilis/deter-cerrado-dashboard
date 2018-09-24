@@ -99,7 +99,8 @@ var Translation={
 		'video': 'Video Introdutório',
 		'about': 'Sobre',
 		'contactus': 'Contato',
-		'tt-contactus': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)'
+		'tt-contactus': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)',
+		'tt-contactus-menu': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -201,7 +202,8 @@ var Translation={
 		'video': 'Introductory Video',
 		'about': 'About',
 		'contactus': 'Contact us',
-		'tt-contactus': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)'
+		'tt-contactus': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)',
+		'tt-contactus-menu': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)'
 	},
 	'es':{		
 		/* texts into HTML entities */
