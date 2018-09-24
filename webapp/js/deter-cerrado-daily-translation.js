@@ -1,7 +1,7 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
-		'txt1':'Painel DETER-B - diário',
+		'txt1':'Painel DETER - diário',
 		'txt2':'Abrir o Painel Mensal',
 		'txt3':'Apenas o intervalo de tempo exibido no painel (365 dias).',
 		'txt4':'Baixar Dados',
@@ -56,7 +56,7 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
-		'txt1':'DETER-B panel - daily',
+		'txt1':'DETER panel - daily',
 		'txt2':'Open the Monthly Panel',
 		'txt3':'Only the time interval displayed in the panel (365 days).',
 		'txt4':'Download data',
@@ -111,7 +111,7 @@ var Translation={
 	},
 	'es':{
 		/* texts into HTML entities */
-		'txt1':'Panel diario de DETER-B',
+		'txt1':'Panel diario de DETER',
 		'txt2':'Abrir el Panel Mensual',
 		'txt3':'Sólo el intervalo de tiempo mostrado en el panel (365 días).',
 		'txt4':'Descargar Datos',

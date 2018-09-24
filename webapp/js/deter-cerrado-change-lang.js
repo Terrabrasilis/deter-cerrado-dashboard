@@ -22,9 +22,9 @@ var Lang={
 			this.language=l;
 		}
 		this.apply();
-		dashBoard.translateClassNames();
-		dashBoard.resetFilters();
-		dashBoard.build();
+		//graph.translateClassNames();
+		graph.resetFilters();
+		graph.build();
 	},
 	setInLocalStorage:function() {
 		if (typeof(Storage) !== "undefined") {
