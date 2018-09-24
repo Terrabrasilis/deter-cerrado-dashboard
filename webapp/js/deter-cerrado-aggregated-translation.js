@@ -30,7 +30,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
 		'txt13':'Aviso',
 		'txt14':'Este painel não é afetado pelos filtros definidos no mapa.',
-		'txt15':'Variação da detecção de área do projeto DETER, com granularidade mensal e sazonalidade ano PRODES (Agosto a Julho)',
+		'txt15':'Variação da detecção de área do projeto DETER com granularidade mensal e sazonalidade anual do PRODES (Agosto a Julho)',
 		'txt16':'Filtros por Estados, Classes e ano PRODES (Agosto a Julho)',
 		'txt17':'A classe <b>Corte Seletivo</b> refere-se ao somatório das classes Corte Seletivo Geométrico e Corte Seletivo Desordenado para o ano PRODES 2015/2016, quando estas classes ainda não eram discretizadas.',
 		'txt18':'Limpar este filtro.',
@@ -56,12 +56,13 @@ var Translation={
 		'footer2':'sob licença <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">CC BY-SA 4.0</a>',
 		'failure_load_data':'Falhou ao carregar os dados.',
 		'focus_y_label':'Área total (km²)',
-		'focus_x_label':'Meses do ano PRODES',
+		'focus_x_label':'Meses considerando a Sazonalidade Anual do PRODES (Agosto - Julho)',
 		'overview_x_label':'Seleção temporal (granularidade mensal)',
-		'area': 'Área',
+		'area': 'Área Agregada',
 		'unit': 'km²',
 		'warning_class':'Classe válida apenas para o ano PRODES 2015/2016',
-		'barArea_x_label':'Ano PRODES'
+		'barArea_x_label':'Sazonalidade Anual do PRODES',
+
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -83,7 +84,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- And the margins is the default of the browser.<br />',
 		'txt13':'Warning',
 		'txt14':'The map filters isn\'t applied in this panel.',
-		'txt15':'Variation of DETER project area detection, with monthly granularity and year PRODES seasonality (August to July)',
+		'txt15':'Area detection variation of DETER project with monthly granularity and PRODES Annual Seasonality (August to July)',
 		'txt16':'Filters by States, Classes and year PRODES (August to July).',
 		'txt17':'The <strong>Selective Logging</strong> class refers to the sum of the classes Geometric Selective Logging and Disordered Selective Logging for the year PRODES 2015/2016, when these classes were not yet discretized.',
 		'txt18':'Clean this filter.',
@@ -109,12 +110,12 @@ var Translation={
 		'footer2':'under license <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>',
 		'failure_load_data':'Failure in data loading.',
 		'focus_y_label':'Total area (km²)',
-		'focus_x_label':'Months of PRODES year',
+		'focus_x_label':'Months considering PRODES Annual Seasonality (August - July)',
 		'overview_x_label':'Temporal selection (monthly granularity)',
-		'area': 'Area',
+		'area': 'Aggregated Area',
 		'unit': 'km²',
 		'warning_class':'Class valid only for year PRODES 2015/1016',
-		'barArea_x_label':'Year PRODES'
+		'barArea_x_label':'PRODES Annual Seasonality'
 	},
 	'es':{
 		/* texts into HTML entities */
