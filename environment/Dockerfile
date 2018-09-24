@@ -1,5 +1,5 @@
 # To build image for this dockerfile use this command:
-#   docker build -t terrabrasilis/dashboard-server:alpha -f environment/Dockerfile .
+#   docker build -t terrabrasilis/dashboard-server:alpha --build-arg INDEX_FILE=prodes-cerrado-rates -f environment/Dockerfile .
 #
 # To run without compose and without shell terminal use this command:
 #   docker run -d --rm -p 80:80 --name terrabrasilis_dashboard_cerrado terrabrasilis/dashboard-server:alpha
@@ -11,6 +11,7 @@
 # -d, --detach=false         Run container in background and print container ID
 # -t, --tty=false            Allocate a pseudo-TTY
 # --no-cache                 Ignore all cached intermediary layer
+# --build-arg                Build args
 # --------------------------------------------------------------------------------
 #
 #--------- Generic stuff all our Dockerfiles should start with -----------------------------
@@ -31,6 +32,11 @@ COPY environment/config/nginx.conf /etc/nginx/nginx.conf
 COPY environment/config/403.html /usr/share/nginx/html/403.html
 
 COPY webapp/ /usr/share/nginx/html/
+
+ARG INDEX_FILE=prodes-cerrado-rates
+ENV INDEX_FILE_NAME=$INDEX_FILE
+
+RUN mv /usr/share/nginx/html/$INDEX_FILE_NAME.html /usr/share/nginx/html/index.html
 
 EXPOSE 80 443
 
