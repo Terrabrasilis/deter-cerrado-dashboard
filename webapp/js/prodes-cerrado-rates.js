@@ -1207,7 +1207,7 @@ var graph={
 							c['year']=y;
 							aux[y]=c;
 						}
-						c[u]=rates[u][y];
+						c[u]=((rates[u][y]<0.5)?(0):(rates[u][y]));
 					});
 				});
 				for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
@@ -1257,7 +1257,7 @@ var graph={
 						c['year']=y;
 						aux[y]=c;
 					}
-					c[u]=rates[u][y];
+					c[u]=((rates[u][y]<0.5)?(0):(rates[u][y]));
 				});
 			});
 			
