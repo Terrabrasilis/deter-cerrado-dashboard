@@ -348,7 +348,7 @@ var graph={
 	loadData: function() {
 		utils.loadingShow(true);
 		// load data from CSV file
-		//d3.csv("data/cerrado_rates_d.csv", graph.processData);
+		//d3.csv("data/cerrado_rates_d.csv", graph.processCsvData);
 		
 		// download data in JSON format from TerraBrasilis API service.
 		var url="http://terrabrasilis.info/data-api/api/v1/increase-cerrado/all";
@@ -357,6 +357,59 @@ var graph={
 		// load data from JSON file
 		// var url="data/prodes-cerrado-rates.json";
 		// d3.json(url, graph.processData);
+	},
+	processCsvData: function(error, data) {
+		utils.loadingShow(false);
+		if (error) {
+			utils.displayError( error );
+			return;
+		}else if(!data) {
+			utils.displayNoData();
+			return;
+		}else {
+			utils.displayGraphContainer();
+			// normalize all data
+			var o=[],t=[],len=data.length, cerrado=[];
+			for (var j = 0; j < len; ++j) {
+				var y=data[j].ano;
+				if(data[j].estado!=="CERRADO") {
+					var obj={
+						uf:data[j].estado,
+						year:data[j].ano,
+						rate:+data[j].area,
+						ufYear:data[j].estado + "/" + data[j].ano,
+						key:data[j].ano,
+						value:{
+							aream: +data[j].area,
+							areat: +data[j].area_625
+						}
+					};
+					o.push(obj);
+				}else{
+
+					if(cerrado[y]===undefined){
+						cerrado[y]=0;
+					}
+					cerrado[y]+=data[j].area;
+				}
+			}
+			// to prepare the general sum for "cerrado" column
+			cerrado.forEach(function(v,k){
+				var obj={
+					uf:'CERRADO',
+					year:k,
+					rate:+v,
+					ufYear:"CERRADO/" + k
+				};
+				t.push(obj);
+			});
+			
+			data = o;
+			graph.data_all = t;
+			graph.registerDataOnCrossfilter(data);
+			graph.setChartReferencies();
+			graph.build();
+		}
 	},
 	processData: function(error, data) {
 		utils.loadingShow(false);
