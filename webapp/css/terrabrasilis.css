@@ -627,7 +627,7 @@ background: #707070;
 /*--------------------------------------------------------
     ABOUT
 ----------------------------------------------------------*/
-.about .aboutdialog {max-height: 700px; overflow:auto; border: 0px;}
+.about .aboutdialog {max-height: 700px; overflow:auto; border: 0px; overflow-x: hidden;}
 .about .btn-primary:hover,.about .btn-primary:focus { background-color: #006950; border-color: #108d6f; box-shadow: none; outline: none;}
 .about .btn-primary {color: #fff; background-color: #108d6f; border-color: #108d6f;}
 .about section {padding: 20px 0;}
