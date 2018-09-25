@@ -106,6 +106,9 @@ a, a:hover, a:focus {
 .amarelo { color: #f9c069;}
 .boxtop {display: none; margin: 20px 20px 20px 20px; border-bottom: 1px solid #00796b;}
 
+#modal-container-info-rates h3 {text-align: left; color: #00796b; font-size: 18px; text-decoration: none; border-bottom: 1px solid #eeeeee;}
+#modal-container-info-rates a {color: #00796b; font-weight: bold;}
+
 /* ------------- Resets ------------*/
 #totalized-area { background-color: #f9c069;}
 #totalized-alerts { background-color: #96c964;}
@@ -667,6 +670,7 @@ footer{
 	color: #fff !important;
 }
 
+.modal-dialog {min-width:800px !important;}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -687,10 +691,11 @@ footer{
         display: none;
     }
 
-	
+	.modal-dialog { max-width: 500px;min-width:300px;}
 	.box, .boxnote, .boxtitulo {   margin-left: -275px;}
 	.box-grafico {   margin-left: 0px;}
 }
+
 
 /* ---------------------------------------------------
     Bootstrap adjust
