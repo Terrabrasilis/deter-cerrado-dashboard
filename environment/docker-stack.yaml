@@ -1,0 +1,8 @@
+version: '3.2'
+services:
+  terrabrasilis-dashboardcerrado:
+    image: terrabrasilis/dashboard-server:alpha
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure

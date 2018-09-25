@@ -38,8 +38,7 @@
 				
 				
 				<div class="desctxt">
-						<h5><span class="amarelo">Cerrado</span><span class="verde">Brasileiro</span> </h5>
-						<div class="texto">Incrementos de desmatamento</div>
+						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
 				</div>
 			</div>
 			
@@ -57,14 +56,20 @@
 												
 				<li>
 					<a href="#print_information" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador." data-toggle="modal">
+
 							<i class="material-icons">print</i>Imprimir Graficos</a>
 				</li>
 				
-				<li>
-					<a href="#ajuda" data-toggle="collapse" aria-expanded="false">
+				<!--li>
+					<a href="#ajuda" id="change_style" title="Alternar o estilo de apresentação claro/escuro." data-toggle="collapse" aria-expanded="false">
 							<i class="material-icons">invert_colors</i>Claro / Escuro</a>
+				</li-->
+				<li>
+					<a id="infoRatesBtn" href="#modal-container-info-rates" data-toggle="modal">
+						<i id="display_warning" title="Clique para ver mais informações sobre os incrementos." class="material-icons">info</i>Sobre os dados
+					</a>
 				</li>
-				
+
 				<li>
 					<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
 						<i class="material-icons">help</i>Ajuda</a>
@@ -76,7 +81,7 @@
 				</li>
 				
 				<li>
-					<a href="#contato" data-toggle="collapse" aria-expanded="false">
+					<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br." data-toggle="collapse" aria-expanded="false">
 							<i class="material-icons">email</i>Contato</a>
 				</li>
 			</ul>
@@ -87,105 +92,29 @@
 		</nav>
 	</div>
 
-	<!--
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid" style="clear: both; color: black;">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand nav-brand-left" href="http://www.inpe.br/">
-					<img src="./img/logo_INPE.png" alt="INPE icon" class="img-rounded" height="35" width="45" />
-				</a>
-				<a class="navbar-brand nav-brand-left" href="http://www.obt.inpe.br/OBT/home">
-					<img src="./img/logo_OBT.png" alt="OBT icon" class="img-rounded" height="35" width="80" />
-				</a>
-			</div>
-			<div class="collapse navbar-collapse" id="navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a id="txt1">Incremento de desmatamento</a>
-					</li>	
-					<li class="dropdown inverse-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="tools">Ferramentas <span class="caret"></span></span></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a id="downloadBtn" href="#modal-container-download" data-toggle="modal" title="Baixar a tabela de incremento de desmatamento.">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt3">Baixar Dados</span>
-								</a>
-							</li>
-							<li>
-								<a href="#" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador.">
-									<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;<span id="txt4">Imprimir</span>
-								</a>
-							</li>
-							<li>
-								<a href="#" id="change_style" title="Alternar o estilo de apresentação claro/escuro.">
-									<span id="btn_style" class="glyphicon glyphicon-tint" aria-hidden="true"></span>&nbsp;<span id="txt5">Escuro/Claro</span>
-								</a>
-							</li>							
-						</ul>
-					</li>
-					<li class="dropdown inverse-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span id="help">Ajuda <span class="caret"></span></span></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
-									<span id="btn_style" class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp;<span id="video">Video Introdutório</span>
-								</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a href="#modal-container-about" id="goto_about" data-toggle="modal" title="Ver informações sobre o projeto e a equipe.">
-									<span id="btn_style" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;<span id="about">Sobre</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br.">
-							<span class="glyphicon glyphicon-envelope"></span>&nbsp;<span id="contactus">Contacte-nos</span>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="#">
-							<img id="flag-pt-br" alt="Bandeira Brasil" src="./img/flag_br.gif" class="img-circle" title="Alterar o idioma do painel para Português do Brasil." />&nbsp;&nbsp;
-							<img id="flag-en" alt="Flag USA" src="./img/flag_usa.gif" class="img-circle" title="Change panel language to English." />&nbsp;&nbsp;
-							<img id="flag-es" alt="Bandera de España" src="./img/flag_spain.gif" class="img-circle" title="Cambiar el idioma del panel al español." />
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	
-	-->
-
 	<!-- Menu superior -->
 	<div id="content">
 		<nav  class="navbar navbar-expand-lg materialnav navbar-header">
 			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="material-icons menuicon">menu</i>
 			</button>
-			<a class="navbar-brand" href="#"><span class="amarelo">Cerrado</span><span class="verde">Brasileiro</span></a>
+			<a class="navbar-brand" href="#"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#">| Incrementos de desmatamento</a>
+					<a class="nav-item nav-link" href="#"> - Cerrado</a>
 				</div>
 				<ul class="navbar-nav  navbar-right">
 					<li class="nav-item active">
 						<a class="nav-link" href="#">Sobre <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Contato</a>
+						<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus-menu" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br." class="nav-link">Contato</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><img src="img/br.svg" class="bandeira" alt="portugues"></a>
+						<a class="nav-link" href="#"><img id="flag-pt-br" src="img/br.svg" class="bandeira" alt="portugues"></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#"><img src="img/usa.svg" class="bandeira" alt="ingles"></a>
+						<a class="nav-link" href="#"><img id="flag-en" src="img/usa.svg" class="bandeira" alt="ingles"></a>
 					</li>      
 				</ul>
 			</div>
@@ -237,13 +166,14 @@
 		</div>
 
 		<!-- Linha Graficos 2 -->
-		<div class="row box">			 
-			<div class="col-md-9">
+		<div class="row box">
+			<div class="col-md-12">
+			<!--div class="col-md-9">
 				<div class="toggle_chart">
 					<button id="line-chart-toggle" type="button" class="btn btn-sm btnbox" data-dismiss="modal">
 						<span>Municípios</span>
 					</button>
-				</div>
+				</div-->
 				<div class="box-grafico text-center">
 					<div id="chart-line-rates-by-year-mun">
 						<div class="all-charts-title boxtitle"><span id="title-chart-lines boxtitle">Totais anuais por</span> <span id="title-chart-lines-p2">Município</span></div>
@@ -255,7 +185,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<!--div class="col-md-3">
 				<div class="box-grafico text-center">
 					<div id="chart-by-mun">
 						<div style="position:relative;">
@@ -276,7 +206,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div-->
 		</div>
 
 		<div class="row boxtitulo">
@@ -921,7 +851,7 @@
 	</div>-->
 	<!--Footer-->
 	<footer class="footer">
-		<p>© 2018<a href="#"> Cerrado Brasileiro</a></p>
+		<p>© 2018<a href="#"> TerraBrasilis - Cerrado</a></p>
 	</footer>
 	<!--/.Footer-->
 

@@ -13,8 +13,32 @@ var graph={
 	//ringTotalizedByClass:undefined,
     histTopByCounties:undefined,
     ringTotalizedByState:undefined,
-    histTopByUCs:undefined,
+	histTopByUCs:undefined,
 	
+	histogramColor: ["#0000FF","#57B4F0"],
+	darkHistogramColor: ["#ffd700","#fc9700"],
+	pallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	darkPallet: ["#FF0000","#FF6A00","#FF8C00","#FFA500","#FFD700","#FFFF00","#DA70D6","#BA55D3","#7B68EE"],
+	barTop10Color: "#b8b8b8",
+	darkBarTop10Color: "#232323",
+
+	/**
+	 * Load configuration file before loading data.
+	 */
+	setConfigurations: function(conf) {
+		if(conf) {
+			graph.pallet=conf.pallet?conf.pallet:graph.pallet;
+			graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
+			graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
+			graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
+			graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
+			graph.darkBarTop10Color=conf.darkBarTop10Color?conf.darkBarTop10Color:graph.darkBarTop10Color;
+			graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.utils.getDefaultHeight();
+		}else{
+			console.log("Didn't load config file. Using default options.");
+		}
+	},
+
 	init:function(config, data) {
 
 		if(data.length==0 || data.exception!==undefined) {
@@ -24,14 +48,15 @@ var graph={
 		
 		Lang.apply();
 		
-		graph.utils.dataConfig=config.dataConfig;
+		graph.setConfigurations(config.dataConfig);
+		//graph.utils.dataConfig=config.dataConfig;
 
 		if(this.loadData(false, data)) {
 			
 			this.displayWaiting(false);
 			this.config=config;
 			
-			this.config.defaultHeight = graph.utils.getDefaultHeight();
+			//this.config.defaultHeight = graph.utils.getDefaultHeight();
 			
 			this.totalizedAreaInfoBox = dc.numberDisplay("#totalized-area");
 			this.totalizedAlertsInfoBox = dc.numberDisplay("#totalized-alerts");
@@ -42,6 +67,7 @@ var graph={
 			this.histTopByUCs = dc.rowChart("#chart-hist-top-ucs");
 			
 			graph.build();
+			SearchEngine.init(this.histTopByCounties, this.ringTotalizedByState ,'modal-search');
 		}
 	},
 	
@@ -95,6 +121,7 @@ var graph={
 		graph.histTopByCounties.filterAll();
 		graph.ringTotalizedByState.filterAll();
 		graph.histTopByUCs.filterAll();
+		SearchEngine.applyCountyFilter();
 	},
 
 	utils:{
@@ -179,7 +206,7 @@ var graph={
 		}
 	},
 	doResize:function() {
-		graph.config.defaultHeight = graph.utils.getDefaultHeight();
+		graph.defaultHeight = graph.utils.getDefaultHeight();
 		dc.renderAll();
 		//setTimeout(function(){graph.addGenerationDate();},300);
 	},
@@ -364,18 +391,43 @@ var graph={
 		graph.utils.setTitle('counties', Translation[Lang.language].title_top_county);
 		
 		this.histTopByCounties
-	        .height(this.config.defaultHeight)
+	        .height(graph.defaultHeight)
 		    .dimension(dimensions["county"])
 		    .group(this.utils.removeLittlestValues(groups["county"]))
 		    .elasticX(true)
 		    .ordering(function(d) {return d.county;})
-		    .controlsUseVisibility(true)
-		    .ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
+			.controlsUseVisibility(true)
+			.ordinalColors([(graph.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)]);
+		    //.ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
 
 		this.histTopByCounties
 			.on('preRender', function(chart) {
-				chart.height(graph.config.defaultHeight);
+				chart.height(graph.defaultHeight);
 				chart.xAxis().ticks((chart.width()<graph.config.minWidth)?(5):(6));
+			});
+		
+		this.histTopByCounties
+			.on('preRedraw', function (chart) {
+				if(chart.data().length > 5){
+					chart.fixedBarHeight(false);
+				}else{
+					chart.fixedBarHeight( parseInt((chart.effectiveHeight()*0.7)/10) );
+				}
+			});
+
+		this.histTopByCounties
+			.on("renderlet.a",function (chart) {
+				var texts=chart.selectAll('g.row text');
+				var rankMun=function() {
+					var allTop=groups["county"].top(Infinity);
+					var ar={};
+					allTop.forEach(function(k,i){ar["\""+k.key+"\""]=(i+1);});
+					return ar;
+				};
+				texts[0].forEach(function(t){
+					var p=(rankMun()["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun()["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
+					t.innerHTML=p+t.innerHTML;
+				});
 			});
 
 		this.histTopByCounties.xAxis()
@@ -388,13 +440,12 @@ var graph={
 			});
 		this.histTopByCounties.title(function(d) {return d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%");});
 		this.histTopByCounties.label(function(d) {return d.key + ': ' + graph.utils.numberByUnit(d.value) + graph.utils.wildcardExchange(" %unit%");});
-		
 
 		// build graph areas or alerts by state
 		graph.utils.setTitle('state',Translation[Lang.language].title_tot_state);
 		
 		this.ringTotalizedByState
-			.height(this.config.defaultHeight)
+			.height(graph.defaultHeight)
 	        .innerRadius(25)
 	        .externalRadiusPadding(40)
 	        .dimension(dimensions["uf"])
@@ -425,7 +476,7 @@ var graph={
 		
 		this.ringTotalizedByState
 			.on('preRender', function(chart) {
-				chart.height(graph.config.defaultHeight);
+				chart.height(graph.defaultHeight);
 				chart.legend().legendWidth(window.innerWidth/2);
 			});
 		
@@ -460,18 +511,43 @@ var graph={
 		graph.utils.setTitle('ucs', Translation[Lang.language].title_top_uc);
 
 		this.histTopByUCs
-			.height(this.config.defaultHeight)
+			.height(graph.defaultHeight)
 		    .dimension(dimensions["uc"])
 		    .group(this.utils.removeLittlestValues(groups["uc"]))
 		    .elasticX(true)
 		    .ordering(function(d) { return d.uc; })
-		    .controlsUseVisibility(true)
-		    .ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
+			.controlsUseVisibility(true)
+			.ordinalColors([(graph.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)]);
+		    //.ordinalColors(["#FF4500","#FF8C00","#FFA500","#FFD700","#FFFF00","#BA55D3","#9932CC","#8A2BE2","#3182BD","#6BAED6"]);
 
 		this.histTopByUCs
 			.on('preRender', function(chart) {
-				chart.height(graph.config.defaultHeight);
+				chart.height(graph.defaultHeight);
 				chart.xAxis().ticks((chart.width()<graph.config.minWidth)?(4):(7));
+			});
+
+		this.histTopByUCs
+			.on('preRedraw', function (chart) {
+				if(chart.data().length > 5){
+					chart.fixedBarHeight(false);
+				}else{
+					chart.fixedBarHeight( parseInt((chart.effectiveHeight()*0.7)/10) );
+				}
+			});
+
+		this.histTopByUCs
+			.on("renderlet.a",function (chart) {
+				var texts=chart.selectAll('g.row text');
+				var rankMun=function() {
+					var allTop=groups["uc"].top(Infinity);
+					var ar={};
+					allTop.forEach(function(k,i){ar["\""+k.key+"\""]=(i+1);});
+					return ar;
+				};
+				texts[0].forEach(function(t){
+					var p=(rankMun()["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun()["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
+					t.innerHTML=p+t.innerHTML;
+				});
 			});
 			
 		this.histTopByUCs.xAxis().tickFormat(function(d) {return d+graph.utils.wildcardExchange(" %unit%");});

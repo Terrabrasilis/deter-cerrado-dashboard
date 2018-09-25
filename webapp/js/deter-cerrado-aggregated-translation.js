@@ -1,8 +1,19 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
-		'txt1':'Painel DETER-B - mensal',
+		'txt1':'Painel DETER - mensal',
 		'txt2':'Abrir o Painel Diário',
+		'txt2a':'Informações gerais',
+		'txt2b':'<h3>Sobreposição PRODES Amazônia x Cerrado</h3>'+
+		'<br /><br />'+
+		'O Mapeamento do cerrado é realizado para toda extensão do Bioma, o que inclui uma zona de sobreposição com os limites da Amazônia Legal Brasileira. Ocorre que as áreas de florestas, dentro da zona de sobreposição entre os limites do Bioma Cerrado e os limites da Amazônia Legal, 7% da área total, já são mapeadas, desde 1988, pelo projeto PRODES Amazônia. Nesta área de sobreposição o INPE utilizou os dados  já mapeados pelo PRODES Amazônia, para evitar resultados discrepantes entre os dois produtos. Apesar dos dois mapeamentos possuírem a mesma legenda (i.e. desmatamento do tipo corte raso) existe uma peculiaridade em relação ao início de suas séries históricas e frequências de mapeamento.'+
+		'<br /><br />'+
+		'O PRODES Cerrado tem uma série histórica com início no ano 2000 e possui frequência de mapeamento bianual até 2012 e anual desde 2013 até 2017. O PRODES Amazônia tem sua série histórica com início em 1988 e possui frequência anual de mapeamento, entretanto durante esse período foi necessário fazer um ajuste geométrico na máscara de desmatamento para corrigir deslocamentos causados por diferentes processos de georreferenciamento das imagens adotados ao longo da vida do projeto. <a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes/pdfs/nt_deslocamentomascara.pdf" target="_blank">Acesse este link para mais detalhes.</a>'+
+		'<br /><br />'+
+		'Este ajuste na máscara de desmatamento do PRODES Amazônia resultou em uma agregação de todos os anos mapeados até 2008 em um único plano de informação, não sendo possível separar a geometria do desmatamento dos anos anteriores. Uma vez que os números computados pelo PRODES Cerrado são referentes ao desmatamento mapeado a partir da máscara agregada do ano 2000, início de sua série histórica, os mesmos não consideram a área de desmatamento acumulado até o ano 2000.'+
+		'<br /><br />'+
+		'Por essa razão, ainda que esta diferença ocorra apenas na área de sobreposição (7% da área total), os números do desmatamento anual publicados no dashboard do TerraBrasilis (www.dpi.inpe.br/fipcerrado/dashboard/) não são iguais aos dados geográficos disponibilizados para download no mesmo site, exclusivamente para os anos 2000 até 2008.',
+		'txt2c':'Fechar',
 		'txt3':'Baixar CSV',
 		'txt4':'Imprimir',
 		'txt5':'Escurecer/clarear',
@@ -19,7 +30,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
 		'txt13':'Aviso',
 		'txt14':'Este painel não é afetado pelos filtros definidos no mapa.',
-		'txt15':'Variação da detecção de área do projeto DETER-B, com granularidade mensal e sazonalidade ano PRODES (Agosto a Julho)',
+		'txt15':'Variação da detecção de área do projeto DETER com granularidade mensal e sazonalidade anual do PRODES (Agosto a Julho)',
 		'txt16':'Filtros por Estados, Classes e ano PRODES (Agosto a Julho)',
 		'txt17':'A classe <b>Corte Seletivo</b> refere-se ao somatório das classes Corte Seletivo Geométrico e Corte Seletivo Desordenado para o ano PRODES 2015/2016, quando estas classes ainda não eram discretizadas.',
 		'txt18':'Limpar este filtro.',
@@ -28,7 +39,7 @@ var Translation={
 		'txt21':'Limpar este filtro.',
 		'txt22':'Informações complementares',
 		'txt23':'As classes que representam alertas de desmatamento são Mineração, Desmatamento com vegetação e Desmatamento com solo exposto.',
-		'txt24':'Informações completas sobre o projeto DETER-B',
+		'txt24':'Informações completas sobre o projeto DETER',
 		'txt25':'Fechar',
 		'txt26':'Concluir',
 		/* titles for HTML entities */
@@ -45,16 +56,17 @@ var Translation={
 		'footer2':'sob licença <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">CC BY-SA 4.0</a>',
 		'failure_load_data':'Falhou ao carregar os dados.',
 		'focus_y_label':'Área total (km²)',
-		'focus_x_label':'Meses do ano PRODES',
+		'focus_x_label':'Meses considerando a Sazonalidade Anual do PRODES (Agosto - Julho)',
 		'overview_x_label':'Seleção temporal (granularidade mensal)',
-		'area': 'Área',
+		'area': 'Área Agregada',
 		'unit': 'km²',
 		'warning_class':'Classe válida apenas para o ano PRODES 2015/2016',
-		'barArea_x_label':'Ano PRODES'
+		'barArea_x_label':'Sazonalidade Anual do PRODES',
+
 	},
 	'en':{
 		/* texts into HTML entities */
-		'txt1':'DETER-B panel - monthly',
+		'txt1':'DETER panel - monthly',
 		'txt2':'Open the Daily Panel',
 		'txt3':'Download CSV',
 		'txt4':'Print',
@@ -72,7 +84,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- And the margins is the default of the browser.<br />',
 		'txt13':'Warning',
 		'txt14':'The map filters isn\'t applied in this panel.',
-		'txt15':'Variation of DETER-B project area detection, with monthly granularity and year PRODES seasonality (August to July)',
+		'txt15':'Area detection variation of DETER project with monthly granularity and PRODES Annual Seasonality (August to July)',
 		'txt16':'Filters by States, Classes and year PRODES (August to July).',
 		'txt17':'The <strong>Selective Logging</strong> class refers to the sum of the classes Geometric Selective Logging and Disordered Selective Logging for the year PRODES 2015/2016, when these classes were not yet discretized.',
 		'txt18':'Clean this filter.',
@@ -81,7 +93,7 @@ var Translation={
 		'txt21':'Clean this filter.',
 		'txt22':'Complementar informations',
 		'txt23':'The classes representing deforestation alerts are Mining, Deforestation with vegetation and Deforestation with exposed soil.',
-		'txt24':'Complete informations about the DETER-B project.',
+		'txt24':'Complete informations about the DETER project.',
 		'txt25':'Close',
 		'txt26':'Conclude',
 		/* titles for HTML entities */
@@ -98,16 +110,16 @@ var Translation={
 		'footer2':'under license <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>',
 		'failure_load_data':'Failure in data loading.',
 		'focus_y_label':'Total area (km²)',
-		'focus_x_label':'Months of PRODES year',
+		'focus_x_label':'Months considering PRODES Annual Seasonality (August - July)',
 		'overview_x_label':'Temporal selection (monthly granularity)',
-		'area': 'Area',
+		'area': 'Aggregated Area',
 		'unit': 'km²',
 		'warning_class':'Class valid only for year PRODES 2015/1016',
-		'barArea_x_label':'Year PRODES'
+		'barArea_x_label':'PRODES Annual Seasonality'
 	},
 	'es':{
 		/* texts into HTML entities */
-		'txt1':'Panel mensual de DETER-B',
+		'txt1':'Panel mensual de DETER',
 		'txt2':'Abrir el Panel Diario',
 		'txt3':'Descargar CSV',
 		'txt4':'Imprimir',
@@ -125,7 +137,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- Los márgenes estándar del navegador.<br />',
 		'txt13':'Advertencia',
 		'txt14':'Este panel no se ve afectado por los filtros definidos en el mapa.',
-		'txt15':'Variación de la detección del área del proyecto DETER-B, con granularidad mensual y año de estacionalidad del PRODES (Agosto a Julio)',
+		'txt15':'Variación de la detección del área del proyecto DETER, con granularidad mensual y año de estacionalidad del PRODES (Agosto a Julio)',
 		'txt16':'Filtros por Estados, Clases y año PRODES (Agosto a Julio)',
 		'txt17':'La clase <b>Corte Selectivo</b> se refiere a la suma de las clases Corte Selectivo Geométrico y Corte Selectivo Desordenado para el año PRODES 2015/2016, cuando estas clases aún no eran discretizadas.',
 		'txt18':'Limpiar este filtro.',
@@ -134,7 +146,7 @@ var Translation={
 		'txt21':'Limpiar este filtro.',
 		'txt22':'Informaciones complementarias',
 		'txt23':'Las clases que representan alertas de deforestación son Minería, Deforestación con vegetación y Deforestación con suelo expuesto.',
-		'txt24':'Información completa sobre el proyecto DETER-B.',
+		'txt24':'Información completa sobre el proyecto DETER.',
 		'txt25':'Cerrar',
 		'txt26':'Concluir',
 		/* titles for HTML entities */

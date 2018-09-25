@@ -305,9 +305,9 @@ var graph={
 			.height(graph.defaultHeight)
 			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth((parseInt($('#chart-by-state').width())>=400)?(400):(300)).itemWidth(40));
 		
-		this.rowTop10ByMun
-			.height(graph.defaultHeight)
-			.margins({top: 0, right: 10, bottom: 50, left: 10});
+		// this.rowTop10ByMun
+		// 	.height(graph.defaultHeight)
+		// 	.margins({top: 0, right: 10, bottom: 50, left: 10});
 		
 		this.compositeChart
 			.height(graph.defaultHeight)
@@ -338,7 +338,7 @@ var graph={
 	setChartReferencies: function() {
 
 		this.pieTotalizedByState = dc.pieChart("#chart-by-state");		
-		this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
+		//this.rowTop10ByMun = dc.rowChart("#chart-by-mun");
 		this.compositeChart = dc.compositeChart("#chart-bar-by-year-625", this.compositeChartName);
 		this.barChart1 = dc.barChart(this.compositeChart, this.compositeChartName);
 		this.barChart2 = dc.barChart(this.compositeChart, this.compositeChartName);
@@ -348,15 +348,68 @@ var graph={
 	loadData: function() {
 		utils.loadingShow(true);
 		// load data from CSV file
-		//d3.csv("data/cerrado_rates_d.csv", graph.processData);
+		d3.csv("data/cerrado_rates_d.csv", graph.processCsvData);
 		
 		// download data in JSON format from TerraBrasilis API service.
-		var url="http://terrabrasilis.info/data-api/api/v1/increase-cerrado/all";
-		d3.json(url, graph.processData);
+		// var url="http://terrabrasilis.info/data-api/api/v1/increase-cerrado/all";
+		// d3.json(url, graph.processData);
 		
 		// load data from JSON file
 		// var url="data/prodes-cerrado-rates.json";
 		// d3.json(url, graph.processData);
+	},
+	processCsvData: function(error, data) {
+		utils.loadingShow(false);
+		if (error) {
+			utils.displayError( error );
+			return;
+		}else if(!data) {
+			utils.displayNoData();
+			return;
+		}else {
+			utils.displayGraphContainer();
+			// normalize all data
+			var o=[],t=[],len=data.length, cerrado=[];
+			for (var j = 0; j < len; ++j) {
+				var y=data[j].ano;
+				if(data[j].estado!=="CERRADO") {
+					var obj={
+						uf:data[j].estado,
+						year:data[j].ano,
+						rate:+data[j].area,
+						ufYear:data[j].estado + "/" + data[j].ano,
+						key:data[j].ano,
+						value:{
+							aream: +data[j].area,
+							areat: +data[j].area_625
+						}
+					};
+					o.push(obj);
+				}else{
+
+					if(cerrado[y]===undefined){
+						cerrado[y]=0;
+					}
+					cerrado[y]+=data[j].area;
+				}
+			}
+			// to prepare the general sum for "cerrado" column
+			cerrado.forEach(function(v,k){
+				var obj={
+					uf:'CERRADO',
+					year:k,
+					rate:+v,
+					ufYear:"CERRADO/" + k
+				};
+				t.push(obj);
+			});
+			
+			data = o;
+			graph.data_all = t;
+			graph.registerDataOnCrossfilter(data);
+			graph.setChartReferencies();
+			graph.build();
+		}
 	},
 	processData: function(error, data) {
 		utils.loadingShow(false);
@@ -927,72 +980,72 @@ var graph={
 		/**
 		 * Starting the top 10 chart of the Counties by rates.
 		 */
-		var barHeightAdjust=function (chart) {
-			if(chart.data().length > 5){
-				chart.fixedBarHeight(false);
-			}else{
-				chart.fixedBarHeight( parseInt((chart.effectiveHeight()*0.7)/10) );
-			}
-		};
+		// var barHeightAdjust=function (chart) {
+		// 	if(chart.data().length > 5){
+		// 		chart.fixedBarHeight(false);
+		// 	}else{
+		// 		chart.fixedBarHeight( parseInt((chart.effectiveHeight()*0.7)/10) );
+		// 	}
+		// };
 
-		this.rowTop10ByMun
-			.dimension(this.munDimension)
-			.group(utils.snapToZero(this.munAreaMunGroup))
-			.title(function(d) {
-				return Translation[Lang.language].county + "/" + Translation[Lang.language].state + ': ' + d.key + "\n" +
-				Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
-			})
-			.label(function(d) {
-				return d.key + ": " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";;
-			})
-			.elasticX(true)
-			.ordinalColors([(utils.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)])
-			.ordering(function(d) {
-				return d.value;
-			})
-			.controlsUseVisibility(true);
+		// this.rowTop10ByMun
+		// 	.dimension(this.munDimension)
+		// 	.group(utils.snapToZero(this.munAreaMunGroup))
+		// 	.title(function(d) {
+		// 		return Translation[Lang.language].county + "/" + Translation[Lang.language].state + ': ' + d.key + "\n" +
+		// 		Translation[Lang.language].area + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+		// 	})
+		// 	.label(function(d) {
+		// 		return d.key + ": " + localeBR.numberFormat(',1f')(d.value.toFixed(2)) + " km²";
+		// 	})
+		// 	.elasticX(true)
+		// 	.ordinalColors([(utils.cssDefault)?(graph.barTop10Color):(graph.darkBarTop10Color)])
+		// 	.ordering(function(d) {
+		// 		return d.value;
+		// 	})
+		// 	.controlsUseVisibility(true);
 		
-		this.rowTop10ByMun.data(function (group) {
-			var fakeGroup=[];
-			fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
-			return (group.all().length>0)?(group.top(10)):(fakeGroup);
-		});
+		// this.rowTop10ByMun.data(function (group) {
+		// 	var fakeGroup=[];
+		// 	fakeGroup.push({key:Translation[Lang.language].no_value,value:0});
+		// 	return (group.all().length>0)?(group.top(10)):(fakeGroup);
+		// });
 
-		this.rowTop10ByMun.xAxis().tickFormat(function(d) {
-			return d;
-		}).ticks(5);
+		// this.rowTop10ByMun.xAxis().tickFormat(function(d) {
+		// 	return d;
+		// }).ticks(5);
 
-		this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
+		// this.rowTop10ByMun.on("preRedraw", barHeightAdjust);
 
-		this.rowTop10ByMun.removeFilterHandler(function(filters, filter) {
-			var pos=filters.indexOf(filter);
-			filters.splice(pos,1);
-			if(!filters.length) {
-				graph.applyCountyFilter(null);
-			}
-			return filters;
-		});
+		// this.rowTop10ByMun.removeFilterHandler(function(filters, filter) {
+		// 	var pos=filters.indexOf(filter);
+		// 	filters.splice(pos,1);
+		// 	if(!filters.length) {
+		// 		graph.applyCountyFilter(null);
+		// 	}
+		// 	return filters;
+		// });
 
-		this.rowTop10ByMun.addFilterHandler(function(filters, filter) {
-			filters.push(filter);
-			if(filters.length) {
-				graph.countyDimension.filter(filter);
-			}
-			return filters;
-		});
+		// this.rowTop10ByMun.addFilterHandler(function(filters, filter) {
+		// 	filters.push(filter);
+		// 	if(filters.length) {
+		// 		graph.countyDimension.filter(filter);
+		// 	}
+		// 	return filters;
+		// });
 
-		this.rowTop10ByMun.on("renderlet.a",function (chart) {
-			var texts=chart.selectAll('g.row text');
-			var rankMun=utils.getMunOrder();
-			texts[0].forEach(function(t){
-				var p=(rankMun["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
-				t.innerHTML=p+t.innerHTML;
-			});
-		});
+		// this.rowTop10ByMun.on("renderlet.a",function (chart) {
+		// 	var texts=chart.selectAll('g.row text');
+		// 	var rankMun=utils.getMunOrder();
+		// 	texts[0].forEach(function(t){
+		// 		var p=(rankMun["\""+t.innerHTML.split(":")[0]+"\""])?(rankMun["\""+t.innerHTML.split(":")[0]+"\""]+'º - '):('');
+		// 		t.innerHTML=p+t.innerHTML;
+		// 	});
+		// });
 
-		this.rowTop10ByMun.on("filtered", function(chart,filter){
-			dc.renderAll(graph.compositeChartName);
-		});
+		// this.rowTop10ByMun.on("filtered", function(chart,filter){
+		// 	dc.renderAll(graph.compositeChartName);
+		// });
 
 
 		/**
@@ -1155,7 +1208,7 @@ var graph={
 			graph.pieTotalizedByState.filterAll();
 		}else if(who=='mun'){
 			graph.rowTop10ByMun.filterAll();
-			graph.applyCountyFilter(null);
+			//graph.applyCountyFilter(null);
 		}else if(who=='compositebar') {
 			graph.barChart1.filterAll();
 			graph.barChart2.filterAll();
@@ -1207,7 +1260,7 @@ var graph={
 							c['year']=y;
 							aux[y]=c;
 						}
-						c[u]=rates[u][y];
+						c[u]=((rates[u][y]<0.5)?(0):(rates[u][y]));
 					});
 				});
 				for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
@@ -1257,7 +1310,7 @@ var graph={
 						c['year']=y;
 						aux[y]=c;
 					}
-					c[u]=rates[u][y];
+					c[u]=((rates[u][y]<0.5)?(0):(rates[u][y]));
 				});
 			});
 			
