@@ -103,7 +103,33 @@ var Translation={
 		'about': 'Sobre',
 		'contactus': 'Contato',
 		'tt-contactus': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)',
-		'tt-contactus-menu': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)'
+		'tt-contactus-menu': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)',
+		/* For about modal window  */
+		'andre-role':'Desenvolvedor de Software Sênior',
+        'co-team-role':'EQUIPE DE COORDENADORES',
+        'contrib':'Ex-Colaboradores',
+        'fabio-role':'Administrador de Banco de Dados',
+        'ney-role':'Web Designer Sênior',
+        'adeline-role':'Bolsista de Pesquisa',
+        'jether-role':'Desenvolvedor de Software Sênior',
+        'karine-role':'Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE',
+        'license':'Essas aplicações são oferecidas e distribuídas por terceiros sob seus próprios termos de licença.',
+        'lubia-role':'Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE',
+        'luiz-role':'Desenvolvedor de Software Pleno',
+        'maurano-role':'Tecnologista Sênior da Divisão de Processamento de Imagens (DIDPI) do INPE',
+        'support-bndes':'Banco Nacional de Desenvolvimento Econômico e Social (BNDES)',
+        'support-inpe':'Instituto Nacional de Pesquisas Espaciais (INPE)',
+        'support-funcate':'Fundação de Ciência Aplicações e Tecnologia Espaciais (FUNCATE)',
+        'support-fundep':'Fundação de Desenvolvimento da Pesquisa (FUNDEP)',
+        'support-world-bank':'Grupo do Banco Mundial',
+        'tb-support':'Apoio',
+        'tb-view':'Visão',
+        'tb-view-text':'O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos eus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet.',
+        'link-homepage':'Leia mais informações sobre o TerraBrasilis',
+        'tech':'Tecnologias',
+        'tech-plat':'Platformas/Software/Bibliotecas ',
+        'ti-team-role':'EQUIPE DE T.I.',
+        'ab-close-modal':'Fechar'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -119,7 +145,7 @@ var Translation={
 		'txt1i':'Close',
 		'txt2':'Deforestation increments',
 		'txt2a':'General informations',
-		'txt2b':'<h3>Overlay PRODES Amazon x Closed</h3>'+
+		'txt2b':'<h3>Overlay PRODES Amazon x Cerrado</h3>'+
 		'<br /><br />'+
 		'Mapping of the cerrado is carried out for the whole extension of the Biome, which includes an overlap zone with the limits of the Brazilian Legal Amazon. It occurs that the forest areas, within the zone of overlap between the borders of the Cerrado Biome and the limits of the Legal Amazon, 7% of the total area, have been mapped since 1988 by PRODES Amazônia. In this area of ​​overlap, INPE used the data already mapped by PRODES Amazônia, to avoid discrepant results between the two products. Although the two mappings have the same legend (i.e. shallow-cut deforestation) there is a peculiarity in relation to the beginning of their historical series and mapping frequencies.'+
 		'<br /><br />'+
@@ -209,7 +235,33 @@ var Translation={
 		'about': 'About',
 		'contactus': 'Contact us',
 		'tt-contactus': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)',
-		'tt-contactus-menu': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)'
+		'tt-contactus-menu': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)',
+		/* For about modal window  */
+		'andre-role':'Senior Software Development',
+        'co-team-role':'Team of Coordinators',
+        'contrib':'Contributors and former members',
+        'fabio-role':'Database Administrator',
+        'ney-role':'Senior Web Designer',
+        'adeline-role':'Research Fellow',
+        'jether-role':'Senior Software Development',
+        'karine-role':'Researcher of the Division of Image Processing (DIDPI) at INPE',
+        'license':'Those applications are offered and distributed by third parties under their own license terms',
+        'lubia-role':'Researcher of the Division of Image Processing (DIDPI) of INPE',
+        'luiz-role':'Software developer',
+        'maurano-role':'Senior Technologist of the Division of Image Processing (DIDPI) at INPE',
+        'support-bndes':'Brazilian Development Bank (BNDES)',
+        'support-inpe':'National Institute for Space Research (INPE)',
+        'support-funcate':'Foundation for Space Science, Technology and Applications (FUNCATE)',
+        'support-fundep':'Research Development Foundation (FUNDEP)',
+        'support-world-bank':'World Bank Group',
+        'tb-support':'Support',
+        'tb-view':'Vision',
+        'tb-view-text':'TerraBrasilis is a platform developed by INPE to organize, access and use throughout a web portal of geographical data produced by its environmental monitoring programs. At first, it focus mainly on the Amazon Program, but the concept and software packages produced can be adapted and customized to meet other projects that produce geographic data and aim to be accessible in the internet environment.',
+        'link-homepage':'More information about TerraBrasilis',
+        'tech':'Technology',
+        'tech-plat':'Platforms/Software/Libraries',
+        'ti-team-role':'IT team',
+        'ab-close-modal':'Close'
 	},
 	'es':{		
 		/* texts into HTML entities */
