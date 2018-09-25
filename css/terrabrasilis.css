@@ -104,8 +104,54 @@ a, a:hover, a:focus {
 .verde { color: #96c964;}
 .amarelo { color: #f9c069;}
 
-/* ------------- Tabela ------------*/
-.table-header {}
+/* ------------- Resets ------------*/
+#totalized-area { background-color: #f9c069;}
+#totalized-alerts { background-color: #96c964;}
+.number-display, .number-display  span { color: #00796b !important;}
+
+/* ------------- Radio ------------*/
+.custom-radios div {
+  display: inline-block;
+}
+.custom-radios input[type="radio"] {
+  display: none;
+}
+.custom-radios input[type="radio"] + label {
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+.custom-radios input[type="radio"] + label span {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  margin: 0px 15px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  line-height: 44px;
+}
+.custom-radios input[type="radio"] + label span img {
+  opacity: 0;
+  transition: all .3s ease;
+}
+.custom-radios input[type="radio"] + label span {
+  background-color: #cccccc;
+}
+
+.custom-radios input[type="radio"]:checked + label span {
+  opacity: 1;
+  background:url(../img/check.svg) center center no-repeat;
+  width: 23px;
+  height: 23px;
+  display: inline-block;
+  background-color: #cccccc;	
+
+}
+
 
 /* ---------------------------------------------------
     Material Icons
