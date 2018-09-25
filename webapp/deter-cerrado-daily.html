@@ -54,17 +54,17 @@
 									
 				<li class="active"><!-- manter active no primeiro -->
 					<a href="#ferramentas" data-toggle="collapse" aria-expanded="true">
-							<i class="material-icons">build</i>Ferramentas</a>
+							<i class="material-icons">build</i><span id="tools">Ferramentas</span></a>
 					</li>
 				<li>
-					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de incremento de desmatamento.">
+					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de alertas de desmatamento.">
 						<i class="material-icons">cloud_download</i><span id="txt4">Baixar Dados</span></a>
 				</li>
 												
 				<li>
 					<a href="#print_information" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador." data-toggle="modal">
 
-							<i class="material-icons">print</i>Imprimir Graficos</a>
+							<i class="material-icons">print</i><span id="txt4">Imprimir Gráficos</span></a>
 				</li>
 				
 				<!--li>
@@ -74,17 +74,17 @@
 
 				<li>
 					<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
-						<i class="material-icons">help</i>Ajuda</a>
+							<i class="material-icons">help</i><span id="help">Ajuda</span></a>
 				</li>
 				
 				<li>					
 					<a href="#modal-container-about" id="goto_about" data-toggle="modal" title="Ver informações sobre o projeto e a equipe." >
-							<i class="material-icons">info</i>Sobre</a>
+							<i class="material-icons">info</i><span id="about">Sobre</span></a>
 				</li>
 				
 				<li>
 					<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br." data-toggle="collapse" aria-expanded="false">
-						<i class="material-icons">email</i>Contato</a>
+							<i class="material-icons">email</i><span id="contactus">Contato</span></a>
 				</li>
 
 			</ul>
@@ -93,25 +93,25 @@
 									
 				<li class="active"><!-- manter active no primeiro -->
 					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
-					<i class="material-icons">dashboard</i>Gráficos - desmatamento</a>
+					<i class="material-icons">dashboard</i><span id="nv-chart">Gráficos - desmatamento</span></a>
 				</li>
 
 				<li>
 					<a href="/dashboard/deforestation/biomes/cerrado/increments/" id="toIncrementsChart" target="_blank" title="Abrir o painel de incrementos de desmatamento." data-toggle="collapse" aria-expanded="false">
-						<i class="material-icons">insert_chart</i>Incrementos anuais</a>
+						<i class="material-icons">insert_chart</i><span id="nv-increments">Incrementos anuais</span></a>
 				</li>
 				<li>
 					<a href="/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart" target="_blank" title="Abrir o painel de alertas de desmatamento." data-toggle="collapse" aria-expanded="false">
-						<i class="material-icons">insert_chart</i>Alertas diários</a>
+						<i class="material-icons">insert_chart</i><span id="nv-daily">Alertas diários</span></a>
 				</li>
 				<li>
 					<a href="/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart" target="_blank" title="Abrir o painel de agregado de alertas de desmatamento." data-toggle="collapse" aria-expanded="false">
-						<i class="material-icons">insert_chart</i>Agregado de alertas</a>
+						<i class="material-icons">insert_chart</i><span id="nv-aggreg">Agregado de alertas</span></a>
 				</li>
 			</ul>
 
 			<ul class="list-unstyled CTAs">
-					<li><a href="http://www.obt.inpe.br/cerrado" class="btn btn-primary btn-success" target="_blank">Página Cerrado</a></li>
+					<li><a href="http://www.obt.inpe.br/cerrado" class="btn btn-primary btn-success" target="_blank"><span id="nv-home">Página Cerrado</span></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -132,10 +132,10 @@
 				</div>
 				<ul class="navbar-nav  navbar-right">
 					<li class="nav-item active">
-						<a class="nav-link"  href="#modal-container-about" data-toggle="modal">Sobre <span class="sr-only">(current)</span></a>
+						<a class="nav-link"  href="#modal-container-about" data-toggle="modal"><span id="about-menu">Sobre</span></a>
 					</li>
 					<li class="nav-item">
-						<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus-menu" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br." class="nav-link">Contato</a>
+						<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus-menu" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br." class="nav-link"><span id="contactus-menu">Contato</span></a>
 					</li>
 					<li class="nav-item">
                         <a class="nav-link" href="#"> 
