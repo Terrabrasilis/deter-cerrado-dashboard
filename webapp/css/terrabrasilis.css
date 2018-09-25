@@ -64,7 +64,7 @@ a, a:hover, a:focus {
 }
 
 .reset{
-	margin: 0px 25px 0px 25px!important; 
+	margin: 0px 25px 0px 25px!important;
 	bottom: 25px;
 	top: -15px;
 	padding: 5px;
@@ -76,6 +76,7 @@ a, a:hover, a:focus {
 
 .groupbox { width: 100%!important; margin-right: 15px;}
 
+.boxtitlepanel { text-align: left; color: #00796b; font-size: 18px; text-decoration: none; border-bottom: 1px solid #49bc95;  margin:74px 5px 0px 20px;}
 .boxtitle { text-align: left; color: #00796b; font-size: 18px; text-decoration: none; border-bottom: 1px solid #eeeeee; margin: 25px;} 
 .boxtitletable { text-align: left !important; color: #00796b; font-size: 18px; text-decoration: none; border-bottom: 1px solid #eeeeee; margin:25px 0px 25px 0px; width: 100%;} 
 .boxtitletable a[aria-expanded="true"] {color: #00796b; background-color:transparent!important;}
@@ -626,7 +627,7 @@ background: #707070;
 /*--------------------------------------------------------
     ABOUT
 ----------------------------------------------------------*/
-.about .aboutdialog {max-height: 700px; overflow:auto; border: 0px;}
+.about .aboutdialog {max-height: 700px; overflow:auto; border: 0px; overflow-x: hidden;}
 .about .btn-primary:hover,.about .btn-primary:focus { background-color: #006950; border-color: #108d6f; box-shadow: none; outline: none;}
 .about .btn-primary {color: #fff; background-color: #108d6f; border-color: #108d6f;}
 .about section {padding: 20px 0;}

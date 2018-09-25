@@ -1,6 +1,7 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+		'title-chart': 'Alertas diários de desmatamento no Cerrado Brasileiro.',
 		'txt1':'Painel DETER - diário',
 		'txt2':'Abrir o Painel Mensal',
 		'txt3':'Apenas o intervalo de tempo exibido no painel (365 dias).',
@@ -56,6 +57,7 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
+		'title-chart': 'Daily alerts of the deforestation in Brazilian Cerrado.',
 		'txt1':'DETER panel - daily',
 		'txt2':'Open the Monthly Panel',
 		'txt3':'Only the time interval displayed in the panel (365 days).',

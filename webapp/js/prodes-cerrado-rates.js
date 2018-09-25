@@ -1268,7 +1268,7 @@ var graph={
 				var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
 				var dt=new Date();
 				dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-				saveAs(blob, 'cerrado_rates_filtered_'+dt+'.csv');
+				saveAs(blob, 'cerrado_increments_filtered_'+dt+'.csv');
 			}else{
 				downloadCSVWithoutFilter();
 			}
@@ -1319,7 +1319,7 @@ var graph={
 			var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
 			var dt=new Date();
 			dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-			saveAs(blob, 'cerrado_rates_'+dt+'.csv');
+			saveAs(blob, 'cerrado_increments_'+dt+'.csv');
 		};
 		// build download data
 		d3.select('#downloadTableBtn')
