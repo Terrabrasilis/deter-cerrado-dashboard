@@ -33,7 +33,7 @@
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
 	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
    	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
-	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily-print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="./css/prodes-cerrado-rates-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
 </head>
 <body>
@@ -62,7 +62,8 @@
 				</li>
 												
 				<li>
-					<a href="#imprimir" id="prepare_print" data-toggle="collapse" aria-expanded="false" title="Imprimir">
+					<a href="#print_information" id="prepare_print" title="Imprimir esta página utilizando o recurso do navegador." data-toggle="modal">
+
 							<i class="material-icons">print</i>Imprimir Graficos</a>
 				</li>
 				
@@ -117,6 +118,10 @@
 
 	<!-- Menu superior -->
 	<div id="content">
+		<div class="boxtop">
+			<img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+			<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span></h5>
+		</div>
 		<nav  class="navbar navbar-expand-lg materialnav navbar-header">
 			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="material-icons menuicon">menu</i>
@@ -243,18 +248,7 @@
                 </div>
             </div>
         </div>
-        <div id="print_information" style="display:none;" onclick="this.style.display='none';">
-            <span class="info_p"><span id="txt14">
-                A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
-                A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
-                &nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
-                &nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
-                &nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br /></span>
-                <span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
-                <span id="txt15">Concluir</span>
-                </span>
-            </span>
-        </div>
+        
         <div id="display_error">
             <span id="inner_display_error">
             
@@ -327,71 +321,9 @@
                     </div>
                 </div>
 
-				<!-- modal window with information about download -->
-				<div class="modal fade" id="modal-container-download" role="dialog" aria-labelledby="download-rates" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">								
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="download-rates">
-									<span id="txt25">Informações para download</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-								<span id="txt26">Baixar a tabela com os incremento de desmatamento em formato CSV.</span>
-								<div class="dwn-tool">
-									<a href="#" id="download-csv-filtered">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt27">Com filtros.</span>
-									</a>
-									<br/>
-									<a href="#" id="download-csv-all">
-									<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt28">Sem filtros.</span>
-									</a>
-								</div>
-							</div>
-							<div class="modal-footer">								
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt29">Fechar</span>
-								</button> 
-							</div>
-						</div>
-					</div>
-				</div>
+				
 				<!-- modal window with an introductory video of this panel -->
-				<div class="modal fade" id="modal-container-video" role="dialog" aria-labelledby="video-rates" aria-hidden="true">
-					<div class="modal-dialog" style="width:830px;">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="video-rates">
-									<span id="txt1c">Informações de ajuda para uso do painel</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-								<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
-								<div class="embed-video">
-                                    <video width="800" height="600" controls>
-                                        <source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
-                                        <track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
-                                        <track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
-                                        <track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
-                                        Seu navegador não suporta a tag de vídeo.
-                                    </video>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt1e">Fechar</span>
-								</button> 
-							</div>
-						</div>
-					</div>
-				</div>
-
+				
 <!-- modal About -->
 <div class="modal fade about" id="modal-container-about">
 <div class="modal-dialog  logo-card">
@@ -731,22 +663,153 @@
 			</div>
         </div>
 	</div>
-	<div id="display_error"><span id="inner_display_error"></span></div>
-	<div id="display_loading"><span id="inner_display_loading"></span></div>
-	<div id="print_information" style="display:none;" onclick="this.style.display='none';">
-		<span class="info_p">
-			<span id="txt30">
-				A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+	
+<!-- Modal print -->
+	<div class="modal fade" id="print_information">
+          <div class="modal-dialog">
+             <div class="modal-content modalinf">
+                <div class="modal-header fechar">
+					 <h5 class="modal-title boxtitletable"> <span >Imprimir Gráficos</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><i class="material-icons">clear</i></button>
+                  </div> 					
+                    <!-- / modal-header -->
+              <div class="modal-body ">	
+				  <div class="alert alert-success" role="alert"> <span id="txt30">
+					  
+					  A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
 				A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
 				&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
 				&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
 				&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />
-			</span>
-			<span id="print_page" class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimir esta página utilizando o recurso do navegador.">
-				<span id="txt31">Concluir</span>
-			</span>
-		</span>
-	</div>
+					  </span>
+				  </div>
+							
+                           </div>
+                   
+                    <!-- / modal-body -->
+                   <div class="modal-footer">
+                       <div class="checkbox pull-right">
+                            <label>
+                              <button type="button" class="btn btngreen" data-dismiss="modal" id="print_page" style="color: #fff;">
+									<span id="txt1ea">Fechar</span>
+								</button> 
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                  </div>
+                  <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+          </div>
+          <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->
+	
+	
+	<!-- Modal Download-->		
+				<div class="modal fade" id="modal-container-download">
+          <div class="modal-dialog">
+             <div class="modal-content modalinf">
+                <div class="modal-header fechar">
+					 <h5 class="modal-title boxtitletable"> <span id="txt26">Baixar a tabela com os incremento de desmatamento em formato CSV.</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                </div> 					
+                    <!-- / modal-header -->
+              <div class="modal-body ">			
+								<div class="dwn-tool">									
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+											   <i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-filtered">
+													<span id="txt27" class="alerttitle">Com filtros.</span>
+											    </a>
+											</p>
+										</div>
+            						</div> 
+									
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+											   <i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-all">
+													<span  id="txt28" class="alerttitle">Sem filtros.</span>
+											    </a>
+											</p>
+										</div>
+            						</div> 
+								</div>				
+                           </div>
+                   
+                    <!-- / modal-body -->
+                   <div class="modal-footer">
+                       <div class="checkbox pull-right">
+                            <label>
+                              <button type="button" class="btn btngreen" data-dismiss="modal">
+									<span id="txt29">Fechar</span>
+								</button> 
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                  </div>
+                  <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+          </div>
+          <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->
+	
+		
+				<!-- modal window with an introductory video of this panel -->
+		<div class="modal fade" id="modal-container-video">
+          <div class="modal-dialog">
+             <div class="modal-content modalinf">
+                <div class="modal-header fechar">
+					 <h5 class="modal-title boxtitletable"> <span id="txt1c">Informações de ajuda para uso do painel</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                </div> 					
+                    <!-- / modal-header -->
+              <div class="modal-body ">	
+				  <div class="alert alert-success" role="alert">
+					  <span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+				  </div>
+								<div class="embed-video">
+										<video style="width: 100%" controls>
+											<source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
+											<track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+											<track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+											<track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
+											Seu navegador não suporta a tag de vídeo.
+										</video>
+								</div>			
+                           </div>
+                   
+                    <!-- / modal-body -->
+                   <div class="modal-footer">
+                       <div class="checkbox pull-right">
+                            <label>
+                              <button type="button" class="btn btngreen" data-dismiss="modal">
+									<span id="txt1e">Fechar</span>
+								</button> 
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                  </div>
+                  <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+          </div>
+          <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->
+
+	<div id="display_loading"><span id="inner_display_loading"></span></div>
+	
 	<!--Footer-->
 	<footer class="footer">
 		<p>© 2018<a href="#"> Cerrado Brasileiro</a></p>

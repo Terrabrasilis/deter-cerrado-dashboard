@@ -103,7 +103,7 @@ a, a:hover, a:focus {
 
 .verde { color: #96c964;}
 .amarelo { color: #f9c069;}
-.boxtop {display: none; margin: 0px 25px 25px 25px; border-bottom: 1px solid #00796b;}
+.boxtop {display: none; margin: 0px 20px 20px 20px; border-bottom: 1px solid #00796b;}
 
 /* ------------- Resets ------------*/
 #totalized-area { background-color: #f9c069;}
@@ -234,7 +234,8 @@ a, a:hover, a:focus {
 
 .bandeira { width: 28px;
   height: 28px;
-  display: inline-block;}
+  display: inline-block;
+border: 0px !important;}
 
 .analises a[aria-expanded="true"] {
     background-color: #00796b !important;
@@ -580,6 +581,7 @@ a[data-toggle="collapse"] {
   transition: 0.5s ease;
 }
 
+
 .descricaoslide { margin: 0 0 48px; font-size: 14px; line-height: 25px;}
 
 .modalinf {
@@ -589,13 +591,14 @@ a[data-toggle="collapse"] {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   box-sizing: border-box;
   padding: 28px;
+
 }
 
 .fechar {border:0px !important; padding: 0px !important;}
 
 .thumbnailc { margin: 0 0 28px; border: 0px; }
 
-.modal-body { margin-top: 0px; padding-top: 0px;}
+.modal-body { margin-top: 0px; padding-top: 0px; min-width: 200px;}
 .textoc { color: #707070; font-size: 12px; margin-left: 5px;}
 
 /* indicadores do carousel */
