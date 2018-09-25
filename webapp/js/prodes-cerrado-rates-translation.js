@@ -20,7 +20,7 @@ var Translation={
 		'<br /><br />'+
 		'Este ajuste na máscara de desmatamento do PRODES Amazônia resultou em uma agregação de todos os anos mapeados até 2008 em um único plano de informação, não sendo possível separar a geometria do desmatamento dos anos anteriores. Uma vez que os números computados pelo PRODES Cerrado são referentes ao desmatamento mapeado a partir da máscara agregada do ano 2000, início de sua série histórica, os mesmos não consideram a área de desmatamento acumulado até o ano 2000.'+
 		'<br /><br />'+
-		'Por essa razão, ainda que esta diferença ocorra apenas na área de sobreposição (7% da área total), os números do desmatamento anual publicados no dashboard do TerraBrasilis (www.dpi.inpe.br/fipcerrado/dashboard/) não são iguais aos dados geográficos disponibilizados para download no mesmo site, exclusivamente para os anos 2000 até 2008.',
+		'Por essa razão, ainda que esta diferença ocorra apenas na área de sobreposição (7% da área total), os números do desmatamento anual publicados no <a href="http://terrabrasilis.dpi.inpe.br/dashboard/deforestation/biomes/cerrado/increments/" target="_blank">dashboard do TerraBrasilis</a> não são iguais aos dados geográficos disponibilizados para download no mesmo site, exclusivamente para os anos 2000 até 2008.',
 		'txt2c':'Fechar',
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir',
@@ -125,7 +125,7 @@ var Translation={
 		'<br /><br />'+
 		'This adjustment in the deforestation mask of PRODES Amazônia resulted in an aggregation of all the years mapped until 2008 into a single information plan, and it is not possible to separate the geometry of deforestation from previous years. Since the numbers computed by PRODES Cerrado refer to the deforestation mapped from the aggregate mask of the year 2000, beginning of its historical series, they do not consider the deforestation area accumulated until the year 2000.'+
 		'<br /><br />'+
-		'For this reason, even though this difference occurs only in the overlapping area (7% of the total area), the annual deforestation figures published in the TerraBrasilis dashboard (www.dpi.inpe.br/fipcerrado/dashboard/) are not the same as the geographic data available for download at the same site, exclusively for the years 2000 to 2008.',
+		'For this reason, even though this difference occurs only in the overlapping area (7% of the total area), the annual deforestation figures published in the <a href="http://terrabrasilis.dpi.inpe.br/dashboard/deforestation/biomes/cerrado/increments/" target="_blank">TerraBrasilis dashboard</a> are not the same as the geographic data available for download at the same site, exclusively for the years 2000 to 2008.',
 		'txt2c':'Close',
 		'txt3':'Download',
 		'txt4':'Print',
@@ -230,7 +230,7 @@ var Translation={
 		'<br /><br />'+
 		'Este ajuste en la máscara de deforestación del PRODES Amazonia resultó en una agregación de todos los años asignados hasta 2008 en un único plan de información, no siendo posible separar la geometría de la deforestación de los años anteriores. Una vez que los números computados por el PRODES Cerrado son referentes a la deforestación mapeada a partir de la máscara agregada del año 2000, inicio de su serie histórica, los mismos no consideran el área de deforestación acumulada hasta el año 2000.'+
 		'<br /><br />'+
-		'Por esta razón, aunque esta diferencia sólo ocurre en el área de superposición (7% del área total), los números de la deforestación anual publicados en el tablero de TerraBrasilis (www.dpi.inpe.br/fipcerrado/dashboard/) no son iguales a los datos geográficos disponibles para su descarga en el mismo sitio, exclusivamente para los años 2000 hasta 2008.',
+		'Por esta razón, aunque esta diferencia sólo ocurre en el área de superposición (7% del área total), los números de la deforestación anual publicados en el <a href="http://terrabrasilis.dpi.inpe.br/dashboard/deforestation/biomes/cerrado/increments/" target="_blank">tablero de TerraBrasilis</a> no son iguales a los datos geográficos disponibles para su descarga en el mismo sitio, exclusivamente para los años 2000 hasta 2008.',
 		'txt2c':'Cerrar',
 		'txt3':'Descargar datos',
 		'txt4':'Imprimir',
