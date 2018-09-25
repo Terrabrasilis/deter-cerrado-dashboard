@@ -1,17 +1,18 @@
+
+body { background-color: #fff !important;  -webkit-print-color-adjust: exact;}
 #sidebar  { display: none}
-.box-grafico { width: 100%; margin-left: 0px; zoom: 85%;}
-
-    #sidebar.active {
-		display: none;
-    }
-.boxnote {display: none;}
-#txt15 {display: none;}
-.material-icons { display: none;}
-
-/* A4 Landscape*/
+   .box-grafico { width: 100%; margin-left: 0px; zoom: 65%;}
+   .boxtables { display: none;}
+   .boxnote {display: none;}
+   #txt15 {display: none;}
+   .boxtop {display:block !important; }
+  .boxtitulo { display: none;}
+.modal-backdrop { display: none !important;}
+.footer {font-size: 12px;}
+.footer a { text-decoration: none;}
 @page {
  size: A4 landscape;
- margin: 0px;
+ margin: 10px;
 }
 
 @media screen  {
@@ -26,7 +27,5 @@
 
   }
 	
-	svg {width:  100%;}
-  
 }
 
