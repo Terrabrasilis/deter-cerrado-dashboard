@@ -167,6 +167,7 @@
                 <div class="col-md-6">
                     <div class="box-grafico text-center">
                         <div id="totalized-area">
+							
                             <input id="radio-area" title="Ver gráficos com base no somatório de áreas em km²." class="input_radio"  style="display:none;margin-top:18px;margin-right:-20px;"
                             name="set_dim" type="radio" onclick="graph.setDataDimension('area');" checked="checked">
                         </div>
@@ -185,7 +186,7 @@
                 <div class="col-md-12">
                     <div class="box-grafico text-center">
                         <div id="chart-line-by-month" class="all-charts timeline-charts">
-							<div id="title-chart-timeline" class="all-charts-title"></div>
+							<div id="title-chart-timeline" class="all-charts-title  boxtitle"></div>
 							<div class="keep-space">
 								<div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
 									<button type="button" class="btn btn-default btn-xs" onclick="graph.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
@@ -199,12 +200,14 @@
                 <div class="col-md-4">
                     <div class="box-grafico text-center">
 						<div id="chart-hist-top-counties" class="all-charts bar-charts">
+
 							<div style="position:relative;">
-								<div id="title-chart-counties" class="all-charts-title"></div>
+								<div id="title-chart-counties" class="all-charts-title boxtitle"></div>
 								<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
 									<span aria-hidden="true" id="txt33" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
 								</a>
 							</div>
+
 
 							<div class="keep-space">
 								<div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
@@ -217,7 +220,7 @@
 				<div class="col-md-4">
                     <div class="box-grafico text-center">
 						<div id="chart-hist-top-ucs" class="all-charts bar-charts">
-							<div id="title-chart-ucs" class="all-charts-title"></div>
+							<div id="title-chart-ucs" class="all-charts-title boxtitle"></div>
 							<div class="keep-space">
 								<div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
 									<button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
@@ -229,7 +232,7 @@
                 <div class="col-md-4">
                     <div class="box-grafico text-center">
                         <div id="chart-ring-by-state" class="all-charts ring-charts">
-							<div id="title-chart-state" class="all-charts-title"></div>
+							<div id="title-chart-state" class="all-charts-title  boxtitle"></div>
 							<div class="keep-space">
 								<div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
 									<button type="button" class="btn btn-default btn-xs" onclick="graph.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
