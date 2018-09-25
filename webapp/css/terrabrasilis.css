@@ -103,6 +103,7 @@ a, a:hover, a:focus {
 
 .verde { color: #96c964;}
 .amarelo { color: #f9c069;}
+.boxtop {display: none; margin: 0px 25px 25px 25px; border-bottom: 1px solid #00796b;}
 
 /* ------------- Resets ------------*/
 #totalized-area { background-color: #f9c069;}
