@@ -1,8 +1,12 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+<<<<<<< HEAD
+		'title-chart': 'Incrementos de desmatamento anuais no Cerrado Brasileiro.',
+=======
 		'title-chart': 'Incrementos anuais de desmatamento no Cerrado Brasileiro.',
 		'tituloprint': ' | Incrementos anuais de desmatamento no Cerrado Brasileiro.',
+>>>>>>> 4f1a00f2eb1a876d4902b4c7b16dc35192a8f539
 		'txt1':'Incrementos de desmatamento',
 		'goto_about':'Ver informações sobre o projeto e a equipe.',
 		'txt1c':'Informações de ajuda para uso do painel',
@@ -144,7 +148,7 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
-		'title-chart': 'Annual increments of the deforestation in Brazilian Cerrado.',
+		'title-chart': 'Annual deforestation increments in the Brazilian Cerrado',
 		'tituloprint': ' | Annual increments of the deforestation in Brazilian Cerrado.',
 		'txt1':'Deforestation increments',
 		'goto_about':'See informations about the project and team.',
@@ -179,7 +183,7 @@ var Translation={
 		'txt12':'Clean this filter.',
 		'txt13':'Download the series chart image in a PNG format.',
 		'txt14':'Download the pie chart image in a PNG format.',
-		'txt15':'Below it follows the tables of the annual deforestation increments and relative variation in Brazilian Cerrado',
+		'txt15':'Below it follows the tables of both the annual deforestation increments and relative variation in the Brazilian Cerrado',
 		'txt16':'Annual deforestation increments between <span id="year-range"></span> (km²/year)',
 		'txt17':'Download CSV',
 		'txt18':'Relative variations of the annual deforestation increments (%)',
@@ -208,8 +212,8 @@ var Translation={
 		/* titles for HTML entities */
 		'title-chart-bar-by-year-625':'Annual totals',
 		'title-chart-by-state':'Totals by State',		
-		'title-chart-lines':'Totals annual by',
-		'title-chart-lines3':'Totals annual by',
+		'title-chart-lines':'Annual totals by',
+		'title-chart-lines3':'Annual totals by',
 		'title-chart-lines-p3':'States',
 		'title-chart-by-mun':'Deforestation by municipality',
 		'about-close':'Close',
@@ -234,8 +238,8 @@ var Translation={
 		'year':'Year: ',
 		'percent':'Percentage: ',
 		'filter':'Filter',
-		'with_filter':'up to 6,25ha',
-		'without_filter':'up to 1ha',
+		'with_filter':'above 6,25ha',
+		'without_filter':'above 1ha',
 		'lineYAxis':'Area in km²/year',
 		'lineXAxis':'Brazilian Cerrado Monitoring Period: ',
 		'tableYearState':'Year / State',
