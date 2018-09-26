@@ -81,6 +81,7 @@ var Translation={
 		'toIncrementsChart':'Abrir o painel de incrementos de desmatamento.',
 		'toDailyChart':'Abrir o painel de alertas de desmatamento.',
 		'toAggregatedChart':'Abrir o painel de agregado de alertas de desmatamento.',
+		'tituloprint': ' | Variação da detecção de área do projeto DETER com granularidade mensal e sazonalidade anual do PRODES (Agosto a Julho).',
 		/* For about modal window  */
 		'andre-role':'Desenvolvedor de Software Sênior',
         'co-team-role':'EQUIPE DE COORDENADORES',
@@ -179,6 +180,7 @@ var Translation={
 		'toIncrementsChart':'Open the panel of the deforestation increments.',
 		'toDailyChart':'Open the panel of the deforestation daily alerts.',
 		'toAggregatedChart':'Open the panel of the deforestation aggregate alerts.',
+		'tituloprint': ' | Area detection variation of DETER project with monthly granularity and PRODES Annual Seasonality (August to July).',
 		/* For about modal window  */
 		'andre-role':'Senior Software Development',
 		'co-team-role':'Team of Coordinators',

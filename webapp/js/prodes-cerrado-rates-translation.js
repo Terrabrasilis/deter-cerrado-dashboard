@@ -2,6 +2,7 @@ var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
 		'title-chart': 'Incrementos anuais de desmatamento no Cerrado Brasileiro.',
+		'tituloprint': ' | Incrementos anuais de desmatamento no Cerrado Brasileiro.',
 		'txt1':'Incrementos de desmatamento',
 		'goto_about':'Ver informações sobre o projeto e a equipe.',
 		'txt1c':'Informações de ajuda para uso do painel',
@@ -143,7 +144,8 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
-		'title-chart': 'Annual increments of the deforestation in Brazilian Cerrado',
+		'title-chart': 'Annual increments of the deforestation in Brazilian Cerrado.',
+		'tituloprint': ' | Annual increments of the deforestation in Brazilian Cerrado.',
 		'txt1':'Deforestation increments',
 		'goto_about':'See informations about the project and team.',
 		'txt1c':'Useful information to manage the dashboard.',

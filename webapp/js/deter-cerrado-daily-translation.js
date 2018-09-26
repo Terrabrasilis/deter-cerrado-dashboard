@@ -74,6 +74,7 @@ var Translation={
 		'toIncrementsChart':'Abrir o painel de incrementos de desmatamento.',
 		'toDailyChart':'Abrir o painel de alertas de desmatamento.',
 		'toAggregatedChart':'Abrir o painel de agregado de alertas de desmatamento.',
+		'tituloprint':' | Alertas diários de desmatamento no Cerrado Brasileiro.',
 		/* For about modal window  */
 		'andre-role':'Desenvolvedor de Software Sênior',
         'co-team-role':'EQUIPE DE COORDENADORES',
@@ -176,6 +177,7 @@ var Translation={
 		'toIncrementsChart':'Open the panel of the deforestation increments.',
 		'toDailyChart':'Open the panel of the deforestation daily alerts.',
 		'toAggregatedChart':'Open the panel of the deforestation aggregate alerts.',
+		'tituloprint':' | Daily alerts of the deforestation in Brazilian Cerrado.',
 		/* For about modal window  */
 		'andre-role':'Senior Software Development',
 		'co-team-role':'Team of Coordinators',
