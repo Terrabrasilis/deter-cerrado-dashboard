@@ -5,9 +5,15 @@ var Translation={
 		'goto_video':'Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.',
 		'title-chart': 'Alertas diários de desmatamento no Cerrado Brasileiro.',
 		'txt1':'Painel DETER - diário',
+		'txt1f':'Pesquisa de municípios',
+		'txt1g':'Encontre um município.',
+		'txt1h':'Selecione um item na lista de municípios encontrados.',
+		'txt1i':'Fechar',
 		'txt2':'Abrir o Painel Mensal',
 		'txt3':'Apenas o intervalo de tempo exibido no painel (365 dias).',
 		'txt4':'Baixar Dados',
+		'txt4p':'Imprimir Gráficos',
+		'txt4s':'Imprimir Gráficos',
 		'downloadBtn':'Baixar a tabela de alertas de desmatamento em formato CSV.',
 		'txt5':'Imprimir',
 		'txt6':'Escurecer/clarear',
@@ -21,7 +27,7 @@ var Translation={
 		'txt12a':'Limpar este filtro.',
 		'txt13':'Filtro:',
 		'txt13a':'Limpar este filtro.',
-		'txt14':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
+		'txt30':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
 		'A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />'+
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
@@ -38,6 +44,7 @@ var Translation={
 		'txt23':'Baixar a tabela de atributos, sem a componente geográfica, em formato CSV.',
 		'txt24':'Com filtros.',
 		'txt25':'Sem filtros.',
+		'txt33':'Procurar por Municípios',
 		/* titles for HTML entities */
 		'aggregate_monthly':'Alternar para o painel de consulta agregada mensal.',
 		'modal-718053':'Baixar os dados com granularidade diária.',
@@ -47,15 +54,15 @@ var Translation={
 		'radio-alerts':'Veja os gráficos com base na soma do número de alertas.',
 		'print_page':'Imprimir esta página utilizando o recurso do navegador.',
 		/* Texts inside javascript. */
-		'area': 'área',
+		'areas': 'área(s)',
 		'alerta': 'alerta',
 		'alertas':'alerta(s)',
-		'timeline_header':'Distribuição de %dim% no tempo (granularidade diária)',
+		'timeline_header':'Distribuição de %dim% ao longo do tempo (granularidade diária)',
 		'timeline_desc':'Intervalo disponível (máximo 365 dias):',
 		'title_tot_class':'%Dim% por Classes',
-		'title_top_county':'Os municípios com maiores %dim% de desmatamento',
+		'title_top_county':'Municípios com maiores %dim% de desmatamento',
 		'title_tot_state':'%Dim% por Estados',
-		'title_top_uc':'As áreas de proteção com maiores %dim% de desmatamento',
+		'title_top_uc':'Áreas de proteção com maiores %dim% de desmatamento',
 		'footer1':'Gerado pelo INPE/OBT/DPI/TerraBrasilis em',
 		'footer2':'sob licença <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">CC BY-SA 4.0</a>',
 		'without':'Sem valor',
@@ -109,11 +116,17 @@ var Translation={
 		/* texts into HTML entities */
 		'goto_about':'See informations about the project and team.',
 		'goto_video':'Watch the introductory video to see how an user interact with dashboard tools.',
-		'title-chart': 'Daily alerts of the deforestation in Brazilian Cerrado.',
+		'title-chart': 'Daily deforestation alerts in the Brazilian Cerrado.',
 		'txt1':'DETER panel - daily',
+		'txt1f':'Search for municipalities',
+		'txt1g':'Find a county.',
+		'txt1h':'Select an item from the list of found municipalities.',
+		'txt1i':'Close',
 		'txt2':'Open the Monthly Panel',
 		'txt3':'Only the time interval displayed in the panel (365 days).',
 		'txt4':'Download data',
+		'txt4p':'Print Graphics',
+		'txt4s':'Print Graphics',
 		'downloadBtn':'Download the deforestation alert table in CSV format.',
 		'txt5':'Print',
 		'txt6':'Darken/Enlighten',
@@ -127,7 +140,7 @@ var Translation={
 		'txt12a':'Clean this filter.',
 		'txt13':'Filter:',
 		'txt13a':'Clean this filter.',
-		'txt14':'The print this document use the browser resources and may have differences among themselves.<br />'+
+		'txt30':'The print this document use the browser resources and may have differences among themselves.<br />'+
 		'The charts stay well arranged over the print document when the following configurations is defined:<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper orientation is landscape;<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper size is A4;<br />'+
@@ -144,6 +157,7 @@ var Translation={
 		'txt23':'Download the attribute table, without the geographic component in CSV format.',
 		'txt24':'With filters.',
 		'txt25':'Without filters.',
+		'txt33':'Search for Municipalities',
 		/* titles for HTML entities */
 		'aggregate_monthly':'Exchange by the monthly aggregation analysis panel.',
 		'modal-718053':'Download the data with daily granularity.',
@@ -153,14 +167,14 @@ var Translation={
 		'radio-alerts':'See the charts based on sum of alerts.',
 		'print_page':'Print this page using the browser resources.',
 		/* Texts inside javascript. */
-		'area':'area',
+		'areas':'area(s)',
 		'alerta':'alert',
 		'alertas':'alert(s)',
 		'timeline_header':'Distribution of %dim% over time (daily granularity).',
 		'timeline_desc':'Interval available (maximum 365 days):',
 		'title_tot_class':'Classes by %dim%',
 		'title_top_county':'Municipalities with the greatest deforestation %dim%',
-		'title_tot_state':'States by %dim%',
+		'title_tot_state':'%Dim% by States',
 		'title_top_uc':'Protected areas with the greatest deforestation %dim%',
 		'footer1':'Generated by the INPE/OBT/DPI/TerraBrasilis in',
 		'footer2':'under license <a target="blank_" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>',
@@ -242,6 +256,7 @@ var Translation={
 		'txt23':'Descargar la tabla de atributos, sin el componente geográfico en formato CSV.',
 		'txt24':'Con filtros.',
 		'txt25':'Sin filtros.',
+		'txt33':'',
 		/* titles for HTML entities */
 		'aggregate_monthly':'Alternar al panel de consulta agregada mensual.',
 		'modal-718053':'Descargar los datos con granularidad diaria.',
