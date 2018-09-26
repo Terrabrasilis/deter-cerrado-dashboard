@@ -197,8 +197,13 @@
                         <div id="chart-line-by-month" class="all-charts timeline-charts">
 							<div id="title-chart-timeline" class="all-charts-title  boxtitle"></div>
 							<div class="keep-space">
-								<div class="reset" style="display: none;"><span id="txt9">Filtro:</span>&nbsp;<span class="filter"></span>
-									<button type="button" class="btn btn-default btn-xs" onclick="graph.lineDistributionByMonth.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<div class="reset" style="display: none;">
+									<b><span id="txt9">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:graph.lineDistributionByMonth.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
 								</div>
 							</div>
                         </div>
@@ -219,8 +224,13 @@
 
 
 							<div class="keep-space">
-								<div class="reset" style="visibility: hidden;"><span id="txt11">Filtro:</span>&nbsp;<span class="filter"></span>
-									<button type="button" class="btn btn-default btn-xs" onclick="SearchEngine.applyCountyFilter();graph.histTopByCounties.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<div class="reset" style="visibility: hidden;">
+									<b><span id="txt11">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:SearchEngine.applyCountyFilter();graph.histTopByCounties.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt11a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
 								</div>
 							</div>
                         </div>
@@ -231,8 +241,13 @@
 						<div id="chart-hist-top-ucs" class="all-charts bar-charts">
 							<div id="title-chart-ucs" class="all-charts-title boxtitle"></div>
 							<div class="keep-space">
-								<div class="reset" style="visibility: hidden;"><span id="txt13">Filtro:</span>&nbsp;<span class="filter"></span>
-									<button type="button" class="btn btn-default btn-xs" onclick="graph.histTopByUCs.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<div class="reset" style="visibility: hidden;">
+									<b><span id="txt13">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:graph.histTopByUCs.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt13a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
 								</div>
 							</div>
                         </div>
@@ -243,8 +258,13 @@
                         <div id="chart-ring-by-state" class="all-charts ring-charts">
 							<div id="title-chart-state" class="all-charts-title  boxtitle"></div>
 							<div class="keep-space">
-								<div class="reset" style="display: none;"><span id="txt12">Filtro:</span>&nbsp;<span class="filter"></span>
-									<button type="button" class="btn btn-default btn-xs" onclick="graph.ringTotalizedByState.filterAll();dc.redrawAll();"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<div class="reset" style="display: none;">
+									<b><span id="txt12">Filtro:</span></b> <span class="filter"></span>
+									<a href="javascript:graph.ringTotalizedByState.filterAll();dc.redrawAll();">
+										<span aria-hidden="true" id="txt12a" title="Limpar este filtro.">
+											<i class="material-icons md-icon-16 icongreen">delete</i>
+										</span>
+									</a>
 								</div>
 							</div>
                         </div>

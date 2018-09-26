@@ -128,11 +128,6 @@ div .dc-chart {
 	height: 500px;
 	overflow-y: scroll;
 }
-a span .md-icon-16{
-	color: #368fb3;
-	font-size: 16px;
-	vertical-align: bottom;
-}
 
 .info{
 	text-align: center;

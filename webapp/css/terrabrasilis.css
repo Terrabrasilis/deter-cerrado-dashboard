@@ -168,6 +168,12 @@ a, a:hover, a:focus {
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+a span .md-icon-16 {
+    color: #368fb3;
+    font-size: 16px;
+    vertical-align: bottom;
+}
+
 .icongreen {color: #00796b !important;}
 .icondownload {margin-right: 25px; color: #00796b; display: none;}
 

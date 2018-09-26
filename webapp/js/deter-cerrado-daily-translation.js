@@ -14,10 +14,13 @@ var Translation={
 		'txt7':'Entrar',
 		'txt8':'Não há dados.',
 		'txt9':'Filtro:',
-		'txt10':'Filtro:',
+		'txt9a':'Limpar este filtro.',
 		'txt11':'Filtro:',
+		'txt11a':'Limpar este filtro.',
 		'txt12':'Filtro:',
+		'txt12a':'Limpar este filtro.',
 		'txt13':'Filtro:',
+		'txt13a':'Limpar este filtro.',
 		'txt14':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
 		'A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />'+
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
@@ -117,10 +120,13 @@ var Translation={
 		'txt7':'Login',
 		'txt8':'Have no data.',
 		'txt9':'Filter:',
-		'txt10':'Filter:',
+		'txt9a':'Clean this filter.',
 		'txt11':'Filter:',
+		'txt11a':'Clean this filter.',
 		'txt12':'Filter:',
+		'txt12a':'Clean this filter.',
 		'txt13':'Filter:',
+		'txt13a':'Clean this filter.',
 		'txt14':'The print this document use the browser resources and may have differences among themselves.<br />'+
 		'The charts stay well arranged over the print document when the following configurations is defined:<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper orientation is landscape;<br />'+
@@ -216,7 +222,6 @@ var Translation={
 		'txt7':'Iniciar sesión',
 		'txt8':'No hay datos.',
 		'txt9':'Filtro:',
-		'txt10':'Filtro:',
 		'txt11':'Filtro:',
 		'txt12':'Filtro:',
 		'txt13':'Filtro:',
