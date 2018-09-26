@@ -701,6 +701,7 @@ footer{
 	.modal-dialog {min-width:300px;}
 	.box, .boxnote, .boxtitulo {   margin-left: -275px;}
 	.box-grafico {   margin-left: 0px;}
+	.boxtitlepanel {  margin-left: -270px !important;}
 }
 
 
