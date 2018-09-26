@@ -18,6 +18,7 @@ var Translation={
 		'txt2c':'Fechar',
 		'txt3':'Baixar CSV',
 		'txt4':'Imprimir',
+		'txt4p':'Imprimir Gráficos',
 		'txt5':'Escurecer/clarear',
 		'txt6':'Entrar',
 		'txt7':'Não há dados.',
@@ -25,7 +26,7 @@ var Translation={
 		'txt9':'Filtro:',
 		'txt10':'Filtro:',
 		'txt11':'Filtro:',
-		'txt12':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
+		'txt30':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
 		'A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />'+
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
@@ -117,6 +118,7 @@ var Translation={
 		'txt2':'Open the Daily Panel',
 		'txt3':'Download CSV',
 		'txt4':'Print',
+		'txt4p':'Print Graphics',
 		'txt5':'Darken/Enlighten',
 		'txt6':'Login',
 		'txt7':'Have no data.',
@@ -124,7 +126,7 @@ var Translation={
 		'txt9':'Filter:',
 		'txt10':'Filter:',
 		'txt11':'Filter:',
-		'txt12':'The print this document use the browser resources and may have differences among themselves.<br />'+
+		'txt30':'The print this document use the browser resources and may have differences among themselves.<br />'+
 		'The charts stay well arranged over the print document when the following configurations is defined:<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper orientation is landscape;<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper size is A4;<br />'+
@@ -221,7 +223,7 @@ var Translation={
 		'txt9':'Filtro:',
 		'txt10':'Filtro:',
 		'txt11':'Filtro:',
-		'txt12':'La impresión de este documento utiliza las características del navegador y puede mostrar diferencias entre ellos.<br />'+
+		'txt30':'La impresión de este documento utiliza las características del navegador y puede mostrar diferencias entre ellos.<br />'+
 		'La impresión acomoda bien los gráficos cuando las configuraciones son las siguientes:<br />'+
 		'&nbsp;&nbsp;&nbsp;- La orientación del papel es del tipo de paisaje;<br />'+
 		'&nbsp;&nbsp;&nbsp;- El tamaño de papel es A4;<br />'+

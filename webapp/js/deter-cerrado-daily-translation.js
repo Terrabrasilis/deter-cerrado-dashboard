@@ -8,6 +8,8 @@ var Translation={
 		'txt2':'Abrir o Painel Mensal',
 		'txt3':'Apenas o intervalo de tempo exibido no painel (365 dias).',
 		'txt4':'Baixar Dados',
+		'txt4p':'Imprimir Gráficos',
+		'txt4s':'Imprimir Gráficos',
 		'downloadBtn':'Baixar a tabela de alertas de desmatamento em formato CSV.',
 		'txt5':'Imprimir',
 		'txt6':'Escurecer/clarear',
@@ -21,7 +23,7 @@ var Translation={
 		'txt12a':'Limpar este filtro.',
 		'txt13':'Filtro:',
 		'txt13a':'Limpar este filtro.',
-		'txt14':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
+		'txt30':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
 		'A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />'+
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
@@ -47,7 +49,7 @@ var Translation={
 		'radio-alerts':'Veja os gráficos com base na soma do número de alertas.',
 		'print_page':'Imprimir esta página utilizando o recurso do navegador.',
 		/* Texts inside javascript. */
-		'area': 'área',
+		'areas': 'área(s)',
 		'alerta': 'alerta',
 		'alertas':'alerta(s)',
 		'timeline_header':'Distribuição de %dim% no tempo (granularidade diária)',
@@ -114,6 +116,8 @@ var Translation={
 		'txt2':'Open the Monthly Panel',
 		'txt3':'Only the time interval displayed in the panel (365 days).',
 		'txt4':'Download data',
+		'txt4p':'Print Graphics',
+		'txt4s':'Print Graphics',
 		'downloadBtn':'Download the deforestation alert table in CSV format.',
 		'txt5':'Print',
 		'txt6':'Darken/Enlighten',
@@ -127,7 +131,7 @@ var Translation={
 		'txt12a':'Clean this filter.',
 		'txt13':'Filter:',
 		'txt13a':'Clean this filter.',
-		'txt14':'The print this document use the browser resources and may have differences among themselves.<br />'+
+		'txt30':'The print this document use the browser resources and may have differences among themselves.<br />'+
 		'The charts stay well arranged over the print document when the following configurations is defined:<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper orientation is landscape;<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper size is A4;<br />'+
@@ -153,7 +157,7 @@ var Translation={
 		'radio-alerts':'See the charts based on sum of alerts.',
 		'print_page':'Print this page using the browser resources.',
 		/* Texts inside javascript. */
-		'area':'area',
+		'areas':'area(s)',
 		'alerta':'alert',
 		'alertas':'alert(s)',
 		'timeline_header':'Distribution of %dim% over time (daily granularity).',

@@ -169,7 +169,7 @@ var graph={
 		},
 		
 		wildcardExchange:function(str) {
-			var dim=((graph.config.defaultDataDimension=='area')?(Translation[Lang.language].area):(Translation[Lang.language].alerta));
+			var dim=((graph.config.defaultDataDimension=='area')?(Translation[Lang.language].areas):(Translation[Lang.language].alertas));
 			var unit=((graph.config.defaultDataDimension=='area')?('km²'):(Translation[Lang.language].alertas));
 			str=str.replace(/%dim%/gi,function(x){return (x=='%Dim%'?dim.charAt(0).toUpperCase()+dim.slice(1):dim);});
 			str=str.replace(/%unit%/gi,function(x){return (x=='%Unit%'?unit.charAt(0).toUpperCase()+unit.slice(1):unit);});
