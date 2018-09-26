@@ -35,33 +35,32 @@ var SearchEngine = {
     injectSearchModalWindow: function(idModal) {
 
         var modalHTML=''+
-        '<!-- modal window with counties filterd items -->'+
-        '<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">'+
-            '<div class="modal-dialog">'+
-                '<div class="modal-content">'+
-                    '<div class="modal-header">'+
-                        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'+
-                            '×'+
-                        '</button>'+
-                        '<h4 class="modal-title" id="filtered">'+
-                            '<span id="txt1f">Pesquisa de municípios</span>'+
-                        '</h4>'+
+        '<div class="modal fade" id="modal-container-filtered">'+
+            '<div class="modal-dialog logo-card">'+
+                '<div class="modal-content modalinf">'+
+                    '<div class="modal-header fechar">'+
+                        '<h5 class="modal-title boxtitletable"> <span id="txt1f">Pesquisa de municípios</span></h5>'+
+                        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>'+
                     '</div>'+
                     '<div class="modal-body">'+
                         '<span id="txt1g">Encontre um município.</span>'+
                         '<div class="input-group input-group-sm" style="margin-bottom: 15px;">'+
                             '<input autofocus id="search-county" onkeypress="SearchEngine.searchCountyByEnterKey(event)" type="text" class="form-control" placeholder="Search">'+
-                            '<div class="input-group-btn">'+
-                                '<button class="btn btn-default" onclick="SearchEngine.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>'+
-                            '</div>'+
+                            '<label>'+
+                                '<button class="btn btngreen" data-dismiss="modal" onclick="SearchEngine.searchCounty()" style="padding:0px;"><i class="material-icons">search</i></button>'+
+                            '</label>'+
                         '</div>'+
                         '<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>'+
                         '<div class="counties-list"><ul id="filtered-list"></ul></div>'+
                     '</div>'+
                     '<div class="modal-footer">'+
-                        '<button type="button" class="btn btn-default" data-dismiss="modal">'+
-                            '<span id="txt1i">Fechar</span>'+
-                        '</button>'+
+                        '<div class="checkbox pull-right">'+
+                            '<label>'+
+                                '<button type="button" class="btn btngreen" data-dismiss="modal">'+
+                                '<span id="txt1i">Fechar</span>'+
+                            '</button>'+
+                            '</label>'+
+                        '</div>'+
                     '</div>'+
                 '</div>'+
             '</div>'+
