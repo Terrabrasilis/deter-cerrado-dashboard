@@ -1,12 +1,8 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
-<<<<<<< HEAD
 		'title-chart': 'Incrementos de desmatamento anuais no Cerrado Brasileiro.',
-=======
-		'title-chart': 'Incrementos anuais de desmatamento no Cerrado Brasileiro.',
 		'tituloprint': ' | Incrementos anuais de desmatamento no Cerrado Brasileiro.',
->>>>>>> 4f1a00f2eb1a876d4902b4c7b16dc35192a8f539
 		'txt1':'Incrementos de desmatamento',
 		'goto_about':'Ver informações sobre o projeto e a equipe.',
 		'txt1c':'Informações de ajuda para uso do painel',
@@ -31,7 +27,7 @@ var Translation={
 		'txt3':'Baixar Dados',
 		'txt4':'Imprimir Gráficos',
 		'txt4p':'Imprimir Gráficos',
-		'txt5':'Sobre os dados',
+		'txt5':'Informações adicionais',
 		'txt6':'Entrar',
 		'txt7':'Incrementos anuais de desmatamento no Cerrado Brasileiro',
 		'txt8':'Filtro:',
@@ -173,9 +169,9 @@ var Translation={
 		'For this reason, even though this difference occurs only in the overlapping area (7% of the total area), the annual deforestation figures published in the <a href="http://terrabrasilis.dpi.inpe.br/dashboard/deforestation/biomes/cerrado/increments/" target="_blank">TerraBrasilis dashboard</a> are not the same as the geographic data available for download at the same site, exclusively for the years 2000 to 2008.',
 		'txt2c':'Close',
 		'txt3':'Download',
-		'txt4':'Print',
+		'txt4':'Print Graphics',
 		'txt4p':'Print Graphics',
-		'txt5':'About the data',
+		'txt5':'Additional information',
 		'txt6':'Login',
 		'txt7':'Annual deforestation increments in Brazilian Cerrado',
 		'txt8':'Filter:',
