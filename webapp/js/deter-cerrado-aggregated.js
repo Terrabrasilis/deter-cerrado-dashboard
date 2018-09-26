@@ -420,8 +420,8 @@ var graph={
 
 		this.ringTotalizedByState
 			.height(this.defaultHeight)
-			.innerRadius(25)
-			.externalRadiusPadding(40)
+			.innerRadius(10)
+			.externalRadiusPadding(30)
 			.dimension(this.ufDimension)
 			.group(this.ufGroup)
 			.title(function(d) {
@@ -434,9 +434,11 @@ var graph={
 				v=localeBR.numberFormat(',1f')(v);
 				return d.key + ":" + v + " "+Translation[Lang.language].unit;
 			})
-			.ordinalColors(["#FF0000","#FFFF00","#FF00FF","#F8B700","#78CC00","#00FFFF","#56B2EA","#0000FF","#00FF00"])
-			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
+			.ordering(dc.pluck('key'))
+			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
+			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
 			//.legend(dc.legend());
+			//.ordinalColors(["#FF0000","#FFFF00","#FF00FF","#F8B700","#78CC00","#00FFFF","#56B2EA","#0000FF","#00FF00"])
 
 	
 		this.ringTotalizedByState.valueAccessor(function(d) {

@@ -972,10 +972,10 @@ var graph={
 		// 	};
 		// }
 
-		var ufs=graph.ufDimension.group().all(),ufList=[];
-		ufs.forEach(function(d){
-			ufList.push(d.key);
-		});
+		// var ufs=graph.ufDimension.group().all(),ufList=[];
+		// ufs.forEach(function(d){
+		// 	ufList.push(d.key);
+		// });
 
 		/**
 		 * Starting the top 10 chart of the Counties by rates.

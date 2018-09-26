@@ -446,12 +446,14 @@ var graph={
 		
 		this.ringTotalizedByState
 			.height(graph.defaultHeight)
-	        .innerRadius(25)
-	        .externalRadiusPadding(40)
+	        .innerRadius(10)
+			.externalRadiusPadding(30)
 	        .dimension(dimensions["uf"])
-	        .group(this.utils.removeLittlestValues(groups["uf"]))
-	        .ordinalColors(["#6A5ACD","#483D8B","#008B8B","#5F9EA0","#6495ED","#4169E1","#4682B4","#708090","#B0C4DE"])
-			.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
+			.group(this.utils.removeLittlestValues(groups["uf"]))
+			.ordering(dc.pluck('key'))
+			.ordinalColors((graph.cssDefault)?(graph.pallet):(graph.darkPallet))
+			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
+			//.legend(dc.legend().x(50).y(0).itemHeight(13).gap(7).horizontal(1).legendWidth(100).itemWidth(100));
 			//.legend(dc.legend());
 
 		// this.ringTotalizedByState
