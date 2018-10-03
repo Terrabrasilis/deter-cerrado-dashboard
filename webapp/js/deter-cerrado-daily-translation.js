@@ -103,14 +103,18 @@ var Translation={
         'support-funcate':'Fundação de Ciência Aplicações e Tecnologia Espaciais (FUNCATE)',
         'support-fundep':'Fundação de Desenvolvimento da Pesquisa (FUNDEP)',
         'support-world-bank':'Grupo do Banco Mundial',
-        'tb-support':'Apoio',
+        'tb-support':'Suporte',
         'tb-view':'Visão',
         'tb-view-text':'O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos eus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet.',
         'link-homepage':'Leia mais informações sobre o TerraBrasilis',
         'tech':'Tecnologias',
         'tech-plat':'Platformas/Software/Bibliotecas ',
         'ti-team-role':'EQUIPE DE T.I.',
-        'ab-close-modal':'Fechar'
+		'ab-close-modal':'Fechar',
+		'about_technology': 'Tecnologias ',
+        'about_technology_languages': 'JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java',
+        'about_technology_heterogeneous': 'Docker Swarm (clusterização de contêineres), Redis MongoDB, PostgreSQL, Nginx HTTP Server (balanceamento de carga e proxy reverso). ',
+        'about_technology_services': 'Servidor de compartilhamento de dados geoespaciais (Geoserver) e catálogo de busca de metadados (Geonetwork).'
 	},
 	'en':{
 		/* texts into HTML entities */
@@ -223,7 +227,11 @@ var Translation={
 		'tech':'Technology',
 		'tech-plat':'Platforms/Software/Libraries',
 		'ti-team-role':'IT team',
-		'ab-close-modal':'Close'
+		'ab-close-modal':'Close',
+		'about_technology': 'Technologies ',
+        'about_technology_languages': 'JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java',
+        'about_technology_heterogeneous': 'Docker Swarm (containers cluster), Redis MongoDB, PostgreSQL, Nginx HTTP Server (load balancer and reverse proxy).',
+		'about_technology_services': 'Server for sharing geospatial data (Geoserver) and metadata search and catalogue (Geonetwork).'
 	},
 	'es':{
 		/* texts into HTML entities */
