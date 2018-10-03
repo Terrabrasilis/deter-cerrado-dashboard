@@ -153,7 +153,7 @@ div .dc-chart {
 .alert{
 	margin-bottom: 5px;
 }
-ul li a{
+#filtered-list{
 	font-size: 12px;
 	color: #333;
 }
