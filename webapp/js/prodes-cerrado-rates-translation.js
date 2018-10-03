@@ -112,6 +112,10 @@ var Translation={
 		'nv-daily':'Alertas diários',
 		'nv-aggreg':'Agregado de alertas',
 		'nv-home':'Página Cerrado',
+		'nv-sites':'Páginas relacionadas',
+		'nv-map':'Mapa Interativo',
+		'toMap': 'Abrir o mapa interativo',
+		'toHome': 'Abrir a página inicial com informações sobre o projeto de monitoramento do Cerrado.',
 		'tt-contactus': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)',
 		'tt-contactus-menu': 'Envie-nos um e-mail com sugestões e dúvidas sobre o projeto PRODES (prodes@dpi.inpe.br)',
 		'about-menu':'Sobre',
@@ -260,6 +264,10 @@ var Translation={
 		'nv-daily':'Daily Alerts',
 		'nv-aggreg':'Aggregate Alerts',
 		'nv-home':'Cerrado page',
+		'nv-sites':'Related pages',
+		'nv-map':'Interactive Map',
+		'toMap': 'Open the interactive map.',
+		'toHome': 'Open the start page with informations about the Cerrado monitoring project.',
 		'tt-contactus': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)',
 		'tt-contactus-menu': 'Send us an e-mail with suggestions or questions about the PRODES project (prodes@dpi.inpe.br)',
 		'about-menu':'About',
@@ -293,7 +301,7 @@ var Translation={
 		'about_technology': 'Technologies ',
         'about_technology_languages': 'JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java',
         'about_technology_heterogeneous': 'Docker Swarm (containers cluster), Redis MongoDB, PostgreSQL, Nginx HTTP Server (load balancer and reverse proxy).',
-		'about_technology_services': 'Server for sharing geospatial data (Geoserver) and metadata search and catalogue (Geonetwork).'
+		'about_technology_services': 'Server for sharing geospatial data (Geoserver) and metadata search and catalogue (Geonetwork).',
 	},
 	'es':{		
 		/* texts into HTML entities */
