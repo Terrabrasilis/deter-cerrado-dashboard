@@ -11,6 +11,7 @@ docker build -t terrabrasilis/dashboard-daily:alpha --build-arg INDEX_FILE=deter
 docker build -t terrabrasilis/dashboard-aggregated:alpha --build-arg INDEX_FILE=deter-cerrado-aggregated -f environment/Dockerfile .
 
 # send to dockerhub
+docker login
 docker push terrabrasilis/dashboard-increments:alpha
 docker push terrabrasilis/dashboard-daily:alpha
 docker push terrabrasilis/dashboard-aggregated:alpha
