@@ -969,12 +969,6 @@ var graph={
 		/**
 		 * Starting the bar chart of the States by years.
 		 */
-		// function sel_stack(i) {
-		// 	return function(d) {
-		// 		return +d.value[i];
-		// 	};
-		// }
-
 		var ufs=graph.ufDimension.group().all(),ufList=[];
 		ufs.forEach(function(d){
 			ufList.push(d.key);
@@ -1236,8 +1230,9 @@ var graph={
 	},
 	prepareTools: function() {
 		var downloadCSVWithFilter=function() {
+			var csv=[];
 
-			if(graph.pieTotalizedByState.hasFilter()) {
+			if(graph.pieTotalizedByState.hasFilter() || graph.barChart1.hasFilter()) {
 
 				var ufs=[],years=[],rates=[];
 				
@@ -1247,13 +1242,20 @@ var graph={
 							ufs.push(d.uf);
 							rates[d.uf]=[]
 						}
-						if(years.indexOf(d.year)<0){
-							years.push(d.year);
+						if(years.indexOf(d.year)<0) {
+							// if time is filtered so test if current time is at list
+							if(graph.barChart1.hasFilter()) {
+								if(graph.barChart1.filters().indexOf(d.year)>=0) {
+									years.push(d.year);
+								}
+							}else{
+								years.push(d.year);
+							}
 						}
-						rates[d.uf][d.year]=d.originalRate;
+						rates[d.uf][d.year]=Math.abs(d.originalRate.toFixed(4));
 					}
 				});
-				var csv=[],aux={};
+				var aux={};
 				ufs.forEach(function(u) {
 					years.forEach(function(y) {
 						if(aux[y]) {
@@ -1267,14 +1269,31 @@ var graph={
 					});
 				});
 				for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
-
-				var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
-				var dt=new Date();
-				dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-				saveAs(blob, 'cerrado_increments_filtered_'+dt+'.csv');
+				download(csv,'cerrado_increments_filtered_');
+			// }else if(graph.rowTop10ByMun.hasFilter()){
+			// 	var ufs=[],years=[],rates=[];
+			// 	graph.data.forEach(function(d) {
+			// 		if(ufs.indexOf(d.uf)<0){
+			// 			ufs.push(d.uf);
+			// 			rates[d.uf]=[]
+			// 		}
+			// 		if(years.indexOf(d.year)<0){
+			// 			years.push(d.year);
+			// 		}
+					
+			// 		rates[d.uf][d.year]=d.rate;
+			// 	});
+			// 	download(csv,'cerrado_munic_filtered_');
 			}else{
 				downloadCSVWithoutFilter();
 			}
+		};
+
+		var download=function(csv, filePrefix){
+			var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
+			var dt=new Date();
+			dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
+			saveAs(blob, filePrefix+dt+'.csv');
 		};
 
 		var downloadCSVWithoutFilter=function() {
@@ -1318,11 +1337,7 @@ var graph={
 			});
 			
 			for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
-			
-			var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
-			var dt=new Date();
-			dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear() + "_" + dt.getTime();
-			saveAs(blob, 'cerrado_increments_'+dt+'.csv');
+			download(csv,'cerrado_increments_');
 		};
 		// build download data
 		d3.select('#downloadTableBtn')
