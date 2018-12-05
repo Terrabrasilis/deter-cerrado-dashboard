@@ -1,6 +1,7 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+		'msg-chart-lines': 'Selecione Municípios para ativar este gráfico.',
 		'title-chart': 'Incrementos de desmatamento anuais no Cerrado Brasileiro.',
 		'tituloprint': ' | Incrementos anuais de desmatamento no Cerrado Brasileiro.',
 		'txt1':'Incrementos de desmatamento',
@@ -153,6 +154,7 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
+		'msg-chart-lines': 'Select municipalities for enable this chart.',
 		'title-chart': 'Annual deforestation increments in the Brazilian Cerrado',
 		'tituloprint': ' | Annual increments of the deforestation in Brazilian Cerrado.',
 		'txt1':'Deforestation increments',

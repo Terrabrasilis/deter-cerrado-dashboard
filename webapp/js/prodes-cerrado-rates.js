@@ -187,7 +187,7 @@ var utils = {
 	},
 	attachEventListeners: function(){
 		// hack to an issue in composite bar chart
-		$('#modal-container-filtered').on('shown.bs.modal hidden.bs.modal',function(){dc.redrawAll();});
+		$('#modal-container-filtered').on('shown.bs.modal hidden.bs.modal',function(){dc.redrawAll();dc.redrawAll(graph.chartType);});
 	},
 	loadingShow: function(ctl) {
 		d3.select('#panel_container').style('display', (ctl)?('none'):(''));
@@ -223,6 +223,7 @@ var graph={
 	compositeChartName: "doublebar",
 	// to control the current line chart, 1=states or 2=municipalities
 	crtSwapLineChart: 1,
+	chartType: "Estados",
 
 	lineRateByYear: null,
 	lineRateByYearState: null,
@@ -333,7 +334,9 @@ var graph={
 	doResize: function() {
 		graph.updateChartsDimensions();
 		dc.renderAll();
+		dc.renderAll(graph.chartType);
 		dc.renderAll(graph.compositeChartName);
+		
 	},
 	setChartReferencies: function() {
 
@@ -579,6 +582,7 @@ var graph={
 			// -----------------------------------------------------------------
 			this.rowTop10ByMun.filter(d[0].key);
 			dc.redrawAll();
+			dc.redrawAll(graph.chartType);
 		}
 		//dc.redrawAll();
 	},
@@ -698,13 +702,16 @@ var graph={
 	buildLineChartMun: function(dataDimension, dataGroup) {
 
 		var chartType='Municípios';
+		graph.chartType=chartType;
+
 		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='none';
-		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='';
+		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='block';
+		d3.select('#chart-line-rates-by-year-msg')[0][0].style.display='block';
 
 		// destroy the State chart reference
 		this.lineRateByYearState=null;
 
-		this.lineRateByYear = dc.seriesChart("#chart-line-rates-by-year-mun");
+		this.lineRateByYear = dc.seriesChart("#chart-line-rates-by-year-mun", graph.chartType);
 		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
 		var auxYears=[],auxRates=[];
 		graph.yearGroup.all().forEach(function(y){
@@ -757,20 +764,29 @@ var graph={
 		this.lineRateByYear
 			.data(function (group) {
 				var realGroup=[],baseGroup;
-				if(!graph.rowTop10ByMun.hasFilter()) {
-					baseGroup=graph.munAreaMunGroup.top(10);
-					baseGroup.forEach(function(el){
-						graph.countyDimension.filter(el.key);
-						var sel=graph.countyDimension.top(Infinity);
-						sel.forEach(function(s){
-							realGroup.push({key:[s.county,s.year],value:s.rate});
-						});
-					});
-				}else{
+				if(graph.rowTop10ByMun.hasFilter()) {
+					d3.select('#chart-line-rates-by-year-msg')[0][0].style.display='none';
 					var sel=graph.munDimension.top(Infinity);
 					sel.forEach(function(s){
 						realGroup.push({key:[s.county,s.year],value:s.rate});
 					});
+				}else{
+					/**
+					 * Don't display municipalities when no filter by municipalities was find.
+					 * Display one message to indicate that filters is  needed.
+					 */
+					d3.select('#chart-line-rates-by-year-msg')[0][0].style.display='';
+					/**
+					 * Display top ten municipalities when no filter by municipalities was find.
+					 */
+					// baseGroup=graph.munAreaMunGroup.top(10);
+					// baseGroup.forEach(function(el){
+					// 	graph.countyDimension.filter(el.key);
+					// 	var sel=graph.countyDimension.top(Infinity);
+					// 	sel.forEach(function(s){
+					// 		realGroup.push({key:[s.county,s.year],value:s.rate});
+					// 	});
+					// });
 				}
 				// filter by years from composite bar chart
 				if(graph.barChart2.hasFilter()){
@@ -816,13 +832,17 @@ var graph={
 	buildLineChartState: function(dataDimension, dataGroup) {
 		
 		var chartType='Estados';
+		graph.chartType=chartType;
+
 		d3.select('#chart-line-rates-by-year-mun')[0][0].style.display='none';
-		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='';
+		d3.select('#chart-line-rates-by-year-state')[0][0].style.display='block';
+		// disable municipalities message when states was enable.
+		d3.select('#chart-line-rates-by-year-msg')[0][0].style.display='none';
 
 		// destroy the Mun chart reference
 		this.lineRateByYear=null;
 
-		this.lineRateByYearState = dc.seriesChart("#chart-line-rates-by-year-state");
+		this.lineRateByYearState = dc.seriesChart("#chart-line-rates-by-year-state", graph.chartType);
 		var chartTitle = (chartType=='Municípios')?(Translation[Lang.language].county):(Translation[Lang.language].state);
 
 		var auxYears=[],auxRates=[];
@@ -963,6 +983,7 @@ var graph={
 		
 		this.pieTotalizedByState.on("postRedraw", this.buildDataTable);
 		this.pieTotalizedByState.on("filtered", function(chart,filter){
+			dc.redrawAll(graph.chartType);
 			dc.renderAll(graph.compositeChartName);
 		});
 
@@ -1041,6 +1062,7 @@ var graph={
 		});
 
 		this.rowTop10ByMun.on("filtered", function(chart,filter){
+			dc.redrawAll(graph.chartType);
 			dc.renderAll(graph.compositeChartName);
 		});
 
@@ -1153,6 +1175,7 @@ var graph={
 			})
 			.on("postRedraw", chart => {
 				dc.redrawAll();
+				dc.redrawAll(graph.chartType);
 			});
 		
 		this.compositeChart
@@ -1212,6 +1235,7 @@ var graph={
 			graph.compositeChart.filterAll();
 		}
 		dc.redrawAll();
+		dc.redrawAll(graph.chartType);
 		dc.redrawAll(graph.compositeChartName);
 	},
 	chartLineSwitcher: function(btn) {
@@ -1219,10 +1243,12 @@ var graph={
 		if(graph.crtSwapLineChart==1){
 			graph.crtSwapLineChart=2;
 			btnValue=Translation[Lang.language].state;
+			dc.chartRegistry.clear(graph.chartType);
 			graph.buildLineChartMun(graph.countyYearDimension, graph.countyYearRateGroup);
 		}else{
 			graph.crtSwapLineChart=1;
 			btnValue=Translation[Lang.language].county;
+			dc.chartRegistry.clear(graph.chartType);
 			graph.buildLineChartState(graph.stateYearDimension, graph.stateYearRateGroup);
 		}
 		btn.innerText=btnValue;
