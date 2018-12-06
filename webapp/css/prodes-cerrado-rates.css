@@ -183,3 +183,10 @@ div .dc-chart {
     font-size: 18px;
     font-weight: bold;
 }
+.btn-search-county{
+	cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 20px;
+	font-size: 27px;
+}

@@ -236,7 +236,7 @@
 			<div class="col-md-9">
 				<div class="toggle_chart">
 					<button id="line-chart-toggle" type="button" class="btn btn-sm btnbox" data-dismiss="modal">
-						<span>Municípios</span>
+						Municípios
 					</button>
 				</div>
 				<div class="box-grafico text-center">
@@ -792,31 +792,28 @@
 				<!-- modal window with counties filterd items -->
 				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
 					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="filtered">
-									<span id="txt1f">Pesquisa de municípios</span>
-								</h4>
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable" id="filtered"><span id="txt1f">Pesquisa de municípios</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
 							</div>
 							<div class="modal-body">
-								<span id="txt1g">Encontre um município.</span>
-								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
-									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control"
-									 placeholder="Search">
-									<div class="input-group-btn">
-										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
+								<div>
+									<div class="form-group">
+									  <!--label for="search-county" id="txt1g">Encontre um município:</label>&nbsp;&nbsp;-->
+									  <input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control" placeholder="Search">
+									  <a onclick="utils.searchCounty()" class="btn-search-county"><i class="material-icons">search</i></a>
 									</div>
 								</div>
-								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
-								<div class="counties-list">
-									<ul id="filtered-list"></ul>
+								<div class="alert alert-light">
+									<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
+									<div class="counties-list">
+										<ul id="filtered-list"></ul>
+									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
+								<button type="button" class="btn btn-default btnbox" data-dismiss="modal">
 									<span id="txt1i">Fechar</span>
 								</button>
 							</div>
