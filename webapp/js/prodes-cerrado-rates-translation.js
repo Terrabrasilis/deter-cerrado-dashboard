@@ -44,8 +44,9 @@ var Translation={
 		'txt18':'Variações relativas dos incrementos anuais de desmatamento (%)',
 		'txt19':'Informações complementares',
 		'txt20':'Para os biênios 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010 e 2011-2012, foi feito um mapeamento, e atribuiu-se a cada um dos anos a metade do incremento do respectivo biênio.',
-		/*'txt21':'Para consultar a área de interesse MATOPIBA, utilize o filtro no menu Ferramentas, no topo da página',*/
-		/*'txt22':'2004 - início do',*/
+		'txt21':'Informações sobre agregação dos dados',
+		'txt22':'Os valores de área informados para estados e municípios, correspondem à soma das área contabilizadas no período de 2001 a 2018.<br/>Note que ao aplicar um filtro temporal, utilizando o gráfico de barras, os valores de área agregada para estados e municípios irão corresponder à soma das áreas para o período ou ano específico selecionado.',
+		'txt22a':'Fechar',
 		'txt23':'Mais informações sobre o projeto FIP Cerrado',
 		'txt24':'Fechar',
 		'txt25':'Informações para download',
@@ -91,6 +92,8 @@ var Translation={
 		'state':'Estado',
 		'county':'Município',
 		'line-chart-toggle':'Município',
+		'line-chart-toggle-tooltip':'Alterna entre o gráfico por Estados e o gráfico por Municípios.',
+		'agr-mun-tooltip':'As áreas apresentadas para municípios, correspondem à soma das áreas contabilizadas no período de 2001 a 2018 ou conforme filtro aplicado no gráfico de barras.',
 		'year':'Ano: ',
 		'percent':'Porcentagem: ',
 		'filter':'Filtro',
@@ -198,8 +201,9 @@ var Translation={
 		'txt18':'Relative variations of the annual deforestation increments (%)',
 		'txt19':'Additional information',
 		'txt20':'For the biennia 2001-2002, 2003-2004, 2005-2006, 2007-2008, 2009-2010 and 2011-2012, a mapping was done, and each half of the biennium increase was attributed to each year.',
-		/*'txt21':'1993 and 1994 deforestation increments correspond to the <strong>mean of the deforestation increments found between these years. </ Strong>',*/
-		/*'txt22':'2004 - start of',*/
+		'txt21':'Informations about data aggregation',
+		'txt22':'The information of area values for states and municipalities, correspond to the sum of the areas accounted in the 2001 at 2018 period.<br/>Note that when apply one temporal filter using the bar chart, the values of aggregate areas for states and municipalities will correspond to the sum of the areas for the selected period or specific year.',
+		'txt22a':'Close',
 		'txt23':'For more information, see FIP Cerrado project',
 		'txt24':'Close',
 		'txt25':'Download information',
@@ -245,6 +249,8 @@ var Translation={
 		'state':'State',
 		'county':'County',
 		'line-chart-toggle':'County',
+		'line-chart-toggle-tooltip':'Toggles between the graph by States and the graph by Municipalities.',
+		'agr-mun-tooltip':'The areas presented for municipalities correspond to the sum of the areas accounted in the period from 2001 to 2018 or according to the filter applied in the bar chart.',
 		'year':'Year: ',
 		'percent':'Percentage: ',
 		'filter':'Filter',

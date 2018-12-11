@@ -233,8 +233,8 @@
 		<div class="row box">
 			<div class="col-md-9">
 				<div class="toggle_chart">
-					<button id="line-chart-toggle" type="button" class="btn btn-sm btnbox" data-dismiss="modal">
-						Municípios
+					<button id="line-chart-toggle-tooltip" type="button" class="btn btn-sm btnbox" data-dismiss="modal" title="Alterna entre o gráfico por Estados e o gráfico por Municípios.">
+						<span id="line-chart-toggle">Municípios</span>
 					</button>
 				</div>
 				<div class="box-grafico text-center">
@@ -254,6 +254,9 @@
 			<div class="col-md-3">
 				<div class="box-grafico text-center">
 					<div id="chart-by-mun">
+						<a id="agr-mun-tooltip" href="#modal-info-state-mun" data-toggle="modal" class="agr-mun" title="As áreas apresentadas para municípios, correspondem à soma das áreas contabilizadas no período de 2001 a 2018 ou conforme filtro aplicado no gráfico de barras.">
+							<i class="material-icons agr-mun-ico">info</i>
+						</a>
 						<div style="position:relative;">
 							<div id="title-chart-by-mun" class="all-charts-title boxtitle">Desmatamento por Município</div>
 							<a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
@@ -332,6 +335,47 @@
 		<div class="row box">
 			<div class="col-md-12">
 				<div id="footer_print"></div>
+
+				<!-- Modal window with informations of data temporal extension for aggregated areas of the states and municipalities. -->
+				<div class="modal fade" id="modal-info-state-mun">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable"> <span id="txt21">Informações sobre agregação dos dados</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body ">
+								<div class="alert alert-light" role="alert">
+									<span id="txt22">
+										Os valores de área informados para estados e municípios, correspondem à soma das área contabilizadas no período de 2001 a 2018.
+										<br/>
+										Note que ao aplicar um filtro temporal, utilizando o gráfico de barras, os valores de área agregada para estados e municípios irão corresponder à soma das áreas para o período ou ano específico selecionado.
+									</span>
+								</div>
+							</div>
+
+							<!-- / modal-body -->
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal">
+											<span id="txt1e">Fechar</span>
+										</button>
+									</label>
+								</div>
+								<!--/ checkbox -->
+							</div>
+							<!--/ modal-footer -->
+						</div>
+						<!-- / modal-content -->
+					</div>
+					<!--/ modal-dialog -->
+				</div>
+				<!-- / modal -->
+
+				<!-- end temporal extension warning -->
+
 				<!-- modal window with information dados rates -->
 				<div class="modal fade" id="modal-container-info-rates">
 					<div class="modal-dialog">

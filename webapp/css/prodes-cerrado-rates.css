@@ -190,3 +190,12 @@ div .dc-chart {
     right: 20px;
 	font-size: 27px;
 }
+.agr-mun{
+	position: absolute;
+    top: 10px;
+    left: -5px;
+}
+.agr-mun-ico{
+	color: #1d8d6f;
+	cursor: help;
+}
