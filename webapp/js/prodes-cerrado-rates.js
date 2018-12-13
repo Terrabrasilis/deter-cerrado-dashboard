@@ -358,6 +358,7 @@ var graph={
 		// d3.json(url, graph.processData);
 		
 		// load data from GeoServer as JSON file
+		// http://terrabrasilis.dpi.inpe.br/geoserver/prodes-cerrado/ows?service=WFS&version=1.1.1&request=GetFeature&typeName=prodes-cerrado:pc_d&outputFormat=application%2Fjson
 		var url="data/prodes-cerrado-rates.json";
 		d3.json(url, graph.processDataFromWFS);
 	},
@@ -1255,66 +1256,97 @@ var graph={
 		this.doResize();
 	},
 	prepareTools: function() {
-		var downloadCSVWithFilter=function() {
-			var csv=[];
 
-			if(graph.pieTotalizedByState.hasFilter() || graph.barChart1.hasFilter()) {
+		var yearFilter=function(d){
 
-				var ufs=[],years=[],rates=[];
-				
-				graph.data2csv.forEach(function(d) {
-					if(d.uf!='CERRADO' && graph.pieTotalizedByState.filters().indexOf(d.uf)>=0) {
-						if(ufs.indexOf(d.uf)<0){
-							ufs.push(d.uf);
-							rates[d.uf]=[]
-						}
-						if(years.indexOf(d.year)<0) {
-							// if time is filtered so test if current time is at list
-							if(graph.barChart1.hasFilter()) {
-								if(graph.barChart1.filters().indexOf(d.year)>=0) {
-									years.push(d.year);
-								}
-							}else{
-								years.push(d.year);
-							}
-						}
-						rates[d.uf][d.year]=Math.abs(d.originalRate.toFixed(4));
-					}
-				});
-				var aux={};
-				ufs.forEach(function(u) {
-					years.forEach(function(y) {
-						if(aux[y]) {
-							c=aux[y];
-						}else{
-							var c={};
-							c['year']=y;
-							aux[y]=c;
-						}
-						c[u]=((rates[u][y]<0.5)?(0):(rates[u][y]));
-					});
-				});
-				for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
-				download(csv,'cerrado_increments_filtered_');
-			// }else if(graph.rowTop10ByMun.hasFilter()){
-			// 	var ufs=[],years=[],rates=[];
-			// 	graph.data.forEach(function(d) {
-			// 		if(ufs.indexOf(d.uf)<0){
-			// 			ufs.push(d.uf);
-			// 			rates[d.uf]=[]
-			// 		}
-			// 		if(years.indexOf(d.year)<0){
-			// 			years.push(d.year);
-			// 		}
-					
-			// 		rates[d.uf][d.year]=d.rate;
-			// 	});
-			// 	download(csv,'cerrado_munic_filtered_');
-			}else{
-				downloadCSVWithoutFilter();
-			}
+			if(!graph.barChart1.hasFilter()) return d;
+			else if(graph.barChart1.filters().indexOf(d.year)>=0) return d;
+			else return false;
 		};
 
+		var munFilter=function(d){
+
+			if(!graph.rowTop10ByMun.hasFilter()) return d;
+			else if(graph.rowTop10ByMun.filters().indexOf(d.county)>=0) return d;
+			else return false;
+		};
+
+		var ufFilter=function(d){
+
+			if(!graph.pieTotalizedByState.hasFilter()) return d;
+			else if(graph.pieTotalizedByState.filters().indexOf(d.uf)>=0) return d;
+			else return false;
+		};
+
+		var downloadCSVMunWithFilter=function() {
+			download(getCsvByMun(true),'cerrado_increments_filtered_by_mun_');
+		};
+
+		var downloadCSVMunWithoutFilter=function() {
+			download(getCsvByMun(false),'cerrado_increments_by_mun_');
+		};
+
+		var getCsvByMun=function(applyFilter){
+			var csv=[];
+			graph.data.forEach(function(d) {
+				var daux=d;
+				if(applyFilter){
+					daux=yearFilter(daux),
+					daux=munFilter(daux),
+					daux=ufFilter(daux);
+				}
+				if(daux){
+					csv.push({
+						mun:daux.county.split('/')[0],
+						uf:daux.uf,
+						year:daux.year,
+						area:Lang.format().numberFormat(',1f')(daux.rate)
+					});
+				}
+			});
+			return csv;
+		};
+
+		var getCsvByState=function(applyFilter){
+			var csv=[],rates={};
+			graph.data.forEach(function(d) {
+				var daux=d;
+				if(applyFilter){
+					daux=yearFilter(daux),
+					daux=munFilter(daux),
+					daux=ufFilter(daux);
+				}
+				if(daux){
+					if(!rates[daux.year]){
+						rates[daux.year]={};
+					}
+					if(!rates[daux.year][daux.uf]){
+						rates[daux.year][daux.uf]=0;
+					}
+					rates[daux.year][daux.uf]+=daux.rate;
+				}
+			});
+			for(var y in rates){
+				var o={year:y};
+				for(var uf in rates[y]){
+					o[uf]=Lang.format().numberFormat(',1f')(rates[y][uf]);
+				}
+				csv.push(o);
+			}
+			return csv;
+		};
+
+		var downloadCSVStateWithFilter=function() {
+			var csv=getCsvByState(true);
+			download(csv,'cerrado_increments_filtered_by_state_');
+		};
+
+		var downloadCSVStateWithoutFilter=function() {
+
+			var csv=getCsvByState(false);
+			download(csv,'cerrado_increments_by_state_');
+		};
+		
 		var download=function(csv, filePrefix){
 			var blob = new Blob([d3.dsv(";").format(csv)], {type: "text/csv;charset=utf-8"});
 			var dt=new Date();
@@ -1322,58 +1354,21 @@ var graph={
 			saveAs(blob, filePrefix+dt+'.csv');
 		};
 
-		var downloadCSVWithoutFilter=function() {
-
-			var ufs=[],years=[],rates=[];
-			
-			graph.data.forEach(function(d) {
-				if(ufs.indexOf(d.uf)<0){
-					ufs.push(d.uf);
-					rates[d.uf]=[]
-				}
-				if(years.indexOf(d.year)<0){
-					years.push(d.year);
-				}
-				
-				rates[d.uf][d.year]=d.rate;
-			});
-			graph.data_all.forEach(function(d) {
-				if(ufs.indexOf(d.uf)<0){
-					ufs.push(d.uf);
-					rates[d.uf]=[]
-				}
-				if(years.indexOf(d.year)<0){
-					years.push(d.year);
-				}
-				
-				rates[d.uf][d.year]=d.rate;
-			});
-			var csv=[],aux={};
-			ufs.forEach(function(u) {
-				years.forEach(function(y) {
-					if(aux[y]) {
-						c=aux[y];
-					}else{
-						var c={};
-						c['year']=y;
-						aux[y]=c;
-					}
-					c[u]=((rates[u][y]<0.5)?(0):(rates[u][y]));
-				});
-			});
-			
-			for(var c in aux){if (aux.hasOwnProperty(c)) {csv.push(aux[c]);} }
-			download(csv,'cerrado_increments_');
-		};
 		// build download data
 		d3.select('#downloadTableBtn')
-		.on('click', downloadCSVWithFilter);
+		.on('click', downloadCSVStateWithFilter);
 
-		d3.select('#download-csv-all')
-		.on('click', downloadCSVWithoutFilter);
+		d3.select('#download-csv-state-all')
+		.on('click', downloadCSVStateWithoutFilter);
+
+		d3.select('#download-csv-mun-all')
+		.on('click', downloadCSVMunWithoutFilter);
 		
-		d3.select('#download-csv-filtered')
-	    .on('click', downloadCSVWithFilter);
+		d3.select('#download-csv-state-filtered')
+		.on('click', downloadCSVStateWithFilter);
+		
+		d3.select('#download-csv-mun-filtered')
+	    .on('click', downloadCSVMunWithFilter);
 		
 		d3.select('#prepare_print')
 	    .on('click', function() {

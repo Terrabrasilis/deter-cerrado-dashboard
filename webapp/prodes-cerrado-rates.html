@@ -430,14 +430,38 @@
 							<!-- / modal-header -->
 							<div class="modal-body ">
 								<div class="dwn-tool">
-									<div class="alert alert-success alert-labeled">
+									
+									<div class="alert alert-warning" role="alert">
+										<span id="txt26a">
+												Caso exista filtro por Município e o formato escolhido seja por Estado, os valores de área apresentados para cada estado serão a soma das áreas dos Municípios selecionados.
+												<br/><br/>
+												Se não houver filtros aplicados, as duas opções de geração de planilha criarão a mesma saída.
+												<br/><br/>
+												O separador decimal utilizado no campo numérico de área, será a virgula quando o painel estiver em português e o ponto quando o painel estiver em inglês.
+										</span>
+									</div>
+
+									<div class="alert alert-success alert-labeled" id="filtered-by-state">
 										<div class="alert-labeled-row">
 											<span class="alert-label alert-label-left alert-labelled-cell">
 												<i class="material-icons">save_alt</i>
 											</span>
 											<p class="alert-body alert-body-right alert-labelled-cell">
-												<a href="#" id="download-csv-filtered">
-													<span id="txt27" class="alerttitle">Com filtros.</span>
+												<a href="#" id="download-csv-state-filtered">
+													<span id="txt27" class="alerttitle">Por Estado - com filtros.</span>
+												</a>
+											</p>
+										</div>
+									</div>
+
+									<div class="alert alert-success alert-labeled" id="filtered-by-mun">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+												<i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-mun-filtered">
+													<span id="txt27a" class="alerttitle">Por Municípios - com filtros.</span>
 												</a>
 											</p>
 										</div>
@@ -449,12 +473,26 @@
 												<i class="material-icons">save_alt</i>
 											</span>
 											<p class="alert-body alert-body-right alert-labelled-cell">
-												<a href="#" id="download-csv-all">
-													<span id="txt28" class="alerttitle">Sem filtros.</span>
+												<a href="#" id="download-csv-state-all">
+													<span id="txt28" class="alerttitle">Por Estados - sem filtros.</span>
 												</a>
 											</p>
 										</div>
 									</div>
+
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+												<i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-mun-all">
+													<span id="txt28a" class="alerttitle">Por Municípios - sem filtros.</span>
+												</a>
+											</p>
+										</div>
+									</div>
+
 								</div>
 							</div>
 
@@ -1021,6 +1059,7 @@
 	<!-- already minified -->
 	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
 	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
+	<script type="text/javascript" src="./libs/d3/d3js.en.js"></script>
 	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
 	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
 	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>

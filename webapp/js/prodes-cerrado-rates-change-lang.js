@@ -6,6 +6,9 @@ var Lang={
 			this.language='pt-br';
 		}
 	},
+	format:function(){
+		return this.formatHandler[this.language];
+	},
 	highlightFlag:function() {
 		var f;
 		for (i in this.languages) {
@@ -64,5 +67,6 @@ var Lang={
 		    }
 		}
 	},
-	languages:['pt-br','en','es']
+	languages:['pt-br','en','es'],
+	formatHandler:{'pt-br':localeBR, 'en':localeUS}
 };

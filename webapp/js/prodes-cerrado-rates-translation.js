@@ -51,8 +51,11 @@ var Translation={
 		'txt24':'Fechar',
 		'txt25':'Informações para download',
 		'txt26':'Baixar uma tabela com os incrementos de desmatamento em formato CSV.',
-		'txt27':'Incluindo os filtros aplicados.',
-		'txt28':'Não incluindo os filtros aplicados.',
+		'txt26a':'Caso exista filtro por Município e o formato escolhido seja por Estado, os valores de área apresentados para cada estado serão a soma das áreas dos Municípios selecionados.<br/><br/>Se não houver filtros aplicados, as duas opções de geração de planilha criarão a mesma saída.<br/><br/>O separador decimal utilizado no campo numérico de área, será a virgula quando o painel estiver em português e o ponto quando o painel estiver em inglês.',
+		'txt27':'Tabela por Estado incluindo os filtros aplicados',
+		'txt27a':'Tabela por Município incluindo os filtros aplicados',
+		'txt28':'Tabela completa por Estado',
+		'txt28a':'Tabela completa por Município',
 		'txt29':'Fechar',
 		'txt30':'A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />'+
 		'A impressão acomoda bem os gráficos quando as configurações de página são as seguintes:<br />'+
@@ -207,9 +210,12 @@ var Translation={
 		'txt23':'For more information, see FIP Cerrado project',
 		'txt24':'Close',
 		'txt25':'Download information',
-		'txt26':'Download a deforestation increment table in CSV format.',
-		'txt27':'Include applied filters.',
-		'txt28':'Do not include applied filters.',
+		'txt26':'Download a deforestation increment spreadsheet in CSV format.',
+		'txt26a':'If there is a filter by Municipality and the format chosen is by State, the area values presented for each state will be the sum of the areas of the selected Municipalities.<br/><br/>If no applied filters then the two spreadsheet generate options build the same output.<br/><br/>The decimal separator used in the area numeric field will be the comma when the panel is in Portuguese and the point when the panel is in English.',
+		'txt27':'Spreadsheet by State, using the applied filters',
+		'txt27a':'Spreadsheet by Municipalities, using the applied filters',
+		'txt28':'Complete spreadsheet by State',
+		'txt28a':'Complete spreadsheet by Municipalities',
 		'txt29':'Close',
 		'txt30':'This print button triggers browser print resources which may differ depending on the browser.<br />'+
 		'We strongly suggest you to arrange charts before printing based on the following setup page:<br />'+
