@@ -6,13 +6,13 @@
 #docker container stop terrabrasilis_dashboard_daily
 
 # build all images
-docker build -t terrabrasilis/dashboard-increments:alpha --build-arg INDEX_FILE=prodes-cerrado-rates -f environment/Dockerfile .
+docker build -t terrabrasilis/dashboard-increments:beta --build-arg INDEX_FILE=prodes-cerrado-rates -f environment/Dockerfile .
 docker build -t terrabrasilis/dashboard-daily:alpha --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
 docker build -t terrabrasilis/dashboard-aggregated:alpha --build-arg INDEX_FILE=deter-cerrado-aggregated -f environment/Dockerfile .
 
 # send to dockerhub
 docker login
-docker push terrabrasilis/dashboard-increments:alpha
+docker push terrabrasilis/dashboard-increments:beta
 docker push terrabrasilis/dashboard-daily:alpha
 docker push terrabrasilis/dashboard-aggregated:alpha
 
