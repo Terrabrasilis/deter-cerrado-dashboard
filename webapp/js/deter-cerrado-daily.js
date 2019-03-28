@@ -702,8 +702,8 @@ window.onload=function(){
 		var afterLoadConfiguration=function(cfg) {
 			graph.displayWaiting();
 			var configDashboard={defaultDataDimension:'area', resizeTimeout:0, minWidth:250, dataConfig:cfg};
-			//var dataUrl = "http://terrabrasilis.dpi.inpe.br/download/deter-cerrado/deter_cerrado_all_d.json";
-			var dataUrl = "./data/deter-cerrado-daily.json";
+			var dataUrl = "http://terrabrasilis.dpi.inpe.br/download/deter-cerrado/deter_cerrado_all_d.json";
+			//var dataUrl = "./data/deter-cerrado-daily.json";
 			var afterLoadData=function(json) {
 				Lang.apply();
 				if(!json || !json.features) {

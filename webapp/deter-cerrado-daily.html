@@ -37,7 +37,7 @@
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
 	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
 	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
-	<link rel="stylesheet" type="text/css" href="./css/prodes-cerrado-rates-print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="./css/cerrado-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
 </head>
 
@@ -102,20 +102,32 @@
 				<li class="active">
 					<!-- manter active no primeiro -->
 					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
-						<i class="material-icons">dashboard</i><span id="nv-chart">Gráficos - desmatamento</span></a>
-				</li>
-
-				<li>
-					<a href="/dashboard/deforestation/biomes/cerrado/increments/" id="toIncrementsChart" title="Abrir o painel de incrementos de desmatamento." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-increments">Incrementos anuais</span></a>
+						<i class="material-icons">dashboard</i><span id="nv-chart-amz">Gráficos - Alertas Amazônia</span></a>
 				</li>
 				<li>
-					<a href="/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart" title="Abrir o painel de alertas de desmatamento." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily">Alertas diários</span></a>
+					<a href="/dashboard/alerts/legal/amazon/daily/" id="toDailyChart-amz" title="Abrir o painel de alertas." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Alertas diários</span></a>
 				</li>
 				<li>
-					<a href="/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart" title="Abrir o painel de agregado de alertas de desmatamento." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg">Agregado de alertas</span></a>
+					<a href="/dashboard/alerts/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel de agregado de alertas." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggreg-amz">Agregado de alertas</span></a>
+				</li>
+			</ul>
+			
+			<ul class="list-unstyled components">
+			
+				<li class="active">
+					<!-- manter active no primeiro -->
+					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
+						<i class="material-icons">dashboard</i><span id="nv-chart-cer">Gráficos - Alertas Cerrado</span></a>
+				</li>
+				<li>
+					<a href="/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de alertas." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-daily-cer">Alertas diários</span></a>
+				</li>
+				<li>
+					<a href="/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel de agregado de alertas." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer">Agregado de alertas</span></a>
 				</li>
 			</ul>
 
@@ -128,9 +140,9 @@
 				</li>
 
 				<li>
-					<a href="http://terrabrasilis.dpi.inpe.br" id="toMap" target="_blank" title="Abrir o mapa interativo."
+					<a href="http://terrabrasilis.dpi.inpe.br/map/alert" id="toMap" target="_blank" title="Abrir o mapa de alertas."
 					 aria-expanded="false">
-						<i class="material-icons">map</i><span id="nv-map">Mapa Interativo</span></a>
+						<i class="material-icons">map</i><span id="nv-map">Mapa de Alertas</span></a>
 				</li>
 				<li>
 					<a href="http://www.obt.inpe.br/cerrado" id="toHome" target="_blank" title="Abrir a página inicial com informações sobre o projeto de monitoramento do Cerrado."
@@ -143,10 +155,10 @@
 
 	<!-- Menu superior -->
 	<div id="content">
-		<div class="boxtop">
+		<!--div class="boxtop">
 			<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span><span id="tituloprint" class="tituloprint">
 					| Alertas diários de desmatamento no Cerrado Brasileiro.</span></h5>
-		</div>
+		</div-->
 		<nav class="navbar navbar-expand-lg materialnav navbar-header">
 			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar"
 			 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,7 +167,7 @@
 			<a class="navbar-brand" href="#"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#">| Cerrado</a>
+					<a class="nav-item nav-link" href="#" id="header-panel">| Alertas</a>
 				</div>
 				<ul class="navbar-nav  navbar-right">
 					<li class="nav-item active">
@@ -199,8 +211,8 @@
 
 		<div id="charts-panel">
 
-			<div id="title-chart" class="all-charts-title boxtitlepanel">
-				Alertas diários de desmatamento no Cerrado Brasileiro.
+			<div class="all-charts-title boxtitlepanel">
+				<div id="txt15">Análise - Amazônia Legal</div>
 			</div>
 
 			<div class="row box">
@@ -358,11 +370,11 @@
 								<br />
 								<span id="txt23">Baixar os dados sem a componente geográfica, apenas tabela de atributos, em formato CSV.</span>
 								<div class="dwn-tool">
-									<a href="#" id="download-csv-daily">
+									<a href="#" id="download-csv-daily-x">
 										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt24">Com filtros.</span><strong>*</strong>
 									</a>
 									<br />
-									<a href="#" id="download-csv-daily-all">
+									<a href="#" id="download-csv-daily-all-x">
 										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt25">Sem filtros.</span><strong>*</strong>
 									</a>
 									<br /><br />
@@ -810,8 +822,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content modalinf">
 				<div class="modal-header fechar">
-					<h5 class="modal-title boxtitletable"> <span id="txt26">Baixar a tabela com os incremento de desmatamento em
-							formato CSV.</span></h5>
+					<h5 class="modal-title boxtitletable"> <span id="txt26">Baixar a tabela com os alertas em formato CSV.</span></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
 				</div>
 				<!-- / modal-header -->
@@ -823,7 +834,7 @@
 									<i class="material-icons">save_alt</i>
 								</span>
 								<p class="alert-body alert-body-right alert-labelled-cell">
-									<a href="#" id="download-csv-filtered">
+									<a href="#" id="download-csv-daily">
 										<span id="txt27" class="alerttitle">Com filtros.</span>
 									</a>
 								</p>
@@ -836,7 +847,7 @@
 									<i class="material-icons">save_alt</i>
 								</span>
 								<p class="alert-body alert-body-right alert-labelled-cell">
-									<a href="#" id="download-csv-all">
+									<a href="#" id="download-csv-daily-all">
 										<span id="txt28" class="alerttitle">Sem filtros.</span>
 									</a>
 								</p>
@@ -880,11 +891,10 @@
 					</div>
 					<div class="embed-video">
 						<video style="width: 100%" controls>
-							<source src="movies/dashboard-rate-in-action.mp4" type="video/mp4">
-							<track src="movies/subtitles/dashboard-rate-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese"
-							 default>
-							<track src="movies/subtitles/dashboard-rate-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
-							<track src="movies/subtitles/dashboard-rate-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish">
+							<source src="movies/dashboard-in-action.mp4" type="video/mp4">
+							<!--track src="movies/subtitles/dashboard-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+							<track src="movies/subtitles/dashboard-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+							<track src="movies/subtitles/dashboard-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish"-->
 							Seu navegador não suporta a tag de vídeo.
 						</video>
 					</div>
@@ -913,7 +923,7 @@
 
 	<!--Footer-->
 	<footer class="footer">
-		<p>© 2018<a href="#"> Cerrado Brasileiro</a></p>
+		<p>© 2019<a href="#"> TerraBrasilis</a></p>
 	</footer>
 	<!--/.Footer-->
 
