@@ -35,7 +35,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
-		'txt15':'Análise - Amazônia Legal',
+		'txt15':'Análise - Cerrado',
 		'txt16':'Informações para obter os dados (granularidade diária)',
 		'txt17':'Baixar os dados incluindo a componente geográfica.',
 		'txt18':'Respeitando os filtros definidos neste painel de consulta.',
