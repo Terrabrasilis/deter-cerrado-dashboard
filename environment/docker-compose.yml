@@ -6,7 +6,7 @@ version: "3"
 services:
 
   alerts-amazon-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.0-beta
+    image: terrabrasilis/cerrado-alert-daily:v2.1-beta
   
   alerts-amazon-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.0-beta
+    image: terrabrasilis/cerrado-alert-aggregated:v2.1-beta
