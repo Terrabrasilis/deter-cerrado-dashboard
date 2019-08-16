@@ -11,4 +11,5 @@ Including dockerized environment to run it into our swarm cluster.
 ## Online resource
 
 Link to online instance for alerts dashboard:
-http://terrabrasilis.dpi.inpe.br/dashboard/alerts/biomes/cerrado/daily/
+http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/biomes/cerrado/daily/
+http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/biomes/cerrado/aggregated/
