@@ -26,13 +26,13 @@ Are two ways for run this service using docker-compose.
 ### To run in atached mode
 
 ```bash
-docker-compose -f cerrado-deter-environment/docker-compose.yml up
+docker-compose -f environment/docker-compose.yml up
 ```
 
 ### To run in detached mode
 
 ```bash
-docker-compose -f cerrado-deter-environment/docker-compose.yml up -d
+docker-compose -f environment/docker-compose.yml up -d
 ```
 
 ## Run in your stack
