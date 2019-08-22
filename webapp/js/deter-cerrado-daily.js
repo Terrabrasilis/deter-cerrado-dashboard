@@ -57,9 +57,9 @@ var graph={
 			this.config=config;
 			
 			//this.config.defaultHeight = graph.utils.getDefaultHeight();
-			
-			this.totalizedAreaInfoBox = dc.numberDisplay("#totalized-area");
-			this.totalizedAlertsInfoBox = dc.numberDisplay("#totalized-alerts");
+			this.totalizedAlertsInfoBox = dc.numberDisplay("#numpolygons");
+			this.totalizedAreaInfoBox = dc.numberDisplay("#custom-classes");
+
 			this.lineDistributionByMonth = dc.barChart("#chart-line-by-month");
 			//this.ringTotalizedByClass = dc.pieChart("#chart-ring-by-class");
 			this.histTopByCounties = dc.rowChart("#chart-hist-top-counties");
@@ -68,6 +68,7 @@ var graph={
 			
 			graph.build();
 			SearchEngine.init(this.histTopByCounties, this.ringTotalizedByState ,'modal-search');
+			graph.loadUpdatedDate();
 		}
 	},
 	
@@ -85,7 +86,7 @@ var graph={
 	displayWarning:function(enable) {
 		if(enable===undefined) enable=true;
 		document.getElementById("warning_data_info").style.display=((enable)?(''):('none'));
-		document.getElementById("warning_data_info").innerHTML='<h1><span id="txt8">'+Translation[Lang.language].txt8+'</span></h1>';
+		document.getElementById("warning_data_info").innerHTML='<h3><span id="txt8">'+Translation[Lang.language].txt8+'</span></h3>';
 		document.getElementById("loading_data_info").style.display=((enable)?('none'):(''));
 	},
 	
@@ -108,11 +109,47 @@ var graph={
 			return true;
 		}
 	},
+
+	loadUpdatedDate: function() {
+		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+		//var url="./data/updated-date.json";
+		d3.json(url, (json) => {
+			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
+			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
+		});
+	},
 	
 	setDataDimension: function(d) {
 		this.config.defaultDataDimension=d;
+		this.storeSelectedFilter();
 		this.resetFilters();
 		this.build();
+		this.updateToSelectedFilter();
+	},
+
+	storeSelectedFilter: function() {
+		graph.selectedFilters={};// reset stored filter
+		if(graph.histTopByCounties.hasFilter())
+			graph.selectedFilters.byCounty=graph.histTopByCounties.filters();
+		if(graph.lineDistributionByMonth.hasFilter())
+			graph.selectedFilters.byMonth=graph.lineDistributionByMonth.filters();
+		if(graph.ringTotalizedByState.hasFilter())
+			graph.selectedFilters.byState=graph.ringTotalizedByState.filters();
+		if(graph.histTopByUCs.hasFilter())
+			graph.selectedFilters.byUCs=graph.histTopByUCs.filters();
+	},
+
+	updateToSelectedFilter: function() {
+		if(graph.selectedFilters.byCounty)
+			while(graph.selectedFilters.byCounty.length) {graph.histTopByCounties.filter(graph.selectedFilters.byCounty.pop());}
+		if(graph.selectedFilters.byMonth)
+			while(graph.selectedFilters.byMonth.length) {graph.lineDistributionByMonth.filter(graph.selectedFilters.byMonth.pop());}
+		if(graph.selectedFilters.byState)
+			while(graph.selectedFilters.byState.length) {graph.ringTotalizedByState.filter(graph.selectedFilters.byState.pop());}
+		if(graph.selectedFilters.byUCs)
+			while(graph.selectedFilters.byUCs.length) {graph.histTopByUCs.filter(graph.selectedFilters.byUCs.pop());}
+
+		dc.redrawAll();
 	},
 	
 	resetFilters:function() {
@@ -170,7 +207,7 @@ var graph={
 		
 		wildcardExchange:function(str) {
 			var dim=((graph.config.defaultDataDimension=='area')?(Translation[Lang.language].areas):(Translation[Lang.language].alertas));
-			var unit=((graph.config.defaultDataDimension=='area')?('km²'):(Translation[Lang.language].alertas));
+			var unit=((graph.config.defaultDataDimension=='area')?('km²'):(Translation[Lang.language].unit_alerts));
 			str=str.replace(/%dim%/gi,function(x){return (x=='%Dim%'?dim.charAt(0).toUpperCase()+dim.slice(1):dim);});
 			str=str.replace(/%unit%/gi,function(x){return (x=='%Unit%'?unit.charAt(0).toUpperCase()+unit.slice(1):unit);});
 			return str;
@@ -284,13 +321,15 @@ var graph={
 			groups["date"] = dimensions["date"].group().reduceCount(function(d) {return +d.timestamp;});
 			groups["uc"] = dimensions["uc"].group().reduceSum(function(d) {return (d.uc!='null')?(1):(0);});
 		}
+
+		var htmlBox="<div class='icon-left'><i class='fa fa-leaf fa-2x' aria-hidden='true'></i></div><span class='number-display'>";
 		
 		this.totalizedAreaInfoBox.formatNumber(localeBR.numberFormat(',1f'));
 		this.totalizedAreaInfoBox.valueAccessor(function(d) {return d.n ? d.tot.toFixed(1) : 0;})
 	      .html({
-	          one:"<span style='color:steelblue; font-size: 36px;'>%number</span> km²",
-	          some:"<span style='color:steelblue; font-size: 36px;'>%number</span> km²",
-	          none:"<span style='color:steelblue; font-size: 36px;'>0</span> km²"
+			one:htmlBox+"<span>"+Translation[Lang.language].deforestation+"</span><br/><div class='numberinf'>%number km²</div></span>",
+			some:htmlBox+"<span>"+Translation[Lang.language].deforestation+"</span><br/><div class='numberinf'>%number km²</div></span>",
+			none:htmlBox+"<span>"+Translation[Lang.language].deforestation+"</span><br/><div class='numberinf'>0 km²</div></span>"
 	      })
 	      .group(totalAreaGroup);
 		
@@ -302,9 +341,9 @@ var graph={
 			return d.n ? d.n : 0;
 		})
 	      .html({
-	          one:"<span style='color:#ffff00; font-size: 36px;'>%number</span> "+Translation[Lang.language].alerta,
-	          some:"<span style='color:#ffff00; font-size: 36px;'>%number</span> "+Translation[Lang.language].alertas,
-	          none:"<span style='color:#ffff00; font-size: 36px;'>0</span> "+Translation[Lang.language].alerta
+			one:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
+			some:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
+			none:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>0</div></span>"
 	      })
 	      .group(totalAlertsGroup);
 		
@@ -334,7 +373,7 @@ var graph={
 		
 		this.lineDistributionByMonth
 			.height(310)
-			.margins({top: 10, right: 15, bottom: 85, left: 45})
+			.margins({top: 10, right: 45, bottom: 85, left: 45})
 			.yAxisLabel( yLabel )
 			.xAxisLabel( Translation[Lang.language].timeline_desc + " " + dateFormat(new Date(alertsMinDate[0].timestamp)) + " - " + dateFormat(new Date(alertsMaxDate[0].timestamp)) )
 			.dimension(dimensions["date"])

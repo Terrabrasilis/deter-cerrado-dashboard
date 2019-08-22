@@ -19,11 +19,25 @@ var utils = {
 		return ((window.innerHeight*0.4).toFixed(0))*1;
 	},
 	btnDownload:function() {
+		// without filters
+		d3.select('#download-csv-monthly-all')
+	    .on('click', function() {
+			var dt=new Date();
+			dt=dt.toLocaleDateString() +'_'+ dt.toLocaleTimeString();
+			dt=dt.split('/').join('_');
+			var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
+			saveAs(blob, 'deter_aggregated_'+dt+'.csv');
+		});
+		// with filters
 		d3.select('#download-csv-monthly')
 	    .on('click', function() {
-	        var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
-	        saveAs(blob, 'deter-b-agregado-mensal.csv');
-	    });
+			var filteredData=graph.monthDimension.top(Infinity);
+			var dt=new Date();
+			dt=dt.toLocaleDateString() +'_'+ dt.toLocaleTimeString();
+			dt=dt.split('/').join('_');
+	        var blob = new Blob([d3.csv.format(filteredData)], {type: "text/csv;charset=utf-8"});
+	        saveAs(blob, 'deter_aggregated_'+dt+'.csv');
+		});
 	},
 	preparePrint: function() {
 		d3.select('#print_information').style('display','block');
@@ -35,8 +49,17 @@ var utils = {
 	},
 	attachEventListeners:function() {
 		utils.btnPrintPage();
-		//utils.btnDownload();
+		utils.btnDownload();
 		//utils.btnChangePanel();
+	},
+	attachListenersToLegend: function() {
+		var legendItems=$('#agreg .dc-legend-item');
+		for(var i=0;i<legendItems.length;i++) {
+			$(legendItems[i]).on('click', function (ev) {
+				graph.barAreaByYear.filter(ev.currentTarget.textContent);
+			});
+		}
+		
 	},
 	onResize:function(event) {
 		clearTimeout(utils.config.resizeTimeout);
@@ -98,23 +121,45 @@ var utils = {
 		return list[d-8];
 
 	},
+	nameMonthsById: function(id) {
+		var list=[];
+		list[13]='Jan';
+		list[14]='Fev';
+		list[15]='Mar';
+		list[16]='Abr';
+		list[17]='Mai';
+		list[18]='Jun';
+		list[19]='Jul';
+		list[8]='Ago';
+		list[9]='Set';
+		list[10]='Out';
+		list[11]='Nov';
+		list[12]='Dez';
+		return list[id];
+	},
 	fakeMonths: function(d) {
 		var list=[13,14,15,16,17,18,19,8,9,10,11,12];
 		return list[d-1];
 	},
-	displayError:function(info) {
-		d3.select('#panel_container').style('display','none');
-		d3.select('#display_error').style('display','block');
-		document.getElementById("inner_display_error").innerHTML=info+
-		'<span id="dtn_refresh" class="glyphicon glyphicon-refresh" aria-hidden="true" title="'+Translation[Lang.language].refresh_data+'"></span>';
-		setTimeout(function(){
-			d3.select('#dtn_refresh').on('click', function() {
-				window.location.href='?type=aggregated';
-		    });
-		}, 300);
-	},
-	displayNoData:function() {
-		this.displayError(Translation[Lang.language].txt7);
+	// displayError:function(info) {
+	// 	d3.select('#panel_container').style('display','none');
+	// 	d3.select('#display_error').style('display','block');
+	// 	document.getElementById("inner_display_error").innerHTML=info+
+	// 	'<span id="dtn_refresh" class="glyphicon glyphicon-refresh" aria-hidden="true" title="'+Translation[Lang.language].refresh_data+'"></span>';
+	// 	setTimeout(function(){
+	// 		d3.select('#dtn_refresh').on('click', function() {
+	// 			window.location.href='?type=aggregated';
+	// 	    });
+	// 	}, 300);
+	// },
+	// displayNoData:function() {
+	// 	this.displayError(Translation[Lang.language].txt7);
+	// },
+	displayWarning:function(enable) {
+		if(enable===undefined) enable=true;
+		document.getElementById("warning_data_info").style.display=((enable)?(''):('none'));
+		document.getElementById("warning_data_info").innerHTML='<h3><span id="txt7">'+Translation[Lang.language].txt7+'</span></h3>';
+		document.getElementById("loading_data_info").style.display=((enable)?('none'):(''));
 	},
 	displayGraphContainer:function() {
 		d3.select('#panel_container').style('display','block');
@@ -134,15 +179,33 @@ var utils = {
 		document.getElementById('stylesheet_dash').href='../theme/css/dashboard-aggregated'+((utils.cssDefault)?(''):('-dark'))+'.css';
 		bt.style.display='none';
 		setTimeout(bt.style.display='',200);
+	},
+
+	highlightSelectedMonths: function() {
+		for (var i=8;i<20;i++) {
+			if(graph.monthFilters.includes(i) || !graph.monthFilters.length) {
+				d3.select('#month_'+i).style('opacity', '1');
+			}else {
+				d3.select('#month_'+i).style('opacity', '0.4');
+			}
+		}
+	},
+
+	setMonthNamesFilterBar: function() {
+		for (var i=8;i<20;i++) {
+			d3.select('#month_'+i).html(Translation[Lang.language].months_of_prodes_year[i-8]);
+		}
 	}
 };
 
 var graph={
 	
 	focusChart: null,
-	overviewChart: null,
+	//overviewChart: null,
 	ringTotalizedByState: null,
 	barAreaByYear: null,
+
+	monthFilters: [],
 	
 	monthDimension: null,
 	temporalDimension: null,
@@ -213,19 +276,29 @@ var graph={
 	},
 	setChartReferencies: function() {
 		this.focusChart = dc.seriesChart("#agreg", "agrega");
-		this.overviewChart = dc.seriesChart("#agreg-overview", "agrega");
+		//this.overviewChart = dc.seriesChart("#agreg-overview", "agrega");
 		this.ringTotalizedByState = dc.pieChart("#chart-by-state", "filtra");
 		this.barAreaByYear = dc.barChart("#chart-by-year", "filtra");
+	},
+	loadUpdatedDate: function() {
+		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+		//var url="./data/updated-date.json";
+		d3.json(url, (json) => {
+			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
+			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
+		});
 	},
 	loadData: function(url) {
 		d3.json(url, graph.processData);
 	},
 	processData: function(error, data) {
 		if (error) {
-			utils.displayError( Translation[Lang.language].failure_load_data );
+			//utils.displayError( Translation[Lang.language].failure_load_data );
+			utils.displayWarning(true);
 			return;
 		}else if(!data || !data.totalFeatures || data.totalFeatures<=0) {
-			utils.displayNoData();
+			//utils.displayNoData();
+			utils.displayWarning(true);
 			return;
 		}
 		utils.displayGraphContainer();
@@ -303,7 +376,7 @@ var graph={
 			.clipPadding(10)
 			.dimension(this.temporalDimension)
 			.group(this.areaGroup)
-			.rangeChart(this.overviewChart)
+			//.rangeChart(this.overviewChart)
 			.title(function(d) {
 				var v=Math.abs(+(parseFloat(d.value).toFixed(2)));
 				v=localeBR.numberFormat(',1f')(v);
@@ -317,7 +390,15 @@ var graph={
 				return d.key[1];
 			})
 			.valueAccessor(function(d) {
-				return Math.abs(+(d.value.toFixed(2)));
+				if(!graph.focusChart.hasFilter()) {
+					return Math.abs(+(d.value.toFixed(2)));
+				}else{
+					if(graph.monthFilters.indexOf(d.key[1])>=0) {
+						return Math.abs(+(d.value.toFixed(2)));
+					}else{
+						return 0;
+					}
+				}
 			})
 			.legend(dc.legend().x(100).y(30).itemHeight(15).gap(5).horizontal(1).legendWidth(600).itemWidth(80))
 			.margins({top: 20, right: 35, bottom: 70, left: 65});
@@ -330,16 +411,28 @@ var graph={
 			return utils.xaxis(d);
 		});
 
-		// this.focusChart.margins().right += 10;
-		// this.focusChart.margins().left += 30;
-		// this.focusChart.margins().top += 30;
-		
 		this.focusChart.on('filtered', function(chart) {
 			if(chart.filter()) {
-				graph.monthDimension.filterRange([chart.filter()[0], (chart.filter()[1]+1) ]);
+				graph.monthDimension.filterFunction(
+					(d) => {
+						return graph.monthFilters.includes(d);
+					}
+				);
 				dc.redrawAll("filtra");
 			}
 		});
+
+		this.focusChart.on('renderlet', function() {
+			utils.attachListenersToLegend();
+			dc.redrawAll("filtra");
+		});
+
+		// this.focusChart.on('filtered', function(chart) {
+		// 	if(chart.filter()) {
+		// 		graph.monthDimension.filterRange([chart.filter()[0], (chart.filter()[1]+1) ]);
+		// 		dc.redrawAll("filtra");
+		// 	}
+		// });
 
 		this.focusChart.colorAccessor(function(d) {
 			var i=0,l=barColors.length;
@@ -352,71 +445,81 @@ var graph={
 		});
 
 		this.focusChart.filterPrinter(function(filters) {
-			var fp=utils.xaxis(filters[0][0])+" - "+utils.xaxis(filters[0][1]);
+			var fp='';
+			graph.monthFilters.forEach(
+				(monthNumber) => {
+					fp+=(fp==''?'':',')+utils.nameMonthsById(monthNumber);
+				}
+			);
 			return fp;
 		});
-		
-		this.overviewChart
-		    .height(90)
-		    .chart(function(c,_,_,i) {
-			    var chart = dc.lineChart(c);
-			    if(i===0) {
-			    	chart.on('filtered', function (chart) {
-			            if (!chart.filter()) {
-			                dc.events.trigger(function () {
-			                    graph.overviewChart.focusChart().x().domain(graph.overviewChart.focusChart().xOriginalDomain());
-			                    graph.overviewChart.focusChart().redraw();
-			                    graph.focusChart.filterAll();
-			                    graph.overviewChart.filterAll()
-			                    graph.monthDimension.filterAll();
-			                    dc.redrawAll("filtra");
-			                });
-			            } else if (!utils.rangesEqual(chart.filter(), graph.overviewChart.focusChart().filter())) {
-			                dc.events.trigger(function () {
-			                	graph.overviewChart.focusChart().focus(chart.filter());
-			                });
-			            }
-			        });
-			    }
-			    return chart;
-		    })
-		    .x(d3.scale.linear().domain([8,19]))
-		    .renderVerticalGridLines(true)
-		    .brushOn(true)
-		    .xAxisLabel(Translation[Lang.language].overview_x_label)
-		    .yAxisPadding('10%')
-		    .clipPadding(10)
-		    .dimension(this.temporalDimension)
-			.group(this.areaGroup)
-			.ordinalColors(["rgba(0,0,0,0)"])
-		    .seriesAccessor(function(d) {
-				return d.key[0];
-			})
-			.keyAccessor(function(d) {
-				return d.key[1];
-			})
-			.valueAccessor(function(d) {
-				return Math.abs(+(d.value.toFixed(2)));
-			})
-			.margins({top: 0, right: 35, bottom: 50, left: 65});
-		
-		// this.overviewChart.margins().right = 5; 
-		// this.overviewChart.margins().left += 40;
-		// this.overviewChart.margins().top = 0;
-		
-		this.overviewChart.yAxis().ticks(0);
-		this.overviewChart.yAxis().tickFormat(function(d) {
-			return d3.format(',d')(d);
-		});
-		this.overviewChart.xAxis().tickFormat(function(d) {
-			return utils.xaxis(d);
-		});
 
-		this.overviewChart.round(
-			function round(v) {
-				return parseInt(v);
-	    	}
-		);
+		// this.focusChart.filterPrinter(function(filters) {
+		// 	var fp=utils.xaxis(filters[0][0])+" - "+utils.xaxis(filters[0][1]);
+		// 	return fp;
+		// });
+		
+		// this.overviewChart
+		//     .height(90)
+		//     .chart(function(c,_,_,i) {
+		// 	    var chart = dc.lineChart(c);
+		// 	    if(i===0) {
+		// 	    	chart.on('filtered', function (chart) {
+		// 	            if (!chart.filter()) {
+		// 	                dc.events.trigger(function () {
+		// 	                    graph.overviewChart.focusChart().x().domain(graph.overviewChart.focusChart().xOriginalDomain());
+		// 	                    graph.overviewChart.focusChart().redraw();
+		// 	                    graph.focusChart.filterAll();
+		// 	                    graph.overviewChart.filterAll()
+		// 	                    graph.monthDimension.filterAll();
+		// 	                    dc.redrawAll("filtra");
+		// 	                });
+		// 	            } else if (!utils.rangesEqual(chart.filter(), graph.overviewChart.focusChart().filter())) {
+		// 	                dc.events.trigger(function () {
+		// 	                	graph.overviewChart.focusChart().focus(chart.filter());
+		// 	                });
+		// 	            }
+		// 	        });
+		// 	    }
+		// 	    return chart;
+		//     })
+		//     .x(d3.scale.linear().domain([8,19]))
+		//     .renderVerticalGridLines(true)
+		//     .brushOn(true)
+		//     .xAxisLabel(Translation[Lang.language].overview_x_label)
+		//     .yAxisPadding('10%')
+		//     .clipPadding(10)
+		//     .dimension(this.temporalDimension)
+		// 	.group(this.areaGroup)
+		// 	.ordinalColors(["rgba(0,0,0,0)"])
+		//     .seriesAccessor(function(d) {
+		// 		return d.key[0];
+		// 	})
+		// 	.keyAccessor(function(d) {
+		// 		return d.key[1];
+		// 	})
+		// 	.valueAccessor(function(d) {
+		// 		return Math.abs(+(d.value.toFixed(2)));
+		// 	})
+		// 	.margins({top: 0, right: 35, bottom: 50, left: 65});
+		
+		// // this.overviewChart.margins().right = 5; 
+		// // this.overviewChart.margins().left += 40;
+		// // this.overviewChart.margins().top = 0;
+		
+		// this.overviewChart.yAxis().ticks(0);
+		// this.overviewChart.yAxis().tickFormat(function(d) {
+		// 	return d3.format(',d')(d);
+		// });
+		// this.overviewChart.xAxis().tickFormat(function(d) {
+		// 	return utils.xaxis(d);
+		// });
+
+		// this.overviewChart.round(
+		// 	function round(v) {
+		// 		return parseInt(v);
+	    // 	}
+		// );
 
 		this.ringTotalizedByState
 			.height(this.defaultHeight)
@@ -524,6 +627,8 @@ var graph={
 			});
 		});
 		utils.renderAll();
+		utils.attachListenersToLegend();
+		utils.setMonthNamesFilterBar();
 	},
 	init: function() {
 		window.onresize=utils.onResize;
@@ -535,6 +640,7 @@ var graph={
 			var dataUrl = "http://terrabrasilis.dpi.inpe.br/download/deter-cerrado/deter_cerrado_month_d.json";
 			//var dataUrl = "./data/deter-cerrado-month.json";
 			graph.loadData(dataUrl);
+			graph.loadUpdatedDate();
 			utils.attachEventListeners();
 		});
 	},
@@ -548,7 +654,7 @@ var graph={
 		}else if(who=='year'){
 			graph.barAreaByYear.filterAll();
 		}else if(who=='agreg'){
-			graph.overviewChart.filterAll();
+			//graph.overviewChart.filterAll();
 			graph.focusChart.filterAll();
 			graph.monthDimension.filterAll();
 			dc.redrawAll("filtra");
@@ -558,9 +664,41 @@ var graph={
 	resetFilters: function() {
 		graph.ringTotalizedByState.filterAll();
 		graph.barAreaByYear.filterAll();
-		graph.overviewChart.filterAll();
+		//graph.overviewChart.filterAll();
 		graph.focusChart.filterAll();
 		graph.monthDimension.filterAll();
+	},
+
+	/**
+	 * Filter by months selected on the month list.
+	 * @param {number} aMonth, a fake number of month. To map for real number, see utils.nameMonthsById
+	 */
+	applyMonthFilter: function(aMonth) {
+		if(graph.focusChart.hasFilter()) {
+			graph.focusChart.filterAll();
+		}
+		var pos=graph.monthFilters.indexOf(aMonth);
+		if(pos<0) {
+			graph.monthFilters.push(aMonth);
+		}else{
+			graph.monthFilters.splice(pos,1);
+		}
+
+		if (graph.monthFilters.length) {
+			graph.monthFilters.sort(
+				(a,b) => {
+					return a>b;
+				}
+			);
+			var min=graph.monthFilters[0],max=graph.monthFilters[graph.monthFilters.length-1];
+			graph.focusChart.filter([min,max]);
+			graph.focusChart.redraw();
+			dc.redrawAll("agrega");
+		}else {
+			graph.resetFilter('agreg','agrega');
+		}
+
+		utils.highlightSelectedMonths();
 	}
 };
 

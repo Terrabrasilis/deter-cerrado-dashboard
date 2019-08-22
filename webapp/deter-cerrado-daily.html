@@ -47,21 +47,57 @@
 		<!-- Sidebar Holder -->
 		<nav id="sidebar">
 
-			<div class="sidebar-header">
-
-
-				<div class="desctxt">
-					<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
-					<div id="header-menu">Alertas</div>
+			<a href="http://terrabrasilis.dpi.inpe.br">
+				<div class="sidebar-header">
+					<div class="desctxt">
+						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
+						<div id="header-menu">Alertas (DETER)</div>
+					</div>
 				</div>
-			</div>
+			</a>
+
+			<ul class="list-unstyled components">
+
+				<li class="active">
+					<!-- manter active no primeiro -->
+					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
+						<span id="nv-chart-day">Gráficos - Alertas Diários</span></a>
+				</li>
+				<li>
+					<a href="/app/dashboard/alerts/legal/amazon/daily/" id="toDailyChart-amz" title="Abrir o painel de alertas diários para a Amazônia Legal." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Amazônia Legal</span></a>
+				</li>
+				<li>
+					<a class="enable_menu" href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de alertas diários para o Bioma Cerrado." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-daily-cer">Bioma Cerrado</span></a>
+				</li>
+				
+			</ul>
+
+			<ul class="list-unstyled components">
+
+				<li class="active">
+					<!-- manter active no primeiro -->
+					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
+						<span id="nv-chart-agg">Gráficos - Agregado de Alertas</span></a>
+				</li>
+				
+				<li>
+					<a href="/app/dashboard/alerts/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel agregado mensal de alertas para a Amazônia Legal." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggreg-amz">Amazônia Legal</span></a>
+				</li>
+				<li>
+					<a href="/app/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel agregado mensal de alertas para o Bioma Cerrado." aria-expanded="false">
+						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer">Bioma Cerrado</span></a>
+				</li>
+			</ul>
 
 			<ul class="list-unstyled components">
 
 				<li class="active">
 					<!-- manter active no primeiro -->
 					<a href="#ferramentas" data-toggle="collapse" aria-expanded="true">
-						<i class="material-icons">build</i><span id="tools">Ferramentas</span></a>
+						<span id="tools">Ferramentas</span></a>
 				</li>
 				<li>
 					<a href="#modal-container-download" id="downloadBtn" data-toggle="modal" title="Baixar a tabela de alertas de desmatamento.">
@@ -75,98 +111,44 @@
 						<i class="material-icons">print</i><span id="txt4s">Imprimir Gráficos</span></a>
 				</li>
 
-				<!--li>
-					<a href="#ajuda" id="change_style" title="Alternar o estilo de apresentação claro/escuro." data-toggle="collapse" aria-expanded="false">
-							<i class="material-icons">invert_colors</i>Claro / Escuro</a>
-				</li-->
-<!-- 
-				<li>
-					<a href="#modal-container-video" id="goto_video" data-toggle="modal" title="Ver o vídeo introdutório sobre como utilizar este painel.">
-						<i class="material-icons">help</i><span id="help">Ajuda</span></a>
-				</li>
-
-				<li>
-					<a href="#modal-container-about" id="goto_about" data-toggle="modal" title="Ver informações sobre o projeto e a equipe.">
-						<i class="material-icons">info</i><span id="about">Sobre</span></a>
-				</li>
-
-				<li>
-					<a href="mailto:prodes@dpi.inpe.br" id="tt-contactus" title="Envie sugestões ou perguntas para prodes@dpi.inpe.br."
-					 data-toggle="collapse" aria-expanded="false">
-						<i class="material-icons">email</i><span id="contactus">Contato</span></a>
-				</li> -->
-
 			</ul>
-
-			<ul class="list-unstyled components">
-
-				<li class="active">
-					<!-- manter active no primeiro -->
-					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
-						<i class="material-icons">dashboard</i><span id="nv-chart-day">Gráficos - Alertas Diários</span></a>
-				</li>
-				<li>
-					<a href="/app/dashboard/alerts/legal/amazon/daily/" id="toDailyChart-amz" title="Abrir o painel de alertas diários para a Amazônia Legal." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Amazônia Legal</span></a>
-				</li>
-				<li>
-					<a href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de alertas diários para o Bioma Cerrado." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-cer">Bioma Cerrado</span></a>
-				</li>
-				
-			</ul>
-
-			<ul class="list-unstyled components">
-
-				<li class="active">
-					<!-- manter active no primeiro -->
-					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
-						<i class="material-icons">dashboard</i><span id="nv-chart-agg">Gráficos - Agregado de Alertas</span></a>
-				</li>
-				
-				<li>
-					<a href="/app/dashboard/alerts/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel agregado mensal de alertas para a Amazônia Legal." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-amz">Amazônia Legal</span></a>
-				</li>
-				<li>
-					<a href="/app/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel agregado mensal de alertas para o Bioma Cerrado." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer">Bioma Cerrado</span></a>
-				</li>
-			</ul>
-
-			<ul class="list-unstyled CTAs">
-				<li>
-					<a class="btn btn-primary btn-success" href="http://terrabrasilis.dpi.inpe.br" target="_blank"><span id="nv-home">Home TerraBrasilis</span></a>
-				</li>
-			</ul>
+			
 		</nav>
 	</div>
 
 	<!-- Menu superior -->
 	<div id="content">
-		<!--div class="boxtop">
+		<div class="boxtop">
 			<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span><span id="tituloprint" class="tituloprint">
-					| Alertas diários de desmatamento no Cerrado Brasileiro.</span></h5>
-		</div-->
+					| Alertas diários de desmatamento no Cerrado Brasileiro (DETER).</span></h5>
+		</div>
 		<nav class="navbar navbar-expand-lg materialnav navbar-header">
 			<button class="btn btn-material navbar-btn " type="button" data-toggle="collapse" id="sidebarCollapse" data-target="#navbar"
 			 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="material-icons menuicon">menu</i>
 			</button>
-			<a class="navbar-brand" href="#"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
+			<a class="navbar-brand" href="http://terrabrasilis.dpi.inpe.br/"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></a>
 			<div class="collapse navbar-collapse justify-content-between">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="#" id="header-panel">| Alertas</a>
+					<a class="nav-item nav-link" href="#" id="header-panel">| DETER (Alertas)</a>
 				</div>
 				<ul class="navbar-nav navbar-right analises">
 					<li class="nav-item dropdown">
+						<a aria-expanded="true" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button">
+							<i class="material-icons iconmobile">assignment </i><span id="maps-sup">Mapas</span>
+						</a>
+						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu">
+							<a class="dropdown-item" target="_blank" href="/app/map/deforestation/"><i class="material-icons iconmenu">nature</i><span id="map-des">PRODES (Desmatamento)</span></a>
+							<a class="dropdown-item" target="_blank" href="/app/map/alerts/"><i class="material-icons iconmenu">warning</i><span id="map-war">DETER (Alertas)</span></a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
 						<a aria-expanded="true" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button"> 
-							<i class="material-icons iconmobile">assignment </i><span id="analysis-sup">Análises</span>
+							<i class="material-icons iconmobile">assignment </i><span id="analysis-sup">Gráficos</span>
 						</a>
 						<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu submenu"> 
-							<a class="dropdown-item" target="_blank" href="/app/dashboard/deforestation/biomes/amazon/increments">
-								<i class="material-icons iconmenu">nature</i><span id="analysis-des">Desmatamento</span></a>
-							<a class="dropdown-item" href="#"><i class="material-icons iconmenu">warning</i><span id="analysis-war">Alertas</span></a>
+							<a class="dropdown-item" target="_blank" href="/app/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i><span id="analysis-des">PRODES (Desmatamento)</span></a>
+							<a class="dropdown-item" href="#"><i class="material-icons iconmenu">warning</i><span id="analysis-war">DETER (Alertas)</span></a>
 						</div>
 					</li>
 					<li class="nav-item active">
@@ -204,7 +186,7 @@
 				<div class="text-center">
 					<div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
 					<div id="warning_data_info" style="display:none;">
-						<h1><span id="txt8">Não há dados.</span></h1>
+						<h3><span id="txt8">Problema na comunicação com o servidor.<br>Aguarde alguns minutos e recarregue a página.</span></h3>
 					</div>
 					<iframe id="fileload" src="" style="width:1px;height:1px;position:fixed;bottom: 0px;left: 0px;"></iframe>
 				</div>
@@ -217,33 +199,61 @@
 		<div id="charts-panel">
 
 			<div class="all-charts-title boxtitlepanel">
-				<div id="txt15">Análise - Cerrado</div>
+
+				<span id="txt15">Gráfico - Cerrado</span>
+				<div class="row selectradio selectradio_more">
+					<div class="selectradio-success" id="radio-area" title="Ver gráficos com base no somatório de áreas em km².">
+						<input checked="checked" type="radio" name="set_dim" id="radioarea" onclick="graph.setDataDimension('area');"/>
+						<label for="radioarea" id="area_alertas"> Área dos alertas (km²)</label>
+					</div>
+					<div class="selectradio-success" id="radio-alerts" title="Ver gráficos com base na contagem do número de alertas.">
+						<input type="radio" name="set_dim" id="radioalerts" onclick="graph.setDataDimension('alert');" />
+						<label for="radioalerts" id="num_alerts"> Número de alertas</label>
+					</div>
+				</div>
+
 			</div>
 
+			<!-- Start the filter bar -->
 			<div class="row box">
+				<!-- <div class="col-md-3">
+					<div class="box-grafico text-center">
+						<div class="generalinfo generalinfo_disable">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="box-grafico text-center">
+						<div class="generalinfo generalinfo_disable">
+						</div>
+					</div>
+				</div> -->
 				<div class="col-md-6">
 					<div class="box-grafico text-center">
-						<div id="totalized-area">
-
-							<input id="radio-area" title="Ver gráficos com base no somatório de áreas em km²." class="input_radio" style="display:none;margin-top:18px;margin-right:-20px;"
-							 name="set_dim" type="radio" onclick="graph.setDataDimension('area');" checked="checked">
+						<div class="generalinfo" id="custom-classes" title="Área total de alertas de desmatamento.">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="box-grafico text-center">
-						<div id="totalized-alerts">
-							<input id="radio-alerts" title="Ver gráficos com base na contagem do número de alertas." class="input_radio"
-							 style="display:none;margin-top:18px;margin-right:-20px;" name="set_dim" type="radio" onclick="graph.setDataDimension('alert');">
+						<div class="generalinfo" id="numpolygons" title="Número de alertas.">
 						</div>
 					</div>
 				</div>
 			</div>
+
 			<div class="row box">
 				<div class="col-md-12">
 					<div class="box-grafico text-center">
 						<div id="chart-line-by-month" class="all-charts timeline-charts">
-							<div id="title-chart-timeline" class="all-charts-title  boxtitle"></div>
+							<div class="all-charts-title boxtitle" style="display: flex;">
+								<div style="min-width: fit-content;">
+									<span id="title-chart-timeline"></span>
+								</div>
+								<div class="updated">
+									<span id="updated">Atualizado em:</span><span class="updated_date" id="updated_date"></span>
+								</div>
+							</div>
 							<div class="keep-space">
 								<div class="reset" style="display: none;">
 									<b><span id="txt9">Filtro:</span></b> <span class="filter"></span>
@@ -842,7 +852,7 @@
 					</div>
 					<div class="embed-video">
 						<video style="width: 100%" controls>
-							<source src="movies/dashboard-in-action.mp4" type="video/mp4">
+							<!-- <source src="movies/dashboard-in-action.mp4" type="video/mp4"> -->
 							<!--track src="movies/subtitles/dashboard-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
 							<track src="movies/subtitles/dashboard-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
 							<track src="movies/subtitles/dashboard-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish"-->
