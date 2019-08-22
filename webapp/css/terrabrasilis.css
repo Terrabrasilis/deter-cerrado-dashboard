@@ -86,7 +86,7 @@ a, a:hover, a:focus {
 .generalinfo i {color:#00796b; }
 .number-display .numberinf {font-size: 24px; font-weight: bold; line-height: 14px;}
 .icon-left {float: left; padding: 10px 10px 10px 0;}
-
+.generalinfo_disable{ background-color: #f0f0f0; }
 .bt_content_generalinfo {
   position: relative;
   top: 20px;
@@ -313,6 +313,7 @@ border: 0px !important;}
 .submenu a {
   color: #33333d !important;
   min-width: 230px;
+  display: inline-flex;
 }
 
 /* ---------------------------------------------------
