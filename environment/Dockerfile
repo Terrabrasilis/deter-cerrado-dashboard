@@ -1,8 +1,8 @@
 # To build image for this dockerfile use this command:
-#   docker build -t terrabrasilis/cerrado-alert-daily:v2.2-beta --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
+#   docker build -t terrabrasilis/cerrado-alert-daily:v2.3-hom --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
 #
 # To run without compose and without shell terminal use this command:
-#   docker run -d --rm -p 80:80 --name terrabrasilis_cerrado_alert_daily terrabrasilis/cerrado-alert-daily:v2.2-beta
+#   docker run -d --rm -p 80:80 --name terrabrasilis_cerrado_alert_daily terrabrasilis/cerrado-alert-daily:v2.3-hom
 # 
 # Information from doc of help about run one container without an explicit service. Run in background
 # --------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ FROM nginx:latest
 
 LABEL "br.inpe.dpi"="INPE/DPI-TerraBrasilis"
 LABEL br.inpe.dpi.terrabrasilis="microservice"
-LABEL version="v2.2-beta"
+LABEL version="v2.3-hom"
 LABEL author="Andre Carvalho"
 LABEL author.email="andre.carvalho@inpe.br"
 LABEL description="This container provides an http server including the beta version for Cerrado dashboards to DETER data."
