@@ -200,6 +200,9 @@ var utils = {
 
 var graph={
 	
+	totalizedAreaInfoBox:undefined,// totalized area info box
+	totalizedAlertsInfoBox:undefined,// totalized alerts info box
+
 	focusChart: null,
 	//overviewChart: null,
 	ringTotalizedByState: null,
@@ -216,6 +219,9 @@ var graph={
 	yearGroup: null,
 	ufDimension: null,
 	ufGroup: null,
+	numPolDimension: null,
+	totalAreaGroup: null,
+	totalAlertsGroup: null,
 	
 	data:null,
 
@@ -275,14 +281,16 @@ var graph={
 		return c;
 	},
 	setChartReferencies: function() {
+		this.totalizedAlertsInfoBox = dc.numberDisplay("#numpolygons", "agrega");
+		this.totalizedAreaInfoBox = dc.numberDisplay("#custom-classes", "agrega");
 		this.focusChart = dc.seriesChart("#agreg", "agrega");
 		//this.overviewChart = dc.seriesChart("#agreg-overview", "agrega");
 		this.ringTotalizedByState = dc.pieChart("#chart-by-state", "filtra");
 		this.barAreaByYear = dc.barChart("#chart-by-year", "filtra");
 	},
 	loadUpdatedDate: function() {
-		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
-		//var url="./data/updated-date.json";
+		//var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+		var url="./data/updated-date.json";
 		d3.json(url, (json) => {
 			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
 			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
@@ -303,6 +311,7 @@ var graph={
 		}
 		utils.displayGraphContainer();
 		
+		var numberFormat = d3.format('.4f');
 		var o=[];
 		
 		for (var j = 0, n = data.totalFeatures; j < n; ++j) {
@@ -315,7 +324,8 @@ var graph={
 			if(month >=8 && month<=12) {
 				year = "20"+year+"/20"+(year+1);
 			}
-			o.push({Year:year,Month:month,Area:+((fet.properties.ar).toFixed(1)),uf:fet.properties.uf});
+
+			o.push({Year:year,Month:month,Area:numberFormat(fet.properties.ar)*1,uf:fet.properties.uf,numPol:fet.properties.np});
 		}
 		data = o;
 		graph.registerDataOnCrossfilter(data);
@@ -356,15 +366,69 @@ var graph={
 		this.ufGroup = this.ufDimension.group().reduceSum(function(d) {
 			return d.Area;
 		});
+		this.numPolDimension = ndx1.dimension(function(d) {
+			return d.numPol;
+		});
+
+		this.totalAreaGroup = ndx1.groupAll().reduce(
+			function (p, v) {
+				++p.n;
+				p.tot += v.Area;
+				return p;
+			},
+			function (p, v) {
+				--p.n;
+				p.tot -= v.Area;
+				return p;
+			},
+			function () { return {n:0,tot:0}; }
+		);
+		this.totalAlertsGroup = this.numPolDimension.groupAll().reduce(
+			function (p, v) {
+				p.tot += v.numPol;
+				return p;
+			},
+			function (p, v) {
+				p.tot -= v.numPol;
+				return p;
+			},
+			function () { return {tot:0}; }
+		);
 	},
 	build: function() {
 		var	barColors = this.getOrdinalColorsToYears();
 		
 		this.setChartReferencies();
+
+		var htmlBox="<div class='icon-left'><i class='fa fa-leaf fa-2x' aria-hidden='true'></i></div><span class='number-display'>";
+		
+		this.totalizedAreaInfoBox.formatNumber(localeBR.numberFormat(',1f'));
+		this.totalizedAreaInfoBox.valueAccessor(function(d) {return d.n ? d.tot.toFixed(2) : 0;})
+	      .html({
+			one:htmlBox+"<span>"+Translation[Lang.language].deforestation+"</span><br/><div class='numberinf'>%number km²</div></span>",
+			some:htmlBox+"<span>"+Translation[Lang.language].deforestation+"</span><br/><div class='numberinf'>%number km²</div></span>",
+			none:htmlBox+"<span>"+Translation[Lang.language].deforestation+"</span><br/><div class='numberinf'>0 km²</div></span>"
+	      })
+	      .group(this.totalAreaGroup);
+		
+
+		// build totalized Alerts box
+		// use format integer see: http://koaning.s3-website-us-west-2.amazonaws.com/html/d3format.html
+		this.totalizedAlertsInfoBox.formatNumber(localeBR.numberFormat(','));
+		this.totalizedAlertsInfoBox.valueAccessor(function(d) {
+				return d.tot ? d.tot : 0;
+			})
+			.html({
+			one:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
+			some:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>%number</div></span>",
+			none:htmlBox+"<span>"+Translation[Lang.language].num_alerts+"</span><br/><div class='numberinf'>0</div></span>"
+			})
+			.group(this.totalAlertsGroup);
 		
 		this.focusChart
 			.height(this.defaultHeight-70)
-			.chart(function(c) { return dc.lineChart(c).interpolate('cardinal').renderDataPoints(true).evadeDomainFilter(true); })
+			.chart(function(c) { return dc.lineChart(c).renderDataPoints(true).evadeDomainFilter(true); })
+			//.chart(function(c) { return dc.lineChart(c).interpolate('cardinal').renderDataPoints(true).evadeDomainFilter(true); })
 			.x(d3.scale.linear().domain([8,19]))
 			.renderHorizontalGridLines(true)
 			.renderVerticalGridLines(true)
@@ -454,73 +518,6 @@ var graph={
 			return fp;
 		});
 
-		// this.focusChart.filterPrinter(function(filters) {
-		// 	var fp=utils.xaxis(filters[0][0])+" - "+utils.xaxis(filters[0][1]);
-		// 	return fp;
-		// });
-		
-		// this.overviewChart
-		//     .height(90)
-		//     .chart(function(c,_,_,i) {
-		// 	    var chart = dc.lineChart(c);
-		// 	    if(i===0) {
-		// 	    	chart.on('filtered', function (chart) {
-		// 	            if (!chart.filter()) {
-		// 	                dc.events.trigger(function () {
-		// 	                    graph.overviewChart.focusChart().x().domain(graph.overviewChart.focusChart().xOriginalDomain());
-		// 	                    graph.overviewChart.focusChart().redraw();
-		// 	                    graph.focusChart.filterAll();
-		// 	                    graph.overviewChart.filterAll()
-		// 	                    graph.monthDimension.filterAll();
-		// 	                    dc.redrawAll("filtra");
-		// 	                });
-		// 	            } else if (!utils.rangesEqual(chart.filter(), graph.overviewChart.focusChart().filter())) {
-		// 	                dc.events.trigger(function () {
-		// 	                	graph.overviewChart.focusChart().focus(chart.filter());
-		// 	                });
-		// 	            }
-		// 	        });
-		// 	    }
-		// 	    return chart;
-		//     })
-		//     .x(d3.scale.linear().domain([8,19]))
-		//     .renderVerticalGridLines(true)
-		//     .brushOn(true)
-		//     .xAxisLabel(Translation[Lang.language].overview_x_label)
-		//     .yAxisPadding('10%')
-		//     .clipPadding(10)
-		//     .dimension(this.temporalDimension)
-		// 	.group(this.areaGroup)
-		// 	.ordinalColors(["rgba(0,0,0,0)"])
-		//     .seriesAccessor(function(d) {
-		// 		return d.key[0];
-		// 	})
-		// 	.keyAccessor(function(d) {
-		// 		return d.key[1];
-		// 	})
-		// 	.valueAccessor(function(d) {
-		// 		return Math.abs(+(d.value.toFixed(2)));
-		// 	})
-		// 	.margins({top: 0, right: 35, bottom: 50, left: 65});
-		
-		// // this.overviewChart.margins().right = 5; 
-		// // this.overviewChart.margins().left += 40;
-		// // this.overviewChart.margins().top = 0;
-		
-		// this.overviewChart.yAxis().ticks(0);
-		// this.overviewChart.yAxis().tickFormat(function(d) {
-		// 	return d3.format(',d')(d);
-		// });
-		// this.overviewChart.xAxis().tickFormat(function(d) {
-		// 	return utils.xaxis(d);
-		// });
-
-		// this.overviewChart.round(
-		// 	function round(v) {
-		// 		return parseInt(v);
-	    // 	}
-		// );
-
 		this.ringTotalizedByState
 			.height(this.defaultHeight)
 			.innerRadius(10)
@@ -530,12 +527,12 @@ var graph={
 			.title(function(d) {
 				var v=Math.abs(+(parseFloat(d.value).toFixed(2)));
 				v=localeBR.numberFormat(',1f')(v);
-				return Translation[Lang.language].area+": " + v + " "+Translation[Lang.language].unit;
+				return d.key+": " + v + " "+Translation[Lang.language].unit;
 			})
 			.label(function(d) {
-				var v=Math.abs(+(parseFloat(d.value).toFixed(0)));
+				var v=Math.abs(+(parseFloat(d.value).toFixed(2)));
 				v=localeBR.numberFormat(',1f')(v);
-				return d.key + ":" + v + " "+Translation[Lang.language].unit;
+				return v + " "+Translation[Lang.language].unit;
 			})
 			.ordering(dc.pluck('key'))
 			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
@@ -637,8 +634,8 @@ var graph={
 
 		this.loadConfigurations(function(){
 			Lang.apply();
-			var dataUrl = "http://terrabrasilis.dpi.inpe.br/download/deter-cerrado/deter_cerrado_month_d.json";
-			//var dataUrl = "./data/deter-cerrado-month.json";
+			//var dataUrl = "http://terrabrasilis.dpi.inpe.br/download/deter-cerrado/deter_cerrado_month_d.json";
+			var dataUrl = "./data/deter-cerrado-month.json";
 			graph.loadData(dataUrl);
 			graph.loadUpdatedDate();
 			utils.attachEventListeners();
