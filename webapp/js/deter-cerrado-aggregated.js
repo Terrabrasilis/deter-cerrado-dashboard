@@ -669,6 +669,8 @@ var graph={
 			//graph.overviewChart.filterAll();
 			graph.focusChart.filterAll();
 			graph.monthDimension.filterAll();
+			graph.monthFilters=[];
+			utils.highlightSelectedMonths();
 			dc.redrawAll("filtra");
 		}
 		dc.redrawAll(g);
