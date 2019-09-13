@@ -129,7 +129,7 @@ var graph={
 			.header("Authorization", "Bearer "+Token.getToken())
 			.get(function(error, root) {
 				if(error && error.status==401) {
-					Token.removeToken();
+					Token.logout();
 					Token.setExpiredToken(true);
 				}else{
 					afterLoadData(root);
@@ -140,17 +140,15 @@ var graph={
 	},
 
 	loadUpdatedDate: function() {
+		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+
 		if(Token.hasToken()){
-			var dt=new Date(graph.utils.dimensions["date"].top(1)[0].timestamp);
-			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
-		}else{
-			var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
-			//var url="./data/updated-date.json";
-			d3.json(url, (json) => {
-				var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
-				d3.select("#updated_date").html(' '+dt.toLocaleDateString());
-			});
+			url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:last_date&OUTPUTFORMAT=application%2Fjson";
 		}
+		d3.json(url, (json) => {
+			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
+			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
+		});
 	},
 	
 	setDataDimension: function(d) {
@@ -727,9 +725,7 @@ var graph={
 		
 		d3.select('#aggregate_monthly')
 		.on('click', function() {
-			//var layerName = (window.layer_config_global && window.layer_config_global!="")?("&internal_layer="+window.layer_config_global):("");
-			//window.location='?type=aggregated'+layerName;
-			window.location='deter-cerrado-aggregated.html'
+			window.location='deter-cerrado-aggregated.html';
 		});
 		
 		d3.select('#prepare_print')
@@ -767,5 +763,6 @@ var graph={
 window.onload=function(){
 	graph.configurePrintKeys();
 	Lang.init();
+	loginUI.init();
 	graph.startLoadData();
 };
