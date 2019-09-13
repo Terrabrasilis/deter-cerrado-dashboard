@@ -8,13 +8,13 @@ var utils = {
 	    	utils.preparePrint();
 	    });
 	},
-	// btnChangePanel:function() {
-	// 	d3.select('#aggregate_daily')
-	//     .on('click', function() {
-	//     	var layerName = (window.layer_config_global && window.layer_config_global!="")?("&internal_layer="+window.layer_config_global):("");
-	//     	window.location='?type=default'+layerName;
-	//     });
-	// },
+	displayLoginExpiredMessage() {
+		if(Token.isExpiredToken()){
+			d3.select('#expired_token_box').style('display','');
+		}else{
+			d3.select('#expired_token_box').style('display','none');
+		}
+	},
 	getDefaultHeight:function() {
 		return ((window.innerHeight*0.4).toFixed(0))*1;
 	},
@@ -289,23 +289,38 @@ var graph={
 		this.barAreaByYear = dc.barChart("#chart-by-year", "filtra");
 	},
 	loadUpdatedDate: function() {
-		//var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
-		var url="./data/updated-date.json";
-		d3.json(url, (json) => {
-			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
+		if(Token.hasToken()){
+			var dt=new Date();
+			dt.setDate(dt.getDate()-1)
 			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
-		});
+		}else{
+			var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+			//var url="./data/updated-date.json";
+			d3.json(url, (json) => {
+				var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
+				d3.select("#updated_date").html(' '+dt.toLocaleDateString());
+			});
+		}
 	},
 	loadData: function(url) {
-		d3.json(url, graph.processData);
+		d3.json(url)
+		.header("Authorization", "Bearer "+Token.getToken())
+		.get(function(error, root) {
+			if(error && error.status==401) {
+				Token.removeToken();
+				Token.setExpiredToken(true);
+			}else{
+				graph.processData(root);
+			}
+		});
 	},
-	processData: function(error, data) {
-		if (error) {
-			//utils.displayError( Translation[Lang.language].failure_load_data );
-			utils.displayWarning(true);
-			return;
-		}else if(!data || !data.totalFeatures || data.totalFeatures<=0) {
-			//utils.displayNoData();
+	processData: function(data) {
+		// if (error) {
+		// 	//utils.displayError( Translation[Lang.language].failure_load_data );
+		// 	utils.displayWarning(true);
+		// 	return;
+		// }else
+		if(!data || !data.totalFeatures || data.totalFeatures<=0) {
 			utils.displayWarning(true);
 			return;
 		}
@@ -631,16 +646,19 @@ var graph={
 		window.onresize=utils.onResize;
 		
 		utils.displayWaiting();
-
-		this.loadConfigurations(function(){
-			Lang.apply();
-			//var dataUrl = "http://terrabrasilis.dpi.inpe.br/download/deter-cerrado/deter_cerrado_month_d.json";
-			var dataUrl = "./data/deter-cerrado-month.json";
-			graph.loadData(dataUrl);
-			graph.loadUpdatedDate();
-			utils.attachEventListeners();
-		});
+		utils.displayLoginExpiredMessage();
+		this.loadConfigurations(this.startLoadData);
 	},
+
+	startLoadData() {
+		Lang.apply();
+		//var dataUrl = "./data/deter-cerrado-month.json";
+		var dataUrl = "http://terrabrasilis.dpi.inpe.br/file-delivery/download/deter-cerrado/monthly";
+		graph.loadData(dataUrl);
+		graph.loadUpdatedDate();
+		utils.attachEventListeners();
+	},
+
 	/*
 	 * Called from the UI controls to clear one specific filter.
 	 */
@@ -696,6 +714,10 @@ var graph={
 		}
 
 		utils.highlightSelectedMonths();
+	},
+
+	restart() {
+		graph.startLoadData();
 	}
 };
 
