@@ -1,6 +1,12 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+		"submitLogin":"Entrar",
+		"submitLogout":"Sair",
+		"expired_token":"Seu login expirou. Para ver os dados mais recentes, por favor faça login novamente.",
+		'txt14g':'Aviso',
+		'txt14h':'O nome de usuário ou senha está incorreto. Verifique se CAPS LOCK está ativado. Se você receber essa mensagem novamente, entre em contato com o administrador do sistema para garantir que você tenha permissão para logar no portal.',
+		'txt14i':'Fechar',
 		'goto_about':'Ver informações sobre o projeto e a equipe.',
 		'goto_video':'Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.',
 		'txt1c':'Informações de ajuda para uso do painel',
@@ -148,6 +154,12 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
+		"submitLogin":"Login",
+		"submitLogout":"Logout",
+		"expired_token":"Your login has expired. To see the latest data, please sign in again.",
+		'txt14g':'Warning',
+		'txt14h':'The username or password is wrong. Verify if CAPS LOCK is enable. If you receive this message again, please contact the system administrator to ensure that you have permission to login in portal.',
+		'txt14i':'Close',
 		'goto_about':'See informations about the project and team.',
 		'goto_video':'Watch the introductory video to see how an user interact with dashboard tools.',
 		'txt1c':'Helpful informations about how to use the panel.',
