@@ -265,30 +265,12 @@ var graph={
 
 		getDefaultHeight:function() {
 			return ((window.innerHeight*0.4).toFixed(0))*1;
-		},
-		downloadAll: function() {
-			//graph.utils.setStateAnimateIcon('animateIconSHPd', true);
-			window.setTimeout(function() {
-				/*
-				var fileFormat=graph.utils.getSelectedFormatFile();
-				var layerName = graph.utils.dataConfig.layerName;
-				layerName = layerName.split(':');
-				layerName = ( (layerName[1])?(layerName[1]):(layerName[0]) );
-				var url="http://terrabrasilis.info/deterb/wms?request=GetFeature&service=wfs&version=2.0.0&outputformat="+fileFormat+
-				"&typename=" + layerName + "&srsName=EPSG:4674";*/
-				var url="http://terrabrasilis.info/files/deter_cerrado/deter_cerrado_public.zip";
-				var iframe=document.getElementById('fileload');
-				iframe.src=url;
-				//window.setTimeout(function() {graph.utils.setStateAnimateIcon('animateIconSHPd', false);}, 2000);
-			}, 200);
 		}
 	},
 	doResize:function() {
 		graph.defaultHeight = graph.utils.getDefaultHeight();
 		dc.renderAll();
-		//setTimeout(function(){graph.addGenerationDate();},300);
 	},
-	// gid as a, fake_point as b, areatotalkm as d, areamunkm as e, areauckm as f, date as g, uf as h, county as i, uc as j 
 	normalizeData:function() {
 		var numberFormat = d3.format('.4f');
 	    var json=[];
@@ -644,20 +626,16 @@ var graph={
 		// build download data
 		d3.select('#download-csv-daily-all')
 	    .on('click', function() {
-	    	//graph.utils.setStateAnimateIcon('animateIconCSVd', true);
 	    	graph.utils.download=function(data) {
-	    		var dt=new Date();
-		    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear();
 		        var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, 'deterb_'+dt+'.csv');
-		        //graph.utils.setStateAnimateIcon('animateIconCSVd', false);
+		        saveAs(blob, 'deter-cerrado-daily-'+downloadCtrl.getDownloadTime()+'.csv');
 	    	};
 	    	window.setTimeout(function() {
 	    		var data=[];
 		    	graph.jsonData.forEach(function(d) {
 		    		var o={};
 		    		var dt = new Date(d.timestamp);
-		    		o.date = dt.toLocaleDateString();
+		    		o.viewDate = dt.toLocaleDateString();
 		    		//o.mes = dt.getMonth()+1;
 		    		//o.ano = dt.getFullYear();
 		    		//o.totalAlertas = d.k;
@@ -670,15 +648,19 @@ var graph={
 				});
 		    	graph.utils.download(data);
 	    	}, 200);
-	    });
+		});
+		
+		// shapefile 
+		d3.select('#download-shp')
+		.on('click', function() {
+			downloadCtrl.startDownload('deter-cerrado');
+		});
 
 		d3.select('#download-csv-daily')
 	    .on('click', function() {
 	    	graph.utils.download=function(data) {
-	    		var dt=new Date();
-		    	dt=dt.getDate() + "_" + dt.getMonth() + "_" + dt.getFullYear();
 		        var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, 'deterb_'+dt+'.csv');
+		        saveAs(blob, 'deter-cerrado-daily-'+downloadCtrl.getDownloadTime()+'.csv');
 	    	};
 	    	window.setTimeout(function() {
 	    		var data=[];
@@ -686,7 +668,7 @@ var graph={
 	    		filteredData.forEach(function(d) {
 		    		var o={};
 		    		var dt = new Date(d.timestamp);
-		    		o.date = dt.toLocaleDateString();
+		    		o.viewDate = dt.toLocaleDateString();
 				    o.areaMunKm = parseFloat(d.areaKm.toFixed(4));
 			    	o.areaUcKm = parseFloat(d.areaUcKm.toFixed(4));
 				    o.uc = ((d.uc!='null')?(d.uc):(''));
@@ -697,36 +679,6 @@ var graph={
 		    	graph.utils.download(data);
 	    	}, 200);
 	    });
-		d3.select('#download-filter')
-		.on('click', function() {
-			console.log('Implementar download com filtros.');
-			graph.utils.downloadAll();
-			//graph.utils.setStateAnimateIcon('animateIconSHPd', true);
-			// window.setTimeout(function() {
-			// 	var fileFormat=graph.utils.getSelectedFormatFile();
-			// 	var layerName = graph.utils.dataConfig.layerName;
-			// 	var url="http://terrabrasilis.info/deterb/wms?request=GetFeature&service=wfs&version=2.0.0&outputformat="+fileFormat+
-			// 	"&typename=" + layerName + "&srsName=EPSG:4674";
-			// 	var cql=graph.getFilters();
-			// 	if(cql) {
-			// 		cql = encodeURI(cql);
-			// 		url += "&CQL_FILTER="+cql;
-			// 		var iframe=document.getElementById('fileload');
-			// 		iframe.src=url+"&VIEWPARAMS=DOWNLOAD_INTERVAL:6%20months";
-			// 	}else{
-			// 		graph.utils.downloadAll();
-			// 	}
-			// 	//window.setTimeout(function() {graph.utils.setStateAnimateIcon('animateIconSHPd', false);}, 2000);
-			// }, 200);
-		});
-		
-		d3.select('#download-all')
-		.on('click', graph.utils.downloadAll);
-		
-		d3.select('#aggregate_monthly')
-		.on('click', function() {
-			window.location='deter-cerrado-aggregated.html';
-		});
 		
 		d3.select('#prepare_print')
 	    .on('click', function() {

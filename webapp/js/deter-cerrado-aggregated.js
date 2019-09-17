@@ -22,21 +22,20 @@ var utils = {
 		// without filters
 		d3.select('#download-csv-monthly-all')
 	    .on('click', function() {
-			var dt=new Date();
-			dt=dt.toLocaleDateString() +'_'+ dt.toLocaleTimeString();
-			dt=dt.split('/').join('_');
 			var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
-			saveAs(blob, 'deter_aggregated_'+dt+'.csv');
+			saveAs(blob, 'deter-cerrado-aggregated-'+downloadCtrl.getDownloadTime()+'.csv');
 		});
 		// with filters
 		d3.select('#download-csv-monthly')
 	    .on('click', function() {
 			var filteredData=graph.monthDimension.top(Infinity);
-			var dt=new Date();
-			dt=dt.toLocaleDateString() +'_'+ dt.toLocaleTimeString();
-			dt=dt.split('/').join('_');
 	        var blob = new Blob([d3.csv.format(filteredData)], {type: "text/csv;charset=utf-8"});
-	        saveAs(blob, 'deter_aggregated_'+dt+'.csv');
+	        saveAs(blob, 'deter-cerrado-aggregated-'+downloadCtrl.getDownloadTime()+'.csv');
+		});
+		// shapefile 
+		d3.select('#download-shp')
+		.on('click', function() {
+			downloadCtrl.startDownload('deter-cerrado');
 		});
 	},
 	preparePrint: function() {
