@@ -1,6 +1,8 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+		'allTime':'Exibindo dados para todo o intervalo do gráfico:',
+		'someMonths':'Exibindo dados para os filtros do gráfico:',
 		"submitLogin":"Entrar",
 		"submitLogout":"Sair",
 		"expired_token":"Seu login expirou. Para ver os dados mais recentes, por favor faça login novamente.",
@@ -81,7 +83,7 @@ var Translation={
 		'print_page':'Imprimir esta página utilizando o recurso do navegador.',
 		'display_warning':'Mais informações sobre as classes.',
 		/* Texts inside javascript. */
-		'deforestation':'Desmatamento acumulado',
+		'deforestation':'Avisos de desmatamento',
 		'num_alerts':'Número de avisos',
 		'refresh_data':'Tentar carregar os dados.',
 		'months_of_prodes_year':['Ago','Set','Out','Nov','Dez','Jan','Fev','Mar','Abr','Mai','Jun','Jul'],
@@ -156,6 +158,8 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
+		'allTime':'Displaying data for entire chart range:',
+		'someMonths':'Displaying data for chart\'s filter:',
 		"submitLogin":"Login",
 		"submitLogout":"Logout",
 		"expired_token":"Your login has expired. To see the latest data, please sign in again.",
@@ -225,7 +229,7 @@ var Translation={
 		'print_page':'Print this page using the browser resources.',
 		'display_warning':'More informations about the classes.',
 		/* Texts inside javascript. */
-		'deforestation': 'Accumulated deforestation',
+		'deforestation': 'Deforestation notices',
 		'num_alerts': 'Number of Notices',
 		'refresh_data':'Retry the data load.',
 		'months_of_prodes_year':['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul'],

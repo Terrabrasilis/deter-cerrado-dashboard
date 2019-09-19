@@ -120,6 +120,23 @@ var utils = {
 		return list[d-8];
 
 	},
+	monthYearList: function(monthNumber,month,years) {
+		var fy=[];
+		
+		years.forEach(
+		(y) =>
+			{
+				if(monthNumber >=13 && monthNumber<=19) {
+					fy.push(y.split("/")[1]);
+				}
+				if(monthNumber >=8 && monthNumber<=12) {
+					fy.push(y.split("/")[0]);
+				}
+			}
+		);
+		fy.sort();
+		return month+"/("+fy.join(", ")+")";
+	},
 	nameMonthsById: function(id) {
 		var list=[];
 		list[13]='Jan';
@@ -445,7 +462,7 @@ var graph={
 			.renderVerticalGridLines(true)
 			.brushOn(false)
 			.yAxisLabel(Translation[Lang.language].focus_y_label)
-			.xAxisLabel(Translation[Lang.language].focus_x_label)
+			//.xAxisLabel(Translation[Lang.language].focus_x_label)
 			.elasticY(true)
 			.yAxisPadding('10%')
 			.clipPadding(10)
@@ -476,7 +493,7 @@ var graph={
 				}
 			})
 			.legend(dc.legend().x(100).y(30).itemHeight(15).gap(5).horizontal(1).legendWidth(600).itemWidth(80))
-			.margins({top: 20, right: 35, bottom: 70, left: 65});
+			.margins({top: 20, right: 35, bottom: 30, left: 65});
 
 		this.focusChart.yAxis().tickFormat(function(d) {
 			//return d3.format(',d')(d);
@@ -497,17 +514,43 @@ var graph={
 			}
 		});
 
-		this.focusChart.on('renderlet', function() {
+		this.focusChart.on('renderlet', function(chart) {
 			utils.attachListenersToLegend();
 			dc.redrawAll("filtra");
-		});
+			var years=[];
+			if(graph.barAreaByYear.hasFilter()){
+				years=graph.barAreaByYear.filters();
+			}else{
+				graph.barAreaByYear.group().all().forEach((d)=> {years.push(d.key);});
+			}
 
-		// this.focusChart.on('filtered', function(chart) {
-		// 	if(chart.filter()) {
-		// 		graph.monthDimension.filterRange([chart.filter()[0], (chart.filter()[1]+1) ]);
-		// 		dc.redrawAll("filtra");
-		// 	}
-		// });
+			if(!chart.hasFilter()){
+				$('#txt18').css('display','none');// hide filter reset buttom
+				$('#txt8b').html(Translation[Lang.language].allTime + "<span class='highlight-time'>" +  years.join(",")  +"</span>" );
+			}else{
+				var fp="", allData=chart.group().top(Infinity);
+				graph.monthFilters.forEach(
+					(monthNumber) => {
+						var ys=[];
+						allData.some(
+							(d)=> {
+								years.forEach(
+									(year) => {
+										if(d.key.includes(monthNumber) && d.key.includes(year)) {
+											ys.push(year);
+											return true;
+										}
+									}
+								);
+							}
+						);
+						if(ys.length) fp+=(fp==''?'':',')+utils.monthYearList(monthNumber,utils.nameMonthsById(monthNumber),ys);
+					}
+				);
+				$('#txt18').css('display','');// display filter reset buttom
+				$('#txt8b').html(Translation[Lang.language].someMonths + "<span class='highlight-time'>" +  fp  +"</span>" );
+			}
+		});
 
 		this.focusChart.colorAccessor(function(d) {
 			var i=0,l=barColors.length;
@@ -517,16 +560,6 @@ var graph={
 				}
 				i++;
 			}
-		});
-
-		this.focusChart.filterPrinter(function(filters) {
-			var fp='';
-			graph.monthFilters.forEach(
-				(monthNumber) => {
-					fp+=(fp==''?'':',')+utils.nameMonthsById(monthNumber);
-				}
-			);
-			return fp;
 		});
 
 		this.ringTotalizedByState

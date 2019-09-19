@@ -1,6 +1,7 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+		'allTime':'Exibindo dados para todo o intervalo do gráfico:',
 		'goto_about':'Ver informações sobre o projeto e a equipe.',
 		'goto_video':'Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.',
 		'title-chart': 'Avisos diários de desmatamento no Cerrado Brasileiro.',
@@ -22,7 +23,7 @@ var Translation={
 		'txt6':'Escurecer/clarear',
 		'txt7':'Entrar',
 		'txt8':'Problema na comunicação com o servidor.<br>Aguarde alguns minutos e recarregue a página.',
-		'txt9':'Filtro:',
+		'txt9':'Exibindo dados para o intervalo de tempo selecionado:',
 		'txt9a':'Limpar este filtro.',
 		'txt11':'Filtro:',
 		'txt11a':'Limpar este filtro.',
@@ -77,7 +78,7 @@ var Translation={
 		'num_alertas':'número de avisos',
 		'unit_alerts':'avisos',
 
-		'deforestation':'Desmatamento acumulado',
+		'deforestation':'Avisos de desmatamento',
 		'num_alerts':'Número de avisos',
 		'area_alertas': 'Área dos avisos (km²)',
 		'updated':'Atualizado até:',
@@ -160,6 +161,7 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
+		'allTime':'Displaying data for entire chart range:',
 		'goto_about':'See informations about the project and team.',
 		'goto_video':'Watch the introductory video to see how an user interact with dashboard tools.',
 		'title-chart': 'Daily deforestation notices in the Brazilian Cerrado.',
@@ -181,7 +183,7 @@ var Translation={
 		'txt6':'Darken/Enlighten',
 		'txt7':'Login',
 		'txt8':'Failure on loading data from server.<br>Try reload after some minutes.',
-		'txt9':'Filter:',
+		'txt9':'Displaying data for selected time range:',
 		'txt9a':'Clean this filter.',
 		'txt11':'Filter:',
 		'txt11a':'Clean this filter.',
@@ -237,7 +239,7 @@ var Translation={
 		'num_alertas':'number of notices',
 		'unit_alerts':'notices',
 
-		'deforestation': 'Accumulated deforestation',
+		'deforestation': 'Deforestation notices',
 		'num_alerts': 'Number of Notices',
 		'area_alertas': 'Notices area (km²)',
 		'updated':'Updated until:',
@@ -249,7 +251,7 @@ var Translation={
 		'txt14h':'The username or password is wrong. Verify if CAPS LOCK is enable. If you receive this message again, please contact the system administrator to ensure that you have permission to login in portal.',
 		'txt14i':'Close',
 
-		'timeline_header':'Distribution of %dim% over time.',
+		'timeline_header':'Distribution of the %dim% over time.',
 		'timeline_desc':'Interval:',
 		'title_tot_class':'Classes by %dim%',
 		'title_top_county':'Municipalities with the greatest deforestation %dim%',

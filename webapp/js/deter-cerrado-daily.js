@@ -396,9 +396,9 @@ var graph={
 		
 		this.lineDistributionByMonth
 			.height(310)
-			.margins({top: 10, right: 45, bottom: 85, left: 45})
+			.margins({top: 10, right: 45, bottom: 55, left: 45})
 			.yAxisLabel( yLabel )
-			.xAxisLabel( Translation[Lang.language].timeline_desc + " " + dateFormat(new Date(alertsMinDate[0].timestamp)) + " - " + dateFormat(new Date(alertsMaxDate[0].timestamp)) )
+			//.xAxisLabel( Translation[Lang.language].timeline_desc + " " + dateFormat(new Date(alertsMinDate[0].timestamp)) + " - " + dateFormat(new Date(alertsMaxDate[0].timestamp)) )
 			.dimension(dimensions["date"])
 			.group(groups["date"])
 			.transitionDuration(300)
@@ -436,16 +436,22 @@ var graph={
 
 		this.lineDistributionByMonth.on("renderlet.a",function (chart) {
 			   // rotate x-axis labels
-			   chart.selectAll('g.x text')
-			     .attr('transform', 'translate(-10,20) rotate(315)');
+			chart.selectAll('g.x text')
+				.attr('transform', 'translate(-10,20) rotate(315)');
+			if(!chart.hasFilter()){
+				$('#txt9a').css('display','none');
+				$('#txt9').html(Translation[Lang.language].allTime + "<span class='highlight-time'>" + dateFormat(new Date(alertsMinDate[0].timestamp)) + " - " + dateFormat(new Date(alertsMaxDate[0].timestamp)) +"</span>" );
+			}else{
+				$('#txt9a').css('display','');
+				$('#txt9').html(Translation[Lang.language].txt9);
+			}
 		});
 		
          this.lineDistributionByMonth
 			.filterPrinter(function(f) {
-				//return dateFormat(f[0][0]) + ' - ' + dateFormat(f[0][1]);
 				var dt=new Date(f[0][0]);
 				dt.setDate(dt.getDate()+1);
-				return dateFormat(dt) + ' - ' + dateFormat(f[0][1]);
+				return dateFormat(dt) + " - " + dateFormat(f[0][1]);
 		});
 		// -----------------------------------------------------------------------
 		
