@@ -118,8 +118,8 @@ a, a:hover, a:focus {
   padding-top: 1em;
 }
 .number-display span {font-size: 1vw;}
-.generalinfo i {color:#00796b; font-size: 1.4vw;}
-.number-display .numberinf {font-size: 1.5vw; font-weight: bold;}
+.generalinfo i {color: #00796b; font-size: 24px !important; margin:10px;}
+.number-display .numberinf {line-height: 20px; font-weight: bold;}
 .icon-left {float: left; padding-left: 5px;}
 .generalinfo_disable{ background-color: #f0f0f0; }
 .bt_content_generalinfo {
@@ -132,6 +132,10 @@ a, a:hover, a:focus {
   display: inline-table;
   min-width: 90%;
   font-size: 1vw;
+}
+.filter-info{
+  font-size: 14px;
+  color: gray;
 }
 
 .enable_menu{
@@ -166,19 +170,9 @@ a, a:hover, a:focus {
 	text-align: initial;
 }
 
-.reset-time{
-  white-space: nowrap;
-  position: absolute;
-  top: 15px;
-  width: calc(95%);
-  overflow-x: auto;
-}
-
 .highlight-time{
-  color: #00757c;
-  font-size: 1.1vw;
-  font-weight: bold;
-  padding-left: 5px;
+  font-size: 14px;
+  font-weight: 700;
 }
 #custom-classes .numberinf{
   padding-left: 20px;
@@ -425,7 +419,6 @@ dfn::after {
   position: absolute;
   top: 22px; left: 0;
   opacity: 0;
-  width: 230px;
   font-size: 13px;
   line-height: 1.5em;
   padding: 0.5em 0.8em;
@@ -500,12 +493,11 @@ tbody tr {
 }
 
 #sidebar.active {
-    margin-left: -290px;
+  margin-left: -290px;
 }
 
 #sidebar .sidebar-header {
-    padding: 4px 20px 4px 20px;
-	/*background: #14757e;*/
+  padding: 4px 20px 4px 20px;
 	background-image:url(../img/i-mapa2.jpg);    
 	color: #119789;
 	height: 210px;
@@ -520,9 +512,8 @@ tbody tr {
 #header-menu{margin-top:-9px;}
 
 #sidebar ul.components {
-    padding: 0px 0;
-    border-bottom: 1px solid #47748b;
-	
+  padding: 0px 0;
+  border-bottom: 1px solid #47748b;	
 }
 
 #sidebar ul p {
@@ -625,16 +616,15 @@ a[data-toggle="collapse"] {
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-   width: calc(100% - 290px);
-    padding: 0px;
-    /* min-height: 100vh; */
-    transition: all 0.3s;
-    position: absolute;
-    top: 0;
-    right: 0;
+  width: calc(100% - 290px);
+  padding: 0px;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 #content.active {
-    width: 100%;
+  width: 100%;
 }
 
 
@@ -922,6 +912,31 @@ footer{
   }
 }
 
+@media screen and (max-width: 1100px) {
+  .number-display span {
+    font-size: 12px;
+  }
+  .number-display .numberinf {
+    font-size: 15px; 
+  }
+  .bt_generalinfo {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 1224px) {
+  .number-display span {
+    font-size: 14px; } 
+  .number-display .numberinf {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .number-display span {
+    font-size: 14px; }
+  .number-display .numberinf {
+    font-size: 24px;
+  }
+}
 
 /* ---------------------------------------------------
     Bootstrap adjust
@@ -929,3 +944,6 @@ footer{
 .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9{
     padding-left: 0px;
 }
+.box .col-md-3 {min-width:250px;}
+
+.col-md-3 .box-grafico {min-width:200px;}
