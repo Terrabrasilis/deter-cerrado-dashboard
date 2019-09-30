@@ -1,6 +1,8 @@
 var Translation={
 	'pt-br':{
 		/* texts into HTML entities */
+		'txt-civil':'Ano Civil',
+		'txt-prodes':'Ano Referência',
 		'allTime':'Exibindo dados para todo o intervalo do gráfico:',
 		'someMonths':'Exibindo dados para os filtros do gráfico:',
 		"submitLogin":"Entrar",
@@ -161,6 +163,8 @@ var Translation={
 	},
 	'en':{
 		/* texts into HTML entities */
+		'txt-civil':'Civil Year',
+		'txt-prodes':'Reference Year',
 		'allTime':'Displaying data for entire chart range:',
 		'someMonths':'Displaying data for chart\'s filter:',
 		"submitLogin":"Login",

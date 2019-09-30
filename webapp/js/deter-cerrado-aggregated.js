@@ -47,10 +47,14 @@ var utils = {
 	    	window.print();
 	    });
 	},
+	btnChangeCalendar: function() {
+		$('#change-calendar input').on('change', function() {
+			graph.changeCalendar($('input[name=calendars]:checked', '#change-calendar').attr('id'));
+		});
+	},
 	attachEventListeners:function() {
 		utils.btnPrintPage();
 		utils.btnDownload();
-		//utils.btnChangePanel();
 	},
 	attachListenersToLegend: function() {
 		var legendItems=$('#agreg .dc-legend-item');
@@ -282,7 +286,7 @@ var graph={
 
 	defaultHeight: null,
 
-	calendarConfiguration: 'civil',
+	calendarConfiguration: 'prodes',
 
 	/**
 	 * Load configuration file before loading data.
@@ -792,8 +796,8 @@ var graph={
 		utils.highlightSelectedMonths();
 	},
 
-	changeCalendar() {
-		graph.calendarConfiguration=(graph.calendarConfiguration=='prodes')?('civil'):('prodes');
+	changeCalendar(value) {
+		graph.calendarConfiguration=(value=='prodes-calendar')?('prodes'):('civil');
 		graph.restart();
 	},
 
@@ -811,7 +815,9 @@ window.onload=function(){
         // return false to prevent default browser behavior
         // and stop event from bubbling
         return false;
-    });
+	});
+	utils.makeMonthsChooserList();
+	utils.btnChangeCalendar();
 	Lang.init();
 	loginUI.init();
 	graph.init();
