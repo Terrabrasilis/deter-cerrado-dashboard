@@ -4,7 +4,7 @@
 #docker container stop terrabrasilis_cerrado_alert_aggregated
 #docker container stop terrabrasilis_cerrado_alert_daily
 
-VERSION=$(cat PROJECT_VERSION | grep -oP '(?<="version": ")[^"]*')
+VERSION=$(cat webapp/PROJECT_VERSION | grep -oP '(?<="version": ")[^"]*')
 
 # build all images
 docker build -t terrabrasilis/cerrado-alert-daily:v$VERSION --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
