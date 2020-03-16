@@ -129,7 +129,7 @@
 				<div class="navbar-nav">
 					<a class="nav-item nav-link" href="#" id="header-panel">| DETER (Avisos)</a>
 				</div>
-				<ul class="navbar-nav navbar-right analises">
+				<ul id="navigationBarUL" class="navbar-nav navbar-right analises">
 					<li class="nav-item dropdown">
 						<a aria-expanded="true" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button">
 							<i class="material-icons iconmobile">assignment </i><span id="maps-sup">Mapas</span>
@@ -200,29 +200,6 @@
 					<div id="txt15">Gráfico - Cerrado</div>
 				</div>
 
-				<!-- Login -->
-				<div class="col-md-10" style="height: 38px;">
-					<div id="login_box" class="form-inline justify-content-end">
-						<label class="sr-only" for="username">login</label>
-						<input type="text" class="form-control form-control-sm" id="username" placeholder="Username">
-						<label class="sr-only" for="password">******</label>
-						<input type="password" class="form-control form-control-sm" id="password" placeholder="Password">
-						<button id="submitLogin" class="btn btn-primary btn-sm mb-2 btn-success">Login</button>
-					</div>
-					<div id="logout_box" class="info-card justify-content-end">
-						<img src="img/usuario.jpg" class="profile-image rounded-circle" alt="Nome do usuário">
-						<div class="info-card-text">
-							<a href="#" class="d-flex align-items-center">
-								<span class="d-inline-block">
-									<b id="userName">Nome do Usuário</b>
-								</span>
-							</a>
-							<span id="userInstitution" class="d-inline-block">Detalhe da conta</span>
-	
-						</div>
-						<button id="submitLogout" class="btn btn-primary btn-sm btn-sair btn-success">Sair</button> 
-					</div>
-				</div>
 			</div>
 
 			<div class="row" style="margin-left: 20px;">
@@ -1087,6 +1064,7 @@
 	<!--Footer-->
 	<footer class="footer">
 		<p><a href="http://terrabrasilis.dpi.inpe.br"> TerraBrasilis</a>&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a></p>
+		<div class="version_style" id="version"></div>
 	</footer>
 	<!--/.Footer-->
 
@@ -1117,9 +1095,8 @@
 	<script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-aggregated.js"></script>
 	<script type="text/javascript" src="./js/easy-cookie.js"></script>
-	<script type="text/javascript" src="./js/loginToken.js"></script>
-	<script type="text/javascript" src="./js/loginUser.js"></script>
 	<script type="text/javascript" src="./js/downloadSHP.js"></script>
+	<script type="text/javascript" src="http://terrabrasilis.dpi.inpe.br/oauth-api/getoauthjs"></script>
 	<script type="text/javascript">
 		$("#notice").click(function () {
 			EasyCookie.create("firstNotice", "Not show modal again", 30);
