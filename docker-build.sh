@@ -5,10 +5,10 @@
 #docker container stop terrabrasilis_cerrado_alert_daily
 
 VERSION=$(cat webapp/PROJECT_VERSION | grep -oP '(?<="version": ")[^"]*')
-
+export VERSION
 # build all images
-docker build -t terrabrasilis/cerrado-alert-daily:v$VERSION --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
-docker build -t terrabrasilis/cerrado-alert-aggregated:v$VERSION --build-arg INDEX_FILE=deter-cerrado-aggregated -f environment/Dockerfile .
+docker build -t terrabrasilis/cerrado-alert-daily:v$VERSION --build-arg VERSION=$VERSION --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
+docker build -t terrabrasilis/cerrado-alert-aggregated:v$VERSION --build-arg VERSION=$VERSION --build-arg INDEX_FILE=deter-cerrado-aggregated -f environment/Dockerfile .
 
 # send to dockerhub
 # docker login
