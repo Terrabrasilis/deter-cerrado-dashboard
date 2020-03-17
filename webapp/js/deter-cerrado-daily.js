@@ -116,7 +116,7 @@ var graph={
 			graph.utils.displayLoginExpiredMessage();
 			graph.displayWaiting();
 			var configDashboard={defaultDataDimension:'area', resizeTimeout:0, minWidth:250, dataConfig:cfg};
-			var dataUrl = "http://terrabrasilis.dpi.inpe.br/file-delivery/download/deter-cerrado/daily";
+			var dataUrl = "http://terrabrasilis.dpi.inpe.br/file-delivery/download/"+downloadCtrl.getProject()+"/daily";
 			var afterLoadData=function(json) {
 				Lang.apply();
 				if(!json || !json.features) {
@@ -136,14 +136,14 @@ var graph={
 				}
 			});
 		};
-		d3.json("./config/deter-cerrado-daily.json", afterLoadConfiguration);
+		d3.json("./config/"+downloadCtrl.getProject()+"-daily.json", afterLoadConfiguration);
 	},
 
 	loadUpdatedDate: function() {
-		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+downloadCtrl.getProject()+":updated_date&OUTPUTFORMAT=application%2Fjson";
 
 		if(Authentication.hasToken()){
-			url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:last_date&OUTPUTFORMAT=application%2Fjson";
+			url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+downloadCtrl.getProject()+":last_date&OUTPUTFORMAT=application%2Fjson";
 		}
 		d3.json(url, (json) => {
 			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
@@ -643,7 +643,7 @@ var graph={
 	    .on('click', function() {
 	    	graph.utils.download=function(data) {
 		        var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, 'deter-cerrado-daily-'+downloadCtrl.getDownloadTime()+'.csv');
+		        saveAs(blob, downloadCtrl.getProject()+'-daily-'+downloadCtrl.getDownloadTime()+'.csv');
 	    	};
 	    	window.setTimeout(function() {
 	    		var data=[];
@@ -668,14 +668,14 @@ var graph={
 		// shapefile 
 		d3.select('#download-shp')
 		.on('click', function() {
-			downloadCtrl.startDownload('deter-cerrado');
+			downloadCtrl.startDownload();
 		});
 
 		d3.select('#download-csv-daily')
 	    .on('click', function() {
 	    	graph.utils.download=function(data) {
 		        var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
-		        saveAs(blob, 'deter-cerrado-daily-'+downloadCtrl.getDownloadTime()+'.csv');
+		        saveAs(blob, downloadCtrl.getProject()+'-daily-'+downloadCtrl.getDownloadTime()+'.csv');
 	    	};
 	    	window.setTimeout(function() {
 	    		var data=[];

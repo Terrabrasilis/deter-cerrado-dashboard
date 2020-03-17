@@ -9,8 +9,24 @@ let downloadCtrl={
 		return ''+dt;
 	},
 
-    startDownload(project) {
-        this.project=project;
+	getProject() {
+		this.inferProjectByURI();
+		return this.project;
+	},
+
+	inferProjectByURI() {
+		var URL=document.location.href;
+		if(URL.includes("amazon")){
+			this.project="deter-amz";
+		}else if(URL.includes("cerrado")){
+			this.project="deter-cerrado";
+		}else if(URL.includes("forest")){
+			this.project="deter-fm";
+		}
+	},
+
+    startDownload() {
+        if(!this.project) this.inferProjectByURI();
         $('#download-shp-icon').html('<img src="img/loader.svg" />');
 		this.downloadShapefile();
     },
@@ -22,7 +38,7 @@ let downloadCtrl={
 		let file = 'http://terrabrasilis.dpi.inpe.br/file-delivery/download/'+this.project+'/shape';
 		
 		let headers = new Headers();
-        headers.append('Authorization', 'Bearer '+Token.getToken());
+        headers.append('Authorization', 'Bearer '+Authentication.getToken());
         
         let fileName=this.project+'-'+this.getDownloadTime()+'.zip';
 		

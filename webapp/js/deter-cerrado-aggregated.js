@@ -29,19 +29,19 @@ var utils = {
 		d3.select('#download-csv-monthly-all')
 	    .on('click', function() {
 			var blob = new Blob([d3.csv.format(graph.data)], {type: "text/csv;charset=utf-8"});
-			saveAs(blob, 'deter-cerrado-aggregated-'+downloadCtrl.getDownloadTime()+'.csv');
+			saveAs(blob, downloadCtrl.getProject()+'-aggregated-'+downloadCtrl.getDownloadTime()+'.csv');
 		});
 		// with filters
 		d3.select('#download-csv-monthly')
 	    .on('click', function() {
 			var filteredData=graph.monthDimension.top(Infinity);
 	        var blob = new Blob([d3.csv.format(filteredData)], {type: "text/csv;charset=utf-8"});
-	        saveAs(blob, 'deter-cerrado-aggregated-'+downloadCtrl.getDownloadTime()+'.csv');
+	        saveAs(blob, downloadCtrl.getProject()+'-aggregated-'+downloadCtrl.getDownloadTime()+'.csv');
 		});
 		// shapefile 
 		d3.select('#download-shp')
 		.on('click', function() {
-			downloadCtrl.startDownload('deter-cerrado');
+			downloadCtrl.startDownload();
 		});
 	},
 	preparePrint: function() {
@@ -298,7 +298,7 @@ var graph={
 	 */
 	loadConfigurations: function(callback) {
 		
-		d3.json("config/deter-cerrado-aggregated.json", function(error, conf) {
+		d3.json("config/"+downloadCtrl.getProject()+"-aggregated.json", function(error, conf) {
 			if (error) {
 				console.log("Didn't load config file. Using default options.");
 			}else{
@@ -351,10 +351,10 @@ var graph={
 		// to prevent error on localhost developer environment
 		if(window.location.host!="terrabrasilis.dpi.inpe.br") return;
 
-		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:updated_date&OUTPUTFORMAT=application%2Fjson";
+		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+downloadCtrl.getProject()+":updated_date&OUTPUTFORMAT=application%2Fjson";
 
 		if(Authentication.hasToken()){
-			url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=deter-cerrado:last_date&OUTPUTFORMAT=application%2Fjson";
+			url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+downloadCtrl.getProject()+":last_date&OUTPUTFORMAT=application%2Fjson";
 		}
 		d3.json(url, (json) => {
 			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
@@ -736,7 +736,7 @@ var graph={
 	startLoadData() {
 		Lang.apply();
 		//var dataUrl = "./data/deter-cerrado-month.json";
-		var dataUrl = "http://terrabrasilis.dpi.inpe.br/file-delivery/download/deter-cerrado/monthly";
+		var dataUrl = "http://terrabrasilis.dpi.inpe.br/file-delivery/download/"+downloadCtrl.getProject()+"/monthly";
 		graph.loadData(dataUrl);
 		graph.loadUpdatedDate();
 		utils.attachEventListeners();
