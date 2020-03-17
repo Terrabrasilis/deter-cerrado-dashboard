@@ -8,6 +8,11 @@ var utils = {
 	    	utils.preparePrint();
 	    });
 	},
+	checkMenuOptions() {
+		displayValue=(Authentication.hasToken())?'':'none';
+		$('#disable_day_menu_fm').css('display',displayValue);
+		$('#disable_agg_menu_fm').css('display',displayValue);
+	},
 	displayLoginExpiredMessage() {
 		if(Authentication.isExpiredToken()){
 			d3.select('#expired_token_box').style('display','');
@@ -818,10 +823,12 @@ window.onload=function(){
 	});
 	utils.makeMonthsChooserList();
 	utils.btnChangeCalendar();
+	utils.checkMenuOptions();
 	Lang.init();
 	graph.init();
 	Authentication.init(Lang.language, function(){
 		graph.resetFilters();
 		graph.restart();
+		utils.checkMenuOptions();
 	});
 };
