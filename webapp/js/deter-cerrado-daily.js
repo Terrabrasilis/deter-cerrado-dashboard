@@ -196,9 +196,9 @@ var graph={
 	utils:{
 
 		checkMenuOptions() {
-			displayValue=(Authentication.hasToken())?'':'none';
-			$('#disable_day_menu_fm').css('display',displayValue);
-			$('#disable_agg_menu_fm').css('display',displayValue);
+			// displayValue=(Authentication.hasToken())?'':'none';
+			// $('#disable_day_menu_fm').css('display',displayValue);
+			// $('#disable_agg_menu_fm').css('display',displayValue);
 		},
 
 		displayLoginExpiredMessage() {
