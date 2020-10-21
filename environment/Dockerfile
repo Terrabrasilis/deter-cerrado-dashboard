@@ -1,8 +1,8 @@
 # To build image for this dockerfile use this command:
-#   docker build -t terrabrasilis/cerrado-alert-daily:v2.5 --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
+#   docker build -t terrabrasilis/cerrado-alert-daily:v2.5.1 --build-arg INDEX_FILE=deter-cerrado-daily -f environment/Dockerfile .
 #
 # To run without compose and without shell terminal use this command:
-#   docker run -d --rm -p 80:80 --name terrabrasilis_cerrado_alert_daily terrabrasilis/cerrado-alert-daily:v2.5
+#   docker run -d --rm -p 80:80 --name terrabrasilis_cerrado_alert_daily terrabrasilis/cerrado-alert-daily:v2.5.1
 # 
 # Information from doc of help about run one container without an explicit service. Run in background
 # --------------------------------------------------------------------------------
