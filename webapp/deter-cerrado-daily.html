@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br, en, es">
+<html lang="pt-br, en">
 
 <head>
 	<title>Cerrado brasileiro - Avisos de Desmatamento</title>
@@ -12,6 +12,7 @@
 	<meta http-equiv="Content-Language" content="pt-br, en, es">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=0">
+	<meta name="description" content="Avisos de desmatamento, projeto DETER, INPE">
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -24,18 +25,15 @@
 
 		gtag('config', 'UA-77404603-3');
 	</script>
-	<!-- Bootstrap CSS CDN -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	 crossorigin="anonymous">
 	<!-- Scrollbar Custom CSS -->
-	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="./libs/jquery/plugin/jquery.mCustomScrollbar.min.css">
 	<!-- Font-awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-	 crossorigin="anonymous">
+	<link rel="stylesheet" href="./libs/fontawesome/v5.3.1/all.css">
 	<!-- Font Material design google -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+	<link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-4.1.3.min.css" />
+	<link rel="stylesheet" type="text/css" href="./libs/datepicker/5.39.0/tempusdominus-bootstrap-4.min.css" />
+	<link rel="stylesheet" type="text/css" href="./libs/dc-2.2/dc.min.css" />
 	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
 	<link rel="stylesheet" type="text/css" href="./css/cerrado-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
@@ -51,7 +49,7 @@
 				<div class="sidebar-header">
 					<div class="desctxt">
 						<h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
-						<div id="header-menu">Avisos (DETER)</div>
+						<div id="header-menu">DETER (Avisos)</div>
 					</div>
 				</div>
 			</a>
@@ -71,10 +69,6 @@
 					<a class="enable_menu" href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de avisos diários para o Bioma Cerrado." aria-expanded="false">
 						<i class="material-icons">insert_chart</i><span id="nv-daily-cer">Bioma Cerrado</span></a>
 				</li>
-				<!-- <li id="disable_day_menu_fm" style="display: none">
-					<a href="/app/dashboard/alerts/forest/monitor/daily/" id="toDailyChart-fm" title="Abrir o painel de avisos diários do Forest monitor." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-fm">Forest Monitor</span></a>
-				</li> -->
 			</ul>
 
 			<ul class="list-unstyled components">
@@ -93,10 +87,6 @@
 					<a href="/app/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel agregado mensal de avisos para o Bioma Cerrado." aria-expanded="false">
 						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer">Bioma Cerrado</span></a>
 				</li>
-				<!-- <li id="disable_agg_menu_fm" style="display: none">
-					<a href="/app/dashboard/alerts/forest/monitor/aggregated/" id="toAggregatedChart-fm" title="Abrir o painel agregado mensal de avisos do Forest monitor." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-fm">Forest Monitor</span></a>
-				</li> -->
 			</ul>
 
 			<ul class="list-unstyled components">
@@ -192,7 +182,7 @@
 		<div class="row box">
 			<div class="col-md-12">
 				<div class="text-center">
-					<div id="loading_data_info" style="display:block;"><img src="./img/loading_map.gif" /></div>
+					<div id="loading_data_info" style="display:block;"><img alt="loading gif when waiting data" src="./img/loading_map.gif" /></div>
 					<div id="warning_data_info" style="display:none;">
 						<h3><span id="txt8">Problema na comunicação com o servidor.<br>Aguarde alguns minutos e recarregue a página.</span></h3>
 					</div>
@@ -209,7 +199,7 @@
 			<div class="row all-charts-title boxtitlepanel">
 
 				<div class="col-md-2">
-					<span id="txt15">Gráfico - Cerrado</span>
+					<span id="txt15">Análise - Cerrado</span>
 				</div>
 
 				<div class="col-md-4">
@@ -237,18 +227,6 @@
 
 			<!-- Start the filter bar -->
 			<div class="row box">
-				<!-- <div class="col-md-3">
-					<div class="box-grafico text-center">
-						<div class="generalinfo generalinfo_disable">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="box-grafico text-center">
-						<div class="generalinfo generalinfo_disable">
-						</div>
-					</div>
-				</div> -->
 				<div class="col-md-6">
 					<div class="box-grafico text-center">
 						<div class="generalinfo" id="custom-classes" title="Área total de avisos de desmatamento.">
@@ -271,18 +249,48 @@
 								<div style="min-width: fit-content;">
 									<span id="title-chart-timeline"></span>
 								</div>
-								<div>
-									<b><span id="txt9" class="filter-info">Intervalo de tempo:</span></b>
-									<span class="filter highlight-time filter-info"></span>
-									<span class="highlight-time filter-info" id="highlight-time"></span>
-									<a href="javascript:graph.lineDistributionByMonth.filterAll();dc.redrawAll();">
-										<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
-											<i class="material-icons md-icon-16 icongreen">delete</i>
-										</span>
-									</a>
-								</div>
-								<div class="updated">
-									<span id="updated">Atualizado até:</span><span class="updated_date" id="updated_date"></span>
+								<div class="main-chart-bar">
+									<div class="main-chart-bar-p1">
+										<b><span id="txt9" class="filter-info">Intervalo de tempo:</span></b>
+										<span class="filter highlight-time filter-info"></span>
+										<span class="highlight-time filter-info" id="highlight-time"></span>
+										<a href="javascript:graph.resetLineDistributionByMonthFilter();">
+											<span aria-hidden="true" id="txt9a" title="Limpar este filtro.">
+												<i class="material-icons md-icon-16 icongreen">delete</i>
+											</span>
+										</a>
+									</div>
+									<div class="main-chart-bar-p2">
+										<div class="form-group">
+											<b><span id="txt9b" class="filter-info">Alterar o intervalo:</span></b>
+											<div class="input-group date" id="datepickerstart" data-target-input="nearest">
+													<input type="text" class="form-control datetimepicker-input" data-target="#datepickerstart"/>
+													<div class="input-group-append" data-target="#datepickerstart" data-toggle="datetimepicker">
+															<div class="input-group-text">
+																<i class="material-icons md-icon-16 icongreen">today</i>
+															</div>
+													</div>
+											</div>
+											<div class="input-group date" id="datepickerend" data-target-input="nearest">
+												<input type="text" class="form-control datetimepicker-input" data-target="#datepickerend"/>
+												<div class="input-group-append" data-target="#datepickerend" data-toggle="datetimepicker">
+														<div class="input-group-text">
+															<i class="material-icons md-icon-16 icongreen">today</i>
+														</div>
+												</div>
+											</div>
+											<div class="btn btn-primary btn-success btn-dp" id="txt9c"
+												title="Carregar dados para este intervalo."
+												onclick="graph.onDateRangeChange()">
+												<i class="material-icons md-icon-22">published_with_changes</i>
+											</div>
+										</div>
+									</div>
+									<div class="updated">
+										<div class="updated-date">
+											<span id="updated">Atualizado até:</span><span id="updated_date"></span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -734,28 +742,23 @@
 	<!-- already minified -->
 	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
 	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
-	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
-	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
+	<script type="text/javascript" src="./libs/crossfilter/crossfilter-1.3.12.min.js"></script>
+	<script type="text/javascript" src="./libs/dc-2.2/dc.min.js"></script>
 	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
 	<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
-
-	<!-- jQuery CDN -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	 crossorigin="anonymous"></script>
-	<!-- Popper.JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	 crossorigin="anonymous"></script>
-	<!-- Bootstrap Js CDN -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-	 crossorigin="anonymous"></script>
-	<!-- jQuery Custom Scroller CDN -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+	<script type="text/javascript" src="./libs/jquery/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="./libs/moment/moment-2.29.0-with-locales.min.js"></script>
+	<script type="text/javascript" src="./libs/datepicker/5.39.0/tempusdominus-bootstrap-4.min.js"></script>
+	<script type="text/javascript" src="./libs/bootstrap/bootstrap-4.1.3.min.js"></script>
+	<script type="text/javascript" src="./libs/popper/1.14.3/popper.min.js"></script>
+	<!-- jQuery Custom Scroller -->
+	<script type="text/javascript" src="./libs/jquery/plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 	<!-- worked to minify / using to minify: https://www.minifier.org/ -->
 	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-daily-translation.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
+	<script type="text/javascript" src="./js/deter-cerrado-daily-utils.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-daily.js"></script>
 	<script type="text/javascript" src="./js/mun-search-engine.js"></script>
 	<script type="text/javascript" src="./js/easy-cookie.js"></script>
