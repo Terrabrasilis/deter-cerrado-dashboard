@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br, en, es">
+<html lang="pt-br, en">
 
 <head>
 	<title>Cerrado brasileiro - avisos de Desmatamento</title>
@@ -9,34 +9,25 @@
 	<meta http-equiv='pragma' content='no-cache'>
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-Language" content="pt-br, en, es">
+	<meta http-equiv="Content-Language" content="pt-br, en">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Avisos de desmatamento no Cerrado - DETER/INPE">
+	<meta name="keywords" content="INPE, DETER, avisos, alertas, desmatamento, cerrado">
+  <meta name="author" content="André Carvalho - andre.carvalho@inpe.br">
 	<!-- favicon -->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77404603-3"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
 
-		gtag('config', 'UA-77404603-3');
-	</script>
-
-	<!-- Bootstrap CSS CDN -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	 crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="./libs/bootstrap/bootstrap-4.1.3.min.css" />
 	<!-- Scrollbar Custom CSS -->
-	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" type="text/css" href="./libs/jquery/plugin/jquery.mCustomScrollbar.min.css">
 	<!-- Font-awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-	 crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="./libs/fontawesome/v5.3.1/all.css">
 	<!-- Font Material design google -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="./libs/dc-2.1/dc.min.css" />
-	<link rel="stylesheet" type="text/css" href="" id="stylesheet_dark" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" type="text/css" href="./libs/dc-2.2/dc.min.css" />
 	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
 	<link rel="stylesheet" type="text/css" href="./css/cerrado-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
@@ -72,10 +63,6 @@
 					<a href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de avisos diários para o Bioma Cerrado." aria-expanded="false">
 						<i class="material-icons">insert_chart</i><span id="nv-daily-cer">Bioma Cerrado</span></a>
 				</li>
-				<!-- <li id="disable_day_menu_fm" style="display: none">
-					<a href="/app/dashboard/alerts/forest/monitor/daily/" id="toDailyChart-fm" title="Abrir o painel de avisos diários do Forest monitor." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-fm">Forest Monitor</span></a>
-				</li> -->
 			</ul>
 
 			<ul class="list-unstyled components">
@@ -93,10 +80,6 @@
 				<li>
 					<a class="enable_menu" href="/app/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel agregado mensal de avisos para o Bioma Cerrado." aria-expanded="false">
 						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer">Bioma Cerrado</span></a>
-				</li>
-				<li id="disable_agg_menu_fm" style="display: none">
-					<a href="/app/dashboard/alerts/forest/monitor/aggregated/" id="toAggregatedChart-fm" title="Abrir o painel agregado mensal de avisos do Forest monitor." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-fm">Forest Monitor</span></a>
 				</li>
 			</ul>
 
@@ -219,18 +202,6 @@
 
 			<!-- Start the filter bar -->
 			<div class="row box">
-				<!-- <div class="col-md-3">
-					<div class="box-grafico text-center">
-						<div class="generalinfo generalinfo_disable">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="box-grafico text-center">
-						<div class="generalinfo generalinfo_disable">
-						</div>
-					</div>
-				</div> -->
 				<div class="col-md-6">
 					<div class="box-grafico text-center">
 						<div class="generalinfo" id="custom-classes" title="Área total de avisos de desmatamento.">
@@ -333,15 +304,15 @@
 
 			</span>
 		</div>
-		<!--div id="footer_page"></div-->
 
 	</div><!-- Fim do painel de gráficos -->
 
+	<!-- start footer and modals -->
 	<div class="container">
 		<div class="row box">
 			<div class="col-md-12">
 				<div id="footer_print"></div>
-				<!-- modal window with information dados rates -->
+				<!-- modal window with information rates -->
 				<div class="modal fade" id="modal-container-info-rates">
 					<div class="modal-dialog">
 						<div class="modal-content modalinf">
@@ -381,354 +352,310 @@
 				</div>
 				<!-- / modal -->
 
-			<!-- Modal Download-->
-			<div class="modal fade" id="modal-container-download">
-				<div class="modal-dialog">
-					<div class="modal-content modalinf">
-						<div class="modal-header fechar">
-							<h5 class="modal-title boxtitletable"><span id="txt26">Download de dados</span></h5>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-						</div>
-						<!-- / modal-header -->
-						<div class="modal-body ">
-							<h5 class="modal-title boxtitletable"><span id="txt26a">Baixar a tabela com os avisos de desmatamento em formato CSV.</span></h5>
-							<div class="dwn-tool">
-								<div class="alert alert-success alert-labeled">
-									<div class="alert-labeled-row">
-										<span class="alert-label alert-label-left alert-labelled-cell">
-											<i class="material-icons">save_alt</i>
-										</span>
-										<p class="alert-body alert-body-right alert-labelled-cell">
-											<a href="#" id="download-csv-monthly">
-												<span id="txt27" class="alerttitle">Com filtros.</span>
-											</a>
-										</p>
+				<!-- Modal Download-->
+				<div class="modal fade" id="modal-container-download">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable"><span id="txt26">Download de dados</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body ">
+								<h5 class="modal-title boxtitletable"><span id="txt26a">Baixar a tabela com os avisos de desmatamento em formato CSV.</span></h5>
+								<div class="dwn-tool">
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+												<i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-monthly">
+													<span id="txt27" class="alerttitle">Com filtros.</span>
+												</a>
+											</p>
+										</div>
 									</div>
-								</div>
 
-								<div class="alert alert-success alert-labeled">
-									<div class="alert-labeled-row">
-										<span class="alert-label alert-label-left alert-labelled-cell">
-											<i class="material-icons">save_alt</i>
-										</span>
-										<p class="alert-body alert-body-right alert-labelled-cell">
-											<a href="#" id="download-csv-monthly-all">
-												<span id="txt28" class="alerttitle">Sem filtros.</span>
-											</a>
-										</p>
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span class="alert-label alert-label-left alert-labelled-cell">
+												<i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-csv-monthly-all">
+													<span id="txt28" class="alerttitle">Sem filtros.</span>
+												</a>
+											</p>
+										</div>
 									</div>
-								</div>
 
-								<h5 class="modal-title boxtitletable"><span id="txt26b">Baixar o arquivo completo dos avisos de desmatamento em formato Shapefile.</span></h5>
-								<div class="alert alert-success alert-labeled">
-									<div class="alert-labeled-row">
-										<span id="download-shp-icon" class="alert-label alert-label-left alert-labelled-cell">
-											<i class="material-icons">save_alt</i>
-										</span>
-										<p class="alert-body alert-body-right alert-labelled-cell">
-											<a href="#" id="download-shp">
-												<span id="txt28b" class="alerttitle">Shapefile.</span>
-											</a>
-										</p>
+									<h5 class="modal-title boxtitletable"><span id="txt26b">Baixar o arquivo completo dos avisos de desmatamento em formato Shapefile.</span></h5>
+									<div class="alert alert-success alert-labeled">
+										<div class="alert-labeled-row">
+											<span id="download-shp-icon" class="alert-label alert-label-left alert-labelled-cell">
+												<i class="material-icons">save_alt</i>
+											</span>
+											<p class="alert-body alert-body-right alert-labelled-cell">
+												<a href="#" id="download-shp">
+													<span id="txt28b" class="alerttitle">Shapefile.</span>
+												</a>
+											</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<!-- / modal-body -->
-						<div class="modal-footer">
-							<div class="checkbox pull-right">
-								<label>
-									<button type="button" class="btn btngreen" data-dismiss="modal">
-										<span id="txt29">Fechar</span>
-									</button>
-								</label>
+							<!-- / modal-body -->
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal">
+											<span id="txt29">Fechar</span>
+										</button>
+									</label>
+								</div>
+								<!--/ checkbox -->
 							</div>
-							<!--/ checkbox -->
+							<!--/ modal-footer -->
 						</div>
-						<!--/ modal-footer -->
+						<!-- / modal-content -->
 					</div>
-					<!-- / modal-content -->
+					<!--/ modal-dialog -->
 				</div>
-				<!--/ modal-dialog -->
-			</div>
-			<!-- / modal -->
+				<!-- / modal -->
 
-	<!-- modal window with an introductory video of this panel -->
-	<div class="modal fade" id="modal-container-video">
-		<div class="modal-dialog">
-			<div class="modal-content modalinf">
-				<div class="modal-header fechar">
-					<h5 class="modal-title boxtitletable"> <span id="txt1c">Informações de ajuda para uso do painel</span></h5>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-				</div>
-				<!-- / modal-header -->
-				<div class="modal-body ">
-					<div class="alert alert-success" role="alert">
-						<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
-					</div>
-					<div class="embed-video">
-						<video style="width: 100%" controls>
-							<!-- <source src="movies/dashboard-in-action.mp4" type="video/mp4"> -->
-							<!--track src="movies/subtitles/dashboard-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
-							<track src="movies/subtitles/dashboard-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
-							<track src="movies/subtitles/dashboard-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish"-->
-							Seu navegador não suporta a tag de vídeo.
-						</video>
-					</div>
-				</div>
+				<!-- modal window with an introductory video of this panel -->
+				<div class="modal fade" id="modal-container-video">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable"> <span id="txt1c">Informações de ajuda para uso do painel</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body ">
+								<div class="alert alert-success" role="alert">
+									<span id="txt1d">Veja o vídeo introdutório que mostra a interação de um usuário com as ferramentas do painel.</span>
+								</div>
+								<div class="embed-video">
+									<video style="width: 100%" controls>
+										<!-- <source src="movies/dashboard-in-action.mp4" type="video/mp4"> -->
+										<!--track src="movies/subtitles/dashboard-in-action_pt_br.vtt" kind="subtitles" srclang="pt-BR" label="Portuguese" default>
+										<track src="movies/subtitles/dashboard-in-action_en.vtt" kind="subtitles" srclang="en" label="English">
+										<track src="movies/subtitles/dashboard-in-action_es.vtt" kind="subtitles" srclang="es" label="Spanish"-->
+										Seu navegador não suporta a tag de vídeo.
+									</video>
+								</div>
+							</div>
 
-				<!-- / modal-body -->
-				<div class="modal-footer">
-					<div class="checkbox pull-right">
-						<label>
-							<button type="button" class="btn btngreen" data-dismiss="modal">
-								<span id="txt1e">Fechar</span>
-							</button>
-						</label>
-					</div>
-					<!--/ checkbox -->
-				</div>
-				<!--/ modal-footer -->
-			</div>
-			<!-- / modal-content -->
-		</div>
-		<!--/ modal-dialog -->
-	</div>
-	<!-- / modal -->
-
-	<!-- modal window with counties filterd items -->
-	<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						×
-					</button>
-					<h4 class="modal-title" id="filtered">
-						<span id="txt1f">Pesquisa de municípios</span>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<span id="txt1g">Encontre um município.</span>
-					<div class="input-group input-group-sm" style="margin-bottom: 15px;">
-						<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control"
-							placeholder="Search">
-						<div class="input-group-btn">
-							<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
+							<!-- / modal-body -->
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal">
+											<span id="txt1e">Fechar</span>
+										</button>
+									</label>
+								</div>
+								<!--/ checkbox -->
+							</div>
+							<!--/ modal-footer -->
 						</div>
+						<!-- / modal-content -->
 					</div>
-					<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
-					<div class="counties-list">
-						<ul id="filtered-list"></ul>
-					</div>
+					<!--/ modal-dialog -->
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">
-						<span id="txt1i">Fechar</span>
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+				<!-- / modal -->
 
-</div>
-</div>
-</div>
-
-	<!-- modal window with login warning panel -->
-	<div class="modal fade" id="modal-container-warning">
-		<div class="modal-dialog">
-			<div class="modal-content modalinf">
-				<div class="modal-header fechar">
-					<h5 class="modal-title boxtitletable"> <span id="txt14g">Aviso</span></h5>
-					<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button> -->
-				</div>
-				<!-- / modal-header -->
-				<div class="modal-body ">
-					<div class="alert alert-warning" role="alert">
-						<span id="txt14h">O nome de usuário ou senha está incorreto. Verifique se CAPS LOCK está ativado. Se você receber essa mensagem novamente, entre em contato com o administrador do sistema para garantir que você tenha permissão para logar no portal.</span>
-					</div>
-				</div>
-				<!-- / modal-body -->
-				<div class="modal-footer">
-					<div class="checkbox pull-right">
-						<label>
-							<button type="button" class="btn btngreen" data-dismiss="modal">
-								<span id="txt1i">Fechar</span>
-							</button>
-						</label>
-					</div>
-					<!--/ checkbox -->
-				</div>
-				<!--/ modal-footer -->
-			</div>
-			<!-- / modal-content -->
-		</div>
-		<!--/ modal-dialog -->
-	</div>
-	<!-- / modal -->
-
-	<!-- modal window to display the email contact -->
-	<div class="modal fade" id="modal-container-contact">
-		<div class="modal-dialog">
-			<div class="modal-content modalinf">
-				<div class="modal-header fechar">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-				</div>
-				<!-- / modal-header -->
-				<div class="modal-body">
-					<div class="card">
-						<div class="card-body">
-							<h5 class="card-title"><span id="tt-contactus">Envie sugestões ou perguntas para:</span></h5>
-							<p class="card-text"><a href="mailto:terrabrasilis@inpe.br">terrabrasilis@inpe.br</a></p>
-						</div>
-					</div>
-				</div>
-				<!--/ modal-footer -->
-			</div>
-			<!-- / modal-content -->
-		</div>
-		<!--/ modal-dialog -->
-	</div>
-	<!-- / modal -->
-
-	<!-- modal window to first notice -->
-	<div class="modal fade" id="firstNotice">
-		<div class="modal-dialog firstnotice">
-			<div class="modal-content modalinf">
-				<div class="modal-header fechar">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-				</div>
-				<!-- / modal-header -->
-				<div class="modal-body ">
-					<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block w-100" src="img/slider7.jpg" alt="Primeiro slide">
-								<h1 class="titulo"><span id="about-modal">Sobre </span><span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
-									<p class="descricaoslide" id="description-modal">O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental.</p>
+				<!-- modal window with counties filterd items -->
+				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="filtered">
+									<span id="txt1f">Pesquisa de municípios</span>
+								</h4>
+							</div>
+							<div class="modal-body">
+								<span id="txt1g">Encontre um município.</span>
+								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
+									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control"
+										placeholder="Search">
+									<div class="input-group-btn">
+										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
+									</div>
+								</div>
+								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
+								<div class="counties-list">
+									<ul id="filtered-list"></ul>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<span id="txt1i">Fechar</span>
+								</button>
 							</div>
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
 					</div>
 				</div>
-				<!-- / modal-body -->
-				<div class="modal-footer">
-					<div class="checkbox pull-right">
-						<label>
-							<input id="notice" class="modal-check" name="modal-check" type="checkbox"><span class="textoc" id="option-modal">Não mostrar novamente.</span>
-						</label>
+
+				<!-- modal window to display the email contact -->
+				<div class="modal fade" id="modal-container-contact">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title"><span id="tt-contactus">Envie sugestões ou perguntas para:</span></h5>
+										<p class="card-text"><a href="mailto:terrabrasilis@inpe.br">terrabrasilis@inpe.br</a></p>
+									</div>
+								</div>
+							</div>
+							<!--/ modal-footer -->
+						</div>
+						<!-- / modal-content -->
 					</div>
-					<!--/ checkbox -->
+					<!--/ modal-dialog -->
 				</div>
-				<!--/ modal-footer -->
+				<!-- / modal -->
+
+				<!-- modal window to first notice -->
+				<div class="modal fade" id="firstNotice">
+					<div class="modal-dialog firstnotice">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body ">
+								<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img class="d-block w-100" src="img/slider7.jpg" alt="Primeiro slide">
+											<h1 class="titulo"><span id="about-modal">Sobre </span><span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
+												<p class="descricaoslide" id="description-modal">O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental.</p>
+										</div>
+									</div>
+									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+								</div>
+							</div>
+							<!-- / modal-body -->
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<input id="notice" class="modal-check" name="modal-check" type="checkbox"><span class="textoc" id="option-modal">Não mostrar novamente.</span>
+									</label>
+								</div>
+								<!--/ checkbox -->
+							</div>
+							<!--/ modal-footer -->
+						</div>
+						<!-- / modal-content -->
+					</div>
+					<!--/ modal-dialog -->
+				</div>
+				<!-- / modal -->
+
+				<div id="display_loading"><span id="inner_display_loading"></span></div>
+
+				<!-- Modal print -->
+				<div class="modal fade" id="print_information">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable"> <span id="txt4p">Imprimir Gráficos</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body ">
+								<div class="alert alert-success" role="alert"> <span id="txt30">
+
+										A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
+										A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
+										&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
+										&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
+										&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />
+									</span>
+								</div>
+
+							</div>
+
+							<!-- / modal-body -->
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal" id="print_page" style="color: #fff;">
+											<span id="txt1ea">Fechar</span>
+										</button>
+									</label>
+								</div>
+								<!--/ checkbox -->
+							</div>
+							<!--/ modal-footer -->
+						</div>
+						<!-- / modal-content -->
+					</div>
+					<!--/ modal-dialog -->
+				</div>
+				<!-- / modal -->
+
+				<!--Footer-->
+				<footer class="footer">
+					<p><a href="http://terrabrasilis.dpi.inpe.br"> TerraBrasilis</a>&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a></p>
+					<div class="version_style" id="version"></div>
+				</footer>
+				<!--/.Footer-->
+
 			</div>
-			<!-- / modal-content -->
 		</div>
-		<!--/ modal-dialog -->
 	</div>
-	<!-- / modal -->
-
-	<!--<div id="display_error"><span id="inner_display_error"></span></div>-->
-	<div id="display_loading"><span id="inner_display_loading"></span></div>
-
-	<!-- Modal print -->
-	<div class="modal fade" id="print_information">
-		<div class="modal-dialog">
-			<div class="modal-content modalinf">
-				<div class="modal-header fechar">
-					<h5 class="modal-title boxtitletable"> <span id="txt4p">Imprimir Gráficos</span></h5>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-				</div>
-				<!-- / modal-header -->
-				<div class="modal-body ">
-					<div class="alert alert-success" role="alert"> <span id="txt30">
-
-							A impressão deste documento utiliza os recursos do navegador e pode apresentar diferenças entre eles.<br />
-							A impressão acomoda bem os gráficos quando as configurações são as seguintes:<br />
-							&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />
-							&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />
-							&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />
-						</span>
-					</div>
-
-				</div>
-
-				<!-- / modal-body -->
-				<div class="modal-footer">
-					<div class="checkbox pull-right">
-						<label>
-							<button type="button" class="btn btngreen" data-dismiss="modal" id="print_page" style="color: #fff;">
-								<span id="txt1ea">Fechar</span>
-							</button>
-						</label>
-					</div>
-					<!--/ checkbox -->
-				</div>
-				<!--/ modal-footer -->
-			</div>
-			<!-- / modal-content -->
-		</div>
-		<!--/ modal-dialog -->
-	</div>
-	<!-- / modal -->
-	<!--Footer-->
-	<footer class="footer">
-		<p><a href="http://terrabrasilis.dpi.inpe.br"> TerraBrasilis</a>&nbsp;<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a></p>
-		<div class="version_style" id="version"></div>
-	</footer>
-	<!--/.Footer-->
+  <!-- end footer and modals -->
 
 	<!-- already minified -->
 	<script type="text/javascript" src="./libs/d3/v3/d3.min.js"></script>
 	<script type="text/javascript" src="./libs/d3/d3js.pt-br.js"></script>
-	<script type="text/javascript" src="./libs/crossfilter/crossfilter.min.js"></script>
-	<script type="text/javascript" src="./libs/dc-2.1/dc.min.js"></script>
+	<script type="text/javascript" src="./libs/crossfilter/crossfilter-1.3.12.min.js"></script>
+	<script type="text/javascript" src="./libs/dc-2.2/dc.min.js"></script>
 	<script type="text/javascript" src="./libs/mousetrap/mousetrap.min.js"></script>
 	<script type="text/javascript" src="./libs/filesaver/FileSaver.min.js"></script>
-
-	<!-- jQuery CDN -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	 crossorigin="anonymous"></script>
-	<!-- Popper.JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	 crossorigin="anonymous"></script>
-	<!-- Bootstrap Js CDN -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-	 crossorigin="anonymous"></script>
-	<!-- jQuery Custom Scroller CDN -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+	<script type="text/javascript" src="./libs/jquery/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="./libs/bootstrap/bootstrap-4.1.3.min.js"></script>
+	<script type="text/javascript" src="./libs/popper/1.14.3/popper.min.js"></script>
+	<!-- jQuery Custom Scroller -->
+	<script type="text/javascript" src="./libs/jquery/plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 	<!-- worked to minify / using to minify: https://www.minifier.org/ -->
 	<script type="text/javascript" src="./js/svg-to-image.min.js"></script>
 	<script type="text/javascript" src="./js/terrabrasilis-start.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-aggregated-translation.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
+	<script type="text/javascript" src="./js/deter-cerrado-aggregated-utils.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-aggregated.js"></script>
 	<script type="text/javascript" src="./js/easy-cookie.js"></script>
 	<script type="text/javascript" src="./js/downloadSHP.js"></script>
 	<script type="text/javascript" src="http://terrabrasilis.dpi.inpe.br/oauth-api/getoauthjs"></script>
-	<script type="text/javascript">
-		$("#notice").click(function () {
-			EasyCookie.create("firstNotice", "Not show modal again", 30);
-		});
-		/**
-		* Show the main TerraBrasilis modal
-		*/
-		let cookieFirstNotice = EasyCookie.read("firstNotice");
-		if (cookieFirstNotice === null) {
-			$('#firstNotice').modal('show');
-		}
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77404603-3"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-77404603-3');
 	</script>
-
 </body>
-
 </html>
