@@ -2,19 +2,20 @@ var graph={
 	
 	totalizedAreaInfoBox:undefined,// totalized area info box
 	totalizedAlertsInfoBox:undefined,// totalized alerts info box
-
-	focusChart: null,
-	//overviewChart: null,
+	lineSeriesMonthly: null,
 	ringTotalizedByState: null,
 	barAreaByYear: null,
 
 	monthFilters: [],
-	
-	monthDimension: null,
-	temporalDimension: null,
-	areaGroup: null,
+
+	temporalDimension0: null,
+	areaGroup0: null,
+	yearGroup0:null,
 	yearDimension0: null,
 	ufDimension0: null,
+	monthDimension0: null,
+	
+	monthDimension: null,
 	yearDimension: null,
 	yearGroup: null,
 	ufDimension: null,
@@ -22,15 +23,27 @@ var graph={
 	numPolDimension: null,
 	totalAreaGroup: null,
 	totalAlertsGroup: null,
+
+	temporalDimensionCloud: null,
+	areaGroupCloud: null,
+	areaUfGroupCloud: null,
+	yearDimensionCloud: null,
+	yearGroupCloud:null,
+	ufDimensionCloud: null,
+	monthDimensionCloud: null,
 	
 	data:null,
+	cloudData:null,
 
-	pallet: null,
-	darkPallet: null,
-	histogramColor: null,
-	darkHistogramColor: null,
-	barTop10Color: null,
-	darkBarTop10Color: null,
+	/** to store subcharts of the composite chart used to switch groups */
+	_cloudSubCharts:[],
+	_deforestationSubCharts:[],
+	_deforestationStatus:true,
+	_cloudStatus:false,
+
+	ringPallet: null,
+	defPallet: null,
+	cldPallet: null,
 
 	defaultHeight: null,
 
@@ -46,12 +59,9 @@ var graph={
 				console.log("Didn't load config file. Using default options.");
 			}else{
 				if(conf) {
-					graph.pallet=conf.pallet?conf.pallet:graph.pallet;
-					graph.darkPallet=conf.darkPallet?conf.darkPallet:graph.darkPallet;
-					graph.histogramColor=conf.histogramColor?conf.histogramColor:graph.histogramColor;
-					graph.darkHistogramColor=conf.darkHistogramColor?conf.darkHistogramColor:graph.darkHistogramColor;
-					graph.barTop10Color=conf.barTop10Color?conf.barTop10Color:graph.barTop10Color;
-					graph.darkBarTop10Color=conf.darkBarTop10Color?conf.darkBarTop10Color:graph.darkBarTop10Color;
+					graph.ringPallet=conf.ringPallet?conf.ringPallet:graph.ringPallet;
+					graph.defPallet=conf.defPallet?conf.defPallet:graph.defPallet;
+					graph.cldPallet=conf.cldPallet?conf.cldPallet:graph.cldPallet;
 					graph.defaultHeight=conf.defaultHeight?conf.defaultHeight:graph.defaultHeight;
 				}
 			}
@@ -73,63 +83,83 @@ var graph={
 		}
 		return y;
 	},
-	getOrdinalColorsToYears: function() {
+	getOrdinalColorsToYears: function(colorList) {
 		var c=[];
 		var ys=this.getRangeYears();
-		var cor=d3.scale.category20();
 		for(var i=0;i<ys.length;i++) {
-			c.push({key:ys[i],color:cor(i)});
+			c.push({key:ys[i],color:colorList[i]});
 		}
 		return c;
 	},
 	setChartReferencies: function() {
 		this.totalizedAlertsInfoBox = dc.numberDisplay("#numpolygons", "agrega");
 		this.totalizedAreaInfoBox = dc.numberDisplay("#custom-classes", "agrega");
-		this.focusChart = dc.seriesChart("#agreg", "agrega");
-		//this.overviewChart = dc.seriesChart("#agreg-overview", "agrega");
+		// this.lineSeriesMonthly = dc.seriesChart("#agreg", "agrega");
 		this.ringTotalizedByState = dc.pieChart("#chart-by-state", "filtra");
 		this.barAreaByYear = dc.barChart("#chart-by-year", "filtra");
 	},
-	loadUpdatedDate: function() {
-		// to prevent error on localhost developer environment
-		if(window.location.host!="terrabrasilis.dpi.inpe.br") return;
-
-		var url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+downloadCtrl.getProject()+":updated_date&OUTPUTFORMAT=application%2Fjson";
-
-		if(Authentication.hasToken()){
-			url="http://terrabrasilis.dpi.inpe.br/geoserver/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+downloadCtrl.getProject()+":last_date&OUTPUTFORMAT=application%2Fjson";
-		}
-		d3.json(url, (json) => {
-			var dt=new Date(json.features[0].properties.updated_date+'T21:00:00.000Z');
-			d3.select("#updated_date").html(' '+dt.toLocaleDateString());
-		});
+	setUpdatedDate: function(updated_date)
+	{
+		var dt=new Date(updated_date+'T21:00:00.000Z');
+		d3.select("#updated_date").html(' '+dt.toLocaleDateString());
 	},
-	loadData: function(url) {
+
+	loadData: function(url, type, callback) {
 		d3.json(url)
-		.header("Authorization", "Bearer "+Authentication.getToken())
+		.header("Authorization", "Bearer "+((typeof Authentication!="undefined")?(Authentication.getToken()):("")) )
 		.get(function(error, root) {
 			if(error && error.status==401) {
-				Authentication.logout();
-				Authentication.setExpiredToken(true);
+				if(typeof Authentication!="undefined"){
+					Authentication.logout();
+					Authentication.setExpiredToken(true);
+				}
 			}else{
-				graph.processData(root);
+				if(type=='deforestation')	graph.processData(root);
+				else graph.processCloudData(root);
 			}
+			if(callback) callback();
 		});
 	},
+
+	/** This method must be called before processData! */
+	processCloudData: function(data) {
+		if(!data || !data.totalFeatures || data.totalFeatures<=0) {
+			utils.displayWarning(true);
+			return;
+		}
+		let o=[];
+		for (let j = 0, n = data.totalFeatures; j < n; ++j) {
+			let fet=data.features[j];
+			let month=+fet.properties.m;
+			let year=+fet.properties.y;
+			if(graph.calendarConfiguration=='prodes') {
+				if(month >=1 && month<=7) {
+					year = (year-1)+"/"+year;
+				}
+				if(month >=8 && month<=12) {
+					year = year+"/"+(year+1);
+				}
+			}
+			o.push({year:year,month:month,a:fet.properties.a,au:fet.properties.au,uf:fet.properties.u});
+		}
+		graph.cloudData = o;
+	},
+
 	processData: function(data) {
 		if(!data || !data.totalFeatures || data.totalFeatures<=0) {
 			utils.displayWarning(true);
 			return;
 		}
+		graph.setUpdatedDate(data.updated_date);
 		utils.displayGraphContainer();
 		
-		var numberFormat = d3.format('.4f');
-		var o=[];
+		let numberFormat = d3.format('.2f');
+		let o=[];
 		
-		for (var j = 0, n = data.totalFeatures; j < n; ++j) {
-			var fet=data.features[j];
-			var month=+fet.properties.m;
-			var year=+fet.properties.y;
+		for (let j = 0, n = data.totalFeatures; j < n; ++j) {
+			let fet=data.features[j];
+			let month=+fet.properties.m;
+			let year=+fet.properties.y;
 			if(graph.calendarConfiguration=='prodes') {
 				if(month >=1 && month<=7) {
 					year = "20"+(year-1)+"/20"+year;
@@ -140,61 +170,96 @@ var graph={
 			}else{
 				year = "20"+year;
 			}
-
-			o.push({Year:year,Month:month,Area:numberFormat(fet.properties.ar)*1,uf:fet.properties.uf,numPol:fet.properties.np});
+			o.push({year:year,month:month,area:+(numberFormat(fet.properties.ar)),uf:fet.properties.uf,numPol:fet.properties.np});
 		}
-		data = o;
-		graph.registerDataOnCrossfilter(data);
+		graph.data=o;
+		graph.registerDataOnCrossfilter();
 		utils.displayWaiting(false);
 		graph.build();
 	},
-	registerDataOnCrossfilter: function(data) {
-		graph.data=data;
-		var ndx0 = crossfilter(data),
-		ndx1 = crossfilter(data);
-		
-		this.monthDimension = ndx1.dimension(function(d) {
-			var m=utils.fakeMonths(d.Month);
+	registerDataOnCrossfilter: function() {
+		var ndx0 = crossfilter(graph.data),
+		ndx1 = crossfilter(graph.data),
+		cloud = crossfilter(graph.cloudData);
+
+		/** register cloud data */
+		this.temporalDimensionCloud = cloud.dimension(function(d) {
+			var m=utils.fakeMonths(d.month);
+			return [d.year, m];
+		});
+		this.areaUfGroupCloud = this.temporalDimensionCloud.group().reduceSum(function(d) {
+			return +d.au;
+		});
+		this.areaGroupCloud = this.temporalDimensionCloud.group().reduceSum(function(d) {
+			return +d.a;
+		});
+		this.yearDimensionCloud = cloud.dimension(function(d) {
+			return d.year;
+		});
+		this.yearGroupCloud = this.yearDimensionCloud.group().reduceSum(function(d) {
+			return d.au;
+		});
+		this.ufDimensionCloud = cloud.dimension(function(d) {
+			return d.uf;
+		});
+		this.monthDimensionCloud = cloud.dimension(function(d) {
+			var m=utils.fakeMonths(d.month);
 			return m;
 		});
-		this.temporalDimension = ndx0.dimension(function(d) {
-			var m=utils.fakeMonths(d.Month);
-			return [d.Year, m];
+		/** end register cloud data */
+
+		/** crossfilter registry for secondary use */
+		this.temporalDimension0 = ndx0.dimension(function(d) {
+			var m=utils.fakeMonths(d.month);
+			return [d.year, m];
 		});
-		this.areaGroup = this.temporalDimension.group().reduceSum(function(d) {
-			return d.Area;
+		this.areaGroup0 = this.temporalDimension0.group().reduceSum(function(d) {
+			return d.area;
 		});
 		this.yearDimension0 = ndx0.dimension(function(d) {
-			return d.Year;
+			return d.year;
+		});
+		this.yearGroup0 = this.yearDimension0.group().reduceSum(function(d) {
+			return d.area;
 		});
 		this.ufDimension0 = ndx0.dimension(function(d) {
 			return d.uf;
 		});
-		this.yearDimension = ndx1.dimension(function(d) {
-			return d.Year;
+		this.monthDimension0 = ndx0.dimension(function(d) {
+			var m=utils.fakeMonths(d.month);
+			return m;
 		});
-		this.yearGroup = this.yearDimension.group().reduceSum(function(d) {
-			return d.Area;
+		/** end crossfilter registry for secondary use */
+
+		this.monthDimension = ndx1.dimension(function(d) {
+			var m=utils.fakeMonths(d.month);
+			return m;
+		});
+		this.yearDimension = ndx1.dimension(function(d) {
+			return d.year;
 		});
 		this.ufDimension = ndx1.dimension(function(d) {
 			return d.uf;
-		});
-		this.ufGroup = this.ufDimension.group().reduceSum(function(d) {
-			return d.Area;
 		});
 		this.numPolDimension = ndx1.dimension(function(d) {
 			return d.numPol;
 		});
 
+		this.yearGroup = this.yearDimension.group().reduceSum(function(d) {
+			return d.area;
+		});
+		this.ufGroup = this.ufDimension.group().reduceSum(function(d) {
+			return d.area;
+		});
 		this.totalAreaGroup = ndx1.groupAll().reduce(
 			function (p, v) {
 				++p.n;
-				p.tot += v.Area;
+				p.tot += v.area;
 				return p;
 			},
 			function (p, v) {
 				--p.n;
-				p.tot -= v.Area;
+				p.tot -= v.area;
 				return p;
 			},
 			function () { return {n:0,tot:0}; }
@@ -212,7 +277,7 @@ var graph={
 		);
 	},
 	build: function() {
-		var	barColors = this.getOrdinalColorsToYears();
+		var	barColors = this.getOrdinalColorsToYears(graph.defPallet);
 		
 		this.setChartReferencies();
 
@@ -241,118 +306,9 @@ var graph={
 			})
 			.group(this.totalAlertsGroup);
 		
-		let fcDomain=d3.scale.linear().domain( (graph.calendarConfiguration=='prodes')?([8,19]):([1,12]) );
-
-		this.focusChart
-			.height(this.defaultHeight-70)
-			.chart(function(c) { return dc.lineChart(c).renderDataPoints(true).evadeDomainFilter(true); })
-			//.chart(function(c) { return dc.lineChart(c).interpolate('cardinal').renderDataPoints(true).evadeDomainFilter(true); })
-			.x(fcDomain)
-			.renderHorizontalGridLines(true)
-			.renderVerticalGridLines(true)
-			.brushOn(false)
-			.yAxisLabel(Translation[Lang.language].focus_y_label)
-			//.xAxisLabel(Translation[Lang.language].focus_x_label)
-			.elasticY(true)
-			.yAxisPadding('10%')
-			.clipPadding(10)
-			.dimension(this.temporalDimension)
-			.group(this.areaGroup)
-			//.rangeChart(this.overviewChart)
-			.title(function(d) {
-				var v=Math.abs(+(parseFloat(d.value).toFixed(2)));
-				v=localeBR.numberFormat(',1f')(v);
-				return utils.xaxis(d.key[1]) + " - " + d.key[0]
-				+ "\n"+Translation[Lang.language].area+" " + v + " "+Translation[Lang.language].unit;
-			})
-			.seriesAccessor(function(d) {
-				return d.key[0];
-			})
-			.keyAccessor(function(d) {
-				return d.key[1];
-			})
-			.valueAccessor(function(d) {
-				if(!graph.focusChart.hasFilter()) {
-					return Math.abs(+(d.value.toFixed(2)));
-				}else{
-					if(graph.monthFilters.indexOf(d.key[1])>=0) {
-						return Math.abs(+(d.value.toFixed(2)));
-					}else{
-						return 0;
-					}
-				}
-			})
-			.legend(dc.legend().x(100).y(30).itemHeight(15).gap(5).horizontal(1).legendWidth(600).itemWidth(80))
-			.margins({top: 20, right: 35, bottom: 30, left: 65});
-
-		this.focusChart.yAxis().tickFormat(function(d) {
-			//return d3.format(',d')(d);
-			return localeBR.numberFormat(',1f')(d);
-		});
-		this.focusChart.xAxis().tickFormat(function(d) {
-			return utils.xaxis(d);
-		});
-
-		this.focusChart.on('filtered', function(chart) {
-			if(chart.filter()) {
-				graph.monthDimension.filterFunction(
-					(d) => {
-						return graph.monthFilters.includes(d);
-					}
-				);
-				dc.redrawAll("filtra");
-			}
-		});
-
-		this.focusChart.on('renderlet', function(chart) {
-			utils.attachListenersToLegend();
-			dc.redrawAll("filtra");
-			var years=[];
-			if(graph.barAreaByYear.hasFilter()){
-				years=graph.barAreaByYear.filters();
-			}else{
-				graph.barAreaByYear.group().all().forEach((d)=> {years.push(d.key);});
-			}
-
-			if(!chart.hasFilter()){
-				$('#txt18').css('display','none');// hide filter reset buttom
-				$('#txt8b').html(Translation[Lang.language].allTime);
-				$('#highlight-time').html("&nbsp;" +  years.join(", ") );
-			}else{
-				var fp="", allData=chart.group().top(Infinity);
-				graph.monthFilters.forEach(
-					(monthNumber) => {
-						var ys=[];
-						allData.some(
-							(d)=> {
-								years.forEach(
-									(year) => {
-										if(d.key.includes(monthNumber) && d.key.includes(year)) {
-											ys.push(year);
-											return true;
-										}
-									}
-								);
-							}
-						);
-						if(ys.length) fp+=(fp==''?'':',')+utils.monthYearList(monthNumber,utils.nameMonthsById(monthNumber),ys);
-					}
-				);
-				$('#txt18').css('display','');// display filter reset buttom
-				$('#txt8b').html(Translation[Lang.language].someMonths);
-				$('#highlight-time').html("&nbsp;" +  fp );
-			}
-		});
-
-		this.focusChart.colorAccessor(function(d) {
-			var i=0,l=barColors.length;
-			while(i<l){
-				if(barColors[i].key==d.key){
-					return barColors[i].color;
-				}
-				i++;
-			}
-		});
+		// build the monthly series chart
+		//buildSeriesChart(this);
+		buildCompositeChart(this);
 
 		this.ringTotalizedByState
 			.height(this.defaultHeight)
@@ -371,11 +327,8 @@ var graph={
 				return v + " "+Translation[Lang.language].unit;
 			})
 			.ordering(dc.pluck('key'))
-			.ordinalColors((utils.cssDefault)?(graph.pallet):(graph.darkPallet))
+			.ordinalColors(graph.ringPallet)
 			.legend(dc.legend().x(20).y(10).itemHeight(13).gap(7).horizontal(0).legendWidth(50).itemWidth(35));
-			//.legend(dc.legend());
-			//.ordinalColors(["#FF0000","#FFFF00","#FF00FF","#F8B700","#78CC00","#00FFFF","#56B2EA","#0000FF","#00FF00"])
-
 	
 		this.ringTotalizedByState.valueAccessor(function(d) {
 			return Math.abs(+(d.value.toFixed(2)));
@@ -400,8 +353,8 @@ var graph={
 			.elasticY(true)
 			.yAxisPadding('10%')
 			.x(d3.scale.ordinal())
-	        .xUnits(dc.units.ordinal)
-	        .barPadding(0.2)
+			.xUnits(dc.units.ordinal)
+			.barPadding(0.2)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
 			.colorAccessor(function(d) {
@@ -461,7 +414,7 @@ var graph={
 		});
 		utils.renderAll();
 		utils.attachListenersToLegend();
-		utils.setMonthNamesFilterBar();
+		//utils.setMonthNamesFilterBar();
 	},
 	init: function() {
 		window.onresize=utils.onResize;
@@ -473,10 +426,15 @@ var graph={
 
 	startLoadData() {
 		Lang.apply();
-		//var dataUrl = "./data/deter-cerrado-month.json";
-		var dataUrl = downloadCtrl.serviceBaseUrl+"/download/"+downloadCtrl.getProject()+"/monthly";
-		graph.loadData(dataUrl);
-		graph.loadUpdatedDate();
+
+		let cloudDataUrl = downloadCtrl.getFileDeliveryURL()+"/download/"+downloadCtrl.getProject()+"/cloud";
+		cloudDataUrl = "./data/deter-cerrado-cloud-month.json";// to use in localhost
+		let deforDataUrl = downloadCtrl.getFileDeliveryURL()+"/download/"+downloadCtrl.getProject()+"/monthly";
+		deforDataUrl = "./data/deter-cerrado-month.json";// to use in localhost
+
+		graph.loadData(cloudDataUrl, 'cloud', ()=>{
+			graph.loadData(deforDataUrl, 'deforestation',null);
+		});
 		utils.attachEventListeners();
 	},
 
@@ -490,9 +448,9 @@ var graph={
 		}else if(who=='year'){
 			graph.barAreaByYear.filterAll();
 		}else if(who=='agreg'){
-			//graph.overviewChart.filterAll();
-			graph.focusChart.filterAll();
+			graph.lineSeriesMonthly.filterAll();
 			graph.monthDimension.filterAll();
+			graph.monthDimension0.filterAll();
 			graph.monthFilters=[];
 			utils.highlightSelectedMonths();
 			dc.redrawAll("filtra");
@@ -500,11 +458,12 @@ var graph={
 		dc.redrawAll(g);
 	},
 	resetFilters: function() {
+		if(!graph.data) return;
 		graph.ringTotalizedByState.filterAll();
 		graph.barAreaByYear.filterAll();
-		//graph.overviewChart.filterAll();
-		graph.focusChart.filterAll();
+		graph.lineSeriesMonthly.filterAll();
 		graph.monthDimension.filterAll();
+		graph.monthDimension0.filterAll();
 	},
 
 	/**
@@ -512,8 +471,8 @@ var graph={
 	 * @param {number} aMonth, a fake number of month. To map for real number, see utils.nameMonthsById
 	 */
 	applyMonthFilter: function(aMonth) {
-		if(graph.focusChart.hasFilter()) {
-			graph.focusChart.filterAll();
+		if(graph.lineSeriesMonthly.hasFilter()) {
+			graph.lineSeriesMonthly.filterAll();
 		}
 		var pos=graph.monthFilters.indexOf(aMonth);
 		if(pos<0) {
@@ -529,14 +488,37 @@ var graph={
 				}
 			);
 			var min=graph.monthFilters[0],max=graph.monthFilters[graph.monthFilters.length-1];
-			graph.focusChart.filter([min,max]);
-			graph.focusChart.redraw();
+			graph.lineSeriesMonthly.filter([min,max]);
+			graph.lineSeriesMonthly.redraw();
 			dc.redrawAll("agrega");
 		}else {
 			graph.resetFilter('agreg','agrega');
 		}
 
 		utils.highlightSelectedMonths();
+	},
+
+	changeCompositeSubCharts(){
+		let l=[].concat(
+			( (graph._deforestationStatus)?(graph._deforestationSubCharts):([]) ),
+			( (graph._cloudStatus)?(graph._cloudSubCharts):([]) ),
+		);
+		graph.lineSeriesMonthly.compose(l);
+		
+		// this call is an important method for keeping data points at the vertices of the lines
+		utils.renderAll();
+		// dc.redrawAll("agrega");
+		// graph.displayCustomValues();
+	},
+
+	changeDeforStatus(value) {
+		graph._deforestationStatus=value;
+		this.changeCompositeSubCharts();
+	},
+
+	changeCloudStatus(value) {
+		graph._cloudStatus=value;
+		this.changeCompositeSubCharts();
 	},
 
 	changeCalendar(value) {
@@ -559,7 +541,7 @@ window.onload=function(){
         // and stop event from bubbling
         return false;
 	});
-	utils.makeMonthsChooserList();
+	//utils.makeMonthsChooserList();
 	utils.btnChangeCalendar();
 	Lang.init();
 	graph.init();

@@ -28,7 +28,7 @@
 	<!-- Font Material design google -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" type="text/css" href="./libs/dc-2.2/dc.min.css" />
-	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-daily.css" />
+	<link rel="stylesheet" type="text/css" href="./css/deter-cerrado-aggregated.css" />
 	<link rel="stylesheet" type="text/css" href="./css/cerrado-print.css" media="print" />
 	<link rel="stylesheet" type="text/css" href="./css/terrabrasilis.css" />
 </head>
@@ -228,6 +228,15 @@
 										<span id="title-chart-agreg">Variação mensal de área do projeto DETER</span>
 									</div>
 									<div class="justify-content-end ctrl-change-calendar">
+										<div style="padding-right: 5px;"
+											class="btn-group btn-group-toggle btn-group-sm selecao"
+											data-toggle="buttons">
+											<label class="btn btn-outline-secondary">
+												<input type="checkbox" id="cloud-selector"
+													autocomplete="off" checked><span id="txt-cloud">Mostrar/esconder nuvem</span>
+											</label>
+										</div>
+
 										<div id="change-calendar" class="btn-group btn-group-toggle btn-group-sm selecao" data-toggle="buttons">
 											<label class="btn btn-outline-secondary">
 												<input type="radio" name="calendars" id="civil-calendar" autocomplete="off"><span id="txt-civil">Ano Civil</span>
@@ -238,16 +247,22 @@
 										</div>
 									</div>
 								</div>
-								<div>
-									<b><span id="txt8b" class="filter-info">Intervalo de tempo:</span></b><span class="highlight-time filter-info" id="highlight-time"></span>
-									<a href="javascript:graph.resetFilter('agreg','agrega');">
-										<span aria-hidden="true" id="txt18" title="Limpar este filtro.">
-											<i class="material-icons md-icon-16 icongreen">delete</i>
-										</span>
-									</a>
-								</div>
-								<div class="updated">
-									<span id="updated">Atualizado até:</span><span class="updated_date" id="updated_date"></span>
+
+								<div class="main-chart-bar">
+									<div class="main-chart-bar-p1">
+										<b><span id="txt8b" class="filter-info">Intervalo de tempo:</span></b><span class="highlight-time filter-info" id="highlight-time"></span>
+										<a href="javascript:graph.resetFilter('agreg','agrega');">
+											<span aria-hidden="true" id="txt18" title="Limpar este filtro.">
+												<i class="material-icons md-icon-16 icongreen">delete</i>
+											</span>
+										</a>
+									</div>
+
+									<div class="updated">
+										<div class="updated-date">
+											<span id="updated">Atualizado até:</span><span id="updated_date"></span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -312,45 +327,6 @@
 		<div class="row box">
 			<div class="col-md-12">
 				<div id="footer_print"></div>
-				<!-- modal window with information rates -->
-				<div class="modal fade" id="modal-container-info-rates">
-					<div class="modal-dialog">
-						<div class="modal-content modalinf">
-							<div class="modal-header fechar">
-								<h5 class="modal-title boxtitletable"> <span id="txt19">Informações complementares</span></h5>
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-							</div>
-							<!-- / modal-header -->
-							<div class="modal-body ">
-								<div class="alert alert-success" role="alert">
-									<span id="txt20"></span>
-								</div>
-
-								<div class="alert alert-light" role="alert">
-									<span id="txt2b">Texto de aviso sobre os dados</span>
-								</div>
-								<div class="boxtitle"><a target="_blank" href="http://www.obt.inpe.br/cerrado/" id="txt23">Mais informações
-										sobre o projeto FIP Cerrado</a> </div>
-							</div>
-
-							<!-- / modal-body -->
-							<div class="modal-footer">
-								<div class="checkbox pull-right">
-									<label>
-										<button type="button" class="btn btngreen" data-dismiss="modal">
-											<span id="txt1e">Fechar</span>
-										</button>
-									</label>
-								</div>
-								<!--/ checkbox -->
-							</div>
-							<!--/ modal-footer -->
-						</div>
-						<!-- / modal-content -->
-					</div>
-					<!--/ modal-dialog -->
-				</div>
-				<!-- / modal -->
 
 				<!-- Modal Download-->
 				<div class="modal fade" id="modal-container-download">
@@ -467,41 +443,6 @@
 					<!--/ modal-dialog -->
 				</div>
 				<!-- / modal -->
-
-				<!-- modal window with counties filterd items -->
-				<div class="modal fade" id="modal-container-filtered" role="dialog" aria-labelledby="filtered" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="filtered">
-									<span id="txt1f">Pesquisa de municípios</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-								<span id="txt1g">Encontre um município.</span>
-								<div class="input-group input-group-sm" style="margin-bottom: 15px;">
-									<input autofocus id="search-county" onkeypress="utils.searchCountyByEnterKey(event)" type="text" class="form-control"
-										placeholder="Search">
-									<div class="input-group-btn">
-										<button class="btn btn-default" onclick="utils.searchCounty()"><i class="material-icons" style="color:gray">search</i></button>
-									</div>
-								</div>
-								<span id="txt1h" style="display:none;">Selecione um item na lista de municípios encontrados.</span>
-								<div class="counties-list">
-									<ul id="filtered-list"></ul>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt1i">Fechar</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<!-- modal window to display the email contact -->
 				<div class="modal fade" id="modal-container-contact">
@@ -644,6 +585,7 @@
 	<script type="text/javascript" src="./js/deter-cerrado-aggregated-translation.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-change-lang.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-aggregated-utils.js"></script>
+	<script type="text/javascript" src="./js/build-charts.js"></script>
 	<script type="text/javascript" src="./js/deter-cerrado-aggregated.js"></script>
 	<script type="text/javascript" src="./js/easy-cookie.js"></script>
 	<script type="text/javascript" src="./js/downloadSHP.js"></script>
