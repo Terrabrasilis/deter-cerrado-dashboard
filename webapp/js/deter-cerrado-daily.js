@@ -69,7 +69,7 @@ var graph={
 			graph.displayWaiting();
 			var configDashboard={defaultDataDimension:'area', resizeTimeout:0, minWidth:250, dataConfig:cfg};
 			var dataUrl = downloadCtrl.serviceBaseUrl+"/download/"+downloadCtrl.getProject()+"/all_daily";
-			dataUrl = "./data/deter-cerrado-daily.json";// to use in localhost
+			//dataUrl = "./data/deter-cerrado-daily.json";// to use in localhost
 			var afterLoadData=function(json) {
 				Lang.apply();
 				if(!json || !json.features) {
