@@ -73,10 +73,9 @@ var utils = {
 		var legendItems=$('#agreg .dc-legend-item');
 		for(var i=0;i<legendItems.length;i++) {
 			$(legendItems[i]).on('click', function (ev) {
-				graph.barAreaByYear.filter(ev.currentTarget.textContent);
+				graph.barAreaByYear.filter(ev.currentTarget.textContent.split(" ")[0]);
 			});
 		}
-		
 	},
 	onResize:function(event) {
 		clearTimeout(utils.config.resizeTimeout);

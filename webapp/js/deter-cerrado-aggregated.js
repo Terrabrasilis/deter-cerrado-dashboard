@@ -357,7 +357,7 @@ var graph={
 			.barPadding(0.2)
 			.outerPadding(0.1)
 			.renderHorizontalGridLines(true)
-			.colorAccessor(function(d) {
+			.colorCalculator(function(d) {
 				var i=0,l=barColors.length;
 				while(i<l){
 					if(barColors[i].key==d.key){
@@ -367,54 +367,45 @@ var graph={
 				}
 			})
 			.margins({top: 20, right: 35, bottom: 50, left: 55});
-
-		//this.barAreaByYear.margins().left += 30;
 		
 		dc.chartRegistry.list("filtra").forEach(function(c,i){
 			c.on('filtered', function(chart, filter) {
 				var filters = chart.filters();
+				var commonFilterFunction = function (d) {
+					for (var i = 0; i < filters.length; i++) {
+						var f = filters[i];
+						if (f.isFiltered && f.isFiltered(d)) {
+							return true;
+						} else if (f <= d && f >= d) {
+							return true;
+						}
+					}
+					return false;
+				};
 
 				if(chart.anchorName()=="chart-by-year"){
 					if(!filters.length) {
 						graph.yearDimension0.filterAll();
+						graph.yearDimensionCloud.filterAll();
 					}else {
-						graph.yearDimension0.filterFunction(function (d) {
-							for (var i = 0; i < filters.length; i++) {
-								var f = filters[i];
-								if (f.isFiltered && f.isFiltered(d)) {
-									return true;
-								} else if (f <= d && f >= d) {
-									return true;
-								}
-							}
-							return false;
-						});
+						graph.yearDimension0.filterFunction(commonFilterFunction);
+						graph.yearDimensionCloud.filterFunction(commonFilterFunction);
 					}
 				}
 				if(chart.anchorName()=="chart-by-state"){
 					if(!filters.length) {
 						graph.ufDimension0.filterAll();
+						graph.ufDimensionCloud.filterAll();
 					}else {
-						graph.ufDimension0.filterFunction(function (d) {
-							for (var i = 0; i < filters.length; i++) {
-								var f = filters[i];
-								if (f.isFiltered && f.isFiltered(d)) {
-									return true;
-								} else if (f <= d && f >= d) {
-									return true;
-								}
-							}
-							return false;
-						});
+						graph.ufDimension0.filterFunction(commonFilterFunction);
+						graph.ufDimensionCloud.filterFunction(commonFilterFunction);
 					}
 				}
 				dc.redrawAll("agrega");
-				//utils.addGenerationDate();
 			});
 		});
 		utils.renderAll();
 		utils.attachListenersToLegend();
-		//utils.setMonthNamesFilterBar();
 	},
 	init: function() {
 		window.onresize=utils.onResize;

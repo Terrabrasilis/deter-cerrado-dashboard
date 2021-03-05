@@ -97,6 +97,7 @@ var Translation={
 		/* 'focus_x_label':'Meses considerando o ano referência (Agosto - Julho)', */
 		'overview_x_label':'Seleção temporal',
 		'area': 'Área Agregada',
+		'percentage': 'Porcentagem de cobertura de nuvem',
 		'unit': 'km²',
 		'warning_class_prodes':'Classe válida apenas para o ano referência 2015/2016',
 		'warning_class':'Classe válida apenas para o ano 2015',
@@ -217,6 +218,7 @@ var Translation={
 		/* 'focus_x_label':'Months considering reference year (August - July)', */
 		'overview_x_label':'Temporal selection',
 		'area': 'Aggregated Area',
+		'percentage': 'Cloud coverage percent',
 		'unit': 'km²',
 		'warning_class_prodes':'Class valid only for reference year 2015/2016',
 		'warning_class':'Class valid only for year 2015',

@@ -192,7 +192,7 @@ let buildCompositeChart=(context)=>{
     .tickValues(tv)
     .tickFormat(
       (a)=>{
-        return parseInt(a)+"%";
+        return (parseFloat(a).toFixed(2))+"%";//parseInt(a)+"%";
       }
     );
 
