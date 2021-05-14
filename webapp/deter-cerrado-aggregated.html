@@ -98,6 +98,11 @@
 						data-toggle="modal">
 						<i class="material-icons">print</i><span id="txt4">Imprimir Gráficos</span></a>
 				</li>
+				<li>
+					<a href="#modal-container-cloud" id="cloud-info"
+						title="Informações sobre os dados de cobertura de nuvens." data-toggle="modal">
+						<i class="material-icons">info</i><span id="txt4">Cobertura de nuvens</span></a>
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -328,6 +333,34 @@
 			<div class="col-md-12">
 				<div id="footer_print"></div>
 
+				<!-- modal window for General informations -->
+				<div class="modal fade" id="modal-container-general-info" role="dialog" aria-labelledby="general-info" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable"><span id="txt2a">Informação de alteração nos dados</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-warning">
+									<span id="txt2b">Foi realizada uma atualização da base de dados do DETER Cerrado e os avisos do período de 04/01/2021 até 03/05/2021 agora representam 1.198,25 km² e não mais 1.286,61 km².</span>
+								</div>
+							</div>
+							
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal">
+											<span id="txt2c">Fechar</span>
+										</button>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end modal -->
+
 				<!-- Modal Download-->
 				<div class="modal fade" id="modal-container-download">
 					<div class="modal-dialog">
@@ -468,6 +501,45 @@
 				</div>
 				<!-- / modal -->
 
+				<!-- modal window to display the cloud information -->
+				<div class="modal fade" id="modal-container-cloud">
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+										class="material-icons">clear</i></button>
+							</div>
+							<!-- / modal-header -->
+							<div class="modal-body">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title"><span id="cloud-header">Sobre os dados de cobertura de nuvens</span>
+										</h5>
+										<p class="card-text" id="cloud-main-info">
+											A estação de processamento das imagens CBERS 4/4A gera
+											sistematicamente/automaticamente, como um dos seus produtos,
+											uma imagem de cobertura de nuvens e suas sombras para cada cena
+											do sensor WFI recebida (cloud mask).
+											
+											Uma rotina seleciona todas as cenas WFI/CBERS 4
+											utilizadas no DETER em determinado mês e gera um mosaico
+											mensal das áreas cobertas por nuvens.
+											
+											Depois uma segunda rotina calcula a porcentagem de nuvem
+											em cada estado da Amazônia Legal e Cerrado e alimenta o dashboard
+											do TerraBrasilis.
+										</p>
+									</div>
+								</div>
+							</div>
+							<!--/ modal-footer -->
+						</div>
+						<!-- / modal-content -->
+					</div>
+					<!--/ modal-dialog -->
+				</div>
+				<!-- / modal -->
+
 				<!-- modal window to first notice -->
 				<div class="modal fade" id="firstNotice">
 					<div class="modal-dialog firstnotice">
@@ -476,7 +548,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
 							</div>
 							<!-- / modal-header -->
-							<div class="modal-body ">
+							<div class="modal-body">
 								<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
 									<div class="carousel-inner">
 										<div class="carousel-item active">

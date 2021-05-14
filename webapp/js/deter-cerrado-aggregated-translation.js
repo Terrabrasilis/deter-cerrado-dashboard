@@ -18,16 +18,8 @@ var Translation={
 		'txt1e':'Fechar',
 		'txt1':'Painel DETER - mensal',
 		'txt2':'Abrir o Painel Diário',
-		'txt2a':'Informações gerais',
-		'txt2b':'<h3>Sobreposição PRODES Amazônia x Cerrado</h3>'+
-		'<br /><br />'+
-		'O Mapeamento do cerrado é realizado para toda extensão do Bioma, o que inclui uma zona de sobreposição com os limites da Amazônia Legal Brasileira. Ocorre que as áreas de florestas, dentro da zona de sobreposição entre os limites do Bioma Cerrado e os limites da Amazônia Legal, 7% da área total, já são mapeadas, desde 1988, pelo projeto PRODES Amazônia. Nesta área de sobreposição o INPE utilizou os dados  já mapeados pelo PRODES Amazônia, para evitar resultados discrepantes entre os dois produtos. Apesar dos dois mapeamentos possuírem a mesma legenda (i.e. desmatamento do tipo corte raso) existe uma peculiaridade em relação ao início de suas séries históricas e frequências de mapeamento.'+
-		'<br /><br />'+
-		'O PRODES Cerrado tem uma série histórica com início no ano 2000 e possui frequência de mapeamento bianual até 2012 e anual desde 2013 até 2017. O PRODES Amazônia tem sua série histórica com início em 1988 e possui frequência anual de mapeamento, entretanto durante esse período foi necessário fazer um ajuste geométrico na máscara de desmatamento para corrigir deslocamentos causados por diferentes processos de georreferenciamento das imagens adotados ao longo da vida do projeto. <a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes/pdfs/nt_deslocamentomascara.pdf" target="_blank">Acesse este link para mais detalhes.</a>'+
-		'<br /><br />'+
-		'Este ajuste na máscara de desmatamento do PRODES Amazônia resultou em uma agregação de todos os anos mapeados até 2008 em um único plano de informação, não sendo possível separar a geometria do desmatamento dos anos anteriores. Uma vez que os números computados pelo PRODES Cerrado são referentes ao desmatamento mapeado a partir da máscara agregada do ano 2000, início de sua série histórica, os mesmos não consideram a área de desmatamento acumulado até o ano 2000.'+
-		'<br /><br />'+
-		'Por essa razão, ainda que esta diferença ocorra apenas na área de sobreposição (7% da área total), os números do desmatamento anual publicados no dashboard do TerraBrasilis (www.dpi.inpe.br/fipcerrado/dashboard/) não são iguais aos dados geográficos disponibilizados para download no mesmo site, exclusivamente para os anos 2000 até 2008.',
+		'txt2a':'Informação de alteração nos dados',
+		'txt2b':'Foi realizada uma atualização da base de dados do DETER Cerrado e os avisos do período de 04/01/2021 até 03/05/2021 agora representam 1.198,00 km² e não mais 1.286,61 km².',
 		'txt2c':'Fechar',
 		'txt3':'Baixar Dados',
 		'downloadBtn':'Baixar os dados em formato CSV.',
@@ -150,6 +142,9 @@ var Translation={
 		'txt1e':'Close',
 		'txt1':'DETER panel - monthly',
 		'txt2':'Open the Daily Panel',
+		'txt2a':'Data change information',
+		'txt2b':'DETER Cerrado data has been revised for the period from 2021/01/04 to 2021/05/03, consequently, the sum of the notice area that used to be 1,286.61 km² is now 1,198.00 km²',
+		'txt2c':'Close',
 		'txt3':'Download Data',
 		'downloadBtn':'Download data in CSV format.',
 		'txt4':'Print Graphs',

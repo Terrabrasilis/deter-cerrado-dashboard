@@ -368,94 +368,32 @@
 		<div class="row box">
 			<div class="col-md-12">
 				<div id="footer_print"></div>
-				<!-- modal copied from original DETER-B panel -->
-				<div class="modal fade" id="modal-container-718053" role="dialog" aria-labelledby="areaXclass" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="areaXclass">
-									<span id="txt16">Informações para download</span>
-								</h4>
-							</div>
-							<div class="modal-body">
-
-								<span id="txt17">Baixar os dados incluindo a componente geográfica.</span>
-								<div class="dwn-tool">
-									<span id="txt22">Selecione o formato do arquivo:</span>&nbsp;
-									<select id="download-option" class="form-control">
-										<option value="SHAPE-ZIP">Shapefile (ZIP)</option>
-										<option value="csv">CSV</option>
-										<option value="KML">KML</option>
-									</select>
-									<br />
-									<a href="#" id="download-filter">
-										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt18">Respeitando
-											os filtros definidos neste painel de consulta.</span><strong>*</strong></a>
-									<br />
-									<a href="#" id="download-all">
-										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt19">Sem filtros,
-											arquivo completo.</span></a>
-									<br /><br />
-									<div class="alert alert-warning">
-										<strong>*</strong>&nbsp;<span id="txt20">Ao atribuir qualquer um dos filtros por Classe, Estado, Município ou
-											Áreas de Proteção e <strong>não</strong> atribuir filtro temporal, <strong>toda a extensão temporal</strong>
-											será considerada e não apenas a extensão exibida no painel.</span>
-									</div>
-								</div>
-								<br />
-								<span id="txt23">Baixar os dados sem a componente geográfica, apenas tabela de atributos, em formato CSV.</span>
-								<div class="dwn-tool">
-									<a href="#" id="download-csv-daily-x">
-										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt24">Com filtros.</span><strong>*</strong>
-									</a>
-									<br />
-									<a href="#" id="download-csv-daily-all-x">
-										<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;<span id="txt25">Sem filtros.</span><strong>*</strong>
-									</a>
-									<br /><br />
-									<div class="alert alert-warning">
-										<strong>*</strong>&nbsp;<span id="txt3">Apenas para o intervalo de tempo exibido no painel (365 dias).</span>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt21">Fechar</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<!-- modal window with counties filterd items -->
 				<div id="modal-search"></div>
+				
 				<!-- modal window for General informations -->
 				<div class="modal fade" id="modal-container-general-info" role="dialog" aria-labelledby="general-info" aria-hidden="true">
-					<div class="modal-dialog general-info">
-						<div class="modal-content">
-							<div class="modal-header">
-
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-									×
-								</button>
-								<h4 class="modal-title" id="general-info">
-									<span id="txt2a">Informações gerais</span>
-								</h4>
+					<div class="modal-dialog">
+						<div class="modal-content modalinf">
+							<div class="modal-header fechar">
+								<h5 class="modal-title boxtitletable"><span id="txt2a">Informação de alteração nos dados</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
 							</div>
 							<div class="modal-body">
-								<div class="alert alert-info">
-									<span id="txt2b">Texto de aviso sobre os dados</span>
+								<div class="alert alert-warning">
+									<span id="txt2b">Foi realizada uma atualização da base de dados do DETER Cerrado e os avisos do período de 04/01/2021 até 03/05/2021 agora representam 1.198,00 km² e não mais 1.286,61 km².</span>
 								</div>
 							</div>
+							
 							<div class="modal-footer">
-
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									<span id="txt2c">Fechar</span>
-								</button>
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal">
+											<span id="txt2c">Fechar</span>
+										</button>
+									</label>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -513,7 +451,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
 							</div>
 							<!-- / modal-header -->
-							<div class="modal-body ">
+							<div class="modal-body">
 								<h5 class="modal-title boxtitletable"><span id="txt26a">Baixar a tabela com os avisos de desmatamento em formato CSV.</span></h5>
 								<div class="dwn-tool">
 									<div class="alert alert-success alert-labeled">
@@ -653,7 +591,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
 							</div>
 							<!-- / modal-header -->
-							<div class="modal-body ">
+							<div class="modal-body">
 								<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
 									<div class="carousel-inner">
 										<div class="carousel-item active">
