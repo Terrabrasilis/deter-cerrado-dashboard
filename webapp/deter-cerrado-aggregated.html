@@ -101,7 +101,7 @@
 				<li>
 					<a href="#modal-container-cloud" id="cloud-info"
 						title="Informações sobre os dados de cobertura de nuvens." data-toggle="modal">
-						<i class="material-icons">info</i><span id="txt4">Cobertura de nuvens</span></a>
+						<i class="material-icons">info</i><span id="cloud-btn">Cobertura de nuvens</span></a>
 				</li>
 			</ul>
 		</nav>
@@ -506,33 +506,41 @@
 					<div class="modal-dialog">
 						<div class="modal-content modalinf">
 							<div class="modal-header fechar">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
-										class="material-icons">clear</i></button>
-							</div>
-							<!-- / modal-header -->
+								<h5 class="modal-title boxtitletable"><span id="cloud-header">Sobre os dados de cobertura de nuvens</span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+							</div><!-- / modal-header -->
+
 							<div class="modal-body">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title"><span id="cloud-header">Sobre os dados de cobertura de nuvens</span>
-										</h5>
 										<p class="card-text" id="cloud-main-info">
 											A estação de processamento das imagens CBERS 4/4A gera
 											sistematicamente/automaticamente, como um dos seus produtos,
 											uma imagem de cobertura de nuvens e suas sombras para cada cena
 											do sensor WFI recebida (cloud mask).
-											
+											<br/><br/>
 											Uma rotina seleciona todas as cenas WFI/CBERS 4
 											utilizadas no DETER em determinado mês e gera um mosaico
 											mensal das áreas cobertas por nuvens.
-											
-											Depois uma segunda rotina calcula a porcentagem de nuvem
+											<br/><br/>
+											Em seguida uma segunda rotina calcula a porcentagem de nuvem
 											em cada estado da Amazônia Legal e Cerrado e alimenta o dashboard
 											do TerraBrasilis.
 										</p>
 									</div>
 								</div>
-							</div>
-							<!--/ modal-footer -->
+							</div> <!--/ modal-body -->
+							
+							<div class="modal-footer">
+								<div class="checkbox pull-right">
+									<label>
+										<button type="button" class="btn btngreen" data-dismiss="modal">
+											<span id="cloud-close">Fechar</span>
+										</button>
+									</label>
+								</div>
+							</div><!--/ modal-footer -->
+
 						</div>
 						<!-- / modal-content -->
 					</div>
