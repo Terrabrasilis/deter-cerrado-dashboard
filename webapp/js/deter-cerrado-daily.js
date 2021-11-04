@@ -677,8 +677,11 @@ window.onload=function(){
 	utils.datePicker.initComponent();//For enable datepicker with bootstrap and jquery
 	Lang.init();
 	graph.startLoadData();
-	Authentication.init(Lang.language, function(){
-		graph.resetFilters();
-		graph.restart();
-	});
+	if(Authentication){
+		Authentication.serverURL='/oauth-api/';
+		Authentication.init(Lang.language, function(){
+			graph.resetFilters();
+			graph.restart();
+		});
+	}
 };

@@ -536,8 +536,11 @@ window.onload=function(){
 	utils.btnChangeCalendar();
 	Lang.init();
 	graph.init();
-	Authentication.init(Lang.language, function(){
-		graph.resetFilters();
-		graph.restart();
-	});
+	if(Authentication){
+		Authentication.serverURL='/oauth-api/';
+		Authentication.init(Lang.language, function(){
+			graph.resetFilters();
+			graph.restart();
+		});
+	}
 };
