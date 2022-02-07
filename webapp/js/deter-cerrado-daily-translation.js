@@ -38,7 +38,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
-		'txt15':'Análise - Cerrado',
+		'txt15':'Análise - Cerrado <b>(Novo Limite de Bioma)</b>',
 		'txt16':'Informações para obter os dados',
 		'txt17':'Baixar os dados incluindo a componente geográfica.',
 		'txt18':'Respeitando os filtros definidos neste painel de consulta.',
@@ -114,7 +114,9 @@ var Translation={
 		'nv-aggreg-amz':'Amazônia Legal',
 		'nv-chart-agg':'Gráficos - Agregado Mensal',
 		'nv-daily-cer':'Bioma Cerrado',
+		'nv-daily-cer-nb':'Novo Bioma Cerrado',
 		'nv-aggreg-cer':'Bioma Cerrado',
+		'nv-aggreg-cer-nb':'Novo Bioma Cerrado',
 		'nv-home':'Home TerraBrasilis',
 		'nv-sites':'Páginas relacionadas',
 		'nv-map':'Mapa Interativo',
@@ -126,8 +128,10 @@ var Translation={
 		'contactus-menu':'Contato',
 		'toDailyChart-amz':'Abrir o painel avisos diários para a Amazônia Legal.',
 		'toAggregatedChart-amz':'Abrir o painel agregado mensal de avisos para a Amazônia Legal.',
-		'toDailyChart-cer':'Abrir o painel avisos diários para o Bioma Cerrado.',
-		'toAggregatedChart-cer':'Abrir o painel agregado mensal de avisos para o Bioma Cerrado.',
+		'toDailyChart-cer':'Abrir o painel avisos diários para o antigo Bioma Cerrado.',
+		'toDailyChart-cer-nb':'Abrir o painel avisos diários para o novo Bioma Cerrado.',
+		'toAggregatedChart-cer':'Abrir o painel agregado mensal de avisos para o antigo Bioma Cerrado.',
+		'toAggregatedChart-cer-nb':'Abrir o painel agregado mensal de avisos para o novo Bioma Cerrado.',
 		'tituloprint':' | Avisos diários de desmatamento no Cerrado Brasileiro (DETER).',
 		'description-modal':'O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental.',
 		'option-modal':'Não mostrar novamente.'
@@ -171,7 +175,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- The paper orientation is landscape;<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper size is A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- And the margins is the default of the browser.<br />',
-		'txt15':'Analyses - Cerrado',
+		'txt15':'Analyses - Cerrado <b>(New Biome Border)</b>',
 		'txt16':'Information to download data',
 		'txt17':'This tool provides three ways to download data:',
 		'txt18':'Download with filters defined in this panel.',
@@ -248,7 +252,9 @@ var Translation={
 		'nv-aggreg-amz':'Legal Amazon',
 		'nv-chart-agg':'Graphs - Monthly Aggregate',
 		'nv-daily-cer':'Cerrado Biome',
+		'nv-daily-cer-nb':'New Cerrado Biome',
 		'nv-aggreg-cer':'Cerrado Biome',
+		'nv-aggreg-cer-nb':'New Cerrado Biome',
 		'nv-home':'Home TerraBrasilis',
 		'nv-sites':'Related pages',
 		'nv-map':'Interactive Map',
@@ -260,8 +266,10 @@ var Translation={
 		'contactus-menu':'Contact',
 		'toDailyChart-amz':'Open the panel daily notices for Legal Amazon.',
 		'toAggregatedChart-amz':'Open the panel aggregate monthly notices for Legal Amazon.',
-		'toDailyChart-cer':'Open the panel daily notices for Cerrado Biome.',
-		'toAggregatedChart-cer':'Open the panel aggregate monthly notices for Cerrado Biome.',
+		'toDailyChart-cer':'Open the panel daily notices for old Cerrado Biome.',
+		'toDailyChart-cer-nb':'Open the panel daily notices for new Cerrado Biome.',
+		'toAggregatedChart-cer':'Open the panel aggregate monthly notices for old Cerrado Biome.',
+		'toAggregatedChart-cer-nb':'Open the panel aggregate monthly notices for new Cerrado Biome.',
 		'tituloprint':' | Daily notices of the deforestation in Brazilian Cerrado (DETER).',
 		'description-modal':'TerraBrasilis is a platform developed by INPE for the organization, access and use through a web portal of the geographic data produced by its environmental monitoring programs.',
 		'option-modal':'Do not show again.'
