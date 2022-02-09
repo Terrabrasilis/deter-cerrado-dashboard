@@ -106,13 +106,11 @@ var graph={
 
 	loadData: function(url, type, callback) {
 		d3.json(url)
-		.header("Authorization", "Bearer "+((typeof Authentication!="undefined")?(Authentication.getToken()):("")) )
+		.header("Authorization", "Bearer "+((typeof Authentication!='undefined')?(Authentication.getToken()):("")) )
 		.get(function(error, root) {
-			if(error && error.status==401) {
-				if(typeof Authentication!="undefined"){
-					Authentication.logout();
-					Authentication.setExpiredToken(true);
-				}
+			if(error && error.status==401 && typeof Authentication!='undefined') {
+				Authentication.logout();
+				Authentication.setExpiredToken(true);
 			}else{
 				if(type=='deforestation')	graph.processData(root);
 				else graph.processCloudData(root);
@@ -536,7 +534,7 @@ window.onload=function(){
 	utils.btnChangeCalendar();
 	Lang.init();
 	graph.init();
-	if(Authentication){
+	if(typeof Authentication!='undefined'){
 		Authentication.serverURL='/oauth-api/';
 		Authentication.init(Lang.language, function(){
 			graph.resetFilters();
