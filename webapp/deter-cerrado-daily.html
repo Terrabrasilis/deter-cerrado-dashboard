@@ -60,11 +60,11 @@
 						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Amazônia Legal</span></a>
 				</li>
 				<li>
-					<a href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de avisos diários para o antigo Bioma Cerrado (2019)." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-cer">Antigo Bioma Cerrado</span></a>
+					<a class="enable_menu" href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de avisos diários para o antigo Bioma Cerrado (2019)." aria-expanded="false">
+						<i class="material-icons" style="color:red;">warning</i><span id="nv-daily-cer">Antigo Bioma Cerrado</span></a>
 				</li>
 				<li>
-					<a class="enable_menu" href="/app/dashboard/alerts/biomes/cerrado-nb/daily/" id="toDailyChart-cer-nb" title="Abrir o painel de avisos diários para o novo Bioma Cerrado." aria-expanded="false">
+					<a href="/app/dashboard/alerts/biomes/cerrado-nb/daily/" id="toDailyChart-cer-nb" title="Abrir o painel de avisos diários para o novo Bioma Cerrado." aria-expanded="false">
 						<i class="material-icons">insert_chart</i><span id="nv-daily-cer-nb">Novo Bioma Cerrado</span></a>
 				</li>
 			</ul>
@@ -83,7 +83,7 @@
 				</li>
 				<li>
 					<a href="/app/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel agregado mensal de avisos para o antigo Bioma Cerrado (2019)." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer">Antigo Bioma Cerrado</span></a>
+						<i class="material-icons" style="color:red;">warning</i><span id="nv-aggreg-cer">Antigo Bioma Cerrado</span></a>
 				</li>
 				<li>
 					<a href="/app/dashboard/alerts/biomes/cerrado-nb/aggregated/" id="toAggregatedChart-cer-nb" title="Abrir o painel agregado mensal de avisos para o novo Bioma Cerrado." aria-expanded="false">
@@ -208,7 +208,7 @@
 			<div class="row all-charts-title boxtitlepanel">
 
 				<div class="col-md-8">
-					<span id="txt15">Análise - Cerrado <b>(Novo Limite de Bioma)</b></span>
+					<span id="txt15">Análise - Cerrado <b>(Antigo Limite de Bioma)</b></span>
 				</div>
 
 				<div class="col-md-4">
@@ -232,7 +232,7 @@
 						<span id="expired_token">Seu login expirou. Para voltar a ver os dados mais recentes, faça login novamente.</span>
 					</div>
 					<div id="old_data_box" class="alert alert-warning" role="alert">
-						<span id="old_data">O recorte no antigo limite do bioma Cerrado foi descontinuado. Veja os dados atualizados para o recorte no novo limite do bioma.</span>
+						<span id="old_data">O recorte no antigo limite do bioma Cerrado foi <b style="color: red;">descontinuado</b>. Veja os dados atualizados para o recorte no novo limite do bioma.</span>
 					</div>
 				</div>
 			</div>

@@ -22,7 +22,8 @@ var Lang={
 			this.language=l;
 		}
 		this.apply();
-		AuthenticationTranslation.changeLanguage(l);
+		if(typeof AuthenticationTranslation!='undefined')
+			AuthenticationTranslation.changeLanguage(l);
 		//graph.translateClassNames();
 		graph.resetFilters();
 		graph.build();

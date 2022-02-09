@@ -38,7 +38,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- A orientação do papel é do tipo paisagem;<br />'+
 		'&nbsp;&nbsp;&nbsp;- O tamanho de papel é A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- E margens padrão do navegador.<br />',
-		'txt15':'Análise - Cerrado <b>(Novo Limite de Bioma)</b>',
+		'txt15':'Análise - Cerrado <b>(Antigo Limite de Bioma)</b>',
 		'txt16':'Informações para obter os dados',
 		'txt17':'Baixar os dados incluindo a componente geográfica.',
 		'txt18':'Respeitando os filtros definidos neste painel de consulta.',
@@ -90,6 +90,7 @@ var Translation={
 		"submitLogin":"Entrar",
 		"submitLogout":"Sair",
 		"expired_token":"Seu login expirou. Para ver os dados mais recentes, por favor faça login novamente.",
+		"old_data":"O recorte no antigo limite do bioma Cerrado foi <b style=\"color: red;\">descontinuado</b>. Veja os dados atualizados para o recorte no novo limite do bioma.",
 		'txt14g':'Aviso',
 		'txt14h':'O nome de usuário ou senha está incorreto. Verifique se CAPS LOCK está ativado. Se você receber essa mensagem novamente, entre em contato com o administrador do sistema para garantir que você tenha permissão para logar no portal.',
 		'txt14i':'Fechar',
@@ -175,7 +176,7 @@ var Translation={
 		'&nbsp;&nbsp;&nbsp;- The paper orientation is landscape;<br />'+
 		'&nbsp;&nbsp;&nbsp;- The paper size is A4;<br />'+
 		'&nbsp;&nbsp;&nbsp;- And the margins is the default of the browser.<br />',
-		'txt15':'Analyses - Cerrado <b>(New Biome Border)</b>',
+		'txt15':'Analyses - Cerrado <b>(Old Biome Border)</b>',
 		'txt16':'Information to download data',
 		'txt17':'This tool provides three ways to download data:',
 		'txt18':'Download with filters defined in this panel.',
@@ -228,6 +229,7 @@ var Translation={
 		"submitLogin":"Login",
 		"submitLogout":"Logout",
 		"expired_token":"Your login has expired. To see the latest data, please sign in again.",
+		"old_data":"Old biome clipping <b style=\"color: red;\">has been discontinued</b>. See updated data for the clipping in the new biome boundary.",
 		'txt14g':'Warning',
 		'txt14h':'The username or password is wrong. Verify if CAPS LOCK is enable. If you receive this message again, please contact the system administrator to ensure that you have permission to login in portal.',
 		'txt14i':'Close',
