@@ -80,9 +80,9 @@ var graph={
 				}
 			};
 			d3.json(dataUrl)
-			.header("Authorization", "Bearer "+Authentication.getToken())
+			.header("Authorization", "Bearer "+ ((typeof Authentication!='undefined')?(Authentication.getToken()):("")) )
 			.get(function(error, root) {
-				if(error && error.status==401) {
+				if(error && error.status==401 && typeof Authentication!='undefined') {
 					Authentication.logout();
 					Authentication.setExpiredToken(true);
 				}else{
@@ -677,7 +677,7 @@ window.onload=function(){
 	utils.datePicker.initComponent();//For enable datepicker with bootstrap and jquery
 	Lang.init();
 	graph.startLoadData();
-	if(Authentication){
+	if(typeof Authentication!='undefined'){
 		Authentication.serverURL='/oauth-api/';
 		Authentication.init(Lang.language, function(){
 			graph.resetFilters();
