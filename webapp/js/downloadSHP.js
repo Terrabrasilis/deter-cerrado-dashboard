@@ -27,7 +27,7 @@ let downloadCtrl={
 		if(URL.includes("amazon")){
 			this.project="deter-amz";
 		}else if(URL.includes("cerrado")){
-			this.project="deter-cerrado-nb";
+			this.project="deter-cerrado";
 		}else if(URL.includes("forest")){
 			this.project="deter-fm";
 		}
