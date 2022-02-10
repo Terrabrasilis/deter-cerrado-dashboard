@@ -56,16 +56,8 @@
 						<span id="nv-chart-day">Gráficos - Avisos Diários</span></a>
 				</li>
 				<li>
-					<a href="/app/dashboard/alerts/legal/amazon/daily/" id="toDailyChart-amz" title="Abrir o painel de avisos diários para a Amazônia Legal." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-amz">Amazônia Legal</span></a>
-				</li>
-				<li>
 					<a class="enable_menu" href="/app/dashboard/alerts/biomes/cerrado/daily/" id="toDailyChart-cer" title="Abrir o painel de avisos diários para o antigo Bioma Cerrado (2019)." aria-expanded="false">
 						<i class="material-icons" style="color:red;">warning</i><span id="nv-daily-cer">Antigo Bioma Cerrado</span></a>
-				</li>
-				<li>
-					<a href="/app/dashboard/alerts/biomes/cerrado-nb/daily/" id="toDailyChart-cer-nb" title="Abrir o painel de avisos diários para o novo Bioma Cerrado." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-daily-cer-nb">Novo Bioma Cerrado</span></a>
 				</li>
 			</ul>
 
@@ -76,18 +68,9 @@
 					<a href="#graficos" data-toggle="collapse" aria-expanded="true">
 						<span id="nv-chart-agg">Gráficos - Agregado mensal</span></a>
 				</li>
-				
-				<li>
-					<a href="/app/dashboard/alerts/legal/amazon/aggregated/" id="toAggregatedChart-amz" title="Abrir o painel agregado mensal de avisos para a Amazônia Legal." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-amz">Amazônia Legal</span></a>
-				</li>
 				<li>
 					<a href="/app/dashboard/alerts/biomes/cerrado/aggregated/" id="toAggregatedChart-cer" title="Abrir o painel agregado mensal de avisos para o antigo Bioma Cerrado (2019)." aria-expanded="false">
 						<i class="material-icons" style="color:red;">warning</i><span id="nv-aggreg-cer">Antigo Bioma Cerrado</span></a>
-				</li>
-				<li>
-					<a href="/app/dashboard/alerts/biomes/cerrado-nb/aggregated/" id="toAggregatedChart-cer-nb" title="Abrir o painel agregado mensal de avisos para o novo Bioma Cerrado." aria-expanded="false">
-						<i class="material-icons">insert_chart</i><span id="nv-aggreg-cer-nb">Novo Bioma Cerrado</span></a>
 				</li>
 			</ul>
 
@@ -232,7 +215,7 @@
 						<span id="expired_token">Seu login expirou. Para voltar a ver os dados mais recentes, faça login novamente.</span>
 					</div>
 					<div id="old_data_box" class="alert alert-warning" role="alert">
-						<span id="old_data">O recorte no antigo limite do bioma Cerrado foi <b style="color: red;">descontinuado</b>. Veja os dados atualizados para o recorte no novo limite do bioma.</span>
+						<span id="old_data">Esses resultados foram congelados até o dia 31/01/2022 e não serão atualizados.</span>
 					</div>
 				</div>
 			</div>
@@ -400,7 +383,7 @@
 							</div>
 							<div class="modal-body">
 								<div class="alert alert-warning">
-									<span id="txt2b">Foi realizada uma atualização da base de dados do DETER Cerrado e os avisos do período de 04/01/2021 até 03/05/2021 agora representam 1.198,00 km² e não mais 1.286,61 km².</span>
+									<span id="txt2b">O limite dos biomas brasileiros foram alterados <a href="https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/25798-ibge-lanca-mapa-inedito-de-biomas-e-sistema-costeiro-marinho" target="_blank">conforme publicação do IBGE</a> de 30/10/2019. Os dados de supressão e/ou degradação de vegetação publicados na plataforma TerraBrasilis foram ajustados para o novo recorte em fevereiro de 2022. Esses resultados foram congelados até o dia 31/01/2022 e não serão atualizados.</span>
 								</div>
 							</div>
 							
@@ -592,50 +575,6 @@
 										<p class="card-text"><a href="http://www.inpe.br/ouvidoria/" target="_blank">http://www.inpe.br/ouvidoria/</a></p>
 									</div>
 								</div>
-							</div>
-							<!--/ modal-footer -->
-						</div>
-						<!-- / modal-content -->
-					</div>
-					<!--/ modal-dialog -->
-				</div>
-				<!-- / modal -->
-
-				<!-- modal window to first notice -->
-				<div class="modal fade" id="firstNotice">
-					<div class="modal-dialog firstnotice">
-						<div class="modal-content modalinf">
-							<div class="modal-header fechar">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-							</div>
-							<!-- / modal-header -->
-							<div class="modal-body">
-								<div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<img class="d-block w-100" src="img/slider7.jpg" alt="Primeiro slide">
-											<h1 class="titulo"><span id="about-modal">Sobre </span><span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
-												<p class="descricaoslide" id="description-modal">O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental.</p>
-										</div>
-									</div>
-									<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-										<span class="sr-only">Previous</span>
-									</a>
-									<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-										<span class="carousel-control-next-icon" aria-hidden="true"></span>
-										<span class="sr-only">Next</span>
-									</a>
-								</div>
-							</div>
-							<!-- / modal-body -->
-							<div class="modal-footer">
-								<div class="checkbox pull-right">
-									<label>
-										<input id="notice" class="modal-check" name="modal-check" type="checkbox"><span class="textoc" id="option-modal">Não mostrar novamente.</span>
-									</label>
-								</div>
-								<!--/ checkbox -->
 							</div>
 							<!--/ modal-footer -->
 						</div>

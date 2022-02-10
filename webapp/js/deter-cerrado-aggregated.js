@@ -148,7 +148,7 @@ var graph={
 			utils.displayWarning(true);
 			return;
 		}
-		graph.setUpdatedDate(data.updated_date);
+		graph.setUpdatedDate('2021-12-31');//data.updated_date);
 		utils.displayGraphContainer();
 		
 		let numberFormat = d3.format('.2f');

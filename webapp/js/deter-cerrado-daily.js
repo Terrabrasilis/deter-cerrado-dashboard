@@ -75,7 +75,7 @@ var graph={
 				if(!json || !json.features) {
 					graph.displayWarning(true);
 				}else{
-					graph.setUpdatedDate(json.updated_date);
+					graph.setUpdatedDate('2021-12-31');//json.updated_date);
 					graph.init(configDashboard, json.features);
 				}
 			};

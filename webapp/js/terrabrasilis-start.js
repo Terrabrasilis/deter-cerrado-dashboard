@@ -1,26 +1,5 @@
 $(document).ready(function () {
-    // after this date, do not force warning message
-    let dt_limit=new Date('2021-06-14');
-    let dt_now=new Date();
-    if(dt_now<dt_limit){
-        $('#modal-container-general-info').modal('show');
-    }else{
-        $("#notice").click(function () {
-            EasyCookie.create("firstNotice", "Not show modal again", 30);
-        });
-        /**
-        * Show the main TerraBrasilis modal
-        */
-        let cookieFirstNotice = EasyCookie.read("firstNotice");
-        if (cookieFirstNotice === null) {
-            $('#firstNotice').modal('show');
-        }
-        
-        //carousel
-        $('.carousel').carousel({
-            interval: 2000
-        });
-    }
+    $('#modal-container-general-info').modal('show');
     
     $("#sidebar").mCustomScrollbar({
         theme: "minimal"
