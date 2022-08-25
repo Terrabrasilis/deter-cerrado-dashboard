@@ -143,7 +143,7 @@ let buildCompositeChart=(context)=>{
     .renderVerticalGridLines(true)
     .brushOn(false)
     .yAxisLabel(Translation[Lang.language].mainbar_y_label)
-    .rightYAxisLabel(Translation[Lang.language].percentage)
+    .rightYAxisLabel(Translation[Lang.language].clouds_y_label)
     .elasticY(true)
     .shareTitle(false)
     .yAxisPadding('10%')
