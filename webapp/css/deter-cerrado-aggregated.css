@@ -118,6 +118,7 @@ text-align: center;
 font-weight: bold;
 text-decoration: underline;
 color: black;
+font-size: medium;
 }
 #agreg-overview svg g g.axis.y { display: none; }
 #agreg-overview svg g g line {
