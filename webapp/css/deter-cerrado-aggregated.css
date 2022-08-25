@@ -114,7 +114,7 @@ font-weight: normal;
 font-size: 13px;
 }
 .barLabel{
-font-size: x-small !important;
+font-size: 0.6vw !important;
 }
 .all-charts-title {
 text-align: center;
