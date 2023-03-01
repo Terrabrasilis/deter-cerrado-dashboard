@@ -128,6 +128,7 @@ var graph={
 		let o=[];
 		for (let j = 0, n = data.totalFeatures; j < n; ++j) {
 			let fet=data.features[j];
+			let aCloud=(fet.properties.a>0)?(fet.properties.a):(0);
 			let month=+fet.properties.m;
 			let year=+fet.properties.y;
 			if(graph.calendarConfiguration=='prodes') {
@@ -138,7 +139,7 @@ var graph={
 					year = year+"/"+(year+1);
 				}
 			}
-			o.push({year:year,month:month,a:fet.properties.a,au:fet.properties.au,uf:fet.properties.u});
+			o.push({year:year,month:month,a:aCloud,au:fet.properties.au,uf:fet.properties.u});
 		}
 		graph.cloudData = o;
 	},
