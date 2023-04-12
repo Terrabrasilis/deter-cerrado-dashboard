@@ -602,7 +602,7 @@ var graph={
 
 		let downloadCsvFnc=function(inpudata) {
 	    	utils.download=function(data) {
-						var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
+				var blob = new Blob([d3.csv.format(data)], {type: "text/csv;charset=utf-8"});
 		        saveAs(blob, downloadCtrl.getProject()+'-daily-'+downloadCtrl.getDownloadTime()+'.csv');
 	    	};
 	    	window.setTimeout(function() {
@@ -611,13 +611,13 @@ var graph={
 		    		var o={};
 		    		var dt = new Date(d.timestamp);
 		    		o.viewDate = dt.toLocaleDateString();
-				    o.areaMunKm = parseFloat(d.areaKm.toFixed(4));
-			    	o.areaUcKm = parseFloat(d.areaUcKm.toFixed(4));
+				    o.areaMunKm = d.areaKm;
+			    	o.areaUcKm = d.areaUcKm;
 				    o.uc = ((d.uc!='null')?(d.uc):(''));
 				    o.uf = d.uf;
 				    o.municipio = d.county;
 					o.geocod = d.codIbge;
-				    data.push(o);
+				    if(d.areaKm) data.push(o);
 				});
 		    	utils.download(data);
 	    	}, 200);
