@@ -28,8 +28,6 @@ let downloadCtrl={
 			this.project="deter-amz";
 		}else if(URL.includes("cerrado")){
 			this.project="deter-cerrado-nb";
-		}else if(URL.includes("forest")){
-			this.project="deter-fm";
 		}
 	},
 
@@ -41,18 +39,18 @@ let downloadCtrl={
 	},
 
 	inferLocalhost() {
-		let orig=document.location.origin;
-		let u="";
-		if(orig.includes('localhost') || orig.includes('127'))
-			u="http://terrabrasilis.dpi.inpe.br";
+		return ((this.isLocalhost())?("http://terrabrasilis.dpi.inpe.br"):(""));
+	},
 
-		return u;
+	isLocalhost() {
+		let orig=document.location.origin;
+		return (orig.includes('localhost') || orig.includes('127'));
 	},
 
 	startDownload() {
-			if(!this.project) this.inferProjectByURI();
-			$('#download-shp-icon').html('<img src="img/loader.svg" />');
-	this.downloadShapefile();
+		if(!this.project) this.inferProjectByURI();
+		$('#download-shp-icon').html('<img src="img/loader.svg" />');
+		this.downloadShapefile();
 	},
 
 	downloadShapefile() {
