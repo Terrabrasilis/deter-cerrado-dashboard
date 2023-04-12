@@ -239,7 +239,7 @@ var graph={
 	    var json=[];
         // normalize/parse data
         this.rawData.forEach(function(d) {
-            var o={uf:d.h,ocl:d.c,county:d.i,codIbge:d.b};
+            var o={uf:d.h,county:d.i,codIbge:d.b};
             o.uc = (d.j)?(d.j):('null');
             var auxDate = new Date(d.g + 'T04:00:00.000Z');
             o.timestamp = auxDate.getTime();
