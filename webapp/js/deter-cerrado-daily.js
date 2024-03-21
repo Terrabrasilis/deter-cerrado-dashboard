@@ -95,7 +95,8 @@ var graph={
 
 	setUpdatedDate: function() {
 		let layer_name=(typeof Authentication!="undefined"&&Authentication.hasToken())?("last_date"):("updated_date");
-		let url="http://terrabrasilis.dpi.inpe.br/geoserver/"+downloadCtrl.getProject()+"/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+layer_name+"&OUTPUTFORMAT=application%2Fjson";
+		var geoserverURL = $(location).attr('origin') + "/geoserver/";
+		let url=geoserverURL+downloadCtrl.getProject()+"/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+layer_name+"&OUTPUTFORMAT=application%2Fjson";
 		d3.json(url, function(jsonResponse){
 			let dt=((jsonResponse&&jsonResponse.features[0].properties)?( (new Date(jsonResponse.features[0].properties.updated_date+'T21:00:00.000Z')).toLocaleDateString(Lang.language) ):('?') );
 			d3.select("#updated_date").html(' '+dt);
