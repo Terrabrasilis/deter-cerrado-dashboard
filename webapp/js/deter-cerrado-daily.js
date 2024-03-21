@@ -69,17 +69,17 @@ var graph={
 			graph.displayWaiting();
 			var configDashboard={defaultDataDimension:'area', resizeTimeout:0, minWidth:250, dataConfig:cfg};
 			var dataUrl = downloadCtrl.getFileDeliveryURL()+"/download/"+downloadCtrl.getProject()+"/all_daily";
-			if(downloadCtrl.isLocalhost()) dataUrl = "./data/deter-cerrado-daily.csv";// to use in localhost run the curl_get_json.sh in data dir
-			var afterLoadData=function(csv) {
+			if(downloadCtrl.isLocalhost()) dataUrl = "./data/deter-cerrado-daily.json";// to use in localhost run the curl_get_json.sh in data dir
+			var afterLoadData=function(json) {
 				Lang.apply();
-				if(!csv) {
+				if(!json || !json.features) {
 					graph.displayWarning(true);
 				}else{
-					graph.setUpdatedDate();
-					graph.init(configDashboard, csv);
+					graph.setUpdatedDate(json.updated_date);
+					graph.init(configDashboard, json.features);
 				}
 			};
-			d3.csv(dataUrl)
+			d3.json(dataUrl)
 			.header("Authorization", "Bearer "+ ((typeof Authentication!='undefined')?(Authentication.getToken()):("")) )
 			.get(function(error, root) {
 				if(error && error.status==401 && typeof Authentication!='undefined') {
@@ -93,14 +93,18 @@ var graph={
 		d3.json("./config/"+downloadCtrl.getProject()+"-daily.json", afterLoadConfiguration);
 	},
 
-	setUpdatedDate: function() {
-		let layer_name=(typeof Authentication!="undefined"&&Authentication.hasToken())?("last_date"):("updated_date");
-		var geoserverURL = $(location).attr('origin') + "/geoserver/";
-		let url=geoserverURL+downloadCtrl.getProject()+"/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+layer_name+"&OUTPUTFORMAT=application%2Fjson";
-		d3.json(url, function(jsonResponse){
-			let dt=((jsonResponse&&jsonResponse.features[0].properties)?( (new Date(jsonResponse.features[0].properties.updated_date+'T21:00:00.000Z')).toLocaleDateString(Lang.language) ):('?') );
-			d3.select("#updated_date").html(' '+dt);
-		});
+	setUpdatedDate: function(updated_date) {
+		if(typeof updated_date!="undefined") {
+			d3.select("#updated_date").html(' '+(new Date(updated_date+'T21:00:00.000Z')).toLocaleDateString(Lang.language));
+		}
+		else{
+			let layer_name=(typeof Authentication!="undefined"&&Authentication.hasToken())?("last_date"):("updated_date");
+			let url=downloadCtrl.getTerraBrasilisHref()+"/geoserver/"+downloadCtrl.getProject()+"/wfs?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME="+layer_name+"&OUTPUTFORMAT=application%2Fjson";
+			d3.json(url, function(jsonResponse){
+				let dt=((jsonResponse&&jsonResponse.features[0].properties)?( (new Date(jsonResponse.features[0].properties.updated_date+'T21:00:00.000Z')).toLocaleDateString(Lang.language) ):('?') );
+				d3.select("#updated_date").html(' '+dt);
+			});
+		}
 	},
 
 	displayWaitingChanges: function(enable) {
@@ -218,6 +222,7 @@ var graph={
 		graph.ringTotalizedByState.filterAll();
 		graph.histTopByUCs.filterAll();
 		SearchEngine.applyCountyFilter();
+		SearchEngine.rebuildModalWindow();
 	},
 
 	resetLineDistributionByMonthFilter() {
@@ -237,15 +242,25 @@ var graph={
 	// gid as a, geocod_ibge as b, areatotalkm as d, areamunkm as e, areauckm as f, date as g, uf as h, county as i, uc as j 
 	normalizeData:function() {
 		var numberFormat = d3.format('.2f');
+		let capitalizeFirstLetter = (str)=>{
+			let s = str.toLowerCase();
+			let as = s.split(' ');
+			let os=[];
+			as.forEach((fs)=>{
+				os.push(fs.charAt(0).toUpperCase() + fs.slice(1));
+			});
+			return os.join(' ');
+		};
 	    var json=[];
         // normalize/parse data
         this.rawData.forEach(function(d) {
-            var o={uf:d.h,county:d.i,codIbge:d.b};
-            o.uc = (d.j)?(d.j):('null');
-            var auxDate = new Date(d.g + 'T04:00:00.000Z');
+            var o={uf:d.properties.h,codIbge:d.properties.b};
+			o.county = capitalizeFirstLetter(d.properties.i);
+            o.uc = (d.properties.j)?(d.properties.j):('null');
+            var auxDate = new Date(d.properties.g + 'T04:00:00.000Z');
             o.timestamp = auxDate.getTime();
-            o.areaKm = numberFormat(d.e)*1;// area municipio
-            o.areaUcKm = ((d.f)?(numberFormat(d.f)*1):(0));
+            o.areaKm = numberFormat(d.properties.e)*1;// area municipio
+            o.areaUcKm = ((d.properties.f)?(numberFormat(d.properties.f)*1):(0));
 		    json.push(o);
 		});
 		
@@ -492,6 +507,10 @@ var graph={
 					t.innerHTML=p+t.innerHTML;
 				});
 			});
+		
+		this.histTopByCounties.on('filtered', function(chart) {
+			SearchEngine.updateSelectedList();
+		});
 
 		this.histTopByCounties.xAxis()
 		.tickFormat(function(d) {return d+utils.wildcardExchange(" %unit%");});
@@ -612,13 +631,13 @@ var graph={
 		    		var o={};
 		    		var dt = new Date(d.timestamp);
 		    		o.viewDate = dt.toLocaleDateString();
-				    o.areaMunKm = d.areaKm;
-			    	o.areaUcKm = d.areaUcKm;
+					o.areaMunKm = parseFloat(d.areaKm.toFixed(4));
+			    	o.areaUcKm = parseFloat(d.areaUcKm.toFixed(4));
 				    o.uc = ((d.uc!='null')?(d.uc):(''));
 				    o.uf = d.uf;
 				    o.municipio = d.county;
 					o.geocod = d.codIbge;
-				    if(d.areaKm) data.push(o);
+				    if(o.areaMunKm>0.0) data.push(o);
 				});
 		    	utils.download(data);
 	    	}, 200);
