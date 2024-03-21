@@ -60,9 +60,9 @@ let downloadCtrl={
 	let file = this.getFileDeliveryURL()+'/download/'+this.project+'/shape';
 	
 	let headers = new Headers();
-			headers.append('Authorization', 'Bearer '+Authentication.getToken());
+	headers.append('Authorization', 'Bearer '+Authentication.getToken());
 			
-			let fileName=this.project+'-'+this.getDownloadTime()+'.zip';
+	let fileName=this.project+'-'+this.getDownloadTime()+'.zip';
 	
 	fetch(file, { headers })
 		.then(response => response.blob())
