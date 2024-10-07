@@ -16,7 +16,7 @@ var Translation={
 		'mensal das áreas cobertas por nuvens.'+
 		'<br/><br/>'+
 		'Em seguida uma segunda rotina calcula a porcentagem de nuvem '+
-		'em cada estado da Amazônia Legal e Cerrado e alimenta o dashboard '+
+		'em cada estado dos Biomas Amazônia e Cerrado e alimenta o dashboard '+
 		'do TerraBrasilis.',
 		'cloud-close':'Fechar',
 		'txt-civil':'Ano civil',
@@ -120,8 +120,8 @@ var Translation={
 		'about': 'Sobre',
 		'contactus': 'Contato',
 		'nv-chart-day':'Gráficos - avisos diários',
-		'nv-daily-amz':'Amazônia Legal',
-		'nv-aggreg-amz':'Amazônia Legal',
+		'nv-daily-amz':'Bioma Amazônia',
+		'nv-aggreg-amz':'Bioma Amazônia',
 		'nv-chart-agg':'Gráficos - agregado mensal',
 		'nv-daily-cer-nb':'Bioma Cerrado',
 		'nv-aggreg-cer-nb':'Bioma Cerrado',
@@ -134,8 +134,8 @@ var Translation={
 		'tt-contactus-menu': 'Envie-nos um e-mail com sugestões ou dúvidas sobre o projeto (terrabrasilis@inpe.br)',
 		'about-menu':'Sobre',
 		'contactus-menu':'Contato',
-		'toDailyChart-amz':'Abrir o painel avisos diários para a Amazônia Legal.',
-		'toAggregatedChart-amz':'Abrir o painel agregado mensal de avisos para a Amazônia Legal.',
+		'toDailyChart-amz':'Abrir o painel avisos diários para o Bioma Amazônia.',
+		'toAggregatedChart-amz':'Abrir o painel agregado mensal de avisos para o Bioma Amazônia.',
 		'toDailyChart-cer-nb':'Abrir o painel avisos diários para o Bioma Cerrado.',
 		'toAggregatedChart-cer-nb':'Abrir o painel agregado mensal de avisos para o Bioma Cerrado.',
 		'tituloprint': ' | Variação mensal de área do projeto DETER - ano referência (Agosto a Julho)',
@@ -158,7 +158,7 @@ var Translation={
 		'process for a month and generates a cloud cover mosaic.'+
 		'<br/><br/>'+
 		'Then, another routine calculates the percentage of cloud from each state of the '+
-		'Legal Amazon and Cerrado to feed the TerraBrasilis panels.',
+		'Amazônia and Cerrado biomes to feed the TerraBrasilis panels.',
 		'cloud-close':'Close',
 		'txt-civil':'Civil year',
 		'txt-prodes':'Reference year',
@@ -262,8 +262,8 @@ var Translation={
 		'about': 'About',
 		'contactus': 'Contact us',
 		'nv-chart-day':'Graphs - daily notices',
-		'nv-daily-amz':'Legal Amazon',
-		'nv-aggreg-amz':'Legal Amazon',
+		'nv-daily-amz':'Amazônia Biome',
+		'nv-aggreg-amz':'Amazônia Biome',
 		'nv-chart-agg':'Graphs - monthly aggregate',
 		'nv-daily-cer-nb':'Cerrado Biome',
 		'nv-aggreg-cer-nb':'Cerrado Biome',
@@ -276,8 +276,8 @@ var Translation={
 		'tt-contactus-menu': 'Send us an e-mail with suggestions or questions about the project (terrabrasilis@inpe.br)',
 		'about-menu':'About',
 		'contactus-menu':'Contact',
-		'toDailyChart-amz':'Open the panel daily notices for Legal Amazon.',
-		'toAggregatedChart-amz':'Open the panel aggregate monthly notices for Legal Amazon.',
+		'toDailyChart-amz':'Open the panel daily notices for Amazônia Biome.',
+		'toAggregatedChart-amz':'Open the panel aggregate monthly notices for Amazônia Biome.',
 		'toDailyChart-cer-nb':'Open the panel daily notices for Cerrado Biome.',
 		'toAggregatedChart-cer-nb':'Open the panel aggregate monthly notices for Cerrado Biome.',
 		'tituloprint': ' | Monthly variation of DETER project area - reference year (August to July)',
